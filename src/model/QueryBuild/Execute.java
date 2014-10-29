@@ -118,6 +118,7 @@ public class Execute extends Model {
             try {
                 getConnection(false);
                 getConn();
+           
 //                String cleanSql = StringEscapeUtils.escapeSql(sql);
 //                System.out.println("CleanSql: " + cleanSql);
 //                sqlStatement = getConn().prepareStatement(cleanSql);

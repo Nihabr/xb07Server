@@ -121,7 +121,7 @@ import java.awt.Dimension;
 			
 			JLabel label_1 = new JLabel("");
 			label_1.setIcon(new ImageIcon(AddCourse.class.getResource("/Images/MetalBackground.jpg")));
-			label_1.setBounds(0, 0, 1366, 768);
+			label_1.setBounds(0, 11, 1366, 768);
 			add(label_1);
 			
 

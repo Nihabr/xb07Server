@@ -3,9 +3,9 @@ package GUI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import model.user.*;
 
 import GUI.UserInformation;
-import GUI.AuthUser;
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +17,7 @@ public class GUILogic {
 	private boolean u;
 	private boolean full = false;
 	
-	AuthUser a = new AuthUser();
+	AuthenticateUser auth = new AuthenticateUser();
 	
 
 	public GUILogic(){
@@ -48,8 +48,11 @@ public class GUILogic {
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-			u=a.login(userName, password);
-			
+			u=auth.authenticate(email, password, isAdmin);
+			// Giv auth noget data som passer til metoden
+			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
+			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
+			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
 			if (e.getSource() == screen.getLogin().getBtnLogIn()){
 				
 				if(u == false){
@@ -69,6 +72,7 @@ public class GUILogic {
 			}
 		}	
 	}
+	
 	private class MainMenuActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getMainMenu().getBtnLogOut()){
@@ -87,6 +91,7 @@ public class GUILogic {
 
 		}
 	}
+	
 	private class AddEventGUIActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getAddEventGUI().getBtnLogout()){
@@ -127,6 +132,7 @@ public class GUILogic {
 			}
 		}
 	}
+	
 	private class AddUserActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getAddUser().getBtnLogout()){
@@ -166,6 +172,7 @@ public class GUILogic {
 			}
 		}
 	}
+	
 	private class UserInfoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getUserInfo().getBtnMainMenu()){

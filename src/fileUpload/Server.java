@@ -60,8 +60,8 @@ class Server
        //nu er filen skrevet til project folder. Vi skal nu flytte/kopiere den til upload folder i res\\Uploads\\ 
         try{
         	    
-    	    File File1 =new File(current + "/" + filename);
-    	    File File2 =new File("res\\Uploads\\"+filename);
+    	    File File1 = new File(current + "/" + filename);
+    	    File File2 = new File("res\\Uploads\\"+filename);
   	       
     	    //original filen
     	    inStream = new FileInputStream(File1);
