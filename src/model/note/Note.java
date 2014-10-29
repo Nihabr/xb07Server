@@ -7,7 +7,7 @@ import model.QueryBuild.*;
 
 public class Note extends Model{
 	
-	NoteModel notes = new NoteModel(0, null, null, null, 0, 0);
+	NoteModel notes = new NoteModel(0, "", "", "", 0, 0);
 	QueryBuilder qb = new QueryBuilder(); 
 	
 		public void CreateNote(
@@ -54,8 +54,9 @@ public class Note extends Model{
 							resultSet.getString("text"), 
 							resultSet.getString("dateTime"), 
 							resultSet.getString("createdBy"), 
-							resultSet.getInt("Active"), 
-							noteID);
+							resultSet.getInt("Active"),
+							resultSet.getInt("eventID")
+							);
 				}
 					return notes;
 				
@@ -73,9 +74,14 @@ public class Note extends Model{
 			int eventID = note.getEventID();
 			int noteID = note.getNoteID();
 			
-			String[] fields = {"eventID", "createdBy", "text", "dateTime", "Active"};
-			String[] values = {String.valueOf(noteID), text, dateTime, createdBy, String.valueOf(isActive)};
-			qb.update("notes", fields, values).where("noteID", "=", String.valueOf(noteID));
+			String[] fields = {"eventID", "createdBy", "text", "dateTime", "active"};
+			String[] values = {String.valueOf(eventID), createdBy, text, dateTime,  String.valueOf(isActive)};
+			try {
+				qb.update("notes", fields, values).where("noteID", "=", String.valueOf(noteID)).Execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				
 		}
 }

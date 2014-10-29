@@ -119,10 +119,12 @@ public class QueryBuilder {
         for (int i = 0; i < fields.length; i++) {
             if(i != (fields.length-1)) {
                 setQuery += fields[i] + "='" + values[i] + "',";
-            } else {
+            } 
+            else {
                 setQuery += fields[i] + "='" + values[i] + "'";
             }
         }
+        System.out.println(setQuery);
         queryBuilder.setFields(setQuery);
         queryBuilder.setUpdate(true);
 

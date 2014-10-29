@@ -114,11 +114,14 @@ public class Execute extends Model {
 
         } else if(getQueryBuilder().isUpdate()) {
             sql = UPDATE + getQueryBuilder().getTableName() + " SET " + getQueryBuilder().getFields() + "" + WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?;";
+            System.out.println("sql: " + sql);
             try {
                 getConnection(false);
                 getConn();
-                String cleanSql = StringEscapeUtils.escapeSql(sql);
-                sqlStatement = getConn().prepareStatement(cleanSql);
+//                String cleanSql = StringEscapeUtils.escapeSql(sql);
+//                System.out.println("CleanSql: " + cleanSql);
+//                sqlStatement = getConn().prepareStatement(cleanSql);
+                sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
 
             } catch (SQLException e) {

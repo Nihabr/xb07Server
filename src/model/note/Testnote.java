@@ -5,7 +5,7 @@ import model.*;
 
 public class Testnote {
 	public static void main (String [] args) throws SQLException{
-		int nID = 3;
+		int nID = 2;
 		String text = "penis";
 		String date = "1000-01-01 00:00:00";
 		String cb = "createdBy din mor haha";
@@ -13,7 +13,7 @@ public class Testnote {
 		int eID = 11;
 		
 		Note note = new Note();
-		note.CreateNote(nID, text, date, cb, ia, eID);
+//		note.CreateNote(nID, text, date, cb, ia, eID);
 		note.DeleteNote(nID);
 	}
 }
