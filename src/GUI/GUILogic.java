@@ -48,7 +48,7 @@ public class GUILogic {
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-			userLoggedIn=auth.authenticate(email, password, isAdmin);
+		
 			// Giv auth noget data som passer til metoden
 			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
 			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
