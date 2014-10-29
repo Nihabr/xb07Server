@@ -14,7 +14,7 @@ import GUI.Screen;
 
 public class GUILogic {
 	private Screen screen;
-	private boolean userLoggedIn;
+	private int u;
 	private boolean full = false;
 	
 	AuthenticateUser auth = new AuthenticateUser();
@@ -48,19 +48,19 @@ public class GUILogic {
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-		
+			u=auth.authenticate(userName, password, true);
 			// Giv auth noget data som passer til metoden
-			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
+			// DernÃ¦st skal auth returnere 0 hvis dataen er god, og ellers give en fejl
 			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
-			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
+			// skal det printe hvilken fejl der er (bare print den int vÃ¦rdi i modtager)
 			if (e.getSource() == screen.getLogin().getBtnLogIn()){
 				
-				if(userLoggedIn == false){
-					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
+				if(u != 0){
+					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + u
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 			}
 
-			if	(userLoggedIn != true)
+			if	(u == 0)
 					{
 						screen.show(Screen.MAINMENU);
 					}
@@ -72,6 +72,7 @@ public class GUILogic {
 			}
 		}	
 	}
+	
 	
 	private class MainMenuActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
