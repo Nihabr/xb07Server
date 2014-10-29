@@ -58,15 +58,16 @@ import java.awt.event.ActionEvent;
 
 			
 			//Laver tabellen inde i Eventlisten.
-			String[] columnNames = { "Event", "Date", "Note", "" };
+			String[] columnNames = { "EventID", "Type", "Location", "CreatedBy","Start",
+					"End","Name", "Text","CustomEvent","CalendarID" };
 
-			Object[][] data = {
-
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
-					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) } };
+//			Object[][] data = {
+//
+//					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
+//					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
+//					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) },
+//					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(true) },
+//					{ "DØK Julefrokost", "11.11.2022", "Game on!", new Boolean(false) } };
 
 			final JTable table = new JTable(data, columnNames);
 			table.setSurrendersFocusOnKeystroke(true);

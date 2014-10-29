@@ -28,7 +28,7 @@ public class UserList extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final ActionListener ActionListener = null;
+//	private static final ActionListener ActionListener = null;
 	private boolean DEBUG = false;
 	private JButton btnAdd;
 	private JButton btnDelete;
@@ -36,6 +36,8 @@ public class UserList extends JPanel {
 	private JButton btnMainMenu;
 	private JScrollPane scrollPane;
 	private JLabel lblUserlist;
+	private JLabel lblLogo;
+	private JLabel lblBackground;
 	private ResultSet rs;
 	
     public UserList() {
@@ -157,12 +159,12 @@ public class UserList extends JPanel {
         btnDelete.setBounds(1019, 515, 118, 29);
         add(btnDelete);
         
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(UserList.class.getResource("/Images/CBSLogo3.png")));
-        lblNewLabel.setBounds(36, 695, 223, 67);
-        add(lblNewLabel);
+        lblLogo = new JLabel("");
+        lblLogo.setIcon(new ImageIcon(UserList.class.getResource("/Images/CBSLogo3.png")));
+        lblLogo.setBounds(36, 695, 223, 67);
+        add(lblLogo);
     
-        JLabel lblBackground = new JLabel("Background");
+        lblBackground = new JLabel("Background");
         lblBackground.setIcon(new ImageIcon(UserList.class.getResource("/Images/MetalBackground.jpg")));
         lblBackground.setBackground(new Color(245, 245, 245));
         lblBackground.setForeground(new Color(245, 255, 250));
@@ -208,29 +210,29 @@ public class UserList extends JPanel {
         frame.setVisible(true);
     }
  
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-     
-
-        }
-        });
-    }
+//    public static void main(String[] args) {
+//        //Schedule a job for the event-dispatching thread:
+//        //creating and showing this application's GUI.
+//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                createAndShowGUI();
+//     
+//
+//        }
+//        });
+//    }
     
     public void addActionListener(ActionListener l) {
-//		btnAdd.addActionListener(l);
+		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 		
 	}
 
-	public static ActionListener getActionlistener() {
-		return ActionListener;
-	}
+//	public static ActionListener getActionlistener() {
+//		return ActionListener;
+//	}
 
 	public JButton getBtnAdd() {
 		return btnAdd;

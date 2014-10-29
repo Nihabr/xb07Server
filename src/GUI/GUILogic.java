@@ -108,7 +108,10 @@ public class GUILogic {
 				String end = screen.getAddEventGUI().getTextField_End().getText();
 				String name = screen.getAddEventGUI().getTextField_Name().getText();
 				String text = screen.getAddEventGUI().getTextField_Text().getText();
-
+				
+				
+				//Her må det også tilføyes nye felter til add event panelet.
+				
 				if (Type.equals("")|| Location.equals("")|| Createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
@@ -118,10 +121,14 @@ public class GUILogic {
 				{
 				QueryBuilder qb = new QueryBuilder();
 				
-				String[] kolonner = { "eventid", "type", "location", "createdby", "start", "end", "name", "text"};
-				String[] Values = { Type, Location, Createdby, start, end, name, text};
+				String[] eventColumns = { "EventID", "Type", "Location", "CreatedBy","Start",
+						"End","Name", "Text","CustomEvent","CalendarID"};
+				String[] Values = { "Type", "Location", "CreatedBy","Start",
+						"End","Name", "Text","CustomEvent","CalendarID"};
+				
+				//Har lagt til variabler i arrayet slik det ser ut i databasen. 
 				try {
-					qb.insertInto("events", kolonner ).values(Values).ExecuteQuery();
+					qb.insertInto("events", eventColumns ).values(Values).ExecuteQuery();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -146,6 +153,7 @@ public class GUILogic {
 				String Type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password().getText();
 				
+				//her kan vi også bruke goodpass metoden fra den tidligere oppgave
 				if (Email.equals("")|| Type.equals("")|| Password.equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
@@ -157,6 +165,9 @@ public class GUILogic {
 				
 				String[] kolonner = { "email", "password"};
 				String[] Values = { Email, Password};
+				
+				//Hva brukes disse til?
+				
 				String[] kolonner2 = { "types"};
 				String[] Values2 = { Type};
 				try {

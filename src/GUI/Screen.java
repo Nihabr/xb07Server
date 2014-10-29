@@ -26,10 +26,10 @@ public class Screen extends JFrame {
 	private final UserInfo userInfo = new UserInfo();
 	private final NoteList noteList = new NoteList();
 	private final UserList userlist = new UserList();
-	CardLayout c;
 	private final EventList eventList = new EventList();
 	private AddEventGUI addEventGUI;
 	private final AddUser addUser = new AddUser();
+	CardLayout c;
 
 	/**
 	 * Launch the application.

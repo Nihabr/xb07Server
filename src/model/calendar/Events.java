@@ -56,7 +56,9 @@ public class Events {
 				
 				System.out.println(String.valueOf(startDate.getTime()));
 				
-				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));				
+				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
+				
+				//er det noen grunn til at det tillegges to ganger på fler av variablene?
 			}
 			
 		} catch (SQLException e) {
@@ -76,10 +78,10 @@ public class Events {
         return Arrays.toString(events.toArray());
     }
     
-    public static void main(String []args){
-    	Events Hej = new Events();
-    	
-    	Hej.getEvents();
-    	System.out.println(Hej.toString());
-    }
+//    public static void main(String []args){
+//    	Events Hej = new Events();
+//    	
+//    	Hej.getEvents();
+//    	System.out.println(Hej.toString());
+//    }
 }

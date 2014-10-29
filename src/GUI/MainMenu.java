@@ -21,6 +21,7 @@ public class MainMenu extends JPanel {
 	private JButton btnEventlist;
 	private JButton btnNotelist;
 	private JLabel lblCBSlogo;
+	private JLabel lblBackground;
 	
 
 	
@@ -37,10 +38,10 @@ public class MainMenu extends JPanel {
 		btnUserlist = new JButton("Userlist");
 		btnUserlist.setContentAreaFilled(false);
 		btnUserlist = new JButton("User-list");
-		btnUserlist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+//		btnUserlist.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//			}
+//		});
 		btnUserlist.setForeground(Color.WHITE);
 		btnUserlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnUserlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
@@ -80,7 +81,7 @@ public class MainMenu extends JPanel {
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
 		
-		JLabel lblBackground = new JLabel("");
+		lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(MainMenu.class.getResource("/Images/MetalBackground.jpg")));
 		lblBackground.setBounds(0, 0, 1366, 768);
 		add(lblBackground);

@@ -39,16 +39,16 @@ public class NoteList extends JPanel {
 		setLayout(null);
 		
 		//Laver tabellen inde i Eventlisten.
-		String[] columnNames = { "Note", "Event", "Date", "Numbers of Notes" };
+		String[] columnNames = { "noteId", "eventId", "createdBy", "text", "dateTime", "active"};
 
 		Object[][] data = {
 
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3"},
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3" },
-				{ "DØK Julefrokost", "11.11.2022", "Game on!","3" } 
+				{ "0","0","John","DØK Julefrokost", "11.11.2022","1"}
+				
 				};
+		//Skal vi også gjøre det samme som sist i forhold til refresh av tabellen?
+		// vi må også huske at notes skal integreres med events
+		// - John
 
 		final JTable table = new JTable(data, columnNames);
 		table.setSurrendersFocusOnKeystroke(true);
