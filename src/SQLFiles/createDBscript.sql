@@ -316,6 +316,9 @@ ALTER TABLE userevents
 	ON UPDATE RESTRICT
 ;
 
+ALTER TABLE users
+	add
+
 
 ALTER TABLE notes
 	ADD FOREIGN KEY (createdby)
