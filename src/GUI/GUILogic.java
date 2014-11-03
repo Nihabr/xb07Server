@@ -14,7 +14,7 @@ import GUI.Screen;
 
 public class GUILogic {
 	private Screen screen;
-	private boolean userloggedin;
+	private int loggedIn;
 	private boolean full = false;
 	
 	AuthenticateUser auth = new AuthenticateUser();
