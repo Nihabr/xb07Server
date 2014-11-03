@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS locationdata
 CREATE TABLE IF NOT EXISTS notes
 (
 	noteId int NOT NULL AUTO_INCREMENT,
-	eventId int DEFAULT NULL,
+	eventId int NOT NULL,
 	createdBy varchar(255) NOT NULL,
 	text text,
 	dateTime datetime NOT NULL,
@@ -176,13 +176,11 @@ ALTER TABLE userevents
 ;
 
 
-/*
 ALTER TABLE notes
 	ADD FOREIGN KEY (createdby)
 	REFERENCES users (userid)
 	ON UPDATE RESTRICT
 ;
-*/
 
 
 CREATE DATABASE IF NOT EXISTS cbscalendar;

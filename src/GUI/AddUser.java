@@ -35,7 +35,7 @@ public class AddUser extends JPanel {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 		
-		lblCBSlogo = new JLabel("");
+		lblCBSlogo = new JLabel();
 		lblCBSlogo.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
@@ -53,14 +53,15 @@ public class AddUser extends JPanel {
 		textField_Email.setForeground(new Color(105, 105, 105));
 		textField_Email.setName("");
 		textField_Email.setBounds(755, 213, 120, 34);
-		add(textField_Email);
 		textField_Email.setColumns(10);
+		add(textField_Email);
+		
 
-		JLabel lblUserID = new JLabel("Email");
-		lblUserID.setForeground(new Color(255, 255, 255));
-		lblUserID.setFont(new Font("Arial", Font.BOLD, 26));
-		lblUserID.setBounds(483, 211, 104, 30);
-		add(lblUserID);
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setForeground(new Color(255, 255, 255));
+		lblEmail.setFont(new Font("Arial", Font.BOLD, 26));
+		lblEmail.setBounds(483, 211, 104, 30);
+		add(lblEmail);
 
 		textField_Type = new JTextField();
 		textField_Type.setForeground(new Color(105, 105, 105));
@@ -68,11 +69,11 @@ public class AddUser extends JPanel {
 		textField_Type.setBounds(755, 259, 120, 34);
 		add(textField_Type);
 
-		JLabel lblEmail = new JLabel("Type");
-		lblEmail.setForeground(new Color(255, 255, 255));
-		lblEmail.setFont(new Font("Arial", Font.BOLD, 26));
-		lblEmail.setBounds(483, 257, 109, 30);
-		add(lblEmail);
+		JLabel lblType = new JLabel("User type");
+		lblType.setForeground(new Color(255, 255, 255));
+		lblType.setFont(new Font("Arial", Font.BOLD, 26));
+		lblType.setBounds(483, 257, 139, 30);
+		add(lblType);
 
 		textField_Password = new JTextField();
 		textField_Password.setForeground(new Color(105, 105, 105));
@@ -80,11 +81,11 @@ public class AddUser extends JPanel {
 		textField_Password.setBounds(755, 305, 120, 34);
 		add(textField_Password);
 
-		JLabel lblTeam = new JLabel("Password");
-		lblTeam.setFont(new Font("Arial", Font.BOLD, 26));
-		lblTeam.setForeground(new Color(255, 255, 255));
-		lblTeam.setBounds(483, 303, 127, 30);
-		add(lblTeam);
+		JLabel lblPass = new JLabel("Password");
+		lblPass.setFont(new Font("Arial", Font.BOLD, 26));
+		lblPass.setForeground(new Color(255, 255, 255));
+		lblPass.setBounds(483, 300, 127, 30);
+		add(lblPass);
 
 		btnSubmit = new JButton("Create User");
 		btnSubmit.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

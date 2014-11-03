@@ -17,14 +17,14 @@ public class GUILogic {
 	private int loggedIn;
 	private String action;
 	private boolean full = false;
-	
+	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
 	
 
 	public GUILogic(){
 		
 		screen = new Screen();
-
+		
 
 		screen.getLogin().addActionListener(new LoginActionListener());
 		screen.getMainMenu().addActionListener(new MainMenuActionListener());
@@ -34,13 +34,14 @@ public class GUILogic {
 		screen.getEventlist().addActionListener(new EventListActionListener());
 		screen.getAddEventGUI().addActionListener(new AddEventGUIActionListener());
 		screen.getAddUser().addActionListener(new AddUserActionListener());
+		screen.getAddNote().addActionListener(new AddNoteActionListener());
 
 		
 		
 	}
 	public void run() {
 
-		screen.show(Screen.MAINMENU);
+		screen.show(Screen.LOGIN);
 		screen.setVisible(true);
 	}
 	
@@ -59,12 +60,15 @@ public class GUILogic {
 			// skal det printe hvilken fejl der er (bare print den int vÃ¦rdi i modtager)
 			if ( (action.equals("btnLogIn"))){
 				
-				loggedIn=auth.authenticate(userName, password);
-				
+				loggedIn=auth.authenticate(userName, password,true);
+				System.out.println("hit");
 				
 				if	(loggedIn == 0)
+					
 				{
+					
 					screen.show(Screen.MAINMENU);
+					
 				}
 				
 				else if(loggedIn != 0){
@@ -80,10 +84,7 @@ public class GUILogic {
 			catch(Exception e3){
 			}
 		}	
-	}
-	
-
-	
+	}	
 	
 	private class MainMenuActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -131,7 +132,7 @@ public class GUILogic {
 				}
 				else
 				{
-				QueryBuilder qb = new QueryBuilder();
+				
 				
 				String[] eventColumns = { "EventID", "Type", "Location", "CreatedBy","Start",
 						"End","Name", "Text","CustomEvent","CalendarID"};
@@ -161,11 +162,18 @@ public class GUILogic {
 				screen.show(Screen.MAINMENU);
 			}
 			if (e.getSource() == screen.getAddUser().getBtnSubmit()){
+				
 				String Email = screen.getAddUser().getTextField_Email().getText();
 				String Type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password().getText();
 				int active = 1;
 				String userActive = String.valueOf(active);
+				boolean isAdmin = false;
+				String admin = "false";
+				if(Type.equals("admin")){
+					isAdmin = true;
+					admin = "true";
+				}
 				
 				
 				//her kan vi også bruke goodpass metoden fra den tidligere oppgave
@@ -176,27 +184,65 @@ public class GUILogic {
 				}
 				else
 				{
-				QueryBuilder qb = new QueryBuilder();
 				
-				String[] kolonner = { "email", "password", "active"};
-				String[] Values = { Email, Password, userActive};
+				
+				String[] kolonner = { "userid","email", "active", "created","password","isadmin"};
+				String[] Values = { Email,userActive, Password,admin};
 				
 				//Hva brukes disse til?
 				
-				String[] kolonner2 = { "types"};
+				String[] kolonner2 = { "userid","type"};
+				
 				String[] Values2 = { Type};
+				
+//				StringBuilder sql = new StringBuilder();
+//				sql.append("SELECT @last := LAST_INSERT_ID();\n");
+//				sql.append("insert into cbscalendar.roles values\n");
+//				sql.append("(NULL, @last, 'admin' );\n");
 				try {
 					qb.insertInto("users", kolonner ).values(Values).ExecuteQuery();
-					qb.insertInto("roles", kolonner ).values(Values).ExecuteQuery();
+//					System.out.println(qb.insertInto("users", kolonner ).values(Values).ExecuteQuery());
+					qb.insertInto("roles", kolonner2 ).values(Values2).ExecuteQuery();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 				}
 				
 				
 			}
 		}
+	}
+	
+	private class AddNoteActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+			if(e.getSource() == screen.getAddNote().getBtnAddNote()){
+				
+				String createdBy = screen.getAddNote().getTextFieldCreatedBy().getText();
+				String text = screen.getAddNote().getTextFieldText().getText();
+				int active = 1;
+				String isActive = String.valueOf(active);
+				
+//				String[] noteHeader = {"createdBy","text"};
+//				String[] noteValues = {createdBy,text};
+				String[] fields = {"noteId", "eventId", "createdBy", "text", "dateTime", "active"};
+				String[] values = {null, null, createdBy, text, null, isActive};
+				
+				try{
+					qb.insertInto("notes", fields).values(values).Execute();
+					
+				}catch(Exception e4){
+					
+					e4.printStackTrace();
+				}
+				
+				screen.show(Screen.NOTELIST);
+				
+			}
+		}
+		
 	}
 	
 	private class UserInfoActionListener implements ActionListener {
@@ -215,6 +261,17 @@ public class GUILogic {
 	
 	private class NoteListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource()== screen.getNoteList().getBtnAdd()){
+				
+				screen.show(Screen.ADDNOTE);
+				
+				
+				
+				
+				
+				
+			}
 
 			if (e.getSource() == screen.getNoteList().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
@@ -235,6 +292,8 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getUserList().getBtnAdd()){
+				
+				screen.show(Screen.ADDUSER);
 			
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()){
