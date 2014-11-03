@@ -70,10 +70,11 @@ public class Login extends JPanel {
 		btnLogIn.setForeground(new Color(255, 255, 255));
 		btnLogIn.setBackground(Color.WHITE);
 		btnLogIn.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+//		btnLogIn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//			}
+//		}
+	;
 		textFieldUsername.setOpaque(false);
 		textFieldUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUsername.setForeground(Color.BLACK);
@@ -83,7 +84,7 @@ public class Login extends JPanel {
 		textFieldUsername.setBounds(705, 334, 164, 37);
 		
 		add(textFieldUsername);
-		btnLogIn.setBounds(572, 449, 222, 51);
+		btnLogIn.setBounds(572, 450, 222, 51);
 		
 		add(btnLogIn);
 		btnForgotLogIn.addActionListener(new ActionListener() {
@@ -132,6 +133,7 @@ public class Login extends JPanel {
 	}
 	public void addActionListener(ActionListener l) {
 		btnLogIn.addActionListener(l);
+		btnLogIn.setActionCommand("btnLogIn");
 		btnForgotLogIn.addActionListener(l);
 }
 

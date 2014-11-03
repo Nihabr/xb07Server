@@ -19,7 +19,8 @@ public class AuthenticateUser {
 	 * @return
 	 * @throws Exception
 	 */
-	public int authenticate(String email, String password, boolean isAdmin) throws Exception {
+//	public int authenticate(String email, String password, boolean isAdmin) throws Exception {
+		public int authenticate(String email, String password) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -44,13 +45,19 @@ public class AuthenticateUser {
 					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
 
 					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
-					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
-					{
+//					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
+//					{
+						
+						if((resultSet.getString("type").equals("admin")) || (resultSet.getString("type").equals("user")))
+						{
+							System.out.println(0);
 						return 0; // returnerer "0" hvis bruger/admin er godkendt
 					} else {
+						System.out.println(4);
 						return 4; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
 					}
 				} else {
+					System.out.println(3);
 					return 3; // returnerer fejlkoden "3" hvis password ikke matcher
 				}
 			} else {

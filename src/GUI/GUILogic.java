@@ -3,8 +3,8 @@ package GUI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import model.user.*;
 
+import model.user.*;
 import GUI.UserInformation;
 
 import javax.swing.JOptionPane;
@@ -15,12 +15,14 @@ import GUI.Screen;
 public class GUILogic {
 	private Screen screen;
 	private int loggedIn;
+	private String action;
 	private boolean full = false;
 	
 	AuthenticateUser auth = new AuthenticateUser();
 	
 
 	public GUILogic(){
+		
 		screen = new Screen();
 
 
@@ -38,7 +40,7 @@ public class GUILogic {
 	}
 	public void run() {
 
-		screen.show(Screen.LOGIN);
+		screen.show(Screen.MAINMENU);
 		screen.setVisible(true);
 	}
 	
@@ -46,26 +48,31 @@ public class GUILogic {
 		public void actionPerformed(ActionEvent e) {
 			try{
 				
-			String userName = screen.getLogin().getTextFieldUsername().getText().trim();
-			String password = screen.getLogin().getTextFieldPassword().getText();
+				action = e.getActionCommand();
 			
+			String userName = screen.getLogin().getTextFieldUsername().getText().trim();
+			char[] pass = screen.getLogin().getTextFieldPassword().getPassword();
+			String password = String.valueOf(pass);
 			// Giv auth noget data som passer til metoden
 			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
 			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
 			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
-			if (e.getSource() == screen.getLogin().getBtnLogIn()){
+			if ( (action.equals("btnLogIn"))){
 				
-				loggedIn=auth.authenticate(userName, password, true);
+				loggedIn=auth.authenticate(userName, password);
 				
-				if(loggedIn != 0){
+				
+				if	(loggedIn == 0)
+				{
+					screen.show(Screen.MAINMENU);
+				}
+				
+				else if(loggedIn != 0){
 					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + loggedIn
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 			}
 
-			if	(loggedIn == 0)
-					{
-						screen.show(Screen.MAINMENU);
-					}
+			
 				
 	
 			}	
