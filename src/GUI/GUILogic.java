@@ -42,55 +42,27 @@ public class GUILogic {
 		screen.setVisible(true);
 	}
 	
-//	private class LoginActionListener implements ActionListener {
-//		public void actionPerformed(ActionEvent e) {
-//			try{
-//				
-//			String userName = screen.getLogin().getTextFieldUsername().getText().trim();
-//			String password = screen.getLogin().getTextFieldPassword().getText();
-//			
-//			// Giv auth noget data som passer til metoden
-//			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
-//			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
-//			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
-//			if (e.getSource() == screen.getLogin().getBtnLogIn()){
-//				
-//				loggedIn=auth.authenticate(userName, password, true);
-//				
-//				if(loggedIn != 0){
-//					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + loggedIn
-//							, "Error message",JOptionPane.PLAIN_MESSAGE);
-//			}
-//
-//			if	(loggedIn == 0)
-//					{
-//						screen.show(Screen.MAINMENU);
-//					}
-//				
-//	
-//			}	
-//			}	
-//			catch(Exception e3){
-//			}
-//		}	
-//	}
-	
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try{
 				
-			String userName = screen.getLogin().getTextFieldUsername().getText();
+			String userName = screen.getLogin().getTextFieldUsername().getText().trim();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-			userloggedin=auth.authenticate(email, password, isAdmin)(userName, password);
 			
+			// Giv auth noget data som passer til metoden
+			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
+			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
+			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
 			if (e.getSource() == screen.getLogin().getBtnLogIn()){
 				
-				if(u == false){
-					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
+				loggedIn=auth.authenticate(userName, password, true);
+				
+				if(loggedIn != 0){
+					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + loggedIn
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 			}
 
-			if	(u != true)
+			if	(loggedIn == 0)
 					{
 						screen.show(Screen.MAINMENU);
 					}
@@ -102,6 +74,8 @@ public class GUILogic {
 			}
 		}	
 	}
+	
+
 	
 	
 	private class MainMenuActionListener implements ActionListener {
