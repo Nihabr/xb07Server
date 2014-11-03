@@ -81,16 +81,16 @@ public class GUILogic {
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-			userloggedin = auth.authenticate(email, password, isAdmin)(userName, password);
+			userloggedin=auth.authenticate(email, password, isAdmin)(userName, password);
 			
 			if (e.getSource() == screen.getLogin().getBtnLogIn()){
 				
-				if(userloggedin == false){
+				if(u == false){
 					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 			}
 
-			if	(userloggedin != true)
+			if	(u != true)
 					{
 						screen.show(Screen.MAINMENU);
 					}
