@@ -10,7 +10,24 @@ public class QueryBuilder {
     private String fields;
     private boolean softDelete;
     private boolean isUpdate;
+    private String[] values;
+    private String[] fieldarray;
 
+    public String[] getFieldarray() {
+		return fieldarray;
+	}
+
+	public void setFieldarray(String[] fieldarray) {
+		this.fieldarray = fieldarray;
+	}
+
+	public String[] getValues() {
+		return values;
+	}
+
+	public void setValues(String[] values) {
+		this.values = values;
+	}
     protected void setSoftDelete(boolean b){
         this.softDelete = b;
     }
@@ -124,9 +141,11 @@ public class QueryBuilder {
                 setQuery += fields[i] + "='" + values[i] + "'";
             }
         }
-        System.out.println(setQuery);
+        System.out.println("where update: " + setQuery);
         queryBuilder.setFields(setQuery);
         queryBuilder.setUpdate(true);
+        queryBuilder.setValues(values);
+        queryBuilder.setFieldarray(fields);
 
         return new Where(queryBuilder);
     }

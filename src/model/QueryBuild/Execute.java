@@ -17,7 +17,9 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
-
+    private final String IF_EXISTS = "IF EXISTS ";
+    private final String ELSE = " ELSE ";
+    
     private QueryBuilder queryBuilder;
     private Where where;
     private Values values;
@@ -113,9 +115,22 @@ public class Execute extends Model {
             }
 
         } else if(getQueryBuilder().isUpdate()) {
-            sql = UPDATE + getQueryBuilder().getTableName() + " SET " + getQueryBuilder().getFields() + "" + WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?;";
-            System.out.println("sql: " + sql);
-            try {
+            sql = 	IF_EXISTS + "("+ SELECT + "*" + FROM + getQueryBuilder().getTableName() + WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?) " +
+            		    UPDATE + getQueryBuilder().getTableName() + " "
+            			+ "SET " + getQueryBuilder().getFields() + "" + 
+            			WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?"+ 
+            		ELSE + 
+            			INSERTINTO +  getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFieldarray() + ")" + 
+            			VALUES + "(";
+				            StringBuilder sb = new StringBuilder();
+				            for (String n : getQueryBuilder().getValues()) {
+				                if (sb.length() > 0) sb.append(',');
+				                sb.append(" ?");
+				            }
+				            sql += sb.toString();
+				            sql += " );";
+				            
+           try {
                 getConnection(false);
                 getConn();
            
@@ -124,12 +139,18 @@ public class Execute extends Model {
 //                sqlStatement = getConn().prepareStatement(cleanSql);
                 sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
+                sqlStatement.setString(2, getWhere().getWhereValue());
 
+                for (int i = 0; i < getQueryBuilder().getValues().length; i++) {
+
+                    sqlStatement.setString(i+3, getQueryBuilder().getValues()[i]);
+                }
+                System.out.println(sqlStatement.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println(sql);
+            System.out.println("insert into sql: " + sql);
             
             sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
             StringBuilder sb = new StringBuilder();

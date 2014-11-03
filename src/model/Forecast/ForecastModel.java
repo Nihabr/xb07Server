@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -21,7 +22,7 @@ import java.util.Iterator;
 public class ForecastModel {
 
 	     // Json parser to retrieve and map data from openweathermap.org
-	     private ArrayList<Forecast> forecastList = new ArrayList();
+	     private ArrayList<Forecast> forecastList = new ArrayList<Forecast>();
 	     private String weatherDescription = "";
 	     QueryBuilder qb = new QueryBuilder();
 	     
@@ -65,11 +66,12 @@ public class ForecastModel {
 
 	                 JSONObject innerObj = (JSONObject) i.next();
 
-	                 Date date = new Date((Long) innerObj.get("dt") * 1000L);
-	                 String string_date = date.toString();
+	                 Date date = new Date( (long) innerObj.get("dt") * 1000L);
+	                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                 String date_string = sdf.format(date);                
 	                 
 	                 JSONObject temp = (JSONObject) innerObj.get("temp");
-	                 double celsius = (Double) temp.get("day");
+	                 double celsius = ((Double) temp.get("day")).doubleValue();
 	                 
 	                 String temperatur = String.valueOf(celsius);
 	                 JSONArray subList = (JSONArray) innerObj.get("weather");
@@ -83,7 +85,7 @@ public class ForecastModel {
 
 	                 }
 	                 
-	                 forecastList.add(new Forecast(string_date, temperatur, weatherDescription));
+	                 forecastList.add(new Forecast(date_string, temperatur, weatherDescription));
 	                 
 	             }
 	         } catch (ParseException ex) {
@@ -99,7 +101,6 @@ public class ForecastModel {
 	     	QueryBuilder qb = new QueryBuilder();
 	     	Date date = new Date(); // Current date & time
 	     	long maxTimeNoUpdate = 3600; // Maximum one hour with no update
-	     	ArrayList<Forecast> forecastFromDB = new ArrayList();
 	     	
 	     	long date1 = date.getTime();
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
@@ -108,15 +109,30 @@ public class ForecastModel {
 	     	
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 3600){
+	     		
+	     		forecastList = requestForecast();
+	     		
+	     		for (Forecast fc : forecastList)
+	     		{
+	     		String dateTime = (fc.getDate());
+	     		String temperature = fc.getCelsius().toString();
+	     		String summary = fc.getDesc();
+	     		String msg_type ="fc";
+	     		String[] fields = {"date", "apparenttemperature", "summary", "msg_type"};
+	     		String[] values = {dateTime, temperature, summary, msg_type};
+	     		String key = "date";
+	     		qb.update("dailyupdate", fields, values).where(key, "=", dateTime).Execute();
+	     		}
+	     		
 	     		// return fresh weather data
-	     		return this.requestForecast();
+	     		return forecastList;
 	     	} else {
 	     		// Query database and fetch existing weather data from db
 	     		ResultSet forecast = null;
 	     		try {
 	     			forecast = qb.selectFrom("dailyupdate").where("msg_type", "=", "forecast").ExecuteQuery();
 					// Method to add these ResultSet values to ArrayList needs to be created
-					return (ArrayList<Forecast>) forecastFromDB;
+					return (ArrayList<Forecast>) forecastList;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -126,7 +142,7 @@ public class ForecastModel {
 	     		try {
 					while(forecast.next()){
 						//forecastFromDB.add("xx");
-						return forecastFromDB;
+						return forecastList;
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block

@@ -5,7 +5,7 @@ package model.Forecast;
  * Constructor til ForecastModel Arraylist
  */
 public class Forecast {
-
+	
     private String date;
     private String celsius;
     private String desc;
