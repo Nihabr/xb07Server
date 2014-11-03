@@ -14,7 +14,7 @@ import GUI.Screen;
 
 public class GUILogic {
 	private Screen screen;
-	private int u;
+	private boolean userloggedin;
 	private boolean full = false;
 	
 	AuthenticateUser auth = new AuthenticateUser();
@@ -42,25 +42,55 @@ public class GUILogic {
 		screen.setVisible(true);
 	}
 	
+//	private class LoginActionListener implements ActionListener {
+//		public void actionPerformed(ActionEvent e) {
+//			try{
+//				
+//			String userName = screen.getLogin().getTextFieldUsername().getText().trim();
+//			String password = screen.getLogin().getTextFieldPassword().getText();
+//			
+//			// Giv auth noget data som passer til metoden
+//			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
+//			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
+//			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
+//			if (e.getSource() == screen.getLogin().getBtnLogIn()){
+//				
+//				loggedIn=auth.authenticate(userName, password, true);
+//				
+//				if(loggedIn != 0){
+//					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + loggedIn
+//							, "Error message",JOptionPane.PLAIN_MESSAGE);
+//			}
+//
+//			if	(loggedIn == 0)
+//					{
+//						screen.show(Screen.MAINMENU);
+//					}
+//				
+//	
+//			}	
+//			}	
+//			catch(Exception e3){
+//			}
+//		}	
+//	}
+	
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try{
 				
 			String userName = screen.getLogin().getTextFieldUsername().getText();
 			String password = screen.getLogin().getTextFieldPassword().getText();
-			u=auth.authenticate(userName, password, true);
-			// Giv auth noget data som passer til metoden
-			// Dernæst skal auth returnere 0 hvis dataen er god, og ellers give en fejl
-			// brug if / else statement til at printe om det er godkendt eller ej, og hvis ikke
-			// skal det printe hvilken fejl der er (bare print den int værdi i modtager)
+			userloggedin=auth.authenticate(email, password, isAdmin)(userName, password);
+			
 			if (e.getSource() == screen.getLogin().getBtnLogIn()){
 				
-				if(u != 0){
-					JOptionPane.showMessageDialog(null, "\nLogin failed, error: " + u
+				if(u == false){
+					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 			}
 
-			if	(u == 0)
+			if	(u != true)
 					{
 						screen.show(Screen.MAINMENU);
 					}
@@ -153,6 +183,9 @@ public class GUILogic {
 				String Email = screen.getAddUser().getTextField_Email().getText();
 				String Type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password().getText();
+				int active = 1;
+				String userActive = String.valueOf(active);
+				
 				
 				//her kan vi ogs� bruke goodpass metoden fra den tidligere oppgave
 				if (Email.equals("")|| Type.equals("")|| Password.equals(""))
@@ -164,8 +197,8 @@ public class GUILogic {
 				{
 				QueryBuilder qb = new QueryBuilder();
 				
-				String[] kolonner = { "email", "password"};
-				String[] Values = { Email, Password};
+				String[] kolonner = { "email", "password", "active"};
+				String[] Values = { Email, Password, userActive};
 				
 				//Hva brukes disse til?
 				
