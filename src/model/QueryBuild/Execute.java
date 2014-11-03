@@ -1,6 +1,7 @@
 package model.QueryBuild;
 
 import model.Model;
+
 import org.apache.commons.lang.StringEscapeUtils;
 
 import java.sql.ResultSet;
@@ -120,7 +121,14 @@ public class Execute extends Model {
             			+ "SET " + getQueryBuilder().getFields() + "" + 
             			WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?"+ 
             		ELSE + 
-            			INSERTINTO +  getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFieldarray() + ")" + 
+            			INSERTINTO +  getQueryBuilder().getTableName() + " (";
+            			 StringBuilder sn = new StringBuilder();
+				            for (String n : getQueryBuilder().getFieldarray()) {
+				                if (sn.length() > 0) sn.append(',');
+				                sn.append(" ?");
+				            }
+				            sql += sn.toString();
+				            sql += ")" + 
             			VALUES + "(";
 				            StringBuilder sb = new StringBuilder();
 				            for (String n : getQueryBuilder().getValues()) {
@@ -138,12 +146,18 @@ public class Execute extends Model {
 //                System.out.println("CleanSql: " + cleanSql);
 //                sqlStatement = getConn().prepareStatement(cleanSql);
                 sqlStatement = getConn().prepareStatement(sql);
-                sqlStatement.setString(1, getWhere().getWhereValue());
+                sqlStatement.setString(1, getWhere().getWhereValue());                               
                 sqlStatement.setString(2, getWhere().getWhereValue());
+                
+                int i = 0;
+                for (i = 0; i < getQueryBuilder().getFieldarray().length; i++) {
+                  sqlStatement.setString(i+3, getQueryBuilder().getFieldarray()[i]);
+                }
 
-                for (int i = 0; i < getQueryBuilder().getValues().length; i++) {
+                for (int y = 0; y < getQueryBuilder().getValues().length; y++) {
 
-                    sqlStatement.setString(i+3, getQueryBuilder().getValues()[i]);
+                    sqlStatement.setString(i+3, getQueryBuilder().getValues()[y]);
+                    i++;
                 }
                 System.out.println(sqlStatement.toString());
             } catch (SQLException e) {

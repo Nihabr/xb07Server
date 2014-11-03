@@ -164,10 +164,12 @@ ALTER TABLE userevents
 ;
 
 
+/*
 ALTER TABLE notes
 	ADD FOREIGN KEY (createdby)
 	REFERENCES users (userid)
 	ON UPDATE RESTRICT
 ;
+*/
 
 
