@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +18,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
+
+import model.QueryBuild.QueryBuilder;
 
 public class EventList extends JPanel {
 
@@ -32,6 +37,7 @@ public class EventList extends JPanel {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private ResultSet rs;
 
 	public EventList() {
 		setSize(new Dimension(1366, 768));
@@ -42,22 +48,30 @@ public class EventList extends JPanel {
 				"Start", "End", "Name", "Text", "CustomEvent", "CalendarID" };
 
 
-
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][]{},columnNames)
-		
-				
-		{
+    	model = (DefaultTableModel)table.getModel();
+    	model.setColumnIdentifiers(columnNames);
+    	
+    	 try {
+ 			QueryBuilder qb = new QueryBuilder();
+ 			rs = qb.selectFrom("events").all().ExecuteQuery();
+ 			ResultSetMetaData rsmd = rs.getMetaData();
+ 			int colNo = rsmd.getColumnCount();
+ 			
+ 	        while (rs.next()) {
+ 	        	
+ 	        	Object[] objects = new Object[colNo];
+ 	        	
+ 	        	for(int i=0;i<colNo;i++){
+ 	        		  objects[i]=rs.getObject(i+1);
+ 	        		  }
+ 	        		 model.addRow(objects);
+ 	        		}
+ 	        		table.setModel(model);
+    		} catch (SQLException e1) {
+     			e1.printStackTrace();
+     		}
 
-			@Override
-		
-			public boolean isCellEditable(int row, int column) {
-				//Not possible to manipulate data in table
-				return false;
-			}});
-		
-		
-		model = (DefaultTableModel) table.getModel();
 		
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));

@@ -167,11 +167,11 @@ public class GUILogic {
 				String Type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password().getText();
 				int active = 1;
-				String userActive = String.valueOf(active);
+				String noteActive = String.valueOf(active);
 				boolean isAdmin = false;
-				String admin = "false";
+				String admin = String.valueOf(isAdmin);
 				if(Type.equals("admin")){
-					isAdmin = true;
+//					isAdmin = true;
 					admin = "true";
 				}
 				
@@ -187,7 +187,7 @@ public class GUILogic {
 				
 				
 				String[] kolonner = { "userid","email", "active", "created","password","isadmin"};
-				String[] Values = { Email,userActive, Password,admin};
+				String[] Values = { Email,noteActive, Password,admin};
 				
 				//Hva brukes disse til?
 				
@@ -219,16 +219,21 @@ public class GUILogic {
 		public void actionPerformed(ActionEvent e){
 			
 			if(e.getSource() == screen.getAddNote().getBtnAddNote()){
-				
+				int noteID = 1;
+				String nID = String.valueOf(noteID);
+				int eventID = 1;
+				String eID = String.valueOf(eventID);
 				String createdBy = screen.getAddNote().getTextFieldCreatedBy().getText();
+				String date = "1000-01-01 00:00:00";
 				String text = screen.getAddNote().getTextFieldText().getText();
 				int active = 1;
-				String isActive = String.valueOf(active);
+				String isactive = String.valueOf(active);
+				
 				
 //				String[] noteHeader = {"createdBy","text"};
 //				String[] noteValues = {createdBy,text};
 				String[] fields = {"noteId", "eventId", "createdBy", "text", "dateTime", "active"};
-				String[] values = {null, null, createdBy, text, null, isActive};
+				String[] values = {nID, eID, createdBy, text, date, isactive };
 				
 				try{
 					qb.insertInto("notes", fields).values(values).Execute();
@@ -305,6 +310,11 @@ public class GUILogic {
 	
 	private class EventListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
+			if(e.getSource() == screen.getEventlist().getBtnAdd()){
+				
+				screen.show(Screen.ADDEVENTGUI);
+			}
 
 			if (e.getSource() == screen.getEventlist().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);

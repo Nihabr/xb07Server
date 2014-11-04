@@ -174,6 +174,7 @@ public class Execute extends Model {
             }
             sql += sb.toString();
             sql += " );";
+            System.out.println(sql);
             try {
                 getConnection(false);
                 getConn();

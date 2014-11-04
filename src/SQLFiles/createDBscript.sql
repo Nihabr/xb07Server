@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS notes
 	createdBy varchar(255) NOT NULL,
 	text text,
 	dateTime datetime NOT NULL,
-	active bit,
+	active TINYINT(1),
 	PRIMARY KEY (noteid)
 );
 
