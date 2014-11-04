@@ -185,6 +185,3 @@ ALTER TABLE notes
 */
 
 
-CREATE DATABASE IF NOT EXISTS cbscalendar;
-use cbscalendar;
-SET SESSION FOREIGN_KEY_CHECKS=0;
