@@ -36,17 +36,13 @@ public class MainMenu extends JPanel {
 		add(lblMainMenu);
 		
 		btnUserlist = new JButton("Userlist");
+
 		btnUserlist.setContentAreaFilled(false);
-		btnUserlist = new JButton("User-list");
-//		btnUserlist.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//			}
-//		});
 		btnUserlist.setForeground(Color.WHITE);
 		btnUserlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnUserlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnUserlist.setBackground(Color.WHITE);
-		btnUserlist.setBounds(610, 330, 145, 50);
+		btnUserlist.setBounds(610, 331, 145, 50);
 		add(btnUserlist);
 		
 		btnEventlist = new JButton("Eventlist");

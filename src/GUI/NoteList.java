@@ -14,11 +14,17 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+
+import model.QueryBuild.QueryBuilder;
 
 public class NoteList extends JPanel {
 	private JTable table;
@@ -29,6 +35,9 @@ public class NoteList extends JPanel {
 	private JButton btnMainMenu;
 	private JButton btnLogout;
 	private JLabel label;
+	private JScrollPane scrollPane;
+	private DefaultTableModel model;
+	private ResultSet rs;
 	
 
 	/**
@@ -41,23 +50,37 @@ public class NoteList extends JPanel {
 		//Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "noteId", "eventId", "createdBy", "text", "dateTime", "active"};
 
-		Object[][] data = {
-
-				{ "0","0","John","DØK Julefrokost", "11.11.2022","1"}
-				
-				};
-		//Skal vi også gjøre det samme som sist i forhold til refresh av tabellen?
-		// vi må også huske at notes skal integreres med events
-		// - John
-
-		final JTable table = new JTable(data, columnNames);
+		table = new JTable();
+    	model = (DefaultTableModel)table.getModel();
+    	model.setColumnIdentifiers(columnNames);
+    	
+    	 try {
+ 			QueryBuilder qb = new QueryBuilder();
+ 			rs = qb.selectFrom("notes").all().ExecuteQuery();
+ 			ResultSetMetaData rsmd = rs.getMetaData();
+ 			int colNo = rsmd.getColumnCount();
+ 			
+ 	        while (rs.next()) {
+ 	        	
+ 	        	Object[] objects = new Object[colNo];
+ 	        	
+ 	        	for(int i=0;i<colNo;i++){
+ 	        		  objects[i]=rs.getObject(i+1);
+ 	        		  }
+ 	        		 model.addRow(objects);
+ 	        		}
+ 	        		table.setModel(model);
+    		} catch (SQLException e1) {
+     			e1.printStackTrace();
+     		}
+		
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 
 		// Create the scroll pane and add the table to it.
-		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),

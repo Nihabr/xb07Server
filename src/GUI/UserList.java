@@ -132,16 +132,6 @@ public class UserList extends JPanel {
         btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
         btnAdd.setForeground(new Color(0, 0, 205));
         btnAdd.setOpaque(true);
-        btnAdd.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-
-          String firstName = JOptionPane.showInputDialog(null, "UserID", null);
-          String lastName = JOptionPane.showInputDialog(null, "Email", null);
-          String eMail = JOptionPane.showInputDialog(null, "Date", null);
-          String password = JOptionPane.showInputDialog(null, "Write your password", null);
-          
-        	}
-        });
         
         btnAdd.setBounds(1019, 556, 118, 29);
         add(btnAdd);
@@ -218,22 +208,22 @@ public class UserList extends JPanel {
      * this method should be invoked from the
      * event-dispatching thread.
      */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("SimpleTableDemo");
-        frame.setSize(1366, 768);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        //Create and set up the content pane.
-        UserList newContentPane = new UserList();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
- 
-
-        
-        frame.setVisible(true);
-    }
- 
+//    private static void createAndShowGUI() {
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("SimpleTableDemo");
+//        frame.setSize(1366, 768);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+// 
+//        //Create and set up the content pane.
+//        UserList newContentPane = new UserList();
+//        newContentPane.setOpaque(true); //content panes must be opaque
+//        frame.setContentPane(newContentPane);
+// 
+//
+//        
+//        frame.setVisible(true);
+//    }
+// 
 //    public static void main(String[] args) {
 //        //Schedule a job for the event-dispatching thread:
 //        //creating and showing this application's GUI.

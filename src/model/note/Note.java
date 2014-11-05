@@ -23,6 +23,7 @@ public class Note extends Model{
 			
 			String[] fields = {"noteId", "eventId", "createdBy", "text", "dateTime", "active"};
 			String[] values = {nId, eId, createdBy, text, dateTime, String.valueOf(isActive)};
+			System.out.println(values);
 			try {
 				qb.insertInto("notes", fields).values(values).Execute();
 				

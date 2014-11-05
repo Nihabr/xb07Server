@@ -4,28 +4,29 @@ import java.awt.Dimension;
 
 //public class AddCourse {
 
-	import javax.swing.JPanel;
 
+	import javax.swing.JPanel;
 	import javax.swing.JLabel;
-	import javax.swing.ImageIcon;
-	import javax.swing.JTable;
-	import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 	import java.awt.Font;
 
 	import javax.swing.SwingConstants;
-	import javax.swing.JButton;
+import javax.swing.JButton;
 
 	import java.awt.Color;
 
 	import javax.swing.JScrollPane;
 
 	import java.awt.Component;
+import java.awt.event.ActionListener;
 
 	import javax.swing.border.CompoundBorder;
-	import javax.swing.border.BevelBorder;
-	import javax.swing.border.MatteBorder;
-	import javax.swing.JTextPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.JTextPane;
 
 
 	public class AddCourse extends JPanel {
@@ -123,7 +124,28 @@ import java.awt.Dimension;
 			label_1.setIcon(new ImageIcon(AddCourse.class.getResource("/Images/MetalBackground.jpg")));
 			label_1.setBounds(0, 11, 1366, 768);
 			add(label_1);
-			
+			}
 
+			public void addActionListener(ActionListener l) {
+				btnAdd.addActionListener(l);
+				btnDelete.addActionListener(l);
+				btnLogout.addActionListener(l);
+				btnMainMenu.addActionListener(l);
+			}	
+		
+		public JButton getBtnAdd() {
+			return btnAdd;
 		}
-	}
+
+		public JButton getBtnDelete() {
+			return btnDelete;
+		}
+
+		public JButton getBtnMainMenu() {
+			return btnMainMenu;
+		}
+
+		public JButton getBtnLogout() {
+			return btnLogout;
+		}
+}
