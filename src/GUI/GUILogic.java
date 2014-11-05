@@ -177,7 +177,7 @@ public class GUILogic {
 				String Password = screen.getAddUser().getTextField_Password()
 						.getText();
 				int active = 1;
-				String noteActive = String.valueOf(active);
+				String userActive = String.valueOf(active);
 				boolean isAdmin = false;
 				String admin = String.valueOf(isAdmin);
 				if (Type.equals("admin")) {
@@ -195,7 +195,7 @@ public class GUILogic {
 
 					String[] kolonner = { "userid", "email", "active",
 							"created", "password", "isadmin" };
-					String[] Values = { Email, noteActive, Password, admin };
+					String[] Values = { Email, userActive, Password, admin };
 
 					// Hva brukes disse til?
 
