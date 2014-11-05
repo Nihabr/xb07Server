@@ -17,6 +17,7 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
+    private final String ON_DUPLICATE_KEY = " ON DUPLICATE KEY ";
 
     private QueryBuilder queryBuilder;
     private Where where;
@@ -124,29 +125,44 @@ public class Execute extends Model {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println(sql);
-            
+        } else {        
             sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
             StringBuilder sb = new StringBuilder();
             for (String n : getValues().getValues()) {
-                if (sb.length() > 0) sb.append(',');
-                sb.append(" ?");
+                if (sb.length() > 0) 
+                	sb.append(',');                
+        		sb.append(" ?");
             }
             sql += sb.toString();
-            sql += " );";
-            System.out.println(sql);
+            sql += " )" + ON_DUPLICATE_KEY + UPDATE;   
+            
+            int counter = 0;
+            StringBuilder sn = new StringBuilder();
+            for (String n : getValues().getValues()) 
+            	{
+            	sn.append(getQueryBuilder().getFieldarray()[counter]);
+        		sn.append(" = ?");
+        		if(counter != getQueryBuilder().getFieldarray().length - 1)
+            		sn.append(',' + " ");
+        		counter++;               
+            	}
+            sql += sn.toString();
+            sql += ";";
             try {
                 getConnection(false);
                 getConn();
-                String cleanSql = StringEscapeUtils.escapeSql(sql);
-                sqlStatement = getConn().prepareStatement(cleanSql);
-                int x = 0;
+//                String cleanSql = StringEscapeUtils.escapeSql(sql);
+                sqlStatement = getConn().prepareStatement(sql);
+                int phCounter = 0;
                 for (int i = 0; i < getValues().getValues().length; i++) {
-                    x = i;
-                    sqlStatement.setString(x+1, getValues().getValues()[i]);
+                    phCounter++;
+                    sqlStatement.setString(phCounter, getValues().getValues()[i]);
                 }
-
+                for (int i = 0; i < getValues().getValues().length; i++) {
+                    phCounter++;
+                    sqlStatement.setString(phCounter, getValues().getValues()[i]);
+                }
+                System.out.println(sqlStatement.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -154,6 +170,6 @@ public class Execute extends Model {
 
         return sqlStatement.execute();
     }
+    }
 
 
-}

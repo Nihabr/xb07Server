@@ -10,6 +10,7 @@ public class QueryBuilder {
     private String fields;
     private boolean softDelete;
     private boolean isUpdate;
+    private String[] fieldarray;
 
     protected void setSoftDelete(boolean b){
         this.softDelete = b;
@@ -18,7 +19,13 @@ public class QueryBuilder {
         return softDelete;
     }
 
-    protected boolean isUpdate() {
+    public String[] getFieldarray() {
+		return fieldarray;
+	}
+	public void setFieldarray(String[] fieldarray) {
+		this.fieldarray = fieldarray;
+	}
+	protected boolean isUpdate() {
         return isUpdate;
     }
     protected void setUpdate(boolean isUpdate) {
@@ -99,6 +106,7 @@ public class QueryBuilder {
             }
             sb.append(n);
         }
+        queryBuilder.setFieldarray(fields);
         queryBuilder.setFields(sb.toString());
         return new Values(queryBuilder);
 

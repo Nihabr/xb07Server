@@ -8,7 +8,7 @@ public class CreateCalender implements java.io.Serializable
 	private String userName;
 	private int publicOrPrivate;
 	
-	//Getters and setters for everything, bitch
+	//Getters and setters for everything
 	public String getOverallID() {
 		return overallID;
 	}

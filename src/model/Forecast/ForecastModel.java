@@ -117,11 +117,10 @@ public class ForecastModel {
 	     		String dateTime = (fc.getDate());
 	     		String temperature = fc.getCelsius().toString();
 	     		String summary = fc.getDesc();
-	     		String msg_type ="fc";
+	     		String msg_type = "fc";
 	     		String[] fields = {"date", "apparenttemperature", "summary", "msg_type"};
 	     		String[] values = {dateTime, temperature, summary, msg_type};
-	     		String key = "date";
-	     		qb.update("dailyupdate", fields, values).where(key, "=", dateTime).Execute();
+	     		qb.insertInto("dailyupdate", fields).values(values).Execute();
 	     		}
 	     		
 	     		// return fresh weather data
