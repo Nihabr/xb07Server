@@ -32,6 +32,7 @@ public class Screen extends JFrame {
 	private final AddNote addNote = new AddNote();
 	private AddEventGUI addEventGUI;
 	private final AddUser addUser = new AddUser();
+	private final AddCourse addCourse = new AddCourse();
 	CardLayout c;
 
 	/**
@@ -116,4 +117,8 @@ public class Screen extends JFrame {
 	public AddUser getAddUser() {
 		return addUser;
 	}
+	public AddCourse getAddCourse() {
+		return addCourse;
+	}
+
 }

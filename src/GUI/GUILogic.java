@@ -34,6 +34,9 @@ public class GUILogic {
 				new AddEventGUIActionListener());
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
+		//new addCourse
+		screen.getAddCourse().addActionListener(new AddCourseActionListener());
+
 
 	}
 
@@ -55,12 +58,12 @@ public class GUILogic {
 						.getPassword();
 				String password = String.valueOf(pass);
 				// Giv auth noget data som passer til metoden
-				// DernÃ¦st skal auth returnere 0 hvis dataen er god, og ellers
+				// Dernï¿½ï¿½st skal auth returnere 0 hvis dataen er god, og ellers
 				// give en fejl
 				// brug if / else statement til at printe om det er godkendt
 				// eller ej, og hvis ikke
 				// skal det printe hvilken fejl der er (bare print den int
-				// vÃ¦rdi i modtager)
+				// vï¿½ï¿½rdi i modtager)
 				if ((action.equals("btnLogIn"))) {
 
 					loggedIn = auth.authenticate(userName, password, true);
@@ -127,7 +130,7 @@ public class GUILogic {
 				
 				
 				
-				//Her må det også tilføyes nye felter til add event panelet.
+				//Her mï¿½ det ogsï¿½ tilfï¿½yes nye felter til add event panelet.
 				
 				if (type.equals("")|| location.equals("")|| createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
 				{
@@ -142,7 +145,7 @@ public class GUILogic {
 						"End","Name", "Text","CustomEvent","CalendarID"};
 				String[] Values = { null,type, location, createdby,start,
 						end,name, text,customEvent,calendarID};
-				// for å få dette til å fungere må vi først opprette en kalender...
+				// for ï¿½ fï¿½ dette til ï¿½ fungere mï¿½ vi fï¿½rst opprette en kalender...
 				
 				//Har lagt til variabler i arrayet slik det ser ut i databasen. 
 				try {
@@ -182,7 +185,7 @@ public class GUILogic {
 					admin = "true";
 				}
 
-				// her kan vi også bruke goodpass metoden fra den tidligere
+				// her kan vi ogsï¿½ bruke goodpass metoden fra den tidligere
 				// oppgave
 				if (Email.equals("") || Type.equals("") || Password.equals("")) {
 					JOptionPane.showMessageDialog(null,
@@ -305,7 +308,7 @@ public class GUILogic {
 
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()) {
-
+			//mangler
 			}
 
 		}
@@ -314,18 +317,37 @@ public class GUILogic {
 	private class EventListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if (e.getSource() == screen.getEventlist().getBtnAdd()) {
-
-				screen.show(Screen.ADDEVENTGUI);
-			}
-
-			if (e.getSource() == screen.getEventlist().getBtnMainMenu()) {
+			if (e.getSource() == screen.getEventlist().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getEventlist().getBtnLogout()) {
+			if (e.getSource() == screen.getEventlist().getBtnLogout()){
 				screen.show(Screen.LOGIN);
+			}
+			if (e.getSource() == screen.getEventlist().getBtnAdd()){
+				screen.show(Screen.ADDEVENTGUI);
+			}
+			if (e.getSource() == screen.getEventlist().getBtnDelete()){
+				// mangler
 			}
 		}
 	}
-
+	
+	// hvad er pointen med denne klasse? med course menes event? eller mangler helt GUI for at tilfÃ¸je Course?
+	
+	private class AddCourseActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == screen.getAddCourse().getBtnMainMenu()){
+				screen.show(Screen.MAINMENU);
+			}
+			if (e.getSource() == screen.getLogout().getBtnLogout()){
+				screen.show(Screen.LOGIN);
+			}
+			// (mangler add og delete)
+		}
+	}
+	
+	
+	
+	
 }
