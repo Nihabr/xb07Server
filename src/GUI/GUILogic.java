@@ -340,7 +340,7 @@ public class GUILogic {
 			if (e.getSource() == screen.getAddCourse().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getLogout().getBtnLogout()){
+			if (e.getSource() == screen.getAddCourse().getBtnLogout()){
 				screen.show(Screen.LOGIN);
 			}
 			// (mangler add og delete)
