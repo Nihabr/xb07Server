@@ -10,7 +10,7 @@ public class Where {
     private String whereOperator;
     private String whereValue;
 
-	protected String getWhereKey() {
+    protected String getWhereKey() {
         return whereKey;
     }
 
