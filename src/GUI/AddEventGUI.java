@@ -279,7 +279,7 @@ public class AddEventGUI extends JPanel {
 	public String startDateTimeToString(){
 		
 		String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
-				getTextFieldStartDateDay() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
+				getTextFieldStartDateDay().getText() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
 				getTextFieldStartSecond().getText();
 		
 		return start;
@@ -288,7 +288,7 @@ public class AddEventGUI extends JPanel {
 	public String endDateTimeToString(){
 		
 		String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
-				getTextFieldEndDateDay() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
+				getTextFieldEndDateDay().getText() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
 				getTextFieldEndSecond().getText();
 		
 		return end;

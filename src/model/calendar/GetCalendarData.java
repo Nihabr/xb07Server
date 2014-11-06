@@ -46,8 +46,8 @@ public class GetCalendarData {
          * Encrypt hash from
          */
     	String userID = "1234";
-//        String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey()+".json");
-        String json = readUrl("http://calendar.cbs.dk/events.php/jolj13ab/c8376a342ad9d756d007125edaa281b3.json");
+      String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey()+".json");
+       
         
 
         Gson gson = new Gson();
