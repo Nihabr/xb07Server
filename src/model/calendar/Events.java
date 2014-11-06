@@ -27,7 +27,7 @@ public class Events {
 				int type = rs.getInt("type");
 				int location = rs.getInt("location");
 				int createdby = rs.getInt("createdby");
-				
+			
 				
 				Date startDate = rs.getDate("start");
 				Time startTime = rs.getTime("start");
@@ -58,7 +58,7 @@ public class Events {
 				
 //				events.add(new Event( stringEventID, stringType, stringType, stringLocation,stringCreatedby, alStart, alEnd));
 				
-				//er det noen grunn til at det tillegges to ganger på fler av variablene?
+				//er det noen grunn til at det tillegges to ganger pï¿½ fler av variablene?
 			}
 			
 		} catch (SQLException e) {

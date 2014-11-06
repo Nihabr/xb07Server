@@ -34,7 +34,6 @@ public class GUILogic {
 				new AddEventGUIActionListener());
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
-		//new addCourse
 		screen.getAddCourse().addActionListener(new AddCourseActionListener());
 
 
@@ -279,9 +278,7 @@ public class GUILogic {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == screen.getNoteList().getBtnAdd()) {
-
 				screen.show(Screen.ADDNOTE);
-
 			}
 
 			if (e.getSource() == screen.getNoteList().getBtnMainMenu()) {
@@ -332,7 +329,6 @@ public class GUILogic {
 		}
 	}
 	
-	// hvad er pointen med denne klasse? med course menes event? eller mangler helt GUI for at tilføje Course?
 	
 	private class AddCourseActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
