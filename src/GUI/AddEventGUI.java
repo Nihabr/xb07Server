@@ -276,18 +276,18 @@ public class AddEventGUI extends JPanel {
 		btnMainMenu.addActionListener(l);
 	}
 	
-	public String startDateTimeToString(String start){
+	public String startDateTimeToString(){
 		
-		start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
+		String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
 				getTextFieldStartDateDay() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
 				getTextFieldStartSecond().getText();
 		
 		return start;
 	}
 	
-	public String endDateTimeToString(String end){
+	public String endDateTimeToString(){
 		
-		end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
+		String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
 				getTextFieldEndDateDay() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
 				getTextFieldEndSecond().getText();
 		

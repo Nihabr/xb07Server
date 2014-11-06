@@ -65,9 +65,9 @@ public class GUILogic {
 				// skal det printe hvilken fejl der er (bare print den int
 				// v��rdi i modtager)
 				if ((action.equals("btnLogIn"))) {
-
+					System.out.println("hit1");
 					loggedIn = auth.authenticate(userName, password, true);
-					System.out.println("hit");
+					System.out.println("hit2");
 
 					if (loggedIn == 0)
 
@@ -120,9 +120,9 @@ public class GUILogic {
 				String location = screen.getAddEventGUI().getTextField_Location().getText();
 				String createdby = screen.getAddEventGUI().getTextField_Createdby().getText();
 				String start = "";
-				start = screen.getAddEventGUI().startDateTimeToString(start);
+				start = screen.getAddEventGUI().startDateTimeToString();
 				String end = "";
-				end = screen.getAddEventGUI().endDateTimeToString(end);
+				end = screen.getAddEventGUI().endDateTimeToString();
 				String name = screen.getAddEventGUI().getTextField_Name().getText();
 				String text = screen.getAddEventGUI().getTextField_Text().getText();
 				String customEvent = "1";
@@ -141,9 +141,9 @@ public class GUILogic {
 				{
 				
 				
-				String[] eventColumns = { "EventID", "Type", "Location", "CreatedBy","Start",
+				String[] eventColumns = {"Type", "Location", "CreatedBy","Start",
 						"End","Name", "Text","CustomEvent","CalendarID"};
-				String[] Values = { null,type, location, createdby,start,
+				String[] Values = {type, location, createdby,start,
 						end,name, text,customEvent,calendarID};
 				// for � f� dette til � fungere m� vi f�rst opprette en kalender...
 				
