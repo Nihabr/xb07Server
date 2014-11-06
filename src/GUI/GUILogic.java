@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.user.*;
@@ -19,6 +20,8 @@ public class GUILogic {
 	private boolean full = false;
 	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
+
+	private ResultSet res;
 
 	public GUILogic() {
 
@@ -172,46 +175,52 @@ public class GUILogic {
 
 				String Email = screen.getAddUser().getTextField_Email()
 						.getText();
-				String Type = screen.getAddUser().getTextField_Type().getText();
+				String type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password()
 						.getText();
 				int active = 1;
 				String userActive = String.valueOf(active);
-				boolean isAdmin = false;
-				String admin = String.valueOf(isAdmin);
-				if (Type.equals("admin")) {
+				int adminstatus;
+				String admin = String.valueOf(type);
+				if (type.equals("admin")) {
 					// isAdmin = true;
-					admin = "true";
+					
+					adminstatus = 1;
+					admin = String.valueOf(adminstatus);
 				}
+					else if(type.equals("user")){
+						
+						adminstatus = 0;
+						admin = String.valueOf(adminstatus);
+					}
+				
 
 				// her kan vi ogs� bruke goodpass metoden fra den tidligere
 				// oppgave
-				if (Email.equals("") || Type.equals("") || Password.equals("")) {
+				if (Email.equals("") || type.equals("") || Password.equals("")) {
 					JOptionPane.showMessageDialog(null,
 							"\nPlease fill out all the fields",
 							"Error message", JOptionPane.PLAIN_MESSAGE);
 				} else {
 
-					String[] kolonner = { "userid", "email", "active",
-							"created", "password", "isadmin" };
+					String[] kolonner = {"email", "active",
+							 "password", "isadmin" };
 					String[] Values = { Email, userActive, Password, admin };
+					
 
-					// Hva brukes disse til?
-
-					String[] kolonner2 = { "userid", "type" };
-
-					String[] Values2 = { Type };
-
-					// StringBuilder sql = new StringBuilder();
-					// sql.append("SELECT @last := LAST_INSERT_ID();\n");
-					// sql.append("insert into cbscalendar.roles values\n");
-					// sql.append("(NULL, @last, 'admin' );\n");
 					try {
 						qb.insertInto("users", kolonner).values(Values)
 								.ExecuteQuery();
-						// System.out.println(qb.insertInto("users", kolonner
-						// ).values(Values).ExecuteQuery());
-						qb.insertInto("roles", kolonner2).values(Values2)
+
+						String[] value = {"userID"};
+						
+						res = qb.selectFrom(value, "users").where("email", "=", Email).ExecuteQuery();
+						res.last();
+						String[] kolonner2 = { "userid", "type" };
+						String[] values2 = {res.getString("userID"),type};
+						
+												
+						qb.insertInto("roles", kolonner2).values(values2)
 								.ExecuteQuery();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
