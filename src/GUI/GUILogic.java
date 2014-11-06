@@ -181,14 +181,14 @@ public class GUILogic {
 				int active = 1;
 				String userActive = String.valueOf(active);
 				int adminstatus;
-				String admin = String.valueOf(type);
+				String admin = "0";
 				if (type.equals("admin")) {
 					// isAdmin = true;
 					
 					adminstatus = 1;
 					admin = String.valueOf(adminstatus);
 				}
-					else if(type.equals("user")){
+				else if(type.equals("user")){
 						
 						adminstatus = 0;
 						admin = String.valueOf(adminstatus);
@@ -203,25 +203,21 @@ public class GUILogic {
 							"Error message", JOptionPane.PLAIN_MESSAGE);
 				} else {
 
-					String[] kolonner = {"email", "active",
-							 "password", "isadmin" };
+					String[] kolonner = {"email", "active", "password", "isadmin" };
 					String[] Values = { Email, userActive, Password, admin };
 					
-
 					try {
-						qb.insertInto("users", kolonner).values(Values)
-								.ExecuteQuery();
-
+						qb.insertInto("users", kolonner).values(Values).Execute();
+						System.out.println("så langt så godt");
 						String[] value = {"userID"};
 						
 						res = qb.selectFrom(value, "users").where("email", "=", Email).ExecuteQuery();
-						res.last();
+						System.out.println(res.last());
 						String[] kolonner2 = { "userid", "type" };
-						String[] values2 = {res.getString("userID"),type};
-						
+						String[] values2 = {String.valueOf(res.getInt("userID")),type};
+						System.out.println(res.getInt("userID"));
 												
-						qb.insertInto("roles", kolonner2).values(values2)
-								.ExecuteQuery();
+						qb.insertInto("roles", kolonner2).values(values2).Execute();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
