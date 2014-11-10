@@ -51,11 +51,11 @@ public class GetCalendarData {
         
 
         Gson gson = new Gson();
-        Events events = gson.fromJson(json, Events.class); 
+        Events cbsEvents = gson.fromJson(json, Events.class); 
 
         //tester events activityID's
-        for (int i = 0; i < events.getEvents().size(); i++){
-//            System.out.println(events.getEvents().get(i).getActivityid());
+        for (int i = 0; i < cbsEvents.getEvents().size(); i++){
+        	System.out.println(cbsEvents.getEvents().get(i).getText());
         }
     }
 }

@@ -14,14 +14,14 @@ public class Event {
 	private String text;
 	private String location;
 	private String createdby;
-	private ArrayList<String> start;
-	private ArrayList<String> end;
+	private String start;
+	private String end;
 	private String customevent;
 	private String calendarID;
 //	String activityid
 	public Event( String eventid, String type,
-			String location, String createdby, ArrayList<String> start,
-			ArrayList<String> end, String title, String text,
+			String location, String createdby, String start,
+			String end, String title, String text,
 			String customevent, String calendarID) {
 		super();
 		// this.activityid = activityid;
@@ -110,19 +110,19 @@ public class Event {
 		return createdby;
 	}
 
-	public void setStart(ArrayList<String> start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public ArrayList<String> getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setEnd(ArrayList<String> end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 
-	public ArrayList<String> getEnd() {
+	public String getEnd() {
 		return end;
 	}
 

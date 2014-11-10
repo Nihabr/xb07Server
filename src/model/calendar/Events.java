@@ -3,6 +3,7 @@ package model.calendar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -27,14 +28,7 @@ public class Events {
 				int type = rs.getInt("type");
 				int location = rs.getInt("location");
 				int createdby = rs.getInt("createdby");
-			
-				
-				Date startDate = rs.getDate("start");
-				Time startTime = rs.getTime("start");
-				
-				Date endDate = rs.getDate("end");
-				Time endTime = rs.getTime("end");
-				
+
 				String nameEvent = rs.getString("name");
 				String text = rs.getString("text");
 				int customevent = rs.getInt("customevent");
@@ -44,24 +38,21 @@ public class Events {
 				String stringType = String.valueOf(type);
 				String stringLocation = String.valueOf(location);
 				String stringCreatedby = String.valueOf(createdby);
-				String stringStartDate = String.valueOf(startDate);
-				String stringStartTime = String.valueOf(startTime);				
-				String stringEndDate = String.valueOf(endDate);
-				String stringEndTime = String.valueOf(endTime);
+
+			
+
 				String customEvent = String.valueOf(customevent);
 				String calId = String.valueOf(CalendarID);
 				
-				ArrayList<String> alStart = new ArrayList<String>();
-				alStart.add(stringStartDate + "" + stringStartTime);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				
-				ArrayList<String> alEnd = new ArrayList<String>();
-				alEnd.add(stringEndDate + "" + stringEndTime);
-				
-				
-				System.out.println(String.valueOf(startDate.getTime()));
+				String stringStartDate = sdf.format(rs.getDate("start"));
+				String stringEndDate = sdf.format(rs.getDate("end"));
+
+				System.out.println(stringStartDate);
 				
 				
-				events.add(new Event( stringEventID, stringType, stringLocation,stringCreatedby, alStart, alEnd, nameEvent, text,customEvent,calId ));
+				events.add(new Event( stringEventID, stringType, stringLocation,stringCreatedby, stringStartDate, stringEndDate , nameEvent, text,customEvent,calId ));
 //				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
 				//er det noen grunn til at det tillegges to ganger p� fler av variablene?
 			}
