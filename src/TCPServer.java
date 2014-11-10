@@ -29,17 +29,13 @@ class TCPServer {
 			//Creates an object of the data which is to be send back to the client, via the connectionSocket
 			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 			System.out.println("Outtoclient oprettet!");
-			//Sets client sentence equals input from client
-			//incomingJson = inFromClient.readLine();			
 			
 			String ny = cryp.decrypt(b);
 			
-			//cryp.StringEncryption(inFromClient.readLine());
-			System.out.println("Besked modtaget!");
-			//Sysout recieved message
 			System.out.println("Received: " + ny);
 			String returnSvar = GS.GiantSwitchMethod(ny);		
-			//Sends the capitalized message back to client!!
+
+			System.out.println(returnSvar.toString());
 			outToClient.writeBytes(returnSvar + "\n");
 			System.out.println("svar sendt");
 			//BufferedWriter writer = new BufferedWriter(arg0)
