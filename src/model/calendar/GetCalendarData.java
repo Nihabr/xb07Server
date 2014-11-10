@@ -58,6 +58,10 @@ public class GetCalendarData {
 
         Gson gson = new Gson();
         GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class); 
+//        JsonObject jsonObject = gson.fromJson( json, JsonObject.class);
+        
+        
+//        ("activityid","eventid","type", "title", "description","start", "end", "location");
 
         //tester events activityID's
         for (int i = 0; i < cbsEvents.getEvents().size(); i++){
