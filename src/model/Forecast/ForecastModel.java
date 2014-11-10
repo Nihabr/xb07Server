@@ -105,7 +105,7 @@ public class ForecastModel {
 	     	long date1 = date.getTime();
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
 	     	
-	     	long timeSinceUpdate = 3601; 
+	     	long timeSinceUpdate = 3600; 
 	     	
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 3600){
@@ -129,9 +129,9 @@ public class ForecastModel {
 	     		// Query database and fetch existing weather data from db
 	     		ResultSet forecast = null;
 	     		try {
-	     			forecast = qb.selectFrom("dailyupdate").where("msg_type", "=", "forecast").ExecuteQuery();
+	     			forecast = qb.selectFrom("dailyupdate").where("msg_type", "=", "fc").ExecuteQuery();
 					// Method to add these ResultSet values to ArrayList needs to be created
-					return (ArrayList<Forecast>) forecastList;
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -140,9 +140,17 @@ public class ForecastModel {
 	     		//Do something nice with ResultSet in order to make it into an ArrayList
 	     		try {
 					while(forecast.next()){
-						//forecastFromDB.add("xx");
-						return forecastList;
+						
+						date = forecast.getDate("date");
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String date_string = sdf.format(date); 
+						String temperatur = String.valueOf(forecast.getDouble("apparentTemperature"));
+						String weatherDescription = forecast.getString("summary");
+						
+						forecastList.add(new Forecast(date_string, temperatur, weatherDescription));
 					}
+						return forecastList;
+					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
