@@ -37,6 +37,8 @@ public class Events {
 				
 				String nameEvent = rs.getString("name");
 				String text = rs.getString("text");
+				int customevent = rs.getInt("customevent");
+				int CalendarID = rs.getInt("CalendarID");
 				
 				String stringEventID = String.valueOf(eventID);
 				String stringType = String.valueOf(type);
@@ -46,6 +48,8 @@ public class Events {
 				String stringStartTime = String.valueOf(startTime);				
 				String stringEndDate = String.valueOf(endDate);
 				String stringEndTime = String.valueOf(endTime);
+				String customEvent = String.valueOf(customevent);
+				String calId = String.valueOf(CalendarID);
 				
 				ArrayList<String> alStart = new ArrayList<String>();
 				alStart.add(stringStartDate + "" + stringStartTime);
@@ -56,8 +60,9 @@ public class Events {
 				
 				System.out.println(String.valueOf(startDate.getTime()));
 				
-//				events.add(new Event( stringEventID, stringType, stringType, stringLocation,stringCreatedby, alStart, alEnd));
 				
+				events.add(new Event( stringEventID, stringType, stringLocation,stringCreatedby, alStart, alEnd, nameEvent, text,customEvent,calId ));
+//				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
 				//er det noen grunn til at det tillegges to ganger p� fler av variablene?
 			}
 			
@@ -78,11 +83,11 @@ public class Events {
         return Arrays.toString(events.toArray());
     }
     
-    public static void main(String []args){
-    	Events Hej = new Events();
-    	
-    	Hej.getEvents();
-    	System.out.println(Hej.toString());
-
-    }
+//    public static void main(String []args){
+//    	Events Hej = new Events();
+//    	
+//    	Hej.getEvents();
+//    	System.out.println(Hej.toString());
+//
+//    }
 }

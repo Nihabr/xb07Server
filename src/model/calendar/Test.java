@@ -7,6 +7,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		Events etest = new Events();
 		etest.getEvents();
+		System.out.println(etest.toString());
 	}
 
 }
