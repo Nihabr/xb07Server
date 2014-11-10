@@ -1,39 +1,49 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import JsonClasses.*;
+import java.io.*;
+import java.net.*;
+import JsonClasses.CalendarInfo;
 
-public class TCPClient {
-	public static void main(String[] args) throws Exception {
-		String modifiedSentence;
-		Gson gson = new GsonBuilder().create();
-		CreateCalender CC = new CreateCalender();
-		CC.setCalenderName("Din mors kalender2");
-		CC.setPublicOrPrivate(1);
-		CC.setUserName("John");
-		String gsonString = gson.toJson(CC);
-		System.out.println(CC);
-		System.out.println(gsonString);
+import com.google.gson.stream.JsonReader;
 
-		Socket clientSocket = new Socket("localhost", 8888);
-		DataOutputStream outToServer = new DataOutputStream(
-				clientSocket.getOutputStream());
-		byte[] input = gsonString.getBytes();
-		byte key = (byte) 3.1470;
-		byte[] encrypted = input;
-		for (int i = 0; i < encrypted.length; i++)
-			encrypted[i] = (byte) (encrypted[i] ^ key);
+class TCPServer {    
+	public static void main(String argv[]) throws Exception       {
+		CalendarInfo CI = new CalendarInfo();
+		GiantSwitch GS = new GiantSwitch();
+		encryption cryp = new encryption();
+		
 
-		outToServer.write(encrypted);
-		outToServer.flush();
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
-				clientSocket.getInputStream()));
-		modifiedSentence = inFromServer.readLine();
-		System.out.println(modifiedSentence);
-		System.out.println("FROM SERVER: " + modifiedSentence);
-		clientSocket.close();
-	}
-}
+		
+		//Creates a socket to send and recieve messages in port 8888
+		ServerSocket welcomeSocket = new ServerSocket(8888);
+		//Creates 2 string to hold random stuff
+		String incomingJson;
+		//While something is true
+		while(true){
+			//Creates a socket and a buffered reader which recieves some sort of input from somewhere around the internet!
+			Socket connectionSocket = welcomeSocket.accept();
+			System.out.println("forbindelse Oprettet!");
+			//BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+			byte[] b = new byte[500000];
+			int count = connectionSocket.getInputStream().read(b);
+			ByteArrayInputStream bais = new ByteArrayInputStream(b);
+			DataInputStream inFromClient = new DataInputStream(connectionSocket.getInputStream());		
+			//Creates an object of the data which is to be send back to the client, via the connectionSocket
+			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+			System.out.println("Outtoclient oprettet!");
+			//Sets client sentence equals input from client
+			//incomingJson = inFromClient.readLine();			
+			
+			String ny = cryp.decrypt(b);
+			
+			//cryp.StringEncryption(inFromClient.readLine());
+			System.out.println("Besked modtaget!");
+			//Sysout recieved message
+			System.out.println("Received: " + ny);
+			String returnSvar = GS.GiantSwitchMethod(ny);		
+			//Sends the capitalized message back to client!!
+			outToClient.writeBytes(returnSvar + "\n");
+			System.out.println("svar sendt");
+			//BufferedWriter writer = new BufferedWriter(arg0)
+			}
+		}
+	
+		} 
