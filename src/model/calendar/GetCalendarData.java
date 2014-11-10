@@ -53,10 +53,9 @@ public class GetCalendarData {
         Gson gson = new Gson();
         CBSevents cbsEvents = gson.fromJson(json, CBSevents.class); 
 
-        
         //tester events activityID's
         for (int i = 0; i < cbsEvents.getEvents().size(); i++){
-        	System.out.println(cbsEvents.getEvents().get(i).getDescription());
+        	System.out.println(cbsEvents.getEvents());
         }
     }
 }
