@@ -133,7 +133,7 @@ public class Login extends JPanel {
 	}
 	public void addActionListener(ActionListener l) {
 		btnLogIn.addActionListener(l);
-		btnLogIn.setActionCommand("btnLogIn");
+		btnLogIn.setActionCommand("btnLogin");
 		btnForgotLogIn.addActionListener(l);
 }
 
@@ -146,4 +146,4 @@ public class Login extends JPanel {
 	}
 
 
-	}
+}

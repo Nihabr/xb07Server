@@ -208,7 +208,7 @@ public class GUILogic {
 					
 					try {
 						qb.insertInto("users", kolonner).values(Values).Execute();
-						System.out.println("så langt så godt");
+						System.out.println("sï¿½ langt sï¿½ godt");
 						String[] value = {"userID"};
 						
 						res = qb.selectFrom(value, "users").where("email", "=", Email).ExecuteQuery();
@@ -222,9 +222,11 @@ public class GUILogic {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
+					
+					
+					
 				}
-
+			screen.show(Screen.USERLIST);
 			}
 		}
 	}
