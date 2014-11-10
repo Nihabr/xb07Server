@@ -15,9 +15,9 @@ import model.QueryBuild.QueryBuilder;
  * Den laver selve arrayet af alle generede Event
  */
 public class Events {
-    ArrayList<Event> events = new ArrayList<Event>();
+    ArrayList<UserEvent> events = new ArrayList<UserEvent>();
 
-    public ArrayList<Event> getEvents() {
+    public ArrayList<UserEvent> getEvents() {
     	QueryBuilder qb = new QueryBuilder();
     	try {
 			ResultSet rs = qb.selectFrom("events").all().ExecuteQuery();
@@ -52,7 +52,7 @@ public class Events {
 				System.out.println(stringStartDate);
 				
 				
-				events.add(new Event( stringEventID, stringType, stringLocation,stringCreatedby, stringStartDate, stringEndDate , nameEvent, text,customEvent,calId ));
+				events.add(new UserEvent( stringEventID, stringType, stringLocation,stringCreatedby, stringStartDate, stringEndDate , nameEvent, text,customEvent,calId ));
 //				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
 				//er det noen grunn til at det tillegges to ganger p� fler av variablene?
 			}
@@ -64,7 +64,7 @@ public class Events {
     	return events;
     }
 
-    public void setEvents(ArrayList<Event> event) {
+    public void setEvents(ArrayList<UserEvent> event) {
         this.events = event;
     }
     

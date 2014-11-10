@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by jesperbruun on 10/10/14. Til hver specifik event bliver de
  * defineret saaledes.
  */
-public class Event {
+public class UserEvent {
 	// private String activityid;
 	private String eventid;
 	private String type;
@@ -19,7 +19,7 @@ public class Event {
 	private String customevent;
 	private String calendarID;
 //	String activityid
-	public Event( String eventid, String type,
+	public UserEvent( String eventid, String type,
 			String location, String createdby, String start,
 			String end, String title, String text,
 			String customevent, String calendarID) {
