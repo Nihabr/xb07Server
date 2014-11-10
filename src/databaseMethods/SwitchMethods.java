@@ -44,7 +44,7 @@ public class SwitchMethods extends Model
 		getConn();
 		boolean authenticate = false;
 		
-		resultSet= qb.selectFrom("calendar").where("name", "=", newCalenderName).ExecuteQuery();
+		resultSet= qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 				
 				//("select * from test.calender where Name = '"+newCalenderName+"';");
 		while(resultSet.next())
@@ -56,14 +56,13 @@ public class SwitchMethods extends Model
 	
 	public void addNewCalender (String newCalenderName, String userName, int publicOrPrivate) throws SQLException
 	{
-		String [] keys = {"Name","active","CreatedBy","PrivatePublic"};
+		String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
 		String [] values = {newCalenderName,"1",userName, Integer.toString(publicOrPrivate)};
-		qb.update("calendar", keys, values).all().Execute();
+		qb.insertInto("calender", fields).values(values).Execute();
 		
-//		doUpdate("insert into test.calender (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalenderName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");
 	}
 	/**
-	 * Allows the client to delete a calendar
+	 * Allows the client to delete a calender
 	 * @param userName
 	 * @param calenderName
 	 * @return
@@ -106,7 +105,7 @@ public class SwitchMethods extends Model
 			{
 				String [] keys = {"Active"};
 				String [] values = {"2"};
-				qb.update("Calendar", keys, values).where("Name", "=", calenderName).Execute();
+				qb.update("calender", keys, values).where("Name", "=", calenderName).Execute();
 				stringToBeReturend = "Calender has been set inactive";
 			}
 			stringToBeReturend = resultSet.toString();

@@ -13,7 +13,7 @@ class TCPServer {
 
 		
 		//Creates a socket to send and recieve messages in port 8888
-		ServerSocket welcomeSocket = new ServerSocket(8888);
+		ServerSocket welcomeSocket = new ServerSocket(6666);
 		//Creates 2 string to hold random stuff
 		String incomingJson;
 		//While something is true
