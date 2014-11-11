@@ -138,7 +138,7 @@ public class AddEventGUI extends JPanel {
 		btnLogout.setForeground(new Color(255, 255, 255));
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(599, 637, 143, 59);
+		btnLogout.setBounds(593, 680, 143, 59);
 		add(btnLogout);
 
 		textField_Location = new JTextField();
@@ -191,10 +191,10 @@ public class AddEventGUI extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Submit changes to databases
-				// hvad sker der n�r �ndringer ved en bruger submittes
+				// hvad sker der n���r ���ndringer ved en bruger submittes
 			}
 		});
-		btnSubmit.setBounds(553, 544, 239, 43);
+		btnSubmit.setBounds(553, 544, 239, 49);
 		add(btnSubmit);
 
 		btnMainMenu = new JButton("Main menu");
@@ -207,7 +207,7 @@ public class AddEventGUI extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(586, 591, 164, 44);
+		btnMainMenu.setBounds(586, 610, 164, 44);
 		add(btnMainMenu);
 
 		lblCreate = new JLabel("Create even");

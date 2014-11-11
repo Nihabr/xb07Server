@@ -87,7 +87,7 @@ public class AddNote extends JPanel {
 	lblBackground = new JLabel("");
 	lblBackground.setSize(new Dimension(1366, 768));
 	lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
-	lblBackground.setBounds(6, -85, 1366, 768);
+	lblBackground.setBounds(0, 0, 1366, 768);
 	add(lblBackground);
 	}
 	public void addActionListener(ActionListener l) {
