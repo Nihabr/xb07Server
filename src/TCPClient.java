@@ -2,8 +2,12 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+
+import model.QOTD.QOTDModel;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import JsonClasses.*;
 
 public class TCPClient {
@@ -11,19 +15,11 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		CreateEvent ce = new CreateEvent();
-		ce.setEventid("2");
-		ce.setType("1");
-		ce.setLocation("1");
-		ce.setCreatedby("1");
-		ce.setStart("1000-01-01 00:00:00");
-		ce.setEnd("1001-01-01 00:00:00");
-		ce.setTitle("etevent");
-		ce.setText("hihihi");
-		ce.setCustomevent("0");
-		ce.setCalendarID("1");
-		String gsonString = gson.toJson(ce);
-		System.out.println(ce);
+		QOTDModel q = new QOTDModel();
+		q.getQuote();
+
+		String gsonString = gson.toJson(q);
+		System.out.println(q);
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 6666);
