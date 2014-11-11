@@ -164,11 +164,10 @@ public class SwitchMethods extends Model
 		String stringToBeReturend = "";
 		String createdBy ="";
 		resultSet = qb.selectFrom("events").where("eventID", "=", eventID).ExecuteQuery();
-				
-		if (resultSet.next())
-		{
+		
 			while(resultSet.next())
 			{
+				System.out.println("createdby ledes efter: ");
 				createdBy = resultSet.getString("createdby");
 				System.out.println(createdBy);
 			}
@@ -183,12 +182,7 @@ public class SwitchMethods extends Model
 				qb.update("events", keys, values).where("eventID", "=", eventID).Execute();
 				stringToBeReturend = "event has been set inactive";
 			}
-			stringToBeReturend = resultSet.toString();
-		}
-		else
-		{
-			stringToBeReturend = "The event you are trying to delete, does not exists.";
-		}
+			
 		
 		return stringToBeReturend;
 		

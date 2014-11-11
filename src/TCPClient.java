@@ -13,7 +13,7 @@ public class TCPClient {
 		
 		DeleteEvent de = new DeleteEvent();
 		
-		de.setEventId("1");
+		de.setEventId("2");
 		de.setUserID("1");
 		
 		

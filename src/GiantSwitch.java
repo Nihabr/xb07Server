@@ -37,7 +37,7 @@ public class GiantSwitch {
 		 ************/
 
 		case "importCalendar":
-			
+			//import notes, userevents & cbs events related to the user
 			
 			System.out.println("Recieved importCourse");
 			break;
