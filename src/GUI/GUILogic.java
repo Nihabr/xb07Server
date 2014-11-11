@@ -269,7 +269,7 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getUserInfo().getBtnSubmit()) {
-
+				//mangler
 			}
 		}
 	}
@@ -286,6 +286,9 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getNoteList().getBtnLogout()) {
 				screen.show(Screen.LOGIN);
+			}
+			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
+				//mangler
 			}
 		}
 	}
@@ -339,11 +342,12 @@ public class GUILogic {
 			if (e.getSource() == screen.getAddCourse().getBtnLogout()){
 				screen.show(Screen.LOGIN);
 			}
-			// (mangler add og delete)
+			if (e.getSource() == screen.getAddCourse().getBtnAdd()) {
+				// mangler
+			}
+			if (e.getSource() == screen.getAddCourse().getBtnDelete()) {
+				// mangler
+			}
 		}
-	}
-	
-	
-	
-	
+	}	
 }
