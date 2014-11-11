@@ -8,6 +8,7 @@ import JsonClasses.CreateCalender;
 import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
 import JsonClasses.DeleteCalender;
+import JsonClasses.DeleteEvent;
 
 import com.google.gson.*;
 
@@ -91,6 +92,12 @@ public class GiantSwitch {
 			break;
 			
 		case "deleteEvent":
+			
+			DeleteEvent de = (DeleteEvent)gson.fromJson(jsonString, DeleteEvent.class);
+			
+			answer = SW.deleteEvent(de.getUserID(), de.getEventId());
+			System.out.println("Event" + de.getEventId() +"is deleted");
+			
 			System.out.println("Recieved deleteEvent");
 			break;
 			

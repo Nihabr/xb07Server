@@ -6,7 +6,6 @@ public class DeleteEvent {
 	private String overallID = "deleteEvent";
 	private String eventId;
 	private String userID;
-	private String createdby;
 	
 	public DeleteEvent(){
 		

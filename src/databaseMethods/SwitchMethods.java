@@ -163,14 +163,9 @@ public class SwitchMethods extends Model
 		
 		String stringToBeReturend = "";
 		String createdBy ="";
-		String eventExists = "";
 		resultSet = qb.selectFrom("events").where("eventID", "=", eventID).ExecuteQuery();
 				
-		while(resultSet.next())
-		{
-			eventExists = resultSet.toString();
-		}
-		if(!eventExists.equals(""))
+		if (resultSet.next())
 		{
 			while(resultSet.next())
 			{
