@@ -5,6 +5,7 @@ import model.calendar.UserEvent;
 import model.note.Note;
 import JsonClasses.CalendarInfo;
 import JsonClasses.CreateCalender;
+import JsonClasses.CreateEvent;
 import JsonClasses.DeleteCalender;
 
 import com.google.gson.*;
@@ -78,8 +79,11 @@ public class GiantSwitch {
 
 		case "createEvent":
 			
+			CreateEvent ce = (CreateEvent)gson.fromJson(jsonString, CreateEvent.class);
 			
-			System.out.println("Recieved saveEvent");
+			System.out.println("Recieved new event" + ce.getEventid());
+			answer = SW.createEvent(ce.getEventid(), ce.getType(), ce.getLocation(),
+					ce.getCreatedby(),ce.getStart(), ce.getEnd(), ce.getTitle(), ce.getText(), ce.getCustomevent(), ce.getCalendarID());
 			break;
 
 		case "getEventInfo":

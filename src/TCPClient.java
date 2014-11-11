@@ -10,9 +10,20 @@ public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalender CC = new CreateCalender();
-		String gsonString = gson.toJson(CC);
-		System.out.println(CC);
+		
+		CreateEvent ce = new CreateEvent();
+		ce.setEventid("2");
+		ce.setType("1");
+		ce.setLocation("1");
+		ce.setCreatedby("1");
+		ce.setStart("1000-01-01 00:00:00");
+		ce.setEnd("1001-01-01 00:00:00");
+		ce.setTitle("etevent");
+		ce.setText("hihihi");
+		ce.setCustomevent("0");
+		ce.setCalendarID("1");
+		String gsonString = gson.toJson(ce);
+		System.out.println(ce);
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 6666);

@@ -61,12 +61,29 @@ public class SwitchMethods extends Model
 		qb.insertInto("calender", fields).values(values).Execute();
 		
 	}
+	public String createEvent( String eventid, String type,
+			String location, String createdby, String start,
+			String end, String name, String text,
+			String customevent, String calendarID)throws SQLException{
+		testConnection();
+		String stringToBeReturned ="";
+		String [] fields = {"eventid", "type", "location", "createdby", "start",
+				"end", "name","text","customevent", "calendarID"};
+		String[] values = {eventid,  type ,  location ,  createdby ,  start ,
+				 end ,  name , text , customevent ,  calendarID };
+		
+		qb.insertInto("events", fields).values(values).Execute();
+		stringToBeReturned = "Event has been created";
+		return stringToBeReturned;
+	}
 	/**
 	 * Allows the client to delete a calender
 	 * @param userName
 	 * @param calenderName
 	 * @return
 	 */
+	
+	
 	public String deleteCalender (String userName, String calenderName) throws SQLException
 	{
 		String stringToBeReturned ="";
