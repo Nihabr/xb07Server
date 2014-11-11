@@ -47,6 +47,10 @@ public class AddEventGUI extends JPanel {
 	private JTextField textFieldEndYear;
 	private JTextField textFieldStartDateDay;
 	private JTextField textFieldEndDateDay;
+	private JLabel lblStartDate;
+	private JLabel lblHour;
+	private JLabel lblNewLabel_1;
+	private JLabel lblSecond;
 
 	/**
 	 * Create the panel.
@@ -59,67 +63,67 @@ public class AddEventGUI extends JPanel {
 		textFieldEndDateDay = new JTextField();
 		textFieldEndDateDay.setForeground(SystemColor.controlDkShadow);
 		textFieldEndDateDay.setColumns(10);
-		textFieldEndDateDay.setBounds(885, 334, 53, 34);
+		textFieldEndDateDay.setBounds(885, 346, 53, 34);
 		add(textFieldEndDateDay);
 		
 		textFieldStartDateDay = new JTextField();
 		textFieldStartDateDay.setForeground(SystemColor.controlDkShadow);
 		textFieldStartDateDay.setColumns(10);
-		textFieldStartDateDay.setBounds(885, 285, 53, 34);
+		textFieldStartDateDay.setBounds(885, 297, 53, 34);
 		add(textFieldStartDateDay);
 
 		textFieldEndSecond = new JTextField();
 		textFieldEndSecond.setForeground(SystemColor.controlDkShadow);
 		textFieldEndSecond.setColumns(10);
-		textFieldEndSecond.setBounds(1080, 334, 53, 34);
+		textFieldEndSecond.setBounds(1080, 346, 53, 34);
 		add(textFieldEndSecond);
 
 		textFieldEndMonth = new JTextField();
 		textFieldEndMonth.setForeground(SystemColor.controlDkShadow);
 		textFieldEndMonth.setColumns(10);
-		textFieldEndMonth.setBounds(820, 334, 53, 34);
+		textFieldEndMonth.setBounds(820, 346, 53, 34);
 		add(textFieldEndMonth);
 
 		textFieldEndMinute = new JTextField();
 		textFieldEndMinute.setForeground(SystemColor.controlDkShadow);
 		textFieldEndMinute.setColumns(10);
-		textFieldEndMinute.setBounds(1015, 334, 53, 34);
+		textFieldEndMinute.setBounds(1015, 346, 53, 34);
 		add(textFieldEndMinute);
 
 		textFieldEndHour = new JTextField();
 		textFieldEndHour.setForeground(SystemColor.controlDkShadow);
 		textFieldEndHour.setColumns(10);
-		textFieldEndHour.setBounds(950, 334, 53, 34);
+		textFieldEndHour.setBounds(950, 346, 53, 34);
 		add(textFieldEndHour);
 
 		textFieldEndYear = new JTextField();
 		textFieldEndYear.setForeground(SystemColor.controlDkShadow);
 		textFieldEndYear.setColumns(10);
-		textFieldEndYear.setBounds(755, 334, 53, 34);
+		textFieldEndYear.setBounds(755, 346, 53, 34);
 		add(textFieldEndYear);
 
 		textFieldStartSecond = new JTextField();
 		textFieldStartSecond.setForeground(SystemColor.controlDkShadow);
 		textFieldStartSecond.setColumns(10);
-		textFieldStartSecond.setBounds(1080, 285, 53, 34);
+		textFieldStartSecond.setBounds(1080, 297, 53, 34);
 		add(textFieldStartSecond);
 
 		textFieldStartMinute = new JTextField();
 		textFieldStartMinute.setForeground(SystemColor.controlDkShadow);
 		textFieldStartMinute.setColumns(10);
-		textFieldStartMinute.setBounds(1015, 285, 53, 34);
+		textFieldStartMinute.setBounds(1015, 297, 53, 34);
 		add(textFieldStartMinute);
 
 		textFieldStartHour = new JTextField();
 		textFieldStartHour.setForeground(SystemColor.controlDkShadow);
 		textFieldStartHour.setColumns(10);
-		textFieldStartHour.setBounds(950, 285, 53, 34);
+		textFieldStartHour.setBounds(950, 297, 53, 34);
 		add(textFieldStartHour);
 
 		textFieldStartMonth = new JTextField();
 		textFieldStartMonth.setForeground(SystemColor.controlDkShadow);
 		textFieldStartMonth.setColumns(10);
-		textFieldStartMonth.setBounds(820, 285, 53, 34);
+		textFieldStartMonth.setBounds(820, 297, 53, 34);
 		add(textFieldStartMonth);
 
 		lblCBSlogo = new JLabel("");
@@ -129,6 +133,10 @@ public class AddEventGUI extends JPanel {
 		add(lblCBSlogo);
 
 		btnLogout = new JButton("Log out");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnLogout.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
 						0), new Color(255, 255, 255), new Color(0, 0, 0)),
@@ -138,7 +146,7 @@ public class AddEventGUI extends JPanel {
 		btnLogout.setForeground(new Color(255, 255, 255));
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(593, 680, 143, 59);
+		btnLogout.setBounds(552, 712, 239, 50);
 		add(btnLogout);
 
 		textField_Location = new JTextField();
@@ -168,13 +176,13 @@ public class AddEventGUI extends JPanel {
 		textFieldStartYear = new JTextField();
 		textFieldStartYear.setForeground(new Color(105, 105, 105));
 		textFieldStartYear.setColumns(10);
-		textFieldStartYear.setBounds(755, 285, 53, 34);
+		textFieldStartYear.setBounds(755, 297, 53, 34);
 		add(textFieldStartYear);
 
 		lblCreateddate = new JLabel("Start");
 		lblCreateddate.setForeground(new Color(255, 255, 255));
 		lblCreateddate.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCreateddate.setBounds(483, 288, 159, 31);
+		lblCreateddate.setBounds(483, 300, 159, 31);
 		add(lblCreateddate);
 
 		btnSubmit = new JButton("Create");
@@ -194,7 +202,7 @@ public class AddEventGUI extends JPanel {
 				// hvad sker der n���r ���ndringer ved en bruger submittes
 			}
 		});
-		btnSubmit.setBounds(553, 544, 239, 49);
+		btnSubmit.setBounds(552, 548, 239, 50);
 		add(btnSubmit);
 
 		btnMainMenu = new JButton("Main menu");
@@ -207,10 +215,10 @@ public class AddEventGUI extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(586, 610, 164, 44);
+		btnMainMenu.setBounds(552, 618, 239, 50);
 		add(btnMainMenu);
 
-		lblCreate = new JLabel("Create even");
+		lblCreate = new JLabel("Create event");
 		lblCreate.setForeground(Color.WHITE);
 		lblCreate.setFont(new Font("Arial", Font.BOLD, 78));
 		lblCreate.setBounds(451, 90, 466, 91);
@@ -219,44 +227,68 @@ public class AddEventGUI extends JPanel {
 		lblEnd = new JLabel("End");
 		lblEnd.setForeground(Color.WHITE);
 		lblEnd.setFont(new Font("Arial", Font.BOLD, 26));
-		lblEnd.setBounds(483, 337, 159, 31);
+		lblEnd.setBounds(483, 349, 159, 31);
 		add(lblEnd);
 
 		lblName = new JLabel("Name");
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Arial", Font.BOLD, 26));
-		lblName.setBounds(483, 379, 159, 31);
+		lblName.setBounds(483, 391, 159, 31);
 		add(lblName);
 
 		lblText = new JLabel("Text");
 		lblText.setForeground(Color.WHITE);
 		lblText.setFont(new Font("Arial", Font.BOLD, 26));
-		lblText.setBounds(483, 429, 159, 31);
+		lblText.setBounds(483, 441, 159, 31);
 		add(lblText);
 
 		textField_Name = new JTextField();
 		textField_Name.setForeground(SystemColor.controlDkShadow);
 		textField_Name.setColumns(10);
-		textField_Name.setBounds(755, 379, 120, 34);
+		textField_Name.setBounds(755, 391, 120, 34);
 		add(textField_Name);
 
 		textField_Text = new JTextField();
 		textField_Text.setForeground(SystemColor.controlDkShadow);
 		textField_Text.setColumns(10);
-		textField_Text.setBounds(755, 426, 120, 34);
+		textField_Text.setBounds(755, 438, 120, 34);
 		add(textField_Text);
 
 		textField_Type = new JTextField();
 		textField_Type.setForeground(SystemColor.controlDkShadow);
 		textField_Type.setColumns(10);
-		textField_Type.setBounds(755, 473, 120, 34);
+		textField_Type.setBounds(755, 485, 120, 34);
 		add(textField_Type);
 
 		lblType = new JLabel("Type");
 		lblType.setForeground(Color.WHITE);
 		lblType.setFont(new Font("Arial", Font.BOLD, 26));
-		lblType.setBounds(483, 471, 159, 31);
+		lblType.setBounds(483, 483, 159, 31);
 		add(lblType);
+		
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setBounds(755, 275, 61, 16);
+		add(lblYear);
+		
+		JLabel lblNewLabel = new JLabel("Month");
+		lblNewLabel.setBounds(820, 275, 61, 16);
+		add(lblNewLabel);
+		
+		lblStartDate = new JLabel("Date");
+		lblStartDate.setBounds(885, 275, 61, 16);
+		add(lblStartDate);
+		
+		lblHour = new JLabel("Hour");
+		lblHour.setBounds(950, 275, 61, 16);
+		add(lblHour);
+		
+		lblNewLabel_1 = new JLabel("Minute");
+		lblNewLabel_1.setBounds(1015, 275, 61, 16);
+		add(lblNewLabel_1);
+		
+		lblSecond = new JLabel("Second");
+		lblSecond.setBounds(1080, 275, 61, 16);
+		add(lblSecond);
 		// =======
 
 		// >>>>>>> FETCH_HEAD

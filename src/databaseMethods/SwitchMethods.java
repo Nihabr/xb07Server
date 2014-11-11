@@ -148,4 +148,56 @@ public class SwitchMethods extends Model
 		note.CreateNote(nm);
 		return stringToBeReturned;
 	}
+	
+	public String deleteEvent(String userID, String eventID)throws SQLException{
+		
+		String stringToBeReturned = "";
+		testConnection();
+		stringToBeReturned = removeEvent(userID, eventID);
+
+		return stringToBeReturned;
+		
+	}
+	public String removeEvent(String userID, String eventID) throws SQLException{
+		
+		
+		String stringToBeReturend = "";
+		String createdBy ="";
+		String eventExists = "";
+		resultSet = qb.selectFrom("events").where("eventID", "=", eventID).ExecuteQuery();
+				
+		while(resultSet.next())
+		{
+			eventExists = resultSet.toString();
+		}
+		if(!eventExists.equals(""))
+		{
+			String [] value = {"createdBy"};
+			resultSet = qb.selectFrom(value, "events").where("createdBy", "=", userID).ExecuteQuery();
+			while(resultSet.next())
+			{
+				createdBy = resultSet.toString();
+				System.out.println(createdBy);
+			}
+			if(!createdBy.equals(userID))
+			{
+				stringToBeReturend = "Only the creator of the event is able to delete it.";
+			}
+			else
+			{
+				String [] keys = {"active"};
+				String [] values = {"0"};
+				qb.update("events", keys, values).where("eventID", "=", eventID).Execute();
+				stringToBeReturend = "event has been set inactive";
+			}
+			stringToBeReturend = resultSet.toString();
+		}
+		else
+		{
+			stringToBeReturend = "The event you are trying to delete, does not exists.";
+		}
+		
+		return stringToBeReturend;
+		
+	}
 }

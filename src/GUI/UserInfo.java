@@ -47,7 +47,7 @@ public class UserInfo extends JPanel {
 		btnLogout.setForeground(new Color(255, 255, 255));
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(624, 655, 117, 43);
+		btnLogout.setBounds(563, 670, 239, 50);
 		add(btnLogout);
 
 		txtField_UserID = new JTextField();
@@ -118,11 +118,11 @@ public class UserInfo extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			//Submit changes to databases
-			//hvad sker der n�r �ndringer ved en bruger submittes
+			//hvad sker der n���r ���ndringer ved en bruger submittes
 			}
 		}
 		);
-		btnSubmit.setBounds(563, 500, 239, 43);
+		btnSubmit.setBounds(563, 500, 239, 50);
 		add(btnSubmit);
 
 		boolean active = true;
@@ -142,7 +142,7 @@ public class UserInfo extends JPanel {
 				btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
 				btnMainMenu.setContentAreaFilled(false);
 				btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-				btnMainMenu.setBounds(601, 557, 163, 43);
+				btnMainMenu.setBounds(563, 570, 239, 50);
 				add(btnMainMenu);
 				
 				lblUserInfo = new JLabel("User Info");
