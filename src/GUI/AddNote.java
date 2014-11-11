@@ -23,6 +23,7 @@ public class AddNote extends JPanel {
 	private JTextField textFieldCreatedBy;
 	private JLabel lblCreatedBy;
 	private JLabel lblNote;
+	private JButton btnBack;
 	public AddNote(){
 		
 		setPreferredSize(new Dimension(1366, 768));
@@ -53,7 +54,7 @@ public class AddNote extends JPanel {
 	btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
 	btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnMainMenu.setBackground(Color.WHITE);
-	btnMainMenu.setBounds(656, 418, 164, 40);
+	btnMainMenu.setBounds(656, 417, 164, 40);
 	add(btnMainMenu);
 	
 	lblCBSlogo = new JLabel();
@@ -71,13 +72,22 @@ public class AddNote extends JPanel {
 	btnAddNote.setFont(new Font("Arial", Font.BOLD, 30));
 	btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnAddNote.setBackground(Color.WHITE);
-	btnAddNote.setBounds(656, 348, 164, 40);
+	btnAddNote.setBounds(656, 357, 164, 40);
 	add(btnAddNote);
+	
+	btnBack = new JButton("Back");
+	btnBack.setContentAreaFilled(false);
+	btnBack.setForeground(Color.WHITE);
+	btnBack.setFont(new Font("Arial", Font.BOLD, 30));
+	btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+	btnBack.setBackground(Color.WHITE);
+	btnBack.setBounds(656, 477, 164, 40);
+	add(btnBack);
 
 	lblBackground = new JLabel("");
 	lblBackground.setSize(new Dimension(1366, 768));
 	lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
-	lblBackground.setBounds(0, 0, 1366, 768);
+	lblBackground.setBounds(6, -85, 1366, 768);
 	add(lblBackground);
 	}
 	public void addActionListener(ActionListener l) {
@@ -85,6 +95,7 @@ public class AddNote extends JPanel {
 		textFieldText.addActionListener(l);
 		btnAddNote.addActionListener(l);
 		btnMainMenu.addActionListener(l);
+		btnBack.addActionListener(l);
 		
 	}
 	public JButton getBtnMainMenu() {
@@ -98,5 +109,8 @@ public class AddNote extends JPanel {
 	}
 	public JTextField getTextFieldCreatedBy() {
 		return textFieldCreatedBy;
+	}
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }
