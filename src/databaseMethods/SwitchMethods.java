@@ -172,11 +172,9 @@ public class SwitchMethods extends Model
 		}
 		if(!eventExists.equals(""))
 		{
-			String [] value = {"createdBy"};
-			resultSet = qb.selectFrom(value, "events").where("createdBy", "=", userID).ExecuteQuery();
 			while(resultSet.next())
 			{
-				createdBy = resultSet.toString();
+				createdBy = resultSet.getString("createdby");
 				System.out.println(createdBy);
 			}
 			if(!createdBy.equals(userID))
