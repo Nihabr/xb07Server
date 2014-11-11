@@ -9,6 +9,7 @@ public class Forecast {
     private String date;
     private String celsius;
     private String desc;
+    
 
     // Funktion som setter dato, grader og beskrivelse til Forecast objektet
     public Forecast(String date, String celsius, String desc) {

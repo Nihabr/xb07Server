@@ -1,5 +1,10 @@
 package databaseMethods;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import model.Model;
 import model.QOTD.QOTDModel;
@@ -10,9 +15,11 @@ import JsonClasses.*;
 public class SwitchMethods extends Model
 {
 	QueryBuilder qb = new QueryBuilder();
+	Gson gson = new GsonBuilder().create();
 	QOTDModel qm = new QOTDModel();
 	NoteModel nm = new NoteModel (0, "", "", "", 0, 0);
 	Note note = new Note();
+	GetDailyUpdate gdu = new GetDailyUpdate();
 	String stringToBeReturned = "";
 
 	
@@ -186,5 +193,39 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturend;
 		
+	}
+	public String getDailyUpdate () throws SQLException{
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String datetime = sdf.format(date) + " 11:00:00";
+		resultSet = qb.selectFrom("dailyupdate").where("date", "=", datetime).ExecuteQuery();
+		while(resultSet.next()){
+			gdu.setCelsius(String.valueOf(resultSet.getDouble("apparentTemperature")));
+			gdu.setDate(resultSet.getDate("date").toString());
+			gdu.setDesc(resultSet.getString("summary"));
+			gdu.setQuote(resultSet.getString("qotd"));
+		}
+		String gsonString = gson.toJson(gdu);
+		
+		return gsonString;
+	}
+	public String deleteNote (String uID, String nID) throws SQLException{
+		
+		resultSet = qb.selectFrom("notes").where("noteID", "=", nID).ExecuteQuery();
+		System.out.println("Checkpoint 1");
+		while (resultSet.next()){
+		if (uID.equals(resultSet.getString("createdBy"))){
+			String[] fields ={"active"};
+			String[] values ={"0"};
+			qb.update("notes", fields, values).where("noteID", "=", nID).Execute();
+			stringToBeReturned = "Note has been deleted";
+		}
+		else
+			stringToBeReturned = "You are not authorized to delete this note.";
+		}
+
+		
+		return stringToBeReturned;
 	}
 }

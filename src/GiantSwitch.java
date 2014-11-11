@@ -9,6 +9,7 @@ import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
 import JsonClasses.DeleteCalender;
 import JsonClasses.DeleteEvent;
+import JsonClasses.DeleteNote;
 
 import com.google.gson.*;
 
@@ -107,31 +108,18 @@ public class GiantSwitch {
 			SW.CreateNote(cn);
 			System.out.println("Recieved saveNote");
 			break;
-
-		case "getNote":
-			System.out.println("Recieved getNote");
-			break;
 			
 		case "deleteNote":
 			System.out.println("Recieved deleteNote");
+			DeleteNote dn = (DeleteNote)gson.fromJson(jsonString, DeleteNote.class);
+			answer = SW.deleteNote(dn.getUserID(), dn.getNoteID());
 			break;
 
-		/**********
-		 ** QUOTE **
-		 **********/
-		case "getQuote":
-
-			answer = QOTDKlasse.getQuote();
-			System.out.println(answer);
-			
-			break;
-
-		/************
-		 ** WEATHER **
-		 ************/
-
-		case "getClientForecast":
-			System.out.println("Recieved getClientForecast");
+		/*****************
+		 ** DAILYUPDATE **
+		 *****************/
+		case "getDailyUpdate":
+			answer = SW.getDailyUpdate();
 			break;
 		
 		default:
@@ -166,8 +154,8 @@ public class GiantSwitch {
 			return "importCourse";
 		} else if (ID.contains("exportCourse")) {
 			return "exportCourse";
-		} else if (ID.contains("getQuote")) {
-			return "getQuote";
+		} else if (ID.contains("getDailyUpdate")) {
+			return "getDailyUpdate";
 		} else if (ID.contains("logIn")) {
 			return "logIn";
 		} else if (ID.contains("logOut")) {

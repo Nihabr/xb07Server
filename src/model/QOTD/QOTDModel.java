@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -67,14 +68,17 @@ public class QOTDModel {
     			
     			String quote = (String) jsonObject.get("quote");
     			String author = (String) jsonObject.get("author");
-    			String topic = (String) jsonObject.get("topic");
 
+    			String fQuote = quote += author;
+    			System.out.println(fQuote);
     			
     			String[] keys = {"qotd"};
     			String[] keys2 = {quote};
     			
-    			
-    			qb.update("dailyupdate", keys, keys2).where("msg_type", "=", "1").Execute();
+    			Date date = new Date();
+    			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    			String datetime = sdf.format(date) + " 11:00:00";
+    			qb.update("dailyupdate", keys, keys2).where("date", "=", datetime).Execute();
     			
     	
 			} catch (Exception e) {
