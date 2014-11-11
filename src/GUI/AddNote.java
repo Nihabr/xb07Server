@@ -1,6 +1,8 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
@@ -8,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import java.awt.event.ActionEvent;
 
 public class AddNote extends JPanel {
 	
@@ -43,7 +48,12 @@ public class AddNote extends JPanel {
 	textFieldText.setColumns(10);
 	
 	btnMainMenu = new JButton("Main menu");
-	btnMainMenu.setBounds(665, 459, 97, 25);
+	btnMainMenu.setContentAreaFilled(false);
+	btnMainMenu.setForeground(Color.WHITE);
+	btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
+	btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+	btnMainMenu.setBackground(Color.WHITE);
+	btnMainMenu.setBounds(656, 418, 164, 40);
 	add(btnMainMenu);
 	
 	lblCBSlogo = new JLabel();
@@ -52,7 +62,16 @@ public class AddNote extends JPanel {
 	add(lblCBSlogo);
 	
 	btnAddNote = new JButton("Add note");
-	btnAddNote.setBounds(665, 420, 97, 25);
+	btnAddNote.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
+	btnAddNote.setContentAreaFilled(false);
+	btnAddNote.setForeground(Color.WHITE);
+	btnAddNote.setFont(new Font("Arial", Font.BOLD, 30));
+	btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+	btnAddNote.setBackground(Color.WHITE);
+	btnAddNote.setBounds(656, 348, 164, 40);
 	add(btnAddNote);
 
 	lblBackground = new JLabel("");

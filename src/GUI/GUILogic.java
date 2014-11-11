@@ -263,6 +263,9 @@ public class GUILogic {
 				screen.show(Screen.NOTELIST);
 
 			}
+			if (e.getSource() == screen.getAddNote().getBtnMainMenu()) {
+				screen.show(Screen.MAINMENU);
+			}
 		}
 
 	}
