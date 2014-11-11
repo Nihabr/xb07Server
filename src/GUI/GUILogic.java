@@ -111,9 +111,9 @@ public class GUILogic {
 
 	private class AddEventGUIActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == screen.getAddEventGUI().getBtnLogout()){
-				screen.show(Screen.LOGIN);
-			}
+//			if (e.getSource() == screen.getAddEventGUI().getBtnLogout()){
+//				screen.show(Screen.LOGIN);
+//			}
 			if (e.getSource() == screen.getAddEventGUI().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
