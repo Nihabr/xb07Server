@@ -4,12 +4,16 @@ import java.sql.SQLException;
 import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
+import model.note.*;
+import JsonClasses.*;
 
 public class SwitchMethods extends Model
 {
 	QueryBuilder qb = new QueryBuilder();
 	QOTDModel qm = new QOTDModel();
-	
+	NoteModel nm = new NoteModel (0, "", "", "", 0, 0);
+	Note note = new Note();
+	String stringToBeReturned = "";
 
 	
 	/**
@@ -23,7 +27,7 @@ public class SwitchMethods extends Model
 
 	public String createNewCalender (String userName, String calenderName, int privatePublic) throws SQLException
 	{
-		String stringToBeReturned ="";
+
 		testConnection();
 		if(authenticateNewCalender(calenderName) == false)
 		{
@@ -66,7 +70,6 @@ public class SwitchMethods extends Model
 			String end, String name, String text,
 			String customevent, String calendarID)throws SQLException{
 		testConnection();
-		String stringToBeReturned ="";
 		String [] fields = {"eventid", "type", "location", "createdby", "start",
 				"end", "name","text","customevent", "calendarID"};
 		String[] values = {eventid,  type ,  location ,  createdby ,  start ,
@@ -86,7 +89,6 @@ public class SwitchMethods extends Model
 	
 	public String deleteCalender (String userName, String calenderName) throws SQLException
 	{
-		String stringToBeReturned ="";
 		testConnection();
 		stringToBeReturned = removeCalender(userName, calenderName);
 
@@ -95,7 +97,6 @@ public class SwitchMethods extends Model
 	
 	public String removeCalender (String userName, String calenderName) throws SQLException
 	{
-		String stringToBeReturend = "";
 		String usernameOfCreator ="";
 		String calenderExists = "";
 		resultSet = qb.selectFrom("Calender").where("Name", "=", calenderName).ExecuteQuery();
@@ -116,24 +117,35 @@ public class SwitchMethods extends Model
 			}
 			if(!usernameOfCreator.equals(userName))
 			{
-				stringToBeReturend = "Only the creator of the calender is able to delete it.";
+				stringToBeReturned = "Only the creator of the calender is able to delete it.";
 			}
 			else
 			{
 				String [] keys = {"Active"};
 				String [] values = {"2"};
 				qb.update("calender", keys, values).where("Name", "=", calenderName).Execute();
-				stringToBeReturend = "Calender has been set inactive";
+				stringToBeReturned = "Calender has been set inactive";
 			}
-			stringToBeReturend = resultSet.toString();
+			stringToBeReturned = resultSet.toString();
 		}
 		else
 		{
-			stringToBeReturend = "The calender you are trying to delete, does not exists.";
+			stringToBeReturned = "The calender you are trying to delete, does not exists.";
 		}
 		
 		
 		
-		return stringToBeReturend;
+		return stringToBeReturned;
+	}
+	public String CreateNote(CreateNote cn){
+		nm.setActive(cn.getIsActive());
+		nm.setCreatedBy(cn.getCreatedBy());
+		nm.setDateTime(cn.getDateTime());
+		nm.setEventID(cn.getEventID());
+		nm.setNoteID(cn.getNoteID());
+		nm.setText(cn.getText());
+		
+		note.CreateNote(nm);
+		return stringToBeReturned;
 	}
 }

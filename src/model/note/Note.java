@@ -10,13 +10,14 @@ public class Note extends Model{
 	NoteModel notes = new NoteModel(0, "", "", "", 0, 0);
 	QueryBuilder qb = new QueryBuilder(); 
 	
-		public void CreateNote(
-			int noteID,
-			String text, 
-			String dateTime, 
-			String createdBy, 
-			int isActive, 
-			int eventID)	{
+		public void CreateNote(NoteModel note)	{
+			
+			int noteID = note.getNoteID();
+			String text = note.getText();
+			String dateTime = note.getDateTime();
+			String createdBy = note.getCreatedBy();
+			int isActive = note.isActive();
+			int eventID = note.getEventID();
 			
 			String nId = String.valueOf(noteID);
 			String eId = String.valueOf(eventID);

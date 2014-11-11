@@ -11,17 +11,14 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		CreateEvent ce = new CreateEvent();
-		ce.setEventid("2");
-		ce.setType("1");
-		ce.setLocation("1");
-		ce.setCreatedby("1");
-		ce.setStart("1000-01-01 00:00:00");
-		ce.setEnd("1001-01-01 00:00:00");
-		ce.setTitle("etevent");
-		ce.setText("hihihi");
-		ce.setCustomevent("0");
-		ce.setCalendarID("1");
+		CreateNote ce = new CreateNote();
+		ce.setCreatedBy("niklas the great");
+		ce.setDateTime("2014-11-11 11:50");
+		ce.setEventID(2);
+		ce.setIsActive(0);
+		ce.setNoteID(1);
+		ce.setText("Ingen er så cool som Niklas");
+		
 		String gsonString = gson.toJson(ce);
 		System.out.println(ce);
 		System.out.println(gsonString);

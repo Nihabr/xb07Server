@@ -16,6 +16,7 @@ import model.QueryBuild.QueryBuilder;
  */
 public class Events {
     ArrayList<UserEvent> events = new ArrayList<UserEvent>();
+    QueryBuilder qb = new QueryBuilder();
 
     public ArrayList<UserEvent> getEvents() {
     	QueryBuilder qb = new QueryBuilder();
@@ -33,7 +34,6 @@ public class Events {
 				String text = rs.getString("text");
 				int customevent = rs.getInt("customevent");
 				int CalendarID = rs.getInt("CalendarID");
-				
 				String stringEventID = String.valueOf(eventID);
 				String stringType = String.valueOf(type);
 				String stringLocation = String.valueOf(location);
@@ -63,6 +63,7 @@ public class Events {
     	
     	return events;
     }
+
 
     public void setEvents(ArrayList<UserEvent> event) {
         this.events = event;

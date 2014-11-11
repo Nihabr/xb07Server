@@ -9,7 +9,7 @@ import model.user.*;
 import GUI.UserInformation;
 
 import javax.swing.JOptionPane;
-
+import model.note.*;
 import model.QueryBuild.*;
 import GUI.Screen;
 
@@ -235,30 +235,17 @@ public class GUILogic {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == screen.getAddNote().getBtnAddNote()) {
-				int noteID = 1;
-				String nID = String.valueOf(noteID);
-				int eventID = 1;
-				String eID = String.valueOf(eventID);
+				
+				int nID = 0;
+				int eID = 0;
 				String createdBy = screen.getAddNote().getTextFieldCreatedBy()
 						.getText();
 				String date = "1000-01-01 00:00:00";
 				String text = screen.getAddNote().getTextFieldText().getText();
-				int active = 1;
-				String isactive = String.valueOf(active);
-
-				// String[] noteHeader = {"createdBy","text"};
-				// String[] noteValues = {createdBy,text};
-				String[] fields = { "noteId", "eventId", "createdBy", "text",
-						"dateTime", "active" };
-				String[] values = { nID, eID, createdBy, text, date, isactive };
-
-				try {
-					qb.insertInto("notes", fields).values(values).Execute();
-
-				} catch (Exception e4) {
-
-					e4.printStackTrace();
-				}
+				int isActive = 1;
+				NoteModel noteModel = new NoteModel(nID, text, date, createdBy, isActive, eID);
+				Note note = new Note();
+				note.CreateNote(noteModel);
 
 				screen.show(Screen.NOTELIST);
 
