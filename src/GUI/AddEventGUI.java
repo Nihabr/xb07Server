@@ -21,7 +21,7 @@ public class AddEventGUI extends JPanel {
 	private JTextField textField_Createdby;
 	private JTextField textFieldStartYear;
 	private JButton btnSubmit;
-	private JButton btnLogout;
+	private JButton btnBack;
 	private JLabel lblCBSlogo;
 	private JButton btnMainMenu;
 	private JLabel lblCreate;
@@ -131,23 +131,23 @@ public class AddEventGUI extends JPanel {
 				.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
-
-		btnLogout = new JButton("Log out");
-		btnLogout.addActionListener(new ActionListener() {
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(
+		btnBack.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
 						0), new Color(255, 255, 255), new Color(0, 0, 0)),
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnLogout.setForeground(new Color(255, 255, 255));
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(552, 712, 239, 50);
-		add(btnLogout);
+		btnBack.setForeground(new Color(255, 255, 255));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBounds(552, 688, 239, 50);
+		add(btnBack);
 
 		textField_Location = new JTextField();
 		textField_Location.setForeground(new Color(105, 105, 105));
@@ -304,8 +304,8 @@ public class AddEventGUI extends JPanel {
 
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
+		btnBack.addActionListener(l);
 	}
 	
 	public String startDateTimeToString(){
@@ -409,7 +409,7 @@ public class AddEventGUI extends JPanel {
 		return btnMainMenu;
 	}
 
-	public JButton getBtnLogout() {
-		return btnLogout;
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }
