@@ -103,7 +103,7 @@ public class EventList extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(601, 612, 163, 43);
+		btnMainMenu.setBounds(602, 588, 163, 50);
 		add(btnMainMenu);
 
 		btnLogout = new JButton("Log out");
@@ -116,7 +116,7 @@ public class EventList extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnLogout.setBounds(624, 667, 117, 43);
+		btnLogout.setBounds(602, 658, 163, 50);
 		add(btnLogout);
 
 		btnDelete = new JButton("Delete");
