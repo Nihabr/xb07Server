@@ -6,7 +6,6 @@ import com.google.gson.stream.JsonReader;
 
 class TCPServer {    
 	public static void main(String argv[]) throws Exception       {
-		CalendarInfo CI = new CalendarInfo();
 		GiantSwitch GS = new GiantSwitch();
 		encryption cryp = new encryption();
 		

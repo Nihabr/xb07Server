@@ -11,11 +11,10 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		DeleteNote dn = new DeleteNote();
-		dn.setNoteID("1");
-		dn.setUserID("niklas the great");
-		String gsonString = gson.toJson(dn);
-		System.out.println(dn);
+		ClientLogin cl = new ClientLogin();
+		cl.setEmail("bananmanden");
+		cl.setPassWord("bøssefar");
+		String gsonString = gson.toJson(cl);
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 6666);

@@ -20,6 +20,7 @@ public class SwitchMethods extends Model
 	NoteModel nm = new NoteModel (0, "", "", "", 0, 0);
 	Note note = new Note();
 	GetDailyUpdate gdu = new GetDailyUpdate();
+	ClientLogin clientLogin = new ClientLogin();
 	String stringToBeReturned = "";
 
 	
@@ -32,7 +33,7 @@ public class SwitchMethods extends Model
 	 * @throws SQLException
 	 */
 
-	public String createNewCalender (String userName, String calenderName, int privatePublic) throws SQLException
+	public String 	createNewCalender (String userName, String calenderName, int privatePublic) throws SQLException
 	{
 
 		testConnection();
@@ -50,7 +51,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 	}
 	
-	public boolean authenticateNewCalender(String newCalenderName) throws SQLException
+	public boolean 	authenticateNewCalender(String newCalenderName) throws SQLException
 	{
 		getConn();
 		boolean authenticate = false;
@@ -65,14 +66,14 @@ public class SwitchMethods extends Model
 		return authenticate;
 	}
 	
-	public void addNewCalender (String newCalenderName, String userName, int publicOrPrivate) throws SQLException
+	public void 	addNewCalender (String newCalenderName, String userName, int publicOrPrivate) throws SQLException
 	{
 		String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
 		String [] values = {newCalenderName,"1",userName, Integer.toString(publicOrPrivate)};
 		qb.insertInto("calender", fields).values(values).Execute();
 		
 	}
-	public String createEvent( String eventid, String type,
+	public String 	createEvent( String eventid, String type,
 			String location, String createdby, String start,
 			String end, String name, String text,
 			String customevent, String calendarID)throws SQLException{
@@ -94,7 +95,7 @@ public class SwitchMethods extends Model
 	 */
 	
 	
-	public String deleteCalender (String userName, String calenderName) throws SQLException
+	public String 	deleteCalender (String userName, String calenderName) throws SQLException
 	{
 		testConnection();
 		stringToBeReturned = removeCalender(userName, calenderName);
@@ -102,7 +103,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 	}
 	
-	public String removeCalender (String userName, String calenderName) throws SQLException
+	public String 	removeCalender (String userName, String calenderName) throws SQLException
 	{
 		String usernameOfCreator ="";
 		String calenderExists = "";
@@ -144,7 +145,7 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturned;
 	}
-	public String CreateNote(CreateNote cn){
+	public String 	CreateNote(CreateNote cn){
 		nm.setActive(cn.getIsActive());
 		nm.setCreatedBy(cn.getCreatedBy());
 		nm.setDateTime(cn.getDateTime());
@@ -156,7 +157,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 	}
 	
-	public String deleteEvent(String userID, String eventID)throws SQLException{
+	public String 	deleteEvent(String userID, String eventID)throws SQLException{
 		
 		String stringToBeReturned = "";
 		testConnection();
@@ -165,7 +166,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 		
 	}
-	public String removeEvent(String userID, String eventID) throws SQLException{
+	public String 	removeEvent(String userID, String eventID) throws SQLException{
 		
 		
 		String stringToBeReturend = "";
@@ -194,7 +195,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturend;
 		
 	}
-	public String getDailyUpdate () throws SQLException{
+	public String 	getDailyUpdate () throws SQLException{
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -210,7 +211,7 @@ public class SwitchMethods extends Model
 		
 		return gsonString;
 	}
-	public String deleteNote (String uID, String nID) throws SQLException{
+	public String	deleteNote (String uID, String nID) throws SQLException{
 		
 		resultSet = qb.selectFrom("notes").where("noteID", "=", nID).ExecuteQuery();
 		System.out.println("Checkpoint 1");
@@ -227,5 +228,18 @@ public class SwitchMethods extends Model
 
 		
 		return stringToBeReturned;
+	}
+	public String	clientLogin (String email, String password) throws SQLException{
+		
+		String gsonString = "";	
+		String [] values = {"email", "password", "userID", "isAdmin"};
+		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
+		if(resultSet.next()){
+			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
+			clientLogin.setUserID(resultSet.getInt("userID"));
+			gsonString = gson.toJson(clientLogin);
+		}
+
+		return gsonString;
 	}
 }
