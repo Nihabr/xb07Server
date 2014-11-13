@@ -249,6 +249,7 @@ public class UserList extends JPanel {
 		btnDelete.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
+		btnEditUser.addActionListener(l);
 		
 	}
 

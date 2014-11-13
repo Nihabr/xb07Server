@@ -59,7 +59,7 @@ public class UserInfo extends JPanel {
 
 		txtField_UserID = new JTextField();
 		txtField_UserID.setForeground(new Color(105, 105, 105));
-		txtField_UserID.setText("GetUserID");
+		txtField_UserID.setText("");
 		txtField_UserID.setName("");
 		txtField_UserID.setBounds(755, 207, 120, 34);
 		add(txtField_UserID);
@@ -73,7 +73,7 @@ public class UserInfo extends JPanel {
 
 		txtField_Email = new JTextField();
 		txtField_Email.setForeground(new Color(105, 105, 105));
-		txtField_Email.setText("getEmail");
+		txtField_Email.setText("");
 		txtField_Email.setColumns(10);
 		txtField_Email.setBounds(755, 255, 120, 34);
 		add(txtField_Email);
@@ -86,7 +86,7 @@ public class UserInfo extends JPanel {
 
 		txtField_Password = new JTextField();
 		txtField_Password.setForeground(new Color(105, 105, 105));
-		txtField_Password.setText("getPassword");
+		txtField_Password.setText("");
 		txtField_Password.setColumns(10);
 		txtField_Password.setBounds(755, 301, 120, 34);
 		add(txtField_Password);
@@ -99,7 +99,7 @@ public class UserInfo extends JPanel {
 
 		txtField_CreatedDate = new JTextField();
 		txtField_CreatedDate.setForeground(new Color(105, 105, 105));
-		txtField_CreatedDate.setText("getCreatedDate");
+		txtField_CreatedDate.setText("");
 		txtField_CreatedDate.setColumns(10);
 		txtField_CreatedDate.setBounds(755, 347, 120, 34);
 		add(txtField_CreatedDate);
