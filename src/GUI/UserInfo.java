@@ -132,18 +132,14 @@ public class UserInfo extends JPanel {
 		btnSubmit.setBounds(563, 500, 239, 50);
 		add(btnSubmit);
 
-		boolean active = true;
 		lblOnlineDot = new JLabel("");
-		lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));
-		if (active) {
-			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Red.png")));
-		} else {
-			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));
-		}
+		lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Red.png")));
 //<<<<<<< HEAD
 		lblOnlineDot.setBounds(755, 433, 20, 20);
 		add(lblOnlineDot);
-				
+		lblOnlineDot.setBackground(Color.RED);
+		lblOnlineDot.repaint();
+		lblOnlineDot.setText("Offline");
 				
 				lblUserInfo = new JLabel("User Info");
 				lblUserInfo.setForeground(Color.WHITE);
@@ -159,18 +155,7 @@ public class UserInfo extends JPanel {
 						lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
 						lblBackground.setBounds(0, 0, 1366, 768);
 						add(lblBackground);
-		if (active) {
-			lblOnlineDot.setBackground(Color.GREEN);
-			lblOnlineDot.repaint();
-			lblOnlineDot.setText("Online");
-		} else {
-			lblOnlineDot.setBackground(Color.RED);
-			lblOnlineDot.repaint();
-			lblOnlineDot.setText("Offline");
-		}
-		
-
-
+						
 	}
 	public void Refresh(){
 	txtField_UserID.setText("");
@@ -184,11 +169,25 @@ public class UserInfo extends JPanel {
 		txtField_UserID.getDocument().addDocumentListener(e);
 	}
 	
-//>>>>>>> FETCH_HEAD
+	//>>>>>>> FETCH_HEAD
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
+	public void setOnlineDot(int active){
+		if (active == 1) {
+			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));
+			lblOnlineDot.setText("Online");
+
+
+		}
+		else{
+			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Red.png")));
+			lblOnlineDot.setText("Offline");
+
+		}
+	}
+		
 
 	public JTextField getTxtField_UserID() {
 		return txtField_UserID;

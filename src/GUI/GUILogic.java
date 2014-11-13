@@ -388,6 +388,8 @@ public class GUILogic {
 				  while (res.next()){
 					screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("created").toString());
 					screen.getUserInfo().getTxtField_Email().setText(res.getString("email"));
+					System.out.println(res.getInt("active"));
+					screen.getUserInfo().setOnlineDot(res.getInt("active"));
 				  }
 			  }
 		}
