@@ -48,6 +48,7 @@ public class UserList extends JPanel {
 	private JLabel lblBackground;
 	private DefaultTableModel model;
 	private JTable table;
+	private JButton btnEditUser;
 	
 	private ResultSet rs;
 	
@@ -177,6 +178,13 @@ public class UserList extends JPanel {
         lblLogo.setIcon(new ImageIcon(UserList.class.getResource("/Images/CBSLogo3.png")));
         lblLogo.setBounds(36, 695, 223, 67);
         add(lblLogo);
+        
+        btnEditUser = new JButton("Edit User");
+        btnEditUser.setOpaque(true);
+        btnEditUser.setForeground(new Color(0, 0, 205));
+        btnEditUser.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
+        btnEditUser.setBounds(1019, 474, 118, 29);
+        add(btnEditUser);
     
         lblBackground = new JLabel("Background");
         lblBackground.setIcon(new ImageIcon(UserList.class.getResource("/Images/MetalBackground.jpg")));
@@ -263,5 +271,7 @@ public class UserList extends JPanel {
 	public JButton getBtnLogout() {
 		return btnLogout;
 	}
-	
+	public JButton getBtnEditUser() {
+		return btnEditUser;
+	}
 }

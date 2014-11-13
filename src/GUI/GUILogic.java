@@ -51,9 +51,8 @@ public class GUILogic {
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
-
+				
 				action = e.getActionCommand();
-
 				String userName = screen.getLogin().getTextFieldUsername()
 						.getText().trim();
 				char[] pass = screen.getLogin().getTextFieldPassword()
@@ -83,6 +82,7 @@ public class GUILogic {
 						JOptionPane.showMessageDialog(null,
 								"\nLogin failed, error: " + loggedIn,
 								"Error message", JOptionPane.PLAIN_MESSAGE);
+						
 					}
 
 				}
@@ -306,9 +306,10 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getUserList().getBtnAdd()) {
-
 				screen.show(Screen.ADDUSER);
-
+			}
+			if (e.getSource() == screen.getUserList().getBtnEditUser()){
+				screen.show(Screen.USERINFO);
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()) {
 			//mangler

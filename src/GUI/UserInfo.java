@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 public class UserInfo extends JPanel {
 	private JTextField txtField_UserID;
 	private JTextField txtField_Email;
-	private JTextField txtField_Team;
+	private JTextField txtField_Password;
 	private JTextField txtField_CreatedDate;
 	private JButton btnSubmit;
 	private JButton btnLogout;
@@ -77,18 +77,18 @@ public class UserInfo extends JPanel {
 		lblEmail.setBounds(483, 253, 71, 30);
 		add(lblEmail);
 
-		txtField_Team = new JTextField();
-		txtField_Team.setForeground(new Color(105, 105, 105));
-		txtField_Team.setText("getTeam/Class");
-		txtField_Team.setColumns(10);
-		txtField_Team.setBounds(755, 301, 120, 34);
-		add(txtField_Team);
+		txtField_Password = new JTextField();
+		txtField_Password.setForeground(new Color(105, 105, 105));
+		txtField_Password.setText("getPassword");
+		txtField_Password.setColumns(10);
+		txtField_Password.setBounds(755, 301, 120, 34);
+		add(txtField_Password);
 
-		JLabel lblTeam = new JLabel("Team");
-		lblTeam.setFont(new Font("Arial", Font.BOLD, 26));
-		lblTeam.setForeground(new Color(255, 255, 255));
-		lblTeam.setBounds(483, 296, 68, 30);
-		add(lblTeam);
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Arial", Font.BOLD, 26));
+		lblPassword.setForeground(new Color(255, 255, 255));
+		lblPassword.setBounds(483, 296, 68, 30);
+		add(lblPassword);
 
 		txtField_CreatedDate = new JTextField();
 		txtField_CreatedDate.setForeground(new Color(105, 105, 105));
@@ -170,8 +170,14 @@ public class UserInfo extends JPanel {
 		}
 		
 
+
 	}
-	
+	public void Refresh(){
+	txtField_UserID.setText("");
+	txtField_Password.setText("");
+	txtField_Email.setText("");
+	txtField_CreatedDate.setText("");
+	}
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
 		btnLogout.addActionListener(l);
@@ -187,7 +193,7 @@ public class UserInfo extends JPanel {
 	}
 
 	public JTextField getTxtField_Team() {
-		return txtField_Team;
+		return txtField_Password;
 	}
 
 	public JTextField getTxtField_CreatedDate() {
