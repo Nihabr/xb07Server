@@ -118,9 +118,7 @@ public class GUILogic {
 //			if (e.getSource() == screen.getAddEventGUI().getBtnLogout()){
 //				screen.show(Screen.LOGIN);
 //			}
-			if (e.getSource() == screen.getAddEventGUI().getBtnMainMenu()){
-				screen.show(Screen.MAINMENU);
-			}
+			
 			if (e.getSource() == screen.getAddEventGUI().getBtnBack()){
 				screen.show(Screen.EVENTLIST);
 			}
@@ -257,9 +255,7 @@ public class GUILogic {
 				screen.show(Screen.NOTELIST);
 
 			}
-			if (e.getSource() == screen.getAddNote().getBtnMainMenu()) {
-				screen.show(Screen.MAINMENU);
-			}
+			
 			if (e.getSource() == screen.getAddNote().getBtnBack()) {
 				screen.show(Screen.NOTELIST);
 			}
@@ -269,11 +265,9 @@ public class GUILogic {
 
 	private class UserInfoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == screen.getUserInfo().getBtnMainMenu()) {
-				screen.show(Screen.MAINMENU);
-			}
-			if (e.getSource() == screen.getUserInfo().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
+			
+			if (e.getSource() == screen.getUserInfo().getBtnBack()) {
+				screen.show(Screen.USERLIST);
 			}
 			if (e.getSource() == screen.getUserInfo().getBtnSubmit()) {
 			}

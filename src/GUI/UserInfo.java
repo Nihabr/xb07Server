@@ -29,10 +29,9 @@ public class UserInfo extends JPanel {
 	private JTextField txtField_Password;
 	private JTextField txtField_CreatedDate;
 	private JButton btnSubmit;
-	private JButton btnLogout;
+	private JButton btnBack;
 	private JLabel lblOnlineDot;
 	private JLabel lblCBSlogo;
-	private JButton btnMainMenu;
 	private JLabel lblUserInfo;
 
 	/**
@@ -49,13 +48,13 @@ public class UserInfo extends JPanel {
 		add(lblCBSlogo);
 		
 
-		btnLogout = new JButton("Log out");
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setForeground(new Color(255, 255, 255));
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(563, 670, 239, 50);
-		add(btnLogout);
+		btnBack = new JButton("Back");
+		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnBack.setForeground(new Color(255, 255, 255));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBounds(563, 670, 239, 50);
+		add(btnBack);
 
 		txtField_UserID = new JTextField();
 		txtField_UserID.setForeground(new Color(105, 105, 105));
@@ -144,13 +143,6 @@ public class UserInfo extends JPanel {
 		lblOnlineDot.setBounds(755, 433, 20, 20);
 		add(lblOnlineDot);
 				
-				btnMainMenu = new JButton("Main menu");
-				btnMainMenu.setForeground(Color.WHITE);
-				btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
-				btnMainMenu.setContentAreaFilled(false);
-				btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-				btnMainMenu.setBounds(563, 570, 239, 50);
-				add(btnMainMenu);
 				
 				lblUserInfo = new JLabel("User Info");
 				lblUserInfo.setForeground(Color.WHITE);
@@ -194,8 +186,7 @@ public class UserInfo extends JPanel {
 //>>>>>>> FETCH_HEAD
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
-		btnLogout.addActionListener(l);
-		btnMainMenu.addActionListener(l);
+		btnBack.addActionListener(l);
 	}
 
 	public JTextField getTxtField_UserID() {
@@ -217,11 +208,8 @@ public class UserInfo extends JPanel {
 	public JButton getBtnSubmit() {
 		return btnSubmit;
 	}
-	public JButton getBtnMainMenu() {
-		return btnMainMenu;
-	}
 	
-	public JButton getBtnLogout() {
-		return btnLogout;
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }
