@@ -41,6 +41,7 @@ public class GUILogic {
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
 		screen.getAddCourse().addActionListener(new AddCourseActionListener());
+		screen.getUserInfo().addPropertyChangeListener(new AddUserInfoPropertyChange());
 
 
 	}
@@ -358,16 +359,25 @@ public class GUILogic {
 		}
 	}	
 
-	public void propertyChange(PropertyChangeEvent e) throws SQLException {
-		
-		String value = "";
-		Object source = e.getSource();
-		if (source.equals(screen.getUserInfo().getTxtField_UserID())){
-			value = e.getNewValue().toString();
-			res = qb.selectFrom("users").where("userid", "=" , value).ExecuteQuery();
-			while (res.next()){
-				screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("date").toString());
-				screen.getUserInfo().getTxtField_Email().setText(res.getString("email"));
+	private class AddUserInfoPropertyChange implements PropertyChangeListener{
+		public void propertyChange(PropertyChangeEvent e)  {
+			
+			String value = "";
+			Object source = e.getSource();
+			try {
+			if (source.equals(screen.getUserInfo().getTxtField_UserID())){
+				value = e.getNewValue().toString();
+				
+					res = qb.selectFrom("users").where("userid", "=" , value).ExecuteQuery();
+				
+				}
+				while (res.next()){
+					screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("date").toString());
+					screen.getUserInfo().getTxtField_Email().setText(res.getString("email"));
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}
