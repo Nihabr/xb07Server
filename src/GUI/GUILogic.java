@@ -11,6 +11,8 @@ import model.user.*;
 import GUI.UserInformation;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import model.note.*;
 import model.QueryBuild.*;
@@ -41,7 +43,7 @@ public class GUILogic {
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
 		screen.getAddCourse().addActionListener(new AddCourseActionListener());
-		screen.getUserInfo().addPropertyChangeListener(new AddUserInfoPropertyChange());
+		screen.getUserInfo().addDocumentListener(new AddUserInfoDocumentListener());
 
 
 	}
@@ -353,26 +355,41 @@ public class GUILogic {
 		}
 	}	
 
-	private class AddUserInfoPropertyChange implements PropertyChangeListener{
-		public void propertyChange(PropertyChangeEvent e)  {
-			
-			String value = "";
-			Object source = e.getSource();
-			try {
-			if (source.equals(screen.getUserInfo().getTxtField_UserID())){
-				value = e.getNewValue().toString();
-				
-					res = qb.selectFrom("users").where("userid", "=" , value).ExecuteQuery();
-				
+	private class AddUserInfoDocumentListener implements DocumentListener{
+
+			  public void changedUpdate(DocumentEvent e) {
+			    try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				while (res.next()){
-					screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("date").toString());
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+			    try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			  }
+			  public void warn() throws SQLException{
+				  String value = screen.getUserInfo().getTxtField_UserID().getText();
+				  
+				  res = qb.selectFrom("users").where("userid", "=" , value).ExecuteQuery();
+				  while (res.next()){
+					screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("created").toString());
 					screen.getUserInfo().getTxtField_Email().setText(res.getString("email"));
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				  }
+			  }
 		}
-	}
+	
 }

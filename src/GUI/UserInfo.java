@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentListener;
 
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
@@ -179,8 +180,8 @@ public class UserInfo extends JPanel {
 	}
 //<<<<<<< HEAD
 //=======
-	public void addPropertyChangeListener(PropertyChangeListener e){
-		txtField_UserID.addPropertyChangeListener(e);
+	public void addDocumentListener(DocumentListener e){
+		txtField_UserID.getDocument().addDocumentListener(e);
 	}
 	
 //>>>>>>> FETCH_HEAD
