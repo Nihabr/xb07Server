@@ -76,7 +76,7 @@ public class GUILogic {
 					{
 
 						screen.show(Screen.MAINMENU);
-
+						screen.getLogin().Refresh();
 					}
 
 					else if (loggedIn != 0) {
