@@ -134,18 +134,6 @@ public class EventList extends JPanel {
 				255)));
 		btnAdd.setBounds(988, 234, 118, 29);
 		add(btnAdd);
-		
-				lblEvents = new JLabel("Eventlist");
-				lblEvents.setForeground(Color.WHITE);
-				lblEvents.setFont(new Font("Arial", Font.BOLD, 78));
-				lblEvents.setBounds(511, 94, 372, 90);
-				add(lblEvents);
-		
-				lblUpcomingEvent = new JLabel("Upcomming Events:");
-				lblUpcomingEvent.setFont(new Font("Arial", Font.BOLD, 27));
-				lblUpcomingEvent.setForeground(Color.WHITE);
-				lblUpcomingEvent.setBounds(51, 140, 309, 33);
-				add(lblUpcomingEvent);
 
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(EventList.class
@@ -153,7 +141,20 @@ public class EventList extends JPanel {
 		label.setBounds(-26, -28, 1366, 768);
 		add(label);
 
+		lblEvents = new JLabel("Eventlist");
+		lblEvents.setForeground(Color.WHITE);
+		lblEvents.setFont(new Font("Arial", Font.BOLD, 78));
+		lblEvents.setBounds(521, 90, 323, 90);
+		add(lblEvents);
+
+		lblUpcomingEvent = new JLabel("Upcomming Events:");
+		lblUpcomingEvent.setFont(new Font("Arial", Font.BOLD, 27));
+		lblUpcomingEvent.setForeground(Color.WHITE);
+		lblUpcomingEvent.setBounds(51, 140, 309, 33);
+		add(lblUpcomingEvent);
+	
 	}
+	
 
 	public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);

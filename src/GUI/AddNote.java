@@ -17,7 +17,6 @@ import java.awt.event.ActionEvent;
 public class AddNote extends JPanel {
 	
 	private JLabel lblBackground, lblCBSlogo;
-	private JButton btnMainMenu;
 	private JButton btnAddNote;
 	private JTextField textFieldText;
 	private JTextField textFieldCreatedBy;
@@ -47,15 +46,6 @@ public class AddNote extends JPanel {
 	textFieldText.setBounds(646, 207, 231, 119);
 	add(textFieldText);
 	textFieldText.setColumns(10);
-	
-	btnMainMenu = new JButton("Main menu");
-	btnMainMenu.setContentAreaFilled(false);
-	btnMainMenu.setForeground(Color.WHITE);
-	btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
-	btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-	btnMainMenu.setBackground(Color.WHITE);
-	btnMainMenu.setBounds(656, 417, 164, 40);
-	add(btnMainMenu);
 	
 	lblCBSlogo = new JLabel();
 	lblCBSlogo.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/CBSLogo3.png")));
@@ -94,12 +84,8 @@ public class AddNote extends JPanel {
 		textFieldCreatedBy.addActionListener(l);
 		textFieldText.addActionListener(l);
 		btnAddNote.addActionListener(l);
-		btnMainMenu.addActionListener(l);
 		btnBack.addActionListener(l);
 		
-	}
-	public JButton getBtnMainMenu() {
-		return btnMainMenu;
 	}
 	public JButton getBtnAddNote() {
 		return btnAddNote;

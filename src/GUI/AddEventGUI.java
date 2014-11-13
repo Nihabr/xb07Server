@@ -23,7 +23,6 @@ public class AddEventGUI extends JPanel {
 	private JButton btnSubmit;
 	private JButton btnBack;
 	private JLabel lblCBSlogo;
-	private JButton btnMainMenu;
 	private JLabel lblCreate;
 	private JLabel lblEnd;
 	private JLabel lblName;
@@ -205,19 +204,6 @@ public class AddEventGUI extends JPanel {
 		btnSubmit.setBounds(552, 548, 239, 50);
 		add(btnSubmit);
 
-		btnMainMenu = new JButton("Main menu");
-		btnMainMenu.setForeground(Color.WHITE);
-		btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
-		btnMainMenu.setContentAreaFilled(false);
-		btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
-						0), new Color(255, 255, 255), new Color(0, 0, 0)),
-				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
-						new Color(0, 0, 0), new Color(255, 255, 255),
-						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(552, 618, 239, 50);
-		add(btnMainMenu);
-
 		lblCreate = new JLabel("Create event");
 		lblCreate.setForeground(Color.WHITE);
 		lblCreate.setFont(new Font("Arial", Font.BOLD, 78));
@@ -304,7 +290,6 @@ public class AddEventGUI extends JPanel {
 
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
-		btnMainMenu.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
 	
@@ -403,10 +388,6 @@ public class AddEventGUI extends JPanel {
 
 	public JButton getBtnSubmit() {
 		return btnSubmit;
-	}
-
-	public JButton getBtnMainMenu() {
-		return btnMainMenu;
 	}
 
 	public JButton getBtnBack() {
