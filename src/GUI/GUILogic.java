@@ -292,6 +292,7 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getNoteList().getBtnLogout()) {
 				screen.show(Screen.LOGIN);
+				screen.getLogin().Refresh();
 			}
 			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
 				//mangler
