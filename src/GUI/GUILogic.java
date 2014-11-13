@@ -117,6 +117,9 @@ public class GUILogic {
 			if (e.getSource() == screen.getAddEventGUI().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
+			if (e.getSource() == screen.getAddEventGUI().getBtnBack()){
+				screen.show(Screen.EVENTLIST);
+			}
 			if (e.getSource() == screen.getAddEventGUI().getBtnSubmit()){
 				String type = screen.getAddEventGUI().getTextField_Type().getText();
 				String location = screen.getAddEventGUI().getTextField_Location().getText();
