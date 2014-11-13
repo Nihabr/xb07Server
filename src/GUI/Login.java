@@ -118,6 +118,11 @@ public class Login extends JPanel {
 		add(lblBackground);
 
 	}
+	
+	public void Refresh(){
+	textFieldUsername.setText("");
+	textFieldPassword.setText("");
+	}
 
 	public JTextField getTextField() {
 		return textFieldUsername;
