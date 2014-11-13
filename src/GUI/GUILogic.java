@@ -276,7 +276,6 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getUserInfo().getBtnSubmit()) {
-				//mangler
 			}
 		}
 	}
@@ -315,6 +314,7 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getUserList().getBtnEditUser()){
 				screen.show(Screen.USERINFO);
+				screen.getUserInfo().Refresh();
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()) {
 			//mangler

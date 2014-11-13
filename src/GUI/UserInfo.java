@@ -94,7 +94,7 @@ public class UserInfo extends JPanel {
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Arial", Font.BOLD, 26));
 		lblPassword.setForeground(new Color(255, 255, 255));
-		lblPassword.setBounds(483, 296, 68, 30);
+		lblPassword.setBounds(483, 296, 129, 30);
 		add(lblPassword);
 
 		txtField_CreatedDate = new JTextField();

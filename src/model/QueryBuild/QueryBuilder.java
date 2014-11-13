@@ -38,7 +38,7 @@ public class QueryBuilder {
     protected String getSelectValue(){
         return selectValue;
     }
-
+    
     protected String getTableName() {
         return tableName;
     }
