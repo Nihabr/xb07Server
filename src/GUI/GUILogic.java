@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -9,6 +11,7 @@ import model.user.*;
 import GUI.UserInformation;
 
 import javax.swing.JOptionPane;
+
 import model.note.*;
 import model.QueryBuild.*;
 import GUI.Screen;
@@ -289,6 +292,7 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getNoteList().getBtnLogout()) {
 				screen.show(Screen.LOGIN);
+				screen.getLogin().Refresh();
 			}
 			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
 				//mangler
@@ -336,7 +340,6 @@ public class GUILogic {
 		}
 	}
 	
-	
 	private class AddCourseActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -354,4 +357,18 @@ public class GUILogic {
 			}
 		}
 	}	
+
+	public void propertyChange(PropertyChangeEvent e) throws SQLException {
+		
+		String value = "";
+		Object source = e.getSource();
+		if (source.equals(screen.getUserInfo().getTxtField_UserID())){
+			value = e.getNewValue().toString();
+			res = qb.selectFrom("users").where("userid", "=" , value).ExecuteQuery();
+			while (res.next()){
+				screen.getUserInfo().getTxtField_CreatedDate().setText(res.getString("date").toString());
+				screen.getUserInfo().getTxtField_Email().setText(res.getString("email"));
+			}
+		}
+	}
 }
