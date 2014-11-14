@@ -10,6 +10,7 @@ public class ForecastTest {
 
         ForecastModel fm = new ForecastModel();
         
+        fm.requestForecast();
         ArrayList<Forecast> forecastList = fm.getForecast();
         
         for (int i = 0; i < forecastList.size(); i++) {

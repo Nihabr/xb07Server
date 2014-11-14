@@ -2,8 +2,12 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+
+import model.Forecast.ForecastModel;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import JsonClasses.*;
 
 public class TCPClient {
@@ -11,10 +15,9 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		ClientLogin cl = new ClientLogin();
-		cl.setEmail("bananmanden");
-		cl.setPassWord("bøssefar");
-		String gsonString = gson.toJson(cl);
+		ForecastModel f = new ForecastModel();
+		f.getForecast();
+		String gsonString = gson.toJson(f);
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 6666);
