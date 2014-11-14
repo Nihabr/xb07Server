@@ -52,6 +52,10 @@ public class Screen extends JFrame {
 	}
 
 	public Screen() {
+		addCourse.getBtnMainMenu().setLocation(605, 620);
+		addCourse.getBtnLogout().setLocation(605, 690);
+		addCourse.getBtnLogout().setSize(194, 50);
+		addCourse.getBtnMainMenu().setSize(194, 50);
 		setTitle("Doek4life");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

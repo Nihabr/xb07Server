@@ -54,7 +54,7 @@ public class UserInfo extends JPanel {
 		btnBack.setForeground(new Color(255, 255, 255));
 		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 		btnBack.setContentAreaFilled(false);
-		btnBack.setBounds(563, 670, 239, 50);
+		btnBack.setBounds(563, 570, 239, 50);
 		add(btnBack);
 
 		txtField_UserID = new JTextField();

@@ -119,7 +119,7 @@ public class NoteList extends JPanel {
 		btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
 		btnMainMenu.setContentAreaFilled(false);
 		btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnMainMenu.setBounds(601, 589, 163, 50);
+		btnMainMenu.setBounds(601, 589, 194, 50);
 		add(btnMainMenu);
 		
 		btnLogout = new JButton("Log out");
@@ -127,7 +127,7 @@ public class NoteList extends JPanel {
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
 		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setBounds(601, 659, 163, 50);
+		btnLogout.setBounds(601, 659, 194, 50);
 		add(btnLogout);
 		
 		label = new JLabel("");
