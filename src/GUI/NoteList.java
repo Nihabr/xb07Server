@@ -104,14 +104,14 @@ public class NoteList extends JPanel {
 		btnDelete.setOpaque(true);
 		btnDelete.setForeground(new Color(0, 0, 205));
 		btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
-		btnDelete.setBounds(1222, 227, 118, 29);
+		btnDelete.setBounds(1223, 518, 118, 29);
 		add(btnDelete);
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setOpaque(true);
 		btnAdd.setForeground(new Color(0, 0, 205));
 		btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
-		btnAdd.setBounds(1222, 193, 118, 29);
+		btnAdd.setBounds(1223, 484, 118, 29);
 		add(btnAdd);
 		
 		btnMainMenu = new JButton("Main Menu");

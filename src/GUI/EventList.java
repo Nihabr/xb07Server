@@ -37,6 +37,7 @@ public class EventList extends JPanel {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JLabel lblHeader;
 	private ResultSet rs;
 
 	public EventList() {
@@ -78,6 +79,12 @@ public class EventList extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 
+		lblHeader = new JLabel("Eventlist");
+		lblHeader.setForeground(Color.WHITE);
+		lblHeader.setFont(new Font("Arial", Font.BOLD, 78));
+		lblHeader.setBounds(510, 90, 392, 90);
+		add(lblHeader);
+		
 		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
@@ -124,7 +131,7 @@ public class EventList extends JPanel {
 		btnDelete.setForeground(new Color(0, 0, 205));
 		btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
-		btnDelete.setBounds(988, 194, 118, 29);
+		btnDelete.setBounds(990, 486, 118, 29);
 		add(btnDelete);
 
 		btnAdd = new JButton("Add");
@@ -132,7 +139,7 @@ public class EventList extends JPanel {
 		btnAdd.setForeground(new Color(0, 0, 205));
 		btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
-		btnAdd.setBounds(988, 234, 118, 29);
+		btnAdd.setBounds(990, 526, 118, 29);
 		add(btnAdd);
 
 		label = new JLabel("");
