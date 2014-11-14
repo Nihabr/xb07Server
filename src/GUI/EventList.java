@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -38,8 +40,10 @@ public class EventList extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JLabel lblHeader;
+	private int row;
 	private ResultSet rs;
-
+	Object[] objects;
+	
 	public EventList() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
@@ -61,7 +65,7 @@ public class EventList extends JPanel {
  			
  	        while (rs.next()) {
  	        	
- 	        	Object[] objects = new Object[colNo];
+ 	        	objects = new Object[colNo];
  	        	
  	        	for(int i=0;i<colNo;i++){
  	        		  objects[i]=rs.getObject(i+1);
@@ -78,6 +82,7 @@ public class EventList extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
+		
 
 		lblHeader = new JLabel("Events");
 		lblHeader.setForeground(Color.WHITE);
@@ -161,19 +166,32 @@ public class EventList extends JPanel {
 		add(lblUpcomingEvent);
 	
 	}
+	public DefaultTableModel getModel() {
+		return model;
+	}
+	public Object[] getObjects() {
+		return objects;
+	}
+	public void addMouseListener(MouseListener m) {
+		table.addMouseListener(m);
+	}
 	
-
 	public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
+		
 	}
 
 	public JButton getBtnAdd() {
 		return btnAdd;
 	}
+	
 
+	public JTable getTable() {
+		return table;
+	}
 	public JButton getBtnDelete() {
 		return btnDelete;
 	}

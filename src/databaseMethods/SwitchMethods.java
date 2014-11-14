@@ -179,7 +179,7 @@ public class SwitchMethods extends Model
 				createdBy = resultSet.getString("createdby");
 				System.out.println(createdBy);
 			}
-			if(!createdBy.equals(userID))
+			if(!createdBy.equals(userID) || userID.equals("admin"))
 			{
 				stringToBeReturend = "Only the creator of the event is able to delete it.";
 			}

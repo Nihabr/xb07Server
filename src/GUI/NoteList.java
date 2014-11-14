@@ -94,10 +94,10 @@ public class NoteList extends JPanel {
 		// Add the scroll pane to this panel.
 		add(scrollPane);
 		
-		lblHeader = new JLabel("NoteList");
+		lblHeader = new JLabel("Notes");
 		lblHeader.setForeground(Color.WHITE);
 		lblHeader.setFont(new Font("Arial", Font.BOLD, 78));
-		lblHeader.setBounds(527, 90, 312, 90);
+		lblHeader.setBounds(527, 77, 312, 90);
 		add(lblHeader);
 		
 		btnDelete = new JButton("Delete");

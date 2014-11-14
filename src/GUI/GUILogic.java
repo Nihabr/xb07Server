@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import databaseMethods.SwitchMethods;
 import model.note.*;
 import model.QueryBuild.*;
 import GUI.Screen;
@@ -25,6 +28,8 @@ public class GUILogic {
 	private boolean full = false;
 	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
+	int row;
+	SwitchMethods sw = new SwitchMethods();
 
 	private ResultSet res;
 
@@ -345,7 +350,15 @@ public class GUILogic {
 				screen.show(Screen.ADDEVENTGUI);
 			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
-				// mangler
+				String eventID = (String) screen.getEventlist().getModel().getValueAt(row, 1);
+				try {
+					sw.removeEvent("admin", eventID);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//mangler
 			}
 		}
 	}
@@ -368,6 +381,40 @@ public class GUILogic {
 //		}
 //	}	
 
+	private class EventListMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			row = screen.getEventlist().getTable().getSelectedRow();
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	}
+	
 	private class AddUserInfoDocumentListener implements DocumentListener{
 
 			  public void changedUpdate(DocumentEvent e) {

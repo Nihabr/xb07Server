@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -20,9 +19,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentListener;
 
 import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class UserInfo extends JPanel {
 	private JTextField txtField_UserID;
