@@ -197,7 +197,7 @@ public class UserInfo extends JPanel {
 		return txtField_Email;
 	}
 
-	public JTextField getTxtField_Team() {
+	public JTextField getTxtField_Password() {
 		return txtField_Password;
 	}
 

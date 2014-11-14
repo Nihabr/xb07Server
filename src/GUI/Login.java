@@ -84,7 +84,7 @@ public class Login extends JPanel {
 		textFieldUsername.setBounds(705, 334, 164, 37);
 		
 		add(textFieldUsername);
-		btnLogIn.setBounds(572, 450, 222, 51);
+		btnLogIn.setBounds(589, 450, 194, 50);
 		
 		add(btnLogIn);
 		btnForgotLogIn.addActionListener(new ActionListener() {

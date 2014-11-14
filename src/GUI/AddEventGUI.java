@@ -145,7 +145,7 @@ public class AddEventGUI extends JPanel {
 		btnBack.setForeground(new Color(255, 255, 255));
 		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 		btnBack.setContentAreaFilled(false);
-		btnBack.setBounds(552, 688, 239, 50);
+		btnBack.setBounds(552, 650, 194, 50);
 		add(btnBack);
 
 		textField_Location = new JTextField();
@@ -201,7 +201,7 @@ public class AddEventGUI extends JPanel {
 				// hvad sker der n���r ���ndringer ved en bruger submittes
 			}
 		});
-		btnSubmit.setBounds(552, 548, 239, 50);
+		btnSubmit.setBounds(552, 580, 194, 50);
 		add(btnSubmit);
 
 		lblCreate = new JLabel("Create event");

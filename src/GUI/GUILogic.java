@@ -272,6 +272,19 @@ public class GUILogic {
 				screen.show(Screen.USERLIST);
 			}
 			if (e.getSource() == screen.getUserInfo().getBtnSubmit()) {
+			String userID = screen.getUserInfo().getTxtField_UserID().getText();
+			String email = screen.getUserInfo().getTxtField_Email().getText();
+			String password = screen.getUserInfo().getTxtField_Password().getText();
+			String[] fields = {"email", "Password"};
+			String[] values = {email, password};
+			try {
+				qb.update("users", fields, values).where("userID", "=", userID).Execute();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null,
+					"\nThe changes has been successfully made!", "", JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 	}

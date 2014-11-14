@@ -46,7 +46,7 @@ public class AddUser extends JPanel {
 		btnLogout.setForeground(new Color(255, 255, 255));
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(560, 520, 239, 43);
+		btnLogout.setBounds(560, 540, 194, 50);
 		add(btnLogout);
 
 		textField_Email = new JTextField();
@@ -102,11 +102,11 @@ public class AddUser extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			//Submit changes to databases
-			//hvad sker der n�r �ndringer ved en bruger submittes
+			//hvad sker der n���r ���ndringer ved en bruger submittes
 			}
 		}
 		);
-		btnSubmit.setBounds(560, 400, 239, 43);
+		btnSubmit.setBounds(560, 400, 194, 50);
 		add(btnSubmit);
 
 		
@@ -116,7 +116,7 @@ public class AddUser extends JPanel {
 				btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
 				btnMainMenu.setContentAreaFilled(false);
 				btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-				btnMainMenu.setBounds(560, 460, 239, 43);
+				btnMainMenu.setBounds(560, 470, 194, 50);
 				add(btnMainMenu);
 				
 				lblUserInfo = new JLabel("Create user");

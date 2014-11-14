@@ -109,14 +109,14 @@ import javax.swing.JTextPane;
 			btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
 			btnMainMenu.setContentAreaFilled(false);
 			btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-			btnMainMenu.setBounds(601, 620, 163, 43);
+			btnMainMenu.setBounds(601, 620, 194, 50);
 			
 			add(btnMainMenu);
 			btnLogout.setForeground(Color.WHITE);
 			btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 			btnLogout.setContentAreaFilled(false);
 			btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-			btnLogout.setBounds(624, 694, 117, 43);
+			btnLogout.setBounds(601, 690, 194, 50);
 			
 			add(btnLogout);
 			
