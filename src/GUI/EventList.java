@@ -79,7 +79,7 @@ public class EventList extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 
-		lblHeader = new JLabel("Eventlist");
+		lblHeader = new JLabel("Events");
 		lblHeader.setForeground(Color.WHITE);
 		lblHeader.setFont(new Font("Arial", Font.BOLD, 78));
 		lblHeader.setBounds(510, 90, 392, 90);

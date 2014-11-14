@@ -35,7 +35,7 @@ public class MainMenu extends JPanel {
 		lblMainMenu.setBounds(481, 90, 404, 90);
 		add(lblMainMenu);
 		
-		btnUserlist = new JButton("Userlist");
+		btnUserlist = new JButton("Users");
 
 		btnUserlist.setContentAreaFilled(false);
 		btnUserlist.setForeground(Color.WHITE);
@@ -45,7 +45,7 @@ public class MainMenu extends JPanel {
 		btnUserlist.setBounds(597, 310, 194, 50);
 		add(btnUserlist);
 		
-		btnEventlist = new JButton("Eventlist");
+		btnEventlist = new JButton("Events");
 		btnEventlist.setContentAreaFilled(false);
 		btnEventlist.setForeground(Color.WHITE);
 		btnEventlist.setFont(new Font("Arial", Font.BOLD, 30));
@@ -54,7 +54,7 @@ public class MainMenu extends JPanel {
 		btnEventlist.setBounds(597, 380, 194, 50);
 		add(btnEventlist);
 		
-		btnNotelist = new JButton("Notelist");
+		btnNotelist = new JButton("Notes");
 		btnNotelist.setContentAreaFilled(false);
 		btnNotelist.setForeground(Color.WHITE);
 		btnNotelist.setFont(new Font("Arial", Font.BOLD, 30));

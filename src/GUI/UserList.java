@@ -153,7 +153,7 @@ public class UserList extends JPanel {
         btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
         add(btnMainMenu);
         
-        lblUserlist = new JLabel("Userlist");
+        lblUserlist = new JLabel("Users");
         lblUserlist.setBounds(534, 90, 298, 90);
         lblUserlist.setForeground(Color.WHITE);
         lblUserlist.setFont(new Font("Arial", Font.BOLD, 78));
