@@ -118,34 +118,31 @@ public class UserList extends JPanel {
  
         //Create the scroll pane and add the table to it.
         scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(396, 192, 591, 361);
         scrollPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255, 255), new Color(0, 0, 205), new Color(255, 255, 255)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
         scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255, 255), new Color(0, 0, 205), new Color(255, 255, 255)), null));
-
-        scrollPane.setBounds(417, 225, 590, 360);
-
-        scrollPane.setBounds(388, 225, 591, 361);
 
  
         //Add the scroll pane to this panel.
         add(scrollPane);
         
         btnAdd = new JButton("Add");
+        btnAdd.setBounds(1013, 524, 118, 29);
         btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
         btnAdd.setForeground(new Color(0, 0, 205));
         btnAdd.setOpaque(true);
-        
-        btnAdd.setBounds(1019, 556, 118, 29);
         add(btnAdd);
         
         btnLogout = new JButton("Log out");
+        btnLogout.setBounds(616, 666, 194, 50);
         btnLogout.setForeground(Color.WHITE);
         btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
         btnLogout.setContentAreaFilled(false);
         btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-        btnLogout.setBounds(622, 690, 194, 50);
         add(btnLogout);
         
         btnMainMenu = new JButton("Main Menu");
+        btnMainMenu.setBounds(616, 596, 194, 50);
         btnMainMenu.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         	}
@@ -154,44 +151,40 @@ public class UserList extends JPanel {
         btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
         btnMainMenu.setContentAreaFilled(false);
         btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-        btnMainMenu.setBounds(622, 620, 194, 50);
         add(btnMainMenu);
         
         lblUserlist = new JLabel("Userlist");
+        lblUserlist.setBounds(534, 90, 298, 90);
         lblUserlist.setForeground(Color.WHITE);
         lblUserlist.setFont(new Font("Arial", Font.BOLD, 78));
-
-        lblUserlist.setBounds(549, 118, 298, 90);
-
-        lblUserlist.setBounds(534, 90, 298, 90);
 
         add(lblUserlist);
         
         btnDelete = new JButton("Delete");
+        btnDelete.setBounds(1013, 483, 118, 29);
         btnDelete.setOpaque(true);
         btnDelete.setForeground(new Color(0, 0, 205));
         btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
-        btnDelete.setBounds(1019, 515, 118, 29);
         add(btnDelete);
         
         lblLogo = new JLabel("");
+        lblLogo.setBounds(36, 695, 268, 67);
         lblLogo.setIcon(new ImageIcon(UserList.class.getResource("/Images/CBSLogo3.png")));
-        lblLogo.setBounds(36, 695, 223, 67);
         add(lblLogo);
         
         btnEditUser = new JButton("Edit User");
+        btnEditUser.setBounds(1013, 442, 118, 29);
         btnEditUser.setOpaque(true);
         btnEditUser.setForeground(new Color(0, 0, 205));
         btnEditUser.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
-        btnEditUser.setBounds(1019, 474, 118, 29);
         add(btnEditUser);
     
         lblBackground = new JLabel("Background");
+        lblBackground.setBounds(0, 0, 1376, 768);
         lblBackground.setIcon(new ImageIcon(UserList.class.getResource("/Images/MetalBackground.jpg")));
         lblBackground.setBackground(new Color(245, 245, 245));
         lblBackground.setForeground(new Color(245, 255, 250));
         lblBackground.setOpaque(true);
-        lblBackground.setBounds(0, 0, 1376, 768);
         add(lblBackground);
     }
  
