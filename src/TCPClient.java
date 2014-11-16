@@ -16,7 +16,8 @@ public class TCPClient {
 		Gson gson = new GsonBuilder().create();
 		
 		ForecastModel f = new ForecastModel();
-		f.getForecast();
+		f.update();
+		
 		String gsonString = gson.toJson(f);
 		System.out.println(gsonString);
 
