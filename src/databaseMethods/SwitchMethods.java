@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
+import model.calendar.EncryptUserID;
 import model.note.*;
 import JsonClasses.*;
 
@@ -21,6 +22,7 @@ public class SwitchMethods extends Model
 	Note note = new Note();
 	GetDailyUpdate gdu = new GetDailyUpdate();
 	ClientLogin clientLogin = new ClientLogin();
+	EncryptUserID e = new EncryptUserID();
 	String stringToBeReturned = "";
 
 	
@@ -235,6 +237,7 @@ public class SwitchMethods extends Model
 		String [] values = {"email", "password", "userID", "isAdmin"};
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
 		if(resultSet.next()){
+			e.setUserId(email);
 			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
 			clientLogin.setUserID(resultSet.getInt("userID"));
 			gsonString = gson.toJson(clientLogin);

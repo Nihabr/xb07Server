@@ -34,16 +34,6 @@ public class GiantSwitch {
 		switch (Determine(jsonString)) {
 		//If the Json String contains one of the keywords below, run the relevant method.
 
-		/************
-		 ** COURSES **
-		 ************/
-
-		case "importCalendar":
-			//import notes, userevents & cbs events related to the user
-			
-			System.out.println("Recieved importCourse");
-			break;
-
 		/**********
 		 ** LOGIN **
 		 **********/

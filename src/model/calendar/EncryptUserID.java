@@ -13,7 +13,7 @@ public class EncryptUserID {
      * http://www.miraclesalad.com/webtools/md5.php - Du kan her saette userid foerst og derefter hashkey for at teste
      */
     private static final String HASHKEY = "v.eRyzeKretW0r_t";
-    private static String userId = "jolj13ab";
+    private static String email = "";
     private String key;
     private static MessageDigest digester;
 
@@ -25,7 +25,9 @@ public class EncryptUserID {
         }
     }
 
-    // Enkryptere en tekst streng som bliver parset til funktionen
+  
+
+	// Enkryptere en tekst streng som bliver parset til funktionen
     public static String crypt(String str) {
         if (str == null || str.length() == 0) {
             throw new IllegalArgumentException("Error");
@@ -47,14 +49,20 @@ public class EncryptUserID {
     //Quick example of how to get the hash.
     public static void main(String[] args) {
 
-        System.out.print("Secret key: " + crypt(userId + HASHKEY));
-        String key = crypt(userId+ HASHKEY);
+        System.out.print("Secret key: " + crypt(email + HASHKEY));
+        String key = crypt(email+ HASHKEY);
 
     }
 
 	public String getKey() {
 		return key;
 	}
-    
+	  public void setEmail(String email) {
+			EncryptUserID.email = email;
+		}
+
+	public String getEmail() {
+		return email;
+	}
 }
 

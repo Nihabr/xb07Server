@@ -1,15 +1,12 @@
 package model.calendar;
 
-import com.eclipsesource.json.JsonObject;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  * Created by jesperbruun on 13/10/14.
@@ -50,9 +47,9 @@ public class GetCalendarData {
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
-    	String userID = "jolj13ab";
-      String json = readUrl("http://calendar.cbs.dk/events.php/jolj13ab/c8376a342ad9d756d007125edaa281b3.json");
-//      		+ "http://calendar.cbs.dk/events.php/"+userID+"/"+e.getKey()+".json");
+	      String json = readUrl("http://calendar.cbs.dk/events.php/"+ e.getEmail() + "/" +e.getKey() + ".json");
+	      
+	      
      // http://calendar.cbs.dk/events.php/jolj13ab/c8376a342ad9d756d007125edaa281b3.ics
         
 
