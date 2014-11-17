@@ -2,13 +2,13 @@
 
 import java.net.*;
 
-class TCPserver{    
+class TCPServer{    
 	
 	public static void main(String argv[]) throws Exception       {
 
 		AdminWorker admin = new AdminWorker();
 		//Creates a socket to send and receive messages in port 8888
-		ServerSocket welcomeSocket = new ServerSocket(8888);
+		ServerSocket welcomeSocket = new ServerSocket(6666);
 		
 		//While something is true
 		while(true){

@@ -159,7 +159,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 	}
 	
-	public String 	deleteEvent(String userID, int eventID)throws SQLException{
+	public String 	deleteEvent(String userID, String eventID)throws SQLException{
 		
 		String stringToBeReturned = "";
 		testConnection();
@@ -168,7 +168,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 		
 	}
-	public String 	removeEvent(String userID, int eventID) throws SQLException{
+	public String 	removeEvent(String userID, String eventID) throws SQLException{
 		
 		
 		String stringToBeReturend = "";
@@ -231,13 +231,13 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturned;
 	}
-	public String	clientLogin (String email, String password) throws SQLException{
+	public String clientLogin (String email, String password) throws SQLException{
 		
 		String gsonString = "";	
 		String [] values = {"email", "password", "userID", "isAdmin"};
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
 		if(resultSet.next()){
-			e.setUserId(email);
+			e.setEmail(email);
 			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
 			clientLogin.setUserID(resultSet.getInt("userID"));
 			gsonString = gson.toJson(clientLogin);

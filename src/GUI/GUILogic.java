@@ -360,12 +360,12 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
 				int eventID = (int) screen.getEventlist().getModel().getValueAt(row, 1);
-				try {
-					sw.removeEvent("1", eventID);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				try {
+//					sw.removeEvent("1", eventID);
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 				
 				//mangler
 			}
