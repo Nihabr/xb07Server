@@ -36,8 +36,7 @@ public class GUILogic {
 	public GUILogic() {
 
 		screen = new Screen();
-
-		screen.getLogin().addActionListener(new LoginActionListener());
+	screen.getLogin().addActionListener(new LoginActionListener());
 		screen.getMainMenu().addActionListener(new MainMenuActionListener());
 		screen.getUserInfo().addActionListener(new UserInfoActionListener());
 		screen.getNoteList().addActionListener(new NoteListActionListener());
@@ -114,6 +113,7 @@ public class GUILogic {
 				screen.show(Screen.NOTELIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnEventlist()) {
+				screen.getEventlist().updateTable();
 				screen.show(Screen.EVENTLIST);
 			}
 
@@ -164,6 +164,8 @@ public class GUILogic {
 				//Har lagt til variabler i arrayet slik det ser ut i databasen. 
 				try {
 					qb.insertInto("events", eventColumns ).values(Values).Execute();
+					screen.getEventlist().updateTable();
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -357,9 +359,9 @@ public class GUILogic {
 				screen.show(Screen.ADDEVENTGUI);
 			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
-				String eventID = (String) screen.getEventlist().getModel().getValueAt(row, 1);
+				int eventID = (int) screen.getEventlist().getModel().getValueAt(row, 1);
 				try {
-					sw.removeEvent("admin", eventID);
+					sw.removeEvent("1", eventID);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -394,6 +396,7 @@ public class GUILogic {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			row = screen.getEventlist().getTable().getSelectedRow();
+			row++;
 		}
 
 		@Override

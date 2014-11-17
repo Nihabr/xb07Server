@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
@@ -50,39 +51,21 @@ public class EventList extends JPanel {
 
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
-				"Start", "End", "Name", "Text", "CustomEvent", "CalendarID" };
+				"Start", "End", "Name", "Text","Active", "CustomEvent", "CalendarID" };
 
 
 		table = new JTable();
     	model = (DefaultTableModel)table.getModel();
     	model.setColumnIdentifiers(columnNames);
     	
-    	 try {
- 			QueryBuilder qb = new QueryBuilder();
- 			rs = qb.selectFrom("events").all().ExecuteQuery();
- 			ResultSetMetaData rsmd = rs.getMetaData();
- 			int colNo = rsmd.getColumnCount();
- 			
- 	        while (rs.next()) {
- 	        	
- 	        	objects = new Object[colNo];
- 	        	
- 	        	for(int i=0;i<colNo;i++){
- 	        		  objects[i]=rs.getObject(i+1);
- 	        		  }
- 	        		 model.addRow(objects);
- 	        		}
- 	        		table.setModel(model);
-    		} catch (SQLException e1) {
-     			e1.printStackTrace();
-     		}
+    	
+    	 
 
 		
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
-		
 
 		lblHeader = new JLabel("Events");
 		lblHeader.setForeground(Color.WHITE);
@@ -100,7 +83,7 @@ public class EventList extends JPanel {
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
-		scrollPane.setBounds(387, 194, 591, 361);
+		scrollPane.setBounds(94, 186, 884, 369);
 
 		// Add the scroll pane to this panel.
 		add(scrollPane);
@@ -202,6 +185,29 @@ public class EventList extends JPanel {
 
 	public JButton getBtnMainMenu() {
 		return btnMainMenu;
+	}
+	public void updateTable(){
+		try {
+			model.getDataVector().removeAllElements();
+ 			QueryBuilder qb = new QueryBuilder();
+ 			rs = qb.selectFrom("events").all().ExecuteQuery();
+ 			ResultSetMetaData rsmd = rs.getMetaData();
+ 			int colNo = rsmd.getColumnCount();
+ 			
+ 	        while (rs.next()) {
+ 	        	
+ 	        	objects = new Object[colNo];
+ 	        	
+ 	        	for(int i=0;i<colNo;i++){
+ 	        		  objects[i]=rs.getObject(i+1);
+ 	        		  }
+ 	        		 model.addRow(objects);
+ 	        		}
+ 	        		table.setModel(model);
+ 	        		
+    		} catch (SQLException e1) {
+     			e1.printStackTrace();
+     		}
 	}
 
 }

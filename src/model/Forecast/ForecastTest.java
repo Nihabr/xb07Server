@@ -29,7 +29,7 @@ public class ForecastTest {
       public static void addt(){
     	  ScheduledThreadPoolExecutor s = new ScheduledThreadPoolExecutor(5);
     	  s.scheduleAtFixedRate(new QOTDModel(), 0, 1, TimeUnit.SECONDS);
-    	  s.scheduleAtFixedRate(new ForecastModel(), 0, 1, TimeUnit.HOURS);
+//    	  s.scheduleAtFixedRate(new ForecastModel(), 0, 1, TimeUnit.HOURS);
     	  System.out.println("thread" + Thread.activeCount());
       }
        

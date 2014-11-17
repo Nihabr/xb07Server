@@ -157,7 +157,7 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 	}
 	
-	public String 	deleteEvent(String userID, String eventID)throws SQLException{
+	public String 	deleteEvent(String userID, int eventID)throws SQLException{
 		
 		String stringToBeReturned = "";
 		testConnection();
@@ -166,12 +166,12 @@ public class SwitchMethods extends Model
 		return stringToBeReturned;
 		
 	}
-	public String 	removeEvent(String userID, String eventID) throws SQLException{
+	public String 	removeEvent(String userID, int eventID) throws SQLException{
 		
 		
 		String stringToBeReturend = "";
 		String createdBy ="";
-		resultSet = qb.selectFrom("events").where("eventID", "=", eventID).ExecuteQuery();
+		resultSet = qb.selectFrom("events").where("eventID", "=", String.valueOf(eventID)).ExecuteQuery();
 		
 			while(resultSet.next())
 			{
@@ -187,7 +187,7 @@ public class SwitchMethods extends Model
 			{
 				String [] keys = {"active"};
 				String [] values = {"0"};
-				qb.update("events", keys, values).where("eventID", "=", eventID).Execute();
+				qb.update("events", keys, values).where("eventID", "=", String.valueOf(eventID)).Execute();
 				stringToBeReturend = "event has been set inactive";
 			}
 			
