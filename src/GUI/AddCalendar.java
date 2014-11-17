@@ -154,4 +154,25 @@ public class AddCalendar extends JPanel {
 	public JButton getBtnSubmit() {
 		return btnSubmit;
 	}
+
+	public JTextField getTxtCalendarID() {
+		return txtCalendarID;
+	}
+
+	public JTextField getTextName() {
+		return textName;
+	}
+
+	public JTextField getTextActive() {
+		return textActive;
+	}
+
+	public JTextField getTextCreatedBy() {
+		return textCreatedBy;
+	}
+
+	public JTextField getTextPrivateOrPublic() {
+		return textPrivateOrPublic;
+	}
+	
 }
