@@ -387,11 +387,11 @@ public class GUILogic {
 			if (e.getSource() == screen.getCalendar().getBtnLogout()) {
 				screen.show(Screen.LOGIN);
 			}
-			if (e.getSource() == screen.getCalendar().getBtnVlgKalender()) {
-				
-			}
 			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
 				screen.show(Screen.ADDCALENDAR);
+			}
+			if (e.getSource() == screen.getCalendar().getBtnVlgKalender()) {
+				
 			}
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
 				
