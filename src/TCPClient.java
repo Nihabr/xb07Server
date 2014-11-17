@@ -24,6 +24,8 @@ public class TCPClient {
 		c.setIsAdmin(1);
 		String gsonString = gson.toJson(c);
 		System.out.println(gsonString);
+		
+		
 
 		Socket clientSocket = new Socket("localhost", 6666);
 		DataOutputStream outToServer = new DataOutputStream(

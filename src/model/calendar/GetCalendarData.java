@@ -1,11 +1,11 @@
 package model.calendar;
 
 
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+
+import com.google.gson.Gson;
 
 
 /**
@@ -47,7 +47,9 @@ public class GetCalendarData {
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
+    	System.out.println(e.getKey());
 	      String json = readUrl("http://calendar.cbs.dk/events.php/"+ e.getEmail() + "/" +e.getKey() + ".json");
+	      System.out.println(json);
 	      
 	      
      // http://calendar.cbs.dk/events.php/jolj13ab/c8376a342ad9d756d007125edaa281b3.ics
@@ -65,7 +67,7 @@ public class GetCalendarData {
         	
         	
         	
-        	System.out.println(cbsEvents.getEvents().get(i).getStart());
+        	System.out.println(cbsEvents.getEvents().get(i).getTitle());
         }
     }
 }

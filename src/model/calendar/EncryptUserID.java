@@ -14,11 +14,12 @@ public class EncryptUserID {
      */
     private static final String HASHKEY = "v.eRyzeKretW0r_t";
     private static String email = "";
-    private String key;
+    private static String key;
     private static MessageDigest digester;
 
     static {
         try {
+        	
             digester = MessageDigest.getInstance("MD5");
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,12 +51,14 @@ public class EncryptUserID {
     public static void main(String[] args) {
 
         System.out.print("Secret key: " + crypt(email + HASHKEY));
-        String key = crypt(email+ HASHKEY);
+        key = crypt(email+ HASHKEY);
 
     }
 
 	public String getKey() {
-		return key;
+		
+		return crypt(email+ HASHKEY); 
+		
 	}
 	  public void setEmail(String email) {
 			EncryptUserID.email = email;
@@ -64,5 +67,6 @@ public class EncryptUserID {
 	public String getEmail() {
 		return email;
 	}
+
 }
 

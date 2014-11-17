@@ -10,6 +10,7 @@ import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
 import model.calendar.EncryptUserID;
+import model.calendar.GetCalendarData;
 import model.note.*;
 import JsonClasses.*;
 
@@ -236,11 +237,21 @@ public class SwitchMethods extends Model
 		String gsonString = "";	
 		String [] values = {"email", "password", "userID", "isAdmin"};
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
+		GetCalendarData g = new GetCalendarData();
 		if(resultSet.next()){
 			e.setEmail(email);
 			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
 			clientLogin.setUserID(resultSet.getInt("userID"));
 			gsonString = gson.toJson(clientLogin);
+			try {
+				
+				g.getDataFromCalendar();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			
 		}
 
 		return gsonString;
