@@ -183,7 +183,10 @@ public class EventList extends JPanel {
 		try {
 			model.getDataVector().removeAllElements();
  			QueryBuilder qb = new QueryBuilder();
- 			rs = qb.selectFrom("events").all().ExecuteQuery();
+ 			String key [] = {"active"};
+ 			String value = "1";
+ 			
+ 			rs = qb.selectFrom("events").where("active", "=", value).ExecuteQuery();
  			ResultSetMetaData rsmd = rs.getMetaData();
  			int colNo = rsmd.getColumnCount();
  			
