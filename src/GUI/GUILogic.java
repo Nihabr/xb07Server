@@ -409,9 +409,29 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getAddCalendar().getBtnSubmit()) {
+				
+				
+				String calendarID = screen.getAddCalendar().getTxtCalendarID().getText();
+				String name = screen.getAddCalendar().getTextName().getText();
+				String active = screen.getAddCalendar().getTextActive().getText();
+				String createdBy = screen.getAddCalendar().getTextCreatedBy().getText();
+				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
+				
+				String fields[] = {"calenderID","name","active","createdBy","privatePublic"};
+				String values[] = {calendarID,name,active,createdBy,privatePublic};
+				
+				try{
+				qb.insertInto("calender", fields).values(values).Execute();
+				
+				
+				
+				
 				JOptionPane.showMessageDialog(null,
 						"\nCalendar has been added!", "", JOptionPane.PLAIN_MESSAGE);
+				screen.getCalendar().updateTable();
 				screen.show(Screen.CALENDAR);
+			} catch (Exception e2){
+				e2.printStackTrace();
 			}
 		}
 	}
@@ -432,7 +452,7 @@ public class GUILogic {
 //			}
 //		}
 //	}	
-
+	}
 	private class EventListMouseListener implements MouseListener {
 
 		@Override
@@ -506,7 +526,7 @@ public class GUILogic {
 				  }
 			  }
 		}
-	
+		
 }
 	
 
