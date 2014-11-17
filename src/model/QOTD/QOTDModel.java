@@ -72,10 +72,10 @@ public class QOTDModel implements Runnable {
 
 			String quote = (String) jsonObject.get("quote");
 			String author = (String) jsonObject.get("author");
-
+			
+			quote = quote.replace("'", "''");
 			String fQuote = (author + ": \"" + quote + "\"");
-
-			System.out.println(fQuote);
+			
 
 			String[] keys = { "qotd" };
 			String[] keys2 = { fQuote };
@@ -85,23 +85,15 @@ public class QOTDModel implements Runnable {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String datetime = sdf.format(date) + " 11:00:00";
 
-			resultSet = qb.selectFrom(keys, "dailyupdate").all().ExecuteQuery();
-			if(resultSet.next()){
-			
-				resultSet.getString("qotd").replaceAll("'", "''");
-				
-
-			} else {
+		
 
 				qb.update("dailyupdate", keys, keys2)
 						.where("date", "=", datetime).Execute();
-
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+				
+		}catch(Exception e){
 			e.printStackTrace();
 		}
+
 
 	}
 
@@ -123,32 +115,4 @@ public class QOTDModel implements Runnable {
 		}
 		return q;
 	}
-
-	// public void updateQuote(){
-	// // Date date = new Date(); // Current date & time
-	// // Timer timer = new Timer();
-	// // long maxTimeNoUpdate = 86400; // Maximum one day with no update
-	// //
-	// // long date1 = date.getTime();
-	// // long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour --
-	// should be fetched from database
-	// //
-	// // long timeSinceUpdate = date1 - date2;
-	//
-	// final ScheduledExecutorService exec =
-	// Executors.newScheduledThreadPool(1);
-	//
-	// exec.schedule(new Runnable(){
-	// @Override
-	// public void run(){
-	// saveQuote();
-	// }
-	// }, 1, TimeUnit.SECONDS);
-	//
-	// // if more than 1 hour ago, do update
-	// // if(timeSinceUpdate > 864000){
-	// // return fresh weather data
-	//
-	// // saveQuote();
-	// }
 }
