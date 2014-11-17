@@ -167,9 +167,11 @@ public class GUILogic {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"\nEvent has been added!", "", JOptionPane.PLAIN_MESSAGE);
+					screen.show(Screen.EVENTLIST);
 				}
 				}
-				
 				
 			}
 		}
@@ -238,6 +240,8 @@ public class GUILogic {
 					
 					
 				}
+			JOptionPane.showMessageDialog(null,
+						"\nUser has been added!", "", JOptionPane.PLAIN_MESSAGE);
 			screen.show(Screen.USERLIST);
 			}
 		}
@@ -266,8 +270,11 @@ public class GUILogic {
 			if (e.getSource() == screen.getAddNote().getBtnBack()) {
 				screen.show(Screen.NOTELIST);
 			}
+			JOptionPane.showMessageDialog(null,
+					"\nNote has been added!", "", JOptionPane.PLAIN_MESSAGE);
 		}
 
+		
 	}
 
 	private class UserInfoActionListener implements ActionListener {

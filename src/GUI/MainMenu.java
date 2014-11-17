@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
+import javax.swing.JScrollPane;
 
 public class MainMenu extends JPanel {
 	private JLabel label;
@@ -22,6 +23,7 @@ public class MainMenu extends JPanel {
 	private JButton btnNotelist;
 	private JLabel lblCBSlogo;
 	private JLabel lblBackground;
+	private JButton btnVlgKalender;
 	
 
 	
@@ -42,7 +44,7 @@ public class MainMenu extends JPanel {
 		btnUserlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnUserlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnUserlist.setBackground(Color.WHITE);
-		btnUserlist.setBounds(597, 310, 194, 50);
+		btnUserlist.setBounds(289, 310, 194, 50);
 		add(btnUserlist);
 		
 		btnEventlist = new JButton("Events");
@@ -51,7 +53,7 @@ public class MainMenu extends JPanel {
 		btnEventlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnEventlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnEventlist.setBackground(Color.WHITE);
-		btnEventlist.setBounds(597, 380, 194, 50);
+		btnEventlist.setBounds(289, 380, 194, 50);
 		add(btnEventlist);
 		
 		btnNotelist = new JButton("Notes");
@@ -60,7 +62,7 @@ public class MainMenu extends JPanel {
 		btnNotelist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnNotelist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnNotelist.setBackground(Color.WHITE);
-		btnNotelist.setBounds(597, 240, 194, 50);
+		btnNotelist.setBounds(289, 240, 194, 50);
 		add(btnNotelist);
 		
 		btnLogOut = new JButton("Log Out");
@@ -69,18 +71,34 @@ public class MainMenu extends JPanel {
 		btnLogOut.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogOut.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnLogOut.setBackground(Color.WHITE);
-		btnLogOut.setBounds(597, 500, 194, 50);
+		btnLogOut.setBounds(289, 500, 194, 50);
 		add(btnLogOut);
+		
+		btnVlgKalender = new JButton("V\u00E6lg kalender");
+		btnVlgKalender.setContentAreaFilled(false);
+		btnVlgKalender.setForeground(Color.WHITE);
+		btnVlgKalender.setFont(new Font("Arial", Font.BOLD, 30));
+		btnVlgKalender.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnVlgKalender.setBackground(Color.WHITE);
+		btnVlgKalender.setBounds(1001, 240, 220, 50);
+		add(btnVlgKalender);
 		
 		lblCBSlogo = new JLabel("");
 		lblCBSlogo.setIcon(new ImageIcon(MainMenu.class.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(508, 240, 468, 317);
+		add(scrollPane);
+		
 		lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(MainMenu.class.getResource("/Images/MetalBackground.jpg")));
 		lblBackground.setBounds(0, 0, 1366, 768);
 		add(lblBackground);
+		
+		
+		
 
 	}
 	public void addActionListener(ActionListener l) {
@@ -103,5 +121,4 @@ public class MainMenu extends JPanel {
 	public JButton getBtnLogOut() {
 		return btnLogOut;
 	}
-	
 }

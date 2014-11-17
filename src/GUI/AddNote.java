@@ -30,7 +30,7 @@ public class AddNote extends JPanel {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 	
-	lblAddUser = new JLabel("Add user");
+	lblAddUser = new JLabel("Add note");
 	lblAddUser.setForeground(Color.WHITE);
 	lblAddUser.setFont(new Font("Arial", Font.BOLD, 78));
 	lblAddUser.setBounds(509, 107, 464, 90);
