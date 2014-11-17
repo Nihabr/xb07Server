@@ -18,10 +18,14 @@ public class Events {
     ArrayList<UserEvent> events = new ArrayList<UserEvent>();
     QueryBuilder qb = new QueryBuilder();
 
-    public ArrayList<UserEvent> getEvents() {
+    public ArrayList<UserEvent> getEvents(int CalID) {
     	QueryBuilder qb = new QueryBuilder();
     	try {
-			ResultSet rs = qb.selectFrom("events").all().ExecuteQuery();
+			ResultSet rs; 
+			if(CalID != 0)
+				rs = qb.selectFrom("events").where("calendarID", "=", String.valueOf(CalID)).ExecuteQuery();
+			else
+				rs = qb.selectFrom("events").all().ExecuteQuery();
 			while (rs.next())
 			{
 				//String values from SQL database (must be created)
