@@ -390,10 +390,13 @@ public class GUILogic {
 			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
 				screen.show(Screen.ADDCALENDAR);
 			}
-			if (e.getSource() == screen.getCalendar().getBtnVlgKalender()) {
+			if (e.getSource() == screen.getCalendar().getChooseCalendar()) {
 				
 			}
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
+				
+			}
+			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				
 			}
 		}

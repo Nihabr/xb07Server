@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import model.QueryBuild.QueryBuilder;
 
 public class Calendar extends JPanel {
-	private JButton btnVlgKalender;
+	private JButton btnChooseCalendar;
 	private JLabel lblBackground;
 	private JLabel label;
 	private JLabel lblHeader;
@@ -36,6 +36,9 @@ public class Calendar extends JPanel {
 	private JButton btnDelete;
 	private JButton btnMainMenu;
 	private JButton btnLogout;
+	private JButton btnShare;
+	
+	
 
 	public Calendar() {
 		setSize(new Dimension(1366, 768));
@@ -72,20 +75,12 @@ public class Calendar extends JPanel {
 		lblHeader.setBounds(527, 77, 376, 90);
 		add(lblHeader);
 
-		btnVlgKalender = new JButton("V\u00E6lg kalender");
-		btnVlgKalender.setOpaque(true);
-		btnVlgKalender.setForeground(new Color(0, 0, 205));
-		btnVlgKalender.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(
-				0, 0, 255)));
-		btnVlgKalender.setBounds(998, 460, 118, 29);
-		add(btnVlgKalender);
-
 		btnAdd = new JButton("Add");
 		btnAdd.setOpaque(true);
 		btnAdd.setForeground(new Color(0, 0, 205));
 		btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
-		btnAdd.setBounds(998, 493, 118, 29);
+		btnAdd.setBounds(998, 490, 118, 29);
 		add(btnAdd);
 
 		btnDelete = new JButton("Delete");
@@ -94,6 +89,28 @@ public class Calendar extends JPanel {
 		btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
 		btnDelete.setBounds(998, 526, 118, 29);
+
+		
+		btnChooseCalendar = new JButton("Choose Calendar");
+		btnChooseCalendar.setOpaque(true);
+		btnChooseCalendar.setForeground(new Color(0, 0, 205));
+		btnChooseCalendar.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
+		btnChooseCalendar.setBounds(998, 455, 118, 29);
+		add(btnChooseCalendar);
+		
+		btnShare = new JButton("Share");
+		btnShare.setOpaque(true);
+		btnShare.setForeground(new Color(0, 0, 205));
+		btnShare.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
+		btnShare.setBounds(998, 420, 118, 29);
+		add(btnShare);
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.setOpaque(true);
+		btnDelete.setForeground(new Color(0, 0, 205));
+		btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 255)));
+		btnDelete.setBounds(998, 525, 118, 29);
+
 		add(btnDelete);
 
 		btnMainMenu = new JButton("Main Menu");
@@ -137,16 +154,18 @@ public class Calendar extends JPanel {
 	}
 
 	public void addActionListener(ActionListener l) {
-		btnVlgKalender.addActionListener(l);
+		btnChooseCalendar.addActionListener(l);
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 		btnLogout.addActionListener(l);
+		btnShare.addActionListener(l);
 	}
 
 	public void updateTable() {
 		try {
 			model.getDataVector().removeAllElements();
+
 			QueryBuilder qb = new QueryBuilder();
 			rs = qb.selectFrom("calender").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -168,8 +187,13 @@ public class Calendar extends JPanel {
 		}
 	}
 
-	public JButton getBtnVlgKalender() {
-		return btnVlgKalender;
+	public JButton getBtnChooseCalendar() {
+		return btnChooseCalendar;
+	}
+ 		
+	public JButton getChooseCalendar() {
+		return btnChooseCalendar;
+
 	}
 
 	public JButton getBtnAdd() {
@@ -186,5 +210,8 @@ public class Calendar extends JPanel {
 
 	public JButton getBtnLogout() {
 		return btnLogout;
+	}
+	public JButton getBtnShare() {
+		return btnShare;
 	}
 }
