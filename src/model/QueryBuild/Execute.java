@@ -17,8 +17,6 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
-    private final String VALUES2 = " VALUES";
-    private final String REPLACE = " REPLACE ";
     private final String ON_DUPLICATE_KEY = " ON DUPLICATE KEY ";
 
     private QueryBuilder queryBuilder;
@@ -116,21 +114,19 @@ public class Execute extends Model {
             }
 
         } else if(getQueryBuilder().isUpdate()) {
-            sql = UPDATE + getQueryBuilder().getTableName() + " SET " + getQueryBuilder().getFields() + "" + WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + "?;";
+            sql = UPDATE + getQueryBuilder().getTableName() + " SET " + getQueryBuilder().getFields() + "" + WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " ?;";
             try {
                 getConnection(false);
                 getConn();
-                String cleanSql = StringEscapeUtils.escapeSql(sql);
-                sqlStatement = getConn().prepareStatement(cleanSql);
+//              String cleanSql = StringEscapeUtils.escapeSql(sql);
+                sqlStatement = getConn().prepareStatement(sql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
                 System.out.println(sqlStatement.toString());
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-                  
-        }
-        else {        
+        } else {        
             sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
             StringBuilder sb = new StringBuilder();
             for (String n : getValues().getValues()) {

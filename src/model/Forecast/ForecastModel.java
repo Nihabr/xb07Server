@@ -18,21 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-public class ForecastModel implements Runnable {
+public class ForecastModel {
 
 	     // Json parser to retrieve and map data from openweathermap.org
 	     private ArrayList<Forecast> forecastList = new ArrayList<Forecast>();
 	     private String weatherDescription = "";
 	     QueryBuilder qb = new QueryBuilder();
-
-
-	     public void run(){
-	    	 updateFc();
-	     }
+	     
 	     // 
 	     public ArrayList<Forecast> requestForecast() {
 	         URL url;
@@ -107,7 +100,32 @@ public class ForecastModel implements Runnable {
 	     public ArrayList<Forecast> getForecast() throws SQLException{
 	     	QueryBuilder qb = new QueryBuilder();
 	     	Date date = new Date(); // Current date & time
-
+	     	long maxTimeNoUpdate = 3600; // Maximum one hour with no update
+	     	
+	     	long date1 = date.getTime();
+	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
+	     	
+	     	long timeSinceUpdate = 3600; 
+	     	
+	     	// if more than 1 hour ago, do update
+	     	if(timeSinceUpdate > 3600){
+	     		
+	     		forecastList = requestForecast();
+	     		
+	     		for (Forecast fc : forecastList)
+	     		{
+	     		String dateTime = (fc.getDate());
+	     		String temperature = fc.getCelsius().toString();
+	     		String summary = fc.getDesc();
+	     		String msg_type = "fc";
+	     		String[] fields = {"date", "apparenttemperature", "summary", "msg_type"};
+	     		String[] values = {dateTime, temperature, summary, msg_type};
+	     		qb.insertInto("dailyupdate", fields).values(values).Execute();
+	     		}
+	     		
+	     		// return fresh weather data
+	     		return forecastList;
+	     	} else {
 	     		// Query database and fetch existing weather data from db
 	     		ResultSet forecast = null;
 	     		try {
@@ -139,29 +157,6 @@ public class ForecastModel implements Runnable {
 				}
 	     		return null;
 	     	}
-	     
-
-
-private void updateFc(){
-
-	forecastList = requestForecast();
-
-	for (Forecast fc : forecastList) {
-		String dateTime = (fc.getDate());
-		String temperature = fc.getCelsius().toString();
-		String summary = fc.getDesc();
-		String msg_type = "fc";
-		String[] fields = { "date", "apparenttemperature",
-				"summary", "msg_type" };
-		String[] values = { dateTime, temperature, summary,
-				msg_type };
-		try {
-			qb.insertInto("dailyupdate", fields).values(values)
-					.Execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-}
-}
+	     }
+	 
 }

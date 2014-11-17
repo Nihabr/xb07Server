@@ -10,7 +10,6 @@ public class QueryBuilder {
     private String fields;
     private boolean softDelete;
     private boolean isUpdate;
-    private boolean updateAndReplace;
     private String[] fieldarray;
 
     protected void setSoftDelete(boolean b){
@@ -28,9 +27,6 @@ public class QueryBuilder {
 	}
 	protected boolean isUpdate() {
         return isUpdate;
-    }
-	protected boolean updateAndReplace() {
-        return updateAndReplace;
     }
     protected void setUpdate(boolean isUpdate) {
         this.isUpdate = isUpdate;
@@ -140,7 +136,6 @@ public class QueryBuilder {
 
         return new Where(queryBuilder);
     }
-
 
     /**
      * Soft delete method. UPDATE tableName
