@@ -79,8 +79,7 @@ public class QOTDModel implements Runnable {
 
 			String[] keys = { "qotd" };
 			String[] keys2 = { fQuote };
-			String apostrophe = "'";
-			String[] a = { "''" };
+
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String datetime = sdf.format(date) + " 11:00:00";

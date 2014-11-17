@@ -15,10 +15,9 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		ForecastModel f = new ForecastModel();
-		f.update();
 		
-		String gsonString = gson.toJson(f);
+		
+		String gsonString = gson.toJson();
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 6666);

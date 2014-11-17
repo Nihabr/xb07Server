@@ -17,8 +17,6 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
-    private final String VALUES2 = " VALUES";
-    private final String REPLACE = " REPLACE ";
     private final String ON_DUPLICATE_KEY = " ON DUPLICATE KEY ";
 
     private QueryBuilder queryBuilder;
@@ -85,6 +83,7 @@ public class Execute extends Model {
                 String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(cleanSql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
+                System.out.println(sql);
 
             } catch (SQLException e) {
                 e.printStackTrace();
