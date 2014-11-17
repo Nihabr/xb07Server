@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -57,11 +55,6 @@ public class EventList extends JPanel {
 		table = new JTable();
     	model = (DefaultTableModel)table.getModel();
     	model.setColumnIdentifiers(columnNames);
-    	
-    	
-    	 
-
-		
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);

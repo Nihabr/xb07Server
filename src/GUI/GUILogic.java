@@ -83,7 +83,7 @@ public class GUILogic {
 					if (loggedIn == 0)
 
 					{
-
+						screen.getMainMenu().updateTable();
 						screen.show(Screen.MAINMENU);
 						screen.getLogin().Refresh();
 					}
