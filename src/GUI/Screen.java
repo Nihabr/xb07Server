@@ -20,6 +20,8 @@ public class Screen extends JFrame {
 	public static final String ADDEVENTGUI = "name_6308445225625";
 	public static final String ADDUSER = "name_10334207821613";
 	public static final String ADDNOTE = "addnote";
+	public static final String CALENDAR = "calendar";
+	public static final String ADDCALENDAR = "addcalendar";
 	
 	
 	private JPanel contentPane;
@@ -33,6 +35,8 @@ public class Screen extends JFrame {
 	private AddEventGUI addEventGUI;
 	private final AddUser addUser = new AddUser();
 	private final AddCourse addCourse = new AddCourse();
+	private final Calendar calendar = new Calendar();
+	private final AddCalendar addCalendar = new AddCalendar();
 	CardLayout c;
 
 	/**
@@ -86,6 +90,11 @@ public class Screen extends JFrame {
 		contentPane.add(userlist, "name_280161954000083");
 		
 		contentPane.add(addNote, "addnote");
+		
+		contentPane.add(calendar, "calendar");
+		
+		contentPane.add(addCalendar, "addcalendar");
+		
 		c = (CardLayout) getContentPane().getLayout();
 	}
 	
@@ -123,6 +132,12 @@ public class Screen extends JFrame {
 	}
 	public AddCourse getAddCourse() {
 		return addCourse;
+	}
+	public Calendar getCalendar() {
+		return calendar;
+	}
+	public AddCalendar getAddCalendar() {
+		return addCalendar;
 	}
 
 }

@@ -36,7 +36,7 @@ public class GUILogic {
 	public GUILogic() {
 
 		screen = new Screen();
-	screen.getLogin().addActionListener(new LoginActionListener());
+		screen.getLogin().addActionListener(new LoginActionListener());
 		screen.getMainMenu().addActionListener(new MainMenuActionListener());
 		screen.getUserInfo().addActionListener(new UserInfoActionListener());
 		screen.getNoteList().addActionListener(new NoteListActionListener());
@@ -48,6 +48,8 @@ public class GUILogic {
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
 		//screen.getAddCourse().addActionListener(new AddCourseActionListener());
 		screen.getUserInfo().addDocumentListener(new AddUserInfoDocumentListener());
+		screen.getCalendar().addActionListener(new CalendarActionListener());
+		screen.getAddCalendar().addActionListener(new AddCalendarActionListener());
 
 
 	}
@@ -83,7 +85,7 @@ public class GUILogic {
 					if (loggedIn == 0)
 
 					{
-						screen.getMainMenu().updateTable();
+						screen.getCalendar().updateTable();
 						screen.show(Screen.MAINMENU);
 						screen.getLogin().Refresh();
 					}
@@ -116,6 +118,10 @@ public class GUILogic {
 				screen.getEventlist().updateTable();
 				screen.show(Screen.EVENTLIST);
 			}
+			if (e.getSource() == screen.getMainMenu().getBtnCalendars()) {
+				screen.show(Screen.CALENDAR);
+			}
+			
 
 		}
 	}
@@ -372,6 +378,43 @@ public class GUILogic {
 		}
 	}
 	
+	private class CalendarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == screen.getCalendar().getBtnMainMenu()) {
+				screen.show(Screen.MAINMENU);
+			}
+			if (e.getSource() == screen.getCalendar().getBtnLogout()) {
+				screen.show(Screen.LOGIN);
+			}
+			if (e.getSource() == screen.getCalendar().getBtnVlgKalender()) {
+				
+			}
+			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
+				screen.show(Screen.ADDCALENDAR);
+			}
+			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
+				
+			}
+		}
+	}
+	
+	private class AddCalendarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == screen.getAddCalendar().getBtnBack()) {
+				screen.show(Screen.CALENDAR);
+			}
+			if (e.getSource() == screen.getAddCalendar().getBtnLogout()) {
+				screen.show(Screen.LOGIN);
+			}
+			if (e.getSource() == screen.getAddCalendar().getBtnSubmit()) {
+				JOptionPane.showMessageDialog(null,
+						"\nCalendar has been added!", "", JOptionPane.PLAIN_MESSAGE);
+				screen.show(Screen.CALENDAR);
+			}
+		}
+	}
 //	private class AddCourseActionListener implements ActionListener {
 //		public void actionPerformed(ActionEvent e) {
 //			
@@ -465,3 +508,5 @@ public class GUILogic {
 		}
 	
 }
+	
+

@@ -32,43 +32,15 @@ public class MainMenu extends JPanel {
 	private JButton btnNotelist;
 	private JLabel lblCBSlogo;
 	private JLabel lblBackground;
-	private JButton btnVlgKalender;
-	private JTable table;
-	private DefaultTableModel model;
-	private JScrollPane scrollPane;
-	private Object[] objects;
-	QueryBuilder qb = new QueryBuilder();
-	ResultSet rs;
+	private JButton btnCalendars;
+
 
 	
 	public MainMenu() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 		
-		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy",
-				"PrivatePublic" };
-		table = new JTable();
-    	model = (DefaultTableModel)table.getModel();
-    	model.setColumnIdentifiers(columnNames);
-		table.setSurrendersFocusOnKeystroke(true);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
-		table.setFillsViewportHeight(true);
-		table.setRowSelectionAllowed(true);
 
-		// Create the scroll pane and add the table to it.
-		scrollPane = new JScrollPane(table);
-		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
-		scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				null));
-		scrollPane.setBounds(513, 240, 465, 315);
-
-		// Add the scroll pane to this panel.
-		add(scrollPane);
 	
 		lblMainMenu = new JLabel("Main Menu");
 		lblMainMenu.setForeground(Color.WHITE);
@@ -76,14 +48,22 @@ public class MainMenu extends JPanel {
 		lblMainMenu.setBounds(481, 90, 404, 90);
 		add(lblMainMenu);
 		
+		btnCalendars = new JButton("Calendars");
+		btnCalendars.setContentAreaFilled(false);
+		btnCalendars.setForeground(Color.WHITE);
+		btnCalendars.setFont(new Font("Arial", Font.BOLD, 30));
+		btnCalendars.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnCalendars.setBackground(Color.WHITE);
+		btnCalendars.setBounds(588, 245, 194, 50);
+		add(btnCalendars);
+		
 		btnUserlist = new JButton("Users");
-
 		btnUserlist.setContentAreaFilled(false);
 		btnUserlist.setForeground(Color.WHITE);
 		btnUserlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnUserlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnUserlist.setBackground(Color.WHITE);
-		btnUserlist.setBounds(289, 310, 194, 50);
+		btnUserlist.setBounds(588, 385, 194, 50);
 		add(btnUserlist);
 		
 		btnEventlist = new JButton("Events");
@@ -92,7 +72,7 @@ public class MainMenu extends JPanel {
 		btnEventlist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnEventlist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnEventlist.setBackground(Color.WHITE);
-		btnEventlist.setBounds(289, 380, 194, 50);
+		btnEventlist.setBounds(588, 455, 194, 50);
 		add(btnEventlist);
 		
 		btnNotelist = new JButton("Notes");
@@ -101,7 +81,7 @@ public class MainMenu extends JPanel {
 		btnNotelist.setFont(new Font("Arial", Font.BOLD, 30));
 		btnNotelist.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnNotelist.setBackground(Color.WHITE);
-		btnNotelist.setBounds(289, 240, 194, 50);
+		btnNotelist.setBounds(588, 315, 194, 50);
 		add(btnNotelist);
 		
 		btnLogOut = new JButton("Log Out");
@@ -110,17 +90,10 @@ public class MainMenu extends JPanel {
 		btnLogOut.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogOut.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnLogOut.setBackground(Color.WHITE);
-		btnLogOut.setBounds(289, 500, 194, 50);
+		btnLogOut.setBounds(588, 575, 194, 50);
 		add(btnLogOut);
 		
-		btnVlgKalender = new JButton("V\u00E6lg kalender");
-		btnVlgKalender.setContentAreaFilled(false);
-		btnVlgKalender.setForeground(Color.WHITE);
-		btnVlgKalender.setFont(new Font("Arial", Font.BOLD, 30));
-		btnVlgKalender.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnVlgKalender.setBackground(Color.WHITE);
-		btnVlgKalender.setBounds(1001, 240, 220, 50);
-		add(btnVlgKalender);
+
 		
 		lblCBSlogo = new JLabel("");
 		lblCBSlogo.setIcon(new ImageIcon(MainMenu.class.getResource("/Images/CBSLogo3.png")));
@@ -144,6 +117,7 @@ public class MainMenu extends JPanel {
 		btnEventlist.addActionListener(l);
 		btnNotelist.addActionListener(l);
 		btnUserlist.addActionListener(l);
+		btnCalendars.addActionListener(l);
 		
 		
 	}
@@ -159,27 +133,8 @@ public class MainMenu extends JPanel {
 	public JButton getBtnLogOut() {
 		return btnLogOut;
 	}
-	public void updateTable(){
-		try {
-			model.getDataVector().removeAllElements();
- 			QueryBuilder qb = new QueryBuilder();
- 			rs = qb.selectFrom("calender").all().ExecuteQuery();
- 			ResultSetMetaData rsmd = rs.getMetaData();
- 			int colNo = rsmd.getColumnCount();
- 			
- 	        while (rs.next()) {
- 	        	
- 	        	objects = new Object[colNo];
- 	        	
- 	        	for(int i=0;i<colNo;i++){
- 	        		  objects[i]=rs.getObject(i+1);
- 	        		  }
- 	        		 model.addRow(objects);
- 	        		}
- 	        		table.setModel(model);
- 	        		
-    		} catch (SQLException e1) {
-     			e1.printStackTrace();
-     		}
+	public JButton getBtnCalendars() {
+		return btnCalendars;
 	}
+
 }
