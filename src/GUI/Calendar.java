@@ -59,10 +59,11 @@ public class Calendar extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
+				
 				int row = table.getSelectedRow();
+				row+=1;
 
-				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());
+				lblChosenCalendar.setText(table.getValueAt(row, 2).toString());
 				
 
 			}

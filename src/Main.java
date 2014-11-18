@@ -1,4 +1,3 @@
-import GUI.GUILogic;
 import config.Configurations;
 
 public class Main {
@@ -8,9 +7,13 @@ public class Main {
 		Configurations cf = new Configurations();
 		cf.ReadFile();
 		
-		System.out.println(cf.getPassword());
+		cf.getWeather_lat();
+		cf.getWeather_lon();
 		
-		new GUILogic().run();
+		new TCPServer();
+		
+		
+
 	}
 
 }

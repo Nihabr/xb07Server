@@ -13,20 +13,20 @@ public abstract class Model {
 
     private static Configurations cf = new Configurations();
 
-//    private static String sqlUrl = "jdbc:mysql://" + cf.getHost() + ":" + cf.getPort() + "/";
-//    private static String sqlUser = cf.getUsername();
-//    private static String sqlPasswd = cf.getPassword();
-//    private static String dbName = cf.getDbname();
+    private static String sqlUrl = "jdbc:mysql://" + cf.getHost() + ":" + cf.getPort();
+    private static String sqlUser = cf.getUsername();
+    private static String sqlPasswd = cf.getPassword();
+    private static String dbName = cf.getDbname();
     
 //    private static String sqlUrl = "jdbc:mysql://54.172.101.85:3306";
 //    private static String sqlUser = "root";
 //    private static String sqlPasswd = "doekdoek";
 //    private static String dbName = "cbscalendar";
     
-    private static String sqlUrl = "jdbc:mysql://localhost:3306";
-    private static String sqlUser = "root";
-    private static String sqlPasswd = "1234";
-   private static String dbName = "cbscalendar";
+//    private static String sqlUrl = "jdbc:mysql://localhost:3306";
+//    private static String sqlUser = "root";
+//    private static String sqlPasswd = "1234";
+//   private static String dbName = "cbscalendar";
     
     private Statement stmt;
     protected Connection conn = null;
@@ -162,10 +162,13 @@ public abstract class Model {
      * @throws java.sql.SQLException
      */
     public void getConnection(Boolean init) throws SQLException {
+    	
     	if(init) {
     		setConn(DriverManager.getConnection(sqlUrl, sqlUser, sqlPasswd));
+    		
     	}else{
     		setConn(DriverManager.getConnection(sqlUrl+"/"+dbName, sqlUser, sqlPasswd));
+    		
     	}
     }
 

@@ -28,6 +28,11 @@ public class Configurations {
     // Opret DB name
     // Opret update time på QOTD
 
+    public Configurations() {
+		
+	
+    	ReadFile();
+    }
 
     public String getHost() {
         return host;
@@ -121,7 +126,7 @@ public class Configurations {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            FileReader json = new FileReader("src/config.json");
+            FileReader json = new FileReader("src/config-dist.json");
 
             Object obj = jsonParser.parse(json);
             JSONObject jsonObject = (JSONObject) obj;
