@@ -37,14 +37,6 @@ public class UserEvent {
 		this.calendarID = calendarID;
 	}
 
-	// Settere og gettere for Event objektet
-//	public void setActivityid(String activityid) {
-//		this.activityid = activityid;
-//	}
-//
-//	public String getActivityid() {
-//		return activityid;
-//	}
 
 	public void setEventid(String eventid) {
 		this.eventid = eventid;

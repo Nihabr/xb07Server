@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import model.Model;
 import model.QOTD.QOTDModel;
 import model.QueryBuild.QueryBuilder;
+import model.calendar.CalendarEvents;
 import model.calendar.EncryptUserID;
 import model.calendar.GetCalendarData;
 import model.note.*;
@@ -24,6 +25,7 @@ public class SwitchMethods extends Model
 	GetDailyUpdate gdu = new GetDailyUpdate();
 	ClientLogin clientLogin = new ClientLogin();
 	EncryptUserID e = new EncryptUserID();
+	
 	String stringToBeReturned = "";
 
 	
@@ -232,14 +234,18 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturned;
 	}
-	public String clientLogin (String email, String password) throws SQLException{
+	public String 	clientLogin (String email, String password) throws SQLException{
 		
 		String gsonString = "";	
 		String [] values = {"email", "password", "userID", "isAdmin"};
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
 		GetCalendarData g = new GetCalendarData();
 		if(resultSet.next()){
+			System.out.println("res = true");
 			e.setEmail(email);
+			CalendarEvents ce = new CalendarEvents(email);
+			
+			clientLogin.setCalendars(ce.getCalendars());
 			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
 			clientLogin.setUserID(resultSet.getInt("userID"));
 			gsonString = gson.toJson(clientLogin);

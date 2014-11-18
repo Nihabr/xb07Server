@@ -1,5 +1,9 @@
 package JsonClasses;
 
+import java.util.ArrayList;
+
+import model.calendar.UserEvent;
+
 public class ClientLogin {
 
 	private  final long serialVersionUID = 1L;
@@ -8,11 +12,21 @@ public class ClientLogin {
 	String passWord;
 	int userID;
 	int isAdmin;
+	ArrayList <ArrayList<UserEvent>> calendars = new ArrayList <ArrayList<UserEvent>>();
+	
 	
 	public ClientLogin (){
 		
 	}
 	
+	public ArrayList<ArrayList<UserEvent>> getCalendars() {
+		return calendars;
+	}
+
+	public void setCalendars(ArrayList<ArrayList<UserEvent>> calendars) {
+		this.calendars = calendars;
+	}
+
 	public int getUserID() {
 		return userID;
 	}
