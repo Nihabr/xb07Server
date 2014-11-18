@@ -4,6 +4,12 @@ package model.calendar;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import model.QueryBuild.QueryBuilder;
 
 import com.google.gson.Gson;
 
@@ -14,6 +20,7 @@ import com.google.gson.Gson;
 public class GetCalendarData {
 	
 	EncryptUserID e = new EncryptUserID();
+	QueryBuilder qb = new QueryBuilder();
 
 	//henter data fra URL og l??er ind til en string
     private static String readUrl(String urlString) throws Exception {
@@ -47,27 +54,54 @@ public class GetCalendarData {
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
-    	System.out.println(e.getKey());
-	      String json = readUrl("http://calendar.cbs.dk/events.php/"+ e.getEmail() + "/" +e.getKey() + ".json");
-	      System.out.println(json);
-	      
-	      
-     // http://calendar.cbs.dk/events.php/jolj13ab/c8376a342ad9d756d007125edaa281b3.ics
-        
-
+    	String email = e.getEmail();
+	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
+	    System.out.println(json);
+	    
+	    ResultSet rs = qb.selectFrom("calender").where("email", "=", email).ExecuteQuery();
+	    int calID = rs.getInt("calenderID");
+	    
         Gson gson = new Gson();
-        GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class); 
-//        JsonObject jsonObject = gson.fromJson( json, JsonObject.class);
+        GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
         
-        
-//        ("activityid","eventid","type", "title", "description","start", "end", "location");
+        for (CBSevents cbs : cbsEvents.getEvents()){
 
-        //tester events activityID's
-        for (int i = 0; i < cbsEvents.getEvents().size(); i++){
+        	 //	["2014",8,"5","8","00"]
         	
+        	String start ="";
+        	start = String.format("%s-%s-%s %s:%s:00", 
+        			cbs.getStart().get(1), 
+					cbs.getStart().get(2),
+					cbs.getStart().get(3),
+					cbs.getStart().get(4),
+					cbs.getStart().get(5));
+        	System.out.println("stringStart: " + start);
         	
-        	
-        	System.out.println(cbsEvents.getEvents().get(i).getTitle());
+        	String end ="";
+        	end = String.format("%s-%s-%s %s:%s:00", 
+        			cbs.getEnd().get(1), 
+					cbs.getEnd().get(2),
+					cbs.getEnd().get(3),
+					cbs.getEnd().get(4),
+					cbs.getEnd().get(5));
+    			
+        String[] fields = {"activityID", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
+        String[] values = {	cbs.getActivityid(),
+        					cbs.getEventid(),
+        					cbs.getType(),
+        					cbs.getTitle(),
+        					cbs.getDescription(),
+        					cbs.getLocation(),
+        					start,
+        					end,
+        					String.valueOf(calID)};
+        
+        qb.insertInto("events", fields).values(values).Execute();
+        
+        String[] calUfields = {"calendarID", "email"};
+        String[] calUvalues = {String.valueOf(calID), email};
+        qb.insertInto("calender_users", calUfields).values(calUvalues).Execute();
         }
+
     }
 }

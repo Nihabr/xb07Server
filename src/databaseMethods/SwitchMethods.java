@@ -25,6 +25,7 @@ public class SwitchMethods extends Model
 	GetDailyUpdate gdu = new GetDailyUpdate();
 	ClientLogin clientLogin = new ClientLogin();
 	EncryptUserID e = new EncryptUserID();
+	GetCalendarData gcd = new GetCalendarData();
 	
 	String stringToBeReturned = "";
 
@@ -234,7 +235,7 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturned;
 	}
-	public String 	clientLogin (String email, String password) throws SQLException{
+	public String clientLogin (String email, String password) throws SQLException{
 		
 		String gsonString = "";	
 		String [] values = {"email", "password", "userID", "isAdmin"};
@@ -244,6 +245,22 @@ public class SwitchMethods extends Model
 			System.out.println("res = true");
 			e.setEmail(email);
 			CalendarEvents ce = new CalendarEvents(email);
+			
+			String calendarName = "CBScalendar " + email;
+			
+			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
+			String [] fields = {"name", "createdby", "privatepublic", "email"};
+			String [] v = {calendarName, "CBS", "0", email};
+			qb.insertInto("calenders", fields).values(v).Execute();
+			
+			//Opdaterer databasens CBS events
+			try {
+				gcd.getDataFromCalendar();
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
 			
 			clientLogin.setCalendars(ce.getCalendars());
 			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
@@ -257,8 +274,8 @@ public class SwitchMethods extends Model
 				e1.printStackTrace();
 			}
 
-			
 		}
+		else gsonString = "Login failed";
 
 		return gsonString;
 	}
