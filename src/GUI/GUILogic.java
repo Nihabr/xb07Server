@@ -395,6 +395,16 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
 				
+				String name = screen.getCalendar().getLblChosenCalendar().getText();
+				
+				String fields[] = {"active"};
+				String values[] = {"0"};
+				try{
+					qb.update("calender", fields, values).where("name", "=", name).Execute();
+					screen.getCalendar().updateTable();
+				}catch (Exception e4){
+					e4.printStackTrace();
+				}
 			}
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				

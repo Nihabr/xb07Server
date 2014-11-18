@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -26,6 +28,7 @@ public class Calendar extends JPanel {
 	private JLabel lblBackground;
 	private JLabel label;
 	private JLabel lblHeader;
+	private JLabel lblChosenCalendar;
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -53,6 +56,21 @@ public class Calendar extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				int row = table.getSelectedRow();
+
+				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());
+				
+
+			}
+		});
+		
+		lblChosenCalendar = new JLabel("");
+		lblChosenCalendar.setBounds(1030, 412, 56, 16);
+		add(lblChosenCalendar);
 
 		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
@@ -160,6 +178,11 @@ public class Calendar extends JPanel {
 		btnMainMenu.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnShare.addActionListener(l);
+	}
+
+	
+	public JLabel getLblChosenCalendar() {
+		return lblChosenCalendar;
 	}
 
 	public void updateTable() {
