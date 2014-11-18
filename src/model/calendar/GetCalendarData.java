@@ -67,6 +67,20 @@ public class GetCalendarData {
         Gson gson = new Gson();
         GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
         
+        rs = qb.selectFrom("calender_users").where("email", "=", email).ExecuteQuery();
+        boolean exists = false;
+        while (rs.next()){
+        	if (rs.getInt("calendarID") == calID){
+        		exists = true;
+        	}
+        }
+        if (!exists){
+    		String[] calUfields = {"calendarID", "email"};
+    		String[] calUvalues = {String.valueOf(calID), email};
+    		qb.insertInto("calender_users", calUfields).values(calUvalues).Execute();
+        }
+        
+        
         for (CBSevents cbs : cbsEvents.getEvents()){
 
         	 //	["2014",8,"5","8","00"]
@@ -99,13 +113,12 @@ public class GetCalendarData {
         					start,
         					end,
         					String.valueOf(calID)};
-        
+        try{
         qb.insertInto("events", fields).values(values).Execute();
-        
-        String[] calUfields = {"calendarID", "email"};
-        String[] calUvalues = {String.valueOf(calID), email};
-        qb.insertInto("calender_users", calUfields).values(calUvalues).Execute();
+        } catch (Exception e) {
+        	e.printStackTrace();
         }
 
+        }
     }
 }

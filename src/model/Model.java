@@ -74,7 +74,6 @@ public abstract class Model {
         reader.close();
         conn.close();
     }
-
     /**
      * Use a preparedstatment to run SQL on the database
      *
