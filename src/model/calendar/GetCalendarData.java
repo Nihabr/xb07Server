@@ -59,7 +59,10 @@ public class GetCalendarData {
 	    System.out.println(json);
 	    
 	    ResultSet rs = qb.selectFrom("calender").where("email", "=", email).ExecuteQuery();
-	    int calID = rs.getInt("calenderID");
+	    int calID = 0;
+	    
+	    while (rs.next())
+	    	calID = rs.getInt("calenderID");
 	    
         Gson gson = new Gson();
         GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
@@ -70,23 +73,24 @@ public class GetCalendarData {
         	
         	String start ="";
         	start = String.format("%s-%s-%s %s:%s:00", 
-        			cbs.getStart().get(1), 
+        			cbs.getStart().get(0), 
+					cbs.getStart().get(1),
 					cbs.getStart().get(2),
 					cbs.getStart().get(3),
-					cbs.getStart().get(4),
-					cbs.getStart().get(5));
+					cbs.getStart().get(4));
         	System.out.println("stringStart: " + start);
         	
         	String end ="";
         	end = String.format("%s-%s-%s %s:%s:00", 
-        			cbs.getEnd().get(1), 
+        			cbs.getEnd().get(0), 
+					cbs.getEnd().get(1),
 					cbs.getEnd().get(2),
 					cbs.getEnd().get(3),
-					cbs.getEnd().get(4),
-					cbs.getEnd().get(5));
+					cbs.getEnd().get(4));
     			
-        String[] fields = {"activityID", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
+        String[] fields = {"activityID", "createdby", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
         String[] values = {	cbs.getActivityid(),
+        					"2",
         					cbs.getEventid(),
         					cbs.getType(),
         					cbs.getTitle(),

@@ -19,7 +19,7 @@ public class TCPClient {
 		Gson gson = new GsonBuilder().create();
 		
 		c.setEmail("nibr13ae");
-		c.setPassWord("Qhe34qbj");
+		c.setPassWord("test");
 		c.setUserID(1);
 		c.setIsAdmin(1);
 		String gsonString = gson.toJson(c);

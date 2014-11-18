@@ -251,7 +251,7 @@ public class SwitchMethods extends Model
 			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
 			String [] fields = {"name", "createdby", "privatepublic", "email"};
 			String [] v = {calendarName, "CBS", "0", email};
-			qb.insertInto("calenders", fields).values(v).Execute();
+			qb.insertInto("calender", fields).values(v).Execute();
 			
 			//Opdaterer databasens CBS events
 			try {
