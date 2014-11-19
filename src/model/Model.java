@@ -74,6 +74,7 @@ public abstract class Model {
         reader.close();
         conn.close();
     }
+
     /**
      * Use a preparedstatment to run SQL on the database
      *
@@ -89,6 +90,7 @@ public abstract class Model {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
 
         return sqlStatement;

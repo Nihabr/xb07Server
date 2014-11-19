@@ -3,12 +3,10 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import model.Forecast.ForecastModel;
+import JsonClasses.ClientLogin;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import JsonClasses.*;
 
 public class TCPClient {
 	public static void main(String[] args) throws Exception {
@@ -18,8 +16,8 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		
-		c.setEmail("nibr13ae");
-		c.setPassWord("test");
+		c.setEmail("jolj13ab");
+		c.setPassWord("1234");
 		c.setUserID(1);
 		c.setIsAdmin(1);
 		String gsonString = gson.toJson(c);
