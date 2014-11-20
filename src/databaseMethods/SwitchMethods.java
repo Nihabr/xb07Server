@@ -76,19 +76,38 @@ public class SwitchMethods extends Model
 	
 	public String 	addNewCalender (String newCalenderName, int publicOrPrivate, String email, ArrayList <String> sharedUsers) throws SQLException	{
 		
-		String result = "";
+String result = "";
 		
 		resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 		boolean duplicateCalendar = false;
+		
+		
+		boolean hasCBScalendar = false;
 		while (resultSet.next()){
 			if(resultSet.getString("createdby").equals(email))
 				duplicateCalendar = true;
+		
+			@SuppressWarnings("unused")
+			String nullCheck = resultSet.getString("email");
+			if(!resultSet.wasNull())
+				hasCBScalendar = true;
 		}
 		if(!duplicateCalendar){
+			
+			if(!hasCBScalendar){
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
 			qb.insertInto("calender", fields).values(values).Execute();
+			result = "CBSCalendar has been created.";
+			}
+			
+			if(hasCBScalendar){
+			String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
+			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate)};
+			qb.insertInto("calender", fields).values(values).Execute();
 			result = "Calendar has been created.";
+			}
+			
 			if ( !sharedUsers.isEmpty()){
 				String [] values2 = {"calenderID"};
 				resultSet = qb.selectFrom(values2, "calender").where("name", "=", newCalenderName).ExecuteQuery();
@@ -127,24 +146,29 @@ public class SwitchMethods extends Model
 
 	public String share(ArrayList <String> sharedUsers, String calendarID, String email) throws SQLException{
 		
-		String [] values = {"calenderID"};
+		String [] values = {"calenderID","email"};
 		resultSet = qb.selectFrom(values, "calender").where("createdby", "=", email).ExecuteQuery();
 		while(resultSet.next()){
-			
+
 			//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender
-			if((resultSet.getInt("calendarID") != Integer.valueOf(calendarID) || (resultSet.getString("email").equals(email)))){
-				stringToBeReturned = ("calendarID does not exist or the calendar cannot be shared because of restrictions");
-			}else{
+			String myValue = resultSet.getString("email");
+			if(resultSet.wasNull()){
 				for (String su : sharedUsers){
 				String [] fields = {"email","calendarID"};
 				String [] value = {su, String.valueOf(calendarID)};
 				qb.insertInto("calender_users", fields).values(value).Execute();
+				}
 				stringToBeReturned = "Calendar has been shared";
 				}
+			else{
+				stringToBeReturned = "calendarID does not exist or the calendar cannot be shared because of restrictions";
 			}
 			
 		}
+	
+		System.out.println("LOG");
 		return stringToBeReturned;
+		
 		}
 	public String 	deleteCalender (String userName, String calenderName) throws SQLException
 	{
