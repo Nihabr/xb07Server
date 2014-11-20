@@ -80,9 +80,8 @@ String result = "";
 		
 		resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 		boolean duplicateCalendar = false;
-		
-		
 		boolean hasCBScalendar = false;
+		
 		while (resultSet.next()){
 			if(resultSet.getString("createdby").equals(email))
 				duplicateCalendar = true;
@@ -94,14 +93,14 @@ String result = "";
 		}
 		if(!duplicateCalendar){
 			
-			if(!hasCBScalendar){
+			if(hasCBScalendar){
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
 			qb.insertInto("calender", fields).values(values).Execute();
 			result = "CBSCalendar has been created.";
 			}
 			
-			if(hasCBScalendar){
+			if(!hasCBScalendar){
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate)};
 			qb.insertInto("calender", fields).values(values).Execute();
@@ -109,12 +108,11 @@ String result = "";
 			}
 			
 			if ( !sharedUsers.isEmpty()){
-				String [] values2 = {"calenderID"};
-				resultSet = qb.selectFrom(values2, "calender").where("name", "=", newCalenderName).ExecuteQuery();
+				resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 				int newCalendarID = 0;
 				while(resultSet.next()){
 					if(resultSet.getString("createdby").equals(email))
-						newCalendarID = resultSet.getInt("calendarid");
+						newCalendarID = resultSet.getInt("calenderid");
 				}
 				share(sharedUsers, String.valueOf(newCalendarID), email); 
 				result += " Calendar has been shared with specified users.";

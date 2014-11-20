@@ -4,9 +4,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalender;
-import JsonClasses.ShareCalendars;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,10 +19,10 @@ public class TCPClient {
 		CreateCalender c = new CreateCalender();
 		ArrayList<String> users = new ArrayList<String>();
 		
-		c.setCalenderName("a");
-		c.setEmail("jolj13ab");
+		c.setEmail("nibr13ae");
+		c.setCalenderName("hva med den");
 		c.setPublicOrPrivate(1);
-		users.add("nibr13ae");
+		users.add("jolj13ab");
 		users.add("dude");
 		c.setSharedUsers(users);
 		
