@@ -20,6 +20,7 @@ import databaseMethods.SwitchMethods;
 import model.note.*;
 import model.QueryBuild.*;
 import GUI.Screen;
+import JsonClasses.CreateEvent;
 
 public class GUILogic {
 	private Screen screen;
@@ -42,8 +43,7 @@ public class GUILogic {
 		screen.getNoteList().addActionListener(new NoteListActionListener());
 		screen.getUserList().addActionListener(new UserListActionListener());
 		screen.getEventlist().addActionListener(new EventListActionListener());
-		screen.getAddEventGUI().addActionListener(
-				new AddEventGUIActionListener());
+		screen.getAddEventGUI().addActionListener(new AddEventGUIActionListener());
 		screen.getAddUser().addActionListener(new AddUserActionListener());
 		screen.getAddNote().addActionListener(new AddNoteActionListener());
 		//screen.getAddCourse().addActionListener(new AddCourseActionListener());
@@ -51,7 +51,8 @@ public class GUILogic {
 		screen.getCalendar().addActionListener(new CalendarActionListener());
 		screen.getAddCalendar().addActionListener(new AddCalendarActionListener());
 
-
+		
+		
 	}
 
 	public void run() {
@@ -150,6 +151,7 @@ public class GUILogic {
 				
 				
 				
+				
 				//Her m� det ogs� tilf�yes nye felter til add event panelet.
 				
 				if (type.equals("")|| location.equals("")|| createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
@@ -159,17 +161,8 @@ public class GUILogic {
 				}
 				else
 				{
-				
-				
-				String[] eventColumns = {"Type", "Location", "CreatedBy","Start",
-						"End","Name", "Text","CustomEvent","CalendarID"};
-				String[] Values = {type, location, createdby,start,
-						end,name, text,customEvent,calendarID};
-				// for � f� dette til � fungere m� vi f�rst opprette en kalender...
-				
-				//Har lagt til variabler i arrayet slik det ser ut i databasen. 
-				try {
-					qb.insertInto("events", eventColumns ).values(Values).Execute();
+					try{
+					sw.createEvent(type, location, createdby, start, end, name, text, customEvent, calendarID);
 					screen.getEventlist().updateTable();
 					
 				} catch (SQLException e1) {

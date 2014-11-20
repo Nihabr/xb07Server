@@ -104,14 +104,14 @@ public class SwitchMethods extends Model
 			result = "User already has calendar with that name. Please chose a new name for the calendar!";
 		return result;
 	}
-	public String 	createEvent( String eventid, String type,
+	public String 	createEvent(String type,
 			String location, String createdby, String start,
 			String end, String name, String text,
 			String customevent, String calendarID)throws SQLException{
 		testConnection();
-		String [] fields = {"eventid", "type", "location", "createdby", "start",
+		String [] fields = {"type", "location", "createdby", "start",
 				"end", "name","text","customevent", "calendarID"};
-		String[] values = {eventid,  type ,  location ,  createdby ,  start ,
+		String[] values = {type ,  location ,  createdby ,  start ,
 				 end ,  name , text , customevent ,  calendarID };
 		
 		qb.insertInto("events", fields).values(values).Execute();

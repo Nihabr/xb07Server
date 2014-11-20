@@ -83,7 +83,7 @@ public class GiantSwitch {
 			CreateEvent ce = (CreateEvent)gson.fromJson(jsonString, CreateEvent.class);
 			
 			System.out.println("Recieved new event" + ce.getEventid());
-			answer = SW.createEvent(ce.getEventid(), ce.getType(), ce.getLocation(),
+			answer = SW.createEvent(ce.getType(), ce.getLocation(),
 					ce.getCreatedby(),ce.getStart(), ce.getEnd(), ce.getTitle(), ce.getText(), ce.getCustomevent(), ce.getCalendarID());
 			break;
 
