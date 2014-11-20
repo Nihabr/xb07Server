@@ -69,6 +69,7 @@ public class Execute extends Model {
                 getConn();
                 String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(cleanSql);
+                System.out.println(sqlStatement);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -83,6 +84,7 @@ public class Execute extends Model {
                 String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(cleanSql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
+                System.out.println(sqlStatement);
 
             } catch (SQLException e) {
                 e.printStackTrace();

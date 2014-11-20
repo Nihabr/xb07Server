@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalender;
@@ -18,14 +19,16 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		CreateCalender c = new CreateCalender();
+		ArrayList<String> users = new ArrayList<String>();
 		
-		c.setCalenderName("dele denne");
-		c.setPublicOrPrivate(1);
+		c.setCalenderName("a");
 		c.setEmail("jolj13ab");
+		c.setPublicOrPrivate(1);
+		users.add("nibr13ae");
+		users.add("dude");
+		c.setSharedUsers(users);
 		
-//		c.setEmail("jolj13ab");
-//		c.setCalendarID("3");
-//		c.setShareEmail("nibr13ae");
+
 	
 		String gsonString = gson.toJson(c);
 		System.out.println(gsonString);
