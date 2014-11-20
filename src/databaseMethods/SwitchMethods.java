@@ -44,6 +44,7 @@ public class SwitchMethods extends Model
 	public String 	createNewCalender ( String calenderName, int privatePublic, String email, ArrayList <String> sharedUsers) throws SQLException
 	{
 
+		testConnection();
 		if(authenticateNewCalender(calenderName) == false)
 		{
 			addNewCalender(calenderName, privatePublic,email, sharedUsers);
@@ -60,6 +61,7 @@ public class SwitchMethods extends Model
 	
 	public boolean 	authenticateNewCalender(String newCalenderName) throws SQLException
 	{
+		getConn();
 		boolean authenticate = false;
 		
 		resultSet= qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
