@@ -76,7 +76,7 @@ public class SwitchMethods extends Model
 	
 	public String 	addNewCalender (String newCalenderName, int publicOrPrivate, String email, ArrayList <String> sharedUsers) throws SQLException	{
 		
-String result = "";
+		String result = "";
 		
 		resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 		boolean duplicateCalendar = false;
@@ -105,17 +105,18 @@ String result = "";
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate)};
 			qb.insertInto("calender", fields).values(values).Execute();
 			result = "Calendar has been created.";
-			}
-			
-			if ( !sharedUsers.isEmpty()){
-				resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
-				int newCalendarID = 0;
-				while(resultSet.next()){
-					if(resultSet.getString("createdby").equals(email))
-						newCalendarID = resultSet.getInt("calenderid");
+			sharedUsers.add(email);
+
+				if ( !sharedUsers.isEmpty()){
+					resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
+					int newCalendarID = 0;
+					while(resultSet.next()){
+						if(resultSet.getString("createdby").equals(email))
+							newCalendarID = resultSet.getInt("calenderid");
+					}
+					share(sharedUsers, String.valueOf(newCalendarID), email); 
+					result += " Calendar has been shared with specified users.";
 				}
-				share(sharedUsers, String.valueOf(newCalendarID), email); 
-				result += " Calendar has been shared with specified users.";
 			}
 		} else
 			result = "User already has calendar with that name. Please chose a new name for the calendar!";
@@ -142,15 +143,15 @@ String result = "";
 	 * @return
 	 */
 
-	public String share(ArrayList <String> sharedUsers, String calendarID, String email) throws SQLException{
+	public String 	share(ArrayList <String> sharedUsers, String calendarID, String email) throws SQLException{
 		
-		String [] values = {"calenderID","email"};
-		resultSet = qb.selectFrom(values, "calender").where("createdby", "=", email).ExecuteQuery();
+		String [] values = {"calenderID","createdby"};
+		resultSet = qb.selectFrom(values, "calender").where("email", "=", null).ExecuteQuery();
 		while(resultSet.next()){
 
 			//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender
-			String myValue = resultSet.getString("email");
-			if(resultSet.wasNull()){
+			
+			if(resultSet.getString("createdby").equals(email)){
 				for (String su : sharedUsers){
 				String [] fields = {"email","calendarID"};
 				String [] value = {su, String.valueOf(calendarID)};
@@ -304,7 +305,7 @@ String result = "";
 		
 		return stringToBeReturned;
 	}
-	public String clientLogin (String email, String password) throws SQLException{
+	public String 	clientLogin (String email, String password) throws SQLException{
 		
 		String gsonString = "";	
 		String [] values = {"email", "password", "userID", "isAdmin"};
