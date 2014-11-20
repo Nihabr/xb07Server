@@ -3,9 +3,9 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import model.calendar.ShareCalendars;
 import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalender;
+import JsonClasses.ShareCalendars;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,7 +1,6 @@
 import java.sql.SQLException;
 
 import model.QOTD.QOTDModel;
-import model.calendar.ShareCalendars;
 import model.calendar.UserEvent;
 import model.note.Note;
 import JsonClasses.CalendarInfo;
@@ -12,6 +11,7 @@ import JsonClasses.CreateNote;
 import JsonClasses.DeleteCalender;
 import JsonClasses.DeleteEvent;
 import JsonClasses.DeleteNote;
+import JsonClasses.ShareCalendars;
 
 import com.google.gson.*;
 
@@ -25,8 +25,6 @@ public class GiantSwitch {
 
 		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
 
-		//ForecastModel forecastKlasse = new ForecastModel();
-		QOTDModel QOTDKlasse = new QOTDModel();
 		SwitchMethods SW = new SwitchMethods();
 		
 		Gson gson = new GsonBuilder().create();
@@ -53,7 +51,7 @@ public class GiantSwitch {
 		case "createCalender":
 			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
 			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail());
+			answer = SW.createNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers());
 			
 			
 			
@@ -69,7 +67,7 @@ public class GiantSwitch {
 			
 			ShareCalendars sc = (ShareCalendars)gson.fromJson(jsonString, ShareCalendars.class);
 			System.out.println(sc.getShareEmail() + "har nå tilgang til kalender " + sc.getCalendarID());
-			answer = SW.shareCalendar(sc.getEmail(), sc.getCalendarID(), sc.getShareEmail());
+			answer = SW.share(sc.getShareEmail(), sc.getCalendarID(), sc.getEmail());
 			
 			break;
 			

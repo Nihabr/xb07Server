@@ -1,5 +1,7 @@
 package JsonClasses;
 
+import java.util.ArrayList;
+
 public class CreateCalender implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
@@ -7,7 +9,14 @@ public class CreateCalender implements java.io.Serializable
 	private String calenderName;
 	private String email;
 	private int publicOrPrivate;
+	private ArrayList <String> sharedUsers;
 	
+	public ArrayList<String> getSharedUsers() {
+		return sharedUsers;
+	}
+	public void setSharedUsers(ArrayList<String> sharedUsers) {
+		this.sharedUsers = sharedUsers;
+	}
 	//Getters and setters for everything
 	public String getOverallID() {
 		return overallID;
