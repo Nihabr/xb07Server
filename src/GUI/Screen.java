@@ -1,12 +1,11 @@
 package GUI;
 
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
 
 public class Screen extends JFrame {
 
@@ -22,6 +21,7 @@ public class Screen extends JFrame {
 	public static final String ADDNOTE = "addnote";
 	public static final String CALENDAR = "calendar";
 	public static final String ADDCALENDAR = "addcalendar";
+	public static final String SHARECALENDAR = "shareCalendar";
 	
 	
 	private JPanel contentPane;
@@ -37,6 +37,7 @@ public class Screen extends JFrame {
 	private final AddCourse addCourse = new AddCourse();
 	private final Calendar calendar = new Calendar();
 	private final AddCalendar addCalendar = new AddCalendar();
+	private final ShareCalendar shareCalendar = new ShareCalendar();
 	CardLayout c;
 
 	/**
@@ -95,6 +96,8 @@ public class Screen extends JFrame {
 		
 		contentPane.add(addCalendar, "addcalendar");
 		
+		contentPane.add(shareCalendar, "shareCalendar");
+		
 		c = (CardLayout) getContentPane().getLayout();
 	}
 	
@@ -138,6 +141,10 @@ public class Screen extends JFrame {
 	}
 	public AddCalendar getAddCalendar() {
 		return addCalendar;
+	}
+
+	public ShareCalendar getShareCalendar() {
+		return shareCalendar;
 	}
 
 }

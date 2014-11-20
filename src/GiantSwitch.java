@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 
 import model.QOTD.QOTDModel;
+import model.calendar.ShareCalendars;
 import model.calendar.UserEvent;
 import model.note.Note;
 import JsonClasses.CalendarInfo;
@@ -52,7 +53,7 @@ public class GiantSwitch {
 		case "createCalender":
 			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
 			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewCalender(CC.getUserName(), CC.getCalenderName(), CC.getPublicOrPrivate());
+			answer = SW.createNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail());
 			
 			
 			
@@ -64,7 +65,15 @@ public class GiantSwitch {
 			answer = SW.deleteCalender(DC.getUserName(), DC.getCalenderName());
 			break;
 		
-
+		case"shareCalendar":
+			
+			ShareCalendars sc = (ShareCalendars)gson.fromJson(jsonString, ShareCalendars.class);
+			System.out.println(sc.getShareEmail() + "har nå tilgang til kalender " + sc.getCalendarID());
+			answer = SW.shareCalendar(sc.getEmail(), sc.getCalendarID(), sc.getShareEmail());
+			
+			break;
+			
+			
 		case "getEvents":
 			
 			
@@ -162,6 +171,8 @@ public class GiantSwitch {
 			return "createCalender";
 		} else if (ID.contains("createNote")){
 			return "createNote";
+		}else if (ID.contains("shareCalendar")){
+			return "shareCalendar";
 		}
 		
 

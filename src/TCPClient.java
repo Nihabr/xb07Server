@@ -3,7 +3,9 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import model.calendar.ShareCalendars;
 import JsonClasses.ClientLogin;
+import JsonClasses.CreateCalender;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,15 +13,20 @@ import com.google.gson.GsonBuilder;
 public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		
-		ClientLogin c = new ClientLogin();
+//		ClientLogin c = new ClientLogin();
 		
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
+		CreateCalender c = new CreateCalender();
 		
+		c.setCalenderName("dele denne");
+		c.setPublicOrPrivate(1);
 		c.setEmail("jolj13ab");
-		c.setPassWord("1234");
-		c.setUserID(1);
-		c.setIsAdmin(1);
+		
+//		c.setEmail("jolj13ab");
+//		c.setCalendarID("3");
+//		c.setShareEmail("nibr13ae");
+	
 		String gsonString = gson.toJson(c);
 		System.out.println(gsonString);
 		

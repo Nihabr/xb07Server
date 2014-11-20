@@ -12,6 +12,7 @@ import model.QueryBuild.QueryBuilder;
 import model.calendar.CalendarEvents;
 import model.calendar.EncryptUserID;
 import model.calendar.GetCalendarData;
+import model.calendar.ShareCalendars;
 import model.note.*;
 import JsonClasses.*;
 
@@ -26,6 +27,7 @@ public class SwitchMethods extends Model
 	ClientLogin clientLogin = new ClientLogin();
 	EncryptUserID e = new EncryptUserID();
 	GetCalendarData gcd = new GetCalendarData();
+	ShareCalendars share = new ShareCalendars();
 	
 	String stringToBeReturned = "";
 
@@ -39,13 +41,13 @@ public class SwitchMethods extends Model
 	 * @throws SQLException
 	 */
 
-	public String 	createNewCalender (String userName, String calenderName, int privatePublic) throws SQLException
+	public String 	createNewCalender ( String calenderName, int privatePublic, String email) throws SQLException
 	{
 
 		testConnection();
 		if(authenticateNewCalender(calenderName) == false)
 		{
-			addNewCalender(calenderName, userName, privatePublic);
+			addNewCalender(calenderName, privatePublic,email);
 			stringToBeReturned = "The new calender has been created!";
 		}
 		else
@@ -72,10 +74,10 @@ public class SwitchMethods extends Model
 		return authenticate;
 	}
 	
-	public void 	addNewCalender (String newCalenderName, String userName, int publicOrPrivate) throws SQLException
+	public void 	addNewCalender (String newCalenderName, int publicOrPrivate,String email) throws SQLException
 	{
-		String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
-		String [] values = {newCalenderName,"1",userName, Integer.toString(publicOrPrivate)};
+		String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
+		String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
 		qb.insertInto("calender", fields).values(values).Execute();
 		
 	}
@@ -99,8 +101,30 @@ public class SwitchMethods extends Model
 	 * @param calenderName
 	 * @return
 	 */
-	
-	
+	public String shareCalendar(String email, String calendarID, String emailSharedWith) throws SQLException{
+		
+		stringToBeReturned = share(email, calendarID,emailSharedWith);
+				
+				return stringToBeReturned;
+	}
+	public String share(String email, String calendarID, String userSharedWith) throws SQLException{
+		
+		String [] values = {"calenderID"};
+		resultSet = qb.selectFrom(values, "calender").where("email", "=", email).ExecuteQuery();
+		while(resultSet.next()){
+			
+			if((resultSet.getInt("calendarID") != Integer.valueOf(calendarID) || (resultSet.getString("createdBy").equals("CBS")))){
+				stringToBeReturned = ("calendarID does not exist or the calendar cannot be shared because of restrictions");
+			}else{
+				String [] fields = {"email","calendarID"};
+				String [] value = {userSharedWith,String.valueOf(calendarID)};
+				qb.insertInto("calender_users", fields).values(value).Execute();
+				stringToBeReturned = "Calendar has been shared";
+			}
+			
+		}
+		return stringToBeReturned;
+		}
 	public String 	deleteCalender (String userName, String calenderName) throws SQLException
 	{
 		testConnection();
@@ -108,6 +132,7 @@ public class SwitchMethods extends Model
 
 		return stringToBeReturned;
 	}
+	
 	
 	public String 	removeCalender (String userName, String calenderName) throws SQLException
 	{
@@ -151,6 +176,7 @@ public class SwitchMethods extends Model
 		
 		return stringToBeReturned;
 	}
+
 	public String 	CreateNote(CreateNote cn){
 		nm.setActive(cn.getIsActive());
 		nm.setCreatedBy(cn.getCreatedBy());

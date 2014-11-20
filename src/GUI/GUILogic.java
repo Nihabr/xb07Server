@@ -184,6 +184,24 @@ public class GUILogic {
 			}
 		}
 	}
+	
+	private class ShareCalendarActionListener implements ActionListener{
+
+	
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == screen.getShareCalendar().getBtnShare()) {
+				
+				
+			}
+			if (e.getSource() == screen.getShareCalendar().getBtnBack()) {
+				screen.show(Screen.CALENDAR);
+			}
+		}
+		
+		
+		
+	}
 
 	private class AddUserActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -407,7 +425,7 @@ public class GUILogic {
 				}
 			}
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
-				
+				screen.show(Screen.SHARECALENDAR);
 			}
 		}
 	}
@@ -429,9 +447,10 @@ public class GUILogic {
 				String active = screen.getAddCalendar().getTextActive().getText();
 				String createdBy = screen.getAddCalendar().getTextCreatedBy().getText();
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
+				String email = createdBy;
 				
-				String fields[] = {"calenderID","name","active","createdBy","privatePublic"};
-				String values[] = {calendarID,name,active,createdBy,privatePublic};
+				String fields[] = {"calenderID","name","active","createdBy","privatePublic","email"};
+				String values[] = {calendarID,name,active,createdBy,privatePublic, email};
 				
 				try{
 				qb.insertInto("calender", fields).values(values).Execute();

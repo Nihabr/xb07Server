@@ -5,7 +5,7 @@ public class CreateCalender implements java.io.Serializable
 	private  final long serialVersionUID = 1L;
 	private String overallID = "createCalender";
 	private String calenderName;
-	private String userName;
+	private String email;
 	private int publicOrPrivate;
 	
 	//Getters and setters for everything
@@ -21,11 +21,11 @@ public class CreateCalender implements java.io.Serializable
 	public void setCalenderName(String calenderName) {
 		this.calenderName = calenderName;
 	}
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getPublicOrPrivate() {
 		return publicOrPrivate;
