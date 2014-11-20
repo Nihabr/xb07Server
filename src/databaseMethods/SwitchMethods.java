@@ -78,34 +78,15 @@ public class SwitchMethods extends Model
 		
 		resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
 		boolean duplicateCalendar = false;
-		
-		@SuppressWarnings("unused")
-		boolean hasCBScalendar = false;
 		while (resultSet.next()){
 			if(resultSet.getString("createdby").equals(email))
 				duplicateCalendar = true;
-		
-			@SuppressWarnings("unused")
-			String nullCheck = resultSet.getString("email");
-			if(!resultSet.wasNull())
-				hasCBScalendar = true;
 		}
 		if(!duplicateCalendar){
-			
-			if(!hasCBScalendar){
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
 			qb.insertInto("calender", fields).values(values).Execute();
-			result = "CBSCalendar has been created.";
-			}
-			
-			if(hasCBScalendar){
-			String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
-			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate)};
-			qb.insertInto("calender", fields).values(values).Execute();
 			result = "Calendar has been created.";
-			}
-			
 			if ( !sharedUsers.isEmpty()){
 				String [] values2 = {"calenderID"};
 				resultSet = qb.selectFrom(values2, "calender").where("name", "=", newCalenderName).ExecuteQuery();
