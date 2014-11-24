@@ -14,6 +14,7 @@ public class CreateEvent {
 		private String end;
 		private String customevent;
 		private String calendarID;
+		private String CBSeventID;
 		
 		private  final long serialVersionUID = 1L;
 		private String overallID = "createEvent";
@@ -92,6 +93,14 @@ public class CreateEvent {
 		}
 		public void setCalendarID(String calendarID) {
 			this.calendarID = calendarID;
+		}
+
+		public String getCBSeventID() {
+			return CBSeventID;
+		}
+
+		public void setCBSeventID(String cBSeventID) {
+			CBSeventID = cBSeventID;
 		}
 
 
