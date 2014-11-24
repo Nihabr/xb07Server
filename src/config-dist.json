@@ -1,8 +1,8 @@
 {
-	"host": "localhost",
+	"host": "54.172.101.85",
 	"port": "3306",
 	"username": "root",
-	"password": "1234",	
+	"password": "doekdoek",	
 	"ffcryptkey": "3.1470",
 	"weather_expiration_time": "3600",
 	"weather_lat": "55.681589",

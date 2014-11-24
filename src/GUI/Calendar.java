@@ -43,7 +43,7 @@ public class Calendar extends JPanel {
 	private JButton btnShare;
 	
 	int row;
-	int selectedRow;
+
 	
 	
 	
@@ -66,8 +66,9 @@ public class Calendar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				if(row != -1){
 				row = table.getSelectedRow();
+				if(row != -1){
+				
 				
 
 				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());

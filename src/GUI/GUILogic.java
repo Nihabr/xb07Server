@@ -60,7 +60,7 @@ public class GUILogic {
 
 	public void run() {
 
-		screen.show(Screen.LOGIN);
+		screen.show(Screen.ADDUSER);
 		screen.setVisible(true);
 	}
 
@@ -114,6 +114,7 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnUserlist()) {
+				screen.getUserList().updateTable();
 				screen.show(Screen.USERLIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnNotelist()) {
@@ -244,6 +245,13 @@ public class GUILogic {
 					String[] Values = { Email, userActive, Password, admin };
 					
 					try {
+						String[] email = {Email};
+						res = qb.selectFrom(email, "users").all().ExecuteQuery();
+						while(res.next())
+						if(res.getString("email").equals(Email)){
+							JOptionPane.showMessageDialog(null,
+									"\nUser already exists", "", JOptionPane.PLAIN_MESSAGE);
+						}else{
 						qb.insertInto("users", kolonner).values(Values).Execute();
 						System.out.println("s� langt s� godt");
 						String[] value = {"userID"};
@@ -255,6 +263,8 @@ public class GUILogic {
 						System.out.println(res.getInt("userID"));
 												
 						qb.insertInto("roles", kolonner2).values(values2).Execute();
+						
+						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -265,6 +275,7 @@ public class GUILogic {
 				}
 			JOptionPane.showMessageDialog(null,
 						"\nUser has been added!", "", JOptionPane.PLAIN_MESSAGE);
+			screen.getUserList().updateTable();
 			screen.show(Screen.USERLIST);
 			}
 		}
@@ -320,6 +331,8 @@ public class GUILogic {
 			}
 			JOptionPane.showMessageDialog(null,
 					"\nThe changes has been successfully made!", "", JOptionPane.PLAIN_MESSAGE);
+			screen.getUserList().updateTable();
+			screen.show(Screen.USERLIST);
 			}
 		}
 	}
@@ -361,7 +374,18 @@ public class GUILogic {
 				screen.getUserInfo().Refresh();
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()) {
-			//mangler
+				
+				String email = screen.getUserList().getLblChosenUser().getText();
+				
+				String fields[] = {"active"};
+				String values[] = {"0"};
+				try{
+					
+					qb.update("users", fields, values).where("email", "=", email).Execute();
+					screen.getCalendar().updateTable();
+				}catch (Exception e4){
+					e4.printStackTrace();
+				}
 			}
 
 		}
