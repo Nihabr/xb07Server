@@ -239,13 +239,14 @@ public class GUILogic {
 					JOptionPane.showMessageDialog(null,
 							"\nPlease fill out all the fields",
 							"Error message", JOptionPane.PLAIN_MESSAGE);
+					
 				} else {
 
-					String[] kolonner = {"email", "active", "password", "isadmin" };
-					String[] Values = { Email, userActive, Password, admin };
+					String[] kolonner = {"email", "active", "password" };
+					String[] Values = { Email, userActive, Password };
 					
 					try {
-						String[] email = {Email};
+						String[] email = {"email"};
 						res = qb.selectFrom(email, "users").all().ExecuteQuery();
 						while(res.next())
 						if(res.getString("email").equals(Email)){
@@ -253,7 +254,7 @@ public class GUILogic {
 									"\nUser already exists", "", JOptionPane.PLAIN_MESSAGE);
 						}else{
 						qb.insertInto("users", kolonner).values(Values).Execute();
-						System.out.println("s� langt s� godt");
+						
 						String[] value = {"userID"};
 						
 						res = qb.selectFrom(value, "users").where("email", "=", Email).ExecuteQuery();
