@@ -42,66 +42,34 @@ public class SwitchMethods extends Model
 	 * @throws SQLException
 	 */
 
-	public String 	createNewCalender ( String calenderName, int privatePublic, String email, ArrayList <String> sharedUsers) throws SQLException
-	{
-
-		testConnection();
-		if(authenticateNewCalender(calenderName) == false)
-		{
-			addNewCalender(calenderName, privatePublic,email, sharedUsers);
-			stringToBeReturned = "The new calender has been created!";
-		}
-		else
-		{
-			stringToBeReturned = "The new calender has not been created!";
-		}
-		
-		
-		return stringToBeReturned;
-	}
-	
-	public boolean 	authenticateNewCalender(String newCalenderName) throws SQLException
-	{
-		getConn();
-		boolean authenticate = false;
-		
-		resultSet= qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
-				
-				//("select * from test.calender where Name = '"+newCalenderName+"';");
-		while(resultSet.next())
-		{
-			authenticate = true;
-		}
-		return authenticate;
-	}
-	
 	public String 	addNewCalender (String newCalenderName, int publicOrPrivate, String email, ArrayList <String> sharedUsers) throws SQLException	{
 		
 		String result = "";
 		
-		resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
+		//Queries DB to see if calendar name is in use
+		resultSet = qb.selectFrom("calendar").where("name", "=", newCalenderName).ExecuteQuery();
 		boolean duplicateCalendar = false;
-		boolean hasCBScalendar = false;
+//		boolean hasCBScalendar = false;
 		
+		//Checks resultset to find out if the user already has a calendar with the supplied name
 		while (resultSet.next()){
 			if(resultSet.getString("createdby").equals(email))
 				duplicateCalendar = true;
 		
-			@SuppressWarnings("unused")
-			String nullCheck = resultSet.getString("email");
-			if(!resultSet.wasNull())
-				hasCBScalendar = true;
+//			
+//			if(resultSet.getInt("isCBS") == 1)
+//				hasCBScalendar = true;
 		}
 		if(!duplicateCalendar){
 			
-			if(hasCBScalendar){
-			String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
-			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
-			qb.insertInto("calender", fields).values(values).Execute();
-			result = "CBSCalendar has been created.";
-			}
-			
-			if(!hasCBScalendar){
+//			if(hasCBScalendar){
+//			String [] fields = {"Name","active","CreatedBy","PrivatePublic","Email"};
+//			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate),email};
+//			qb.insertInto("calender", fields).values(values).Execute();
+//			result = "CBSCalendar has been created.";
+//			}
+//			
+//			if(!hasCBScalendar){
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
 			String [] values = {newCalenderName,"1",email, Integer.toString(publicOrPrivate)};
 			qb.insertInto("calender", fields).values(values).Execute();
@@ -117,7 +85,7 @@ public class SwitchMethods extends Model
 					}
 					share(sharedUsers, String.valueOf(newCalendarID), email); 
 					result += " Calendar has been shared with specified users.";
-				}
+//				}
 			}
 		} else
 			result = "User already has calendar with that name. Please chose a new name for the calendar!";
@@ -322,9 +290,9 @@ public class SwitchMethods extends Model
 			String calendarName = "CBScalendar " + email;
 			
 			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
-			String [] fields = {"name", "createdby", "privatepublic", "email"};
-			String [] v = {calendarName, "CBS", "0", email};
-			qb.insertInto("calender", fields).values(v).Execute();
+			String [] fields = {"name", "createdby", "privatepublic", "isCBS"};
+			String [] v = {calendarName, "CBS", "0", "1"};
+			qb.insertInto("calendar", fields).values(v).Execute();
 			
 			//Opdaterer databasens CBS events
 			try {

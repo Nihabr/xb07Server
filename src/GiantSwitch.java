@@ -51,9 +51,8 @@ public class GiantSwitch {
 		case "createCalender":
 			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
 			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers());
-			
-			
+			answer = SW.addNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers());
+
 			
 			break;
 		
