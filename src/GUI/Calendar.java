@@ -216,7 +216,7 @@ public class Calendar extends JPanel {
 			model.getDataVector().removeAllElements();
 
 			QueryBuilder qb = new QueryBuilder();
-			rs = qb.selectFrom("calender").all().ExecuteQuery();
+			rs = qb.selectFrom("calendar").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();
 

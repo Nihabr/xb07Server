@@ -23,7 +23,8 @@ public class AuthenticateUser {
 		public int authenticate(String email, String password, boolean isAdmin) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
-
+		String[] fields = {"active"};
+		String[] values = {"1"};
 		qb = new QueryBuilder();
 
 		// Henter info om bruger fra database via querybuilder
@@ -32,25 +33,26 @@ public class AuthenticateUser {
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
 
-			// Hvis brugeren er aktiv
-			if(resultSet.getInt("active")==1)
-			{					
+			qb.update("users", fields, values).where("email", "=", email).Execute();
 				// Hvis passwords matcher
 				if(resultSet.getString("password").equals(password))
 				{	
 
-					int userID = resultSet.getInt("userid");
 
 					String[] key = {"type"};
 					
 					
-					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
+					resultSet = qb.selectFrom(key, "roles").where("email", "=", email).ExecuteQuery();
 					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
 //					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
 //					{
 					resultSet.last();
 					if((resultSet.getString("type").equals("admin")) || (resultSet.getString("type").equals("user")) == true)
 						{
+							
+						
+						
+						
 							System.out.println(0);
 						return 0; // returnerer "0" hvis bruger/admin er godkendt
 					} else {
@@ -64,8 +66,6 @@ public class AuthenticateUser {
 			} else {
 				return 2; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
 			}
-		} else {
-			return 1; // returnerer fejlkoden "1" hvis email ikke findes
-		}
+
 	}
 }

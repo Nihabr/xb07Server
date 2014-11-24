@@ -60,7 +60,7 @@ public class GUILogic {
 
 	public void run() {
 
-		screen.show(Screen.ADDUSER);
+		screen.show(Screen.LOGIN);
 		screen.setVisible(true);
 	}
 
@@ -74,6 +74,10 @@ public class GUILogic {
 				char[] pass = screen.getLogin().getTextFieldPassword()
 						.getPassword();
 				String password = String.valueOf(pass);
+				
+				
+				
+				
 				// Giv auth noget data som passer til metoden
 				// Dern��st skal auth returnere 0 hvis dataen er god, og ellers
 				// give en fejl
@@ -89,6 +93,7 @@ public class GUILogic {
 					if (loggedIn == 0)
 
 					{
+						
 						setCurrentUser(userName);
 						screen.getCalendar().updateTable();
 						screen.show(Screen.MAINMENU);
@@ -216,21 +221,7 @@ public class GUILogic {
 				String type = screen.getAddUser().getTextField_Type().getText();
 				String Password = screen.getAddUser().getTextField_Password()
 						.getText();
-				int active = 1;
-				String userActive = String.valueOf(active);
-				int adminstatus;
-				String admin = "0";
-				if (type.equals("admin")) {
-					// isAdmin = true;
-					
-					adminstatus = 1;
-					admin = String.valueOf(adminstatus);
-				}
-				else if(type.equals("user")){
-						
-						adminstatus = 0;
-						admin = String.valueOf(adminstatus);
-					}
+				
 				
 
 				// her kan vi ogs� bruke goodpass metoden fra den tidligere
@@ -240,32 +231,33 @@ public class GUILogic {
 							"\nPlease fill out all the fields",
 							"Error message", JOptionPane.PLAIN_MESSAGE);
 					
+					
+					
 				} else {
 
-					String[] kolonner = {"email", "active", "password" };
-					String[] Values = { Email, userActive, Password };
+					String[] kolonner = {"email", "password" };
+					String[] Values = { Email, Password };
 					
 					try {
-						String[] email = {"email"};
-						res = qb.selectFrom(email, "users").all().ExecuteQuery();
-						while(res.next())
-						if(res.getString("email").equals(Email)){
-							JOptionPane.showMessageDialog(null,
-									"\nUser already exists", "", JOptionPane.PLAIN_MESSAGE);
-						}else{
+//						String[] email = {"email"};
+//						res = qb.selectFrom(email, "users").all().ExecuteQuery();
+//						while(res.next())
+//						if(res.getString("email").equals(Email)){
+//							JOptionPane.showMessageDialog(null,
+//									"\nUser already exists", "", JOptionPane.PLAIN_MESSAGE);
+//						}else{
 						qb.insertInto("users", kolonner).values(Values).Execute();
 						
-						String[] value = {"userID"};
+						String[] value = {"email"};
 						
 						res = qb.selectFrom(value, "users").where("email", "=", Email).ExecuteQuery();
 						System.out.println(res.last());
-						String[] kolonner2 = { "userid", "type" };
-						String[] values2 = {String.valueOf(res.getInt("userID")),type};
-						System.out.println(res.getInt("userID"));
-												
+						String[] kolonner2 = { "email", "type" };
+						String[] values2 = {Email,type};
+																		
 						qb.insertInto("roles", kolonner2).values(values2).Execute();
 						
-						}
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
