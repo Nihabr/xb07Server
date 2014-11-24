@@ -8,6 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.user.*;
 import GUI.UserInformation;
@@ -26,6 +27,8 @@ public class GUILogic {
 	private Screen screen;
 	private int loggedIn;
 	private String action;
+	private String currentUser = "";
+	
 	private boolean full = false;
 	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
@@ -79,13 +82,14 @@ public class GUILogic {
 				// skal det printe hvilken fejl der er (bare print den int
 				// v��rdi i modtager)
 				if ((action.equals("btnLogIn"))) {
-					System.out.println("hit1");
+					
 					loggedIn = auth.authenticate(userName, password, true);
-					System.out.println("hit2");
+			
 
 					if (loggedIn == 0)
 
 					{
+						setCurrentUser(userName);
 						screen.getCalendar().updateTable();
 						screen.show(Screen.MAINMENU);
 						screen.getLogin().Refresh();
@@ -399,6 +403,7 @@ public class GUILogic {
 				screen.show(Screen.LOGIN);
 			}
 			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
+				screen.getAddCalendar().updateTable();
 				screen.show(Screen.ADDCALENDAR);
 			}
 			if (e.getSource() == screen.getCalendar().getChooseCalendar()) {
@@ -411,12 +416,14 @@ public class GUILogic {
 				String fields[] = {"active"};
 				String values[] = {"0"};
 				try{
+					
 					qb.update("calender", fields, values).where("name", "=", name).Execute();
 					screen.getCalendar().updateTable();
 				}catch (Exception e4){
 					e4.printStackTrace();
 				}
-			}
+				}
+			
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				screen.show(Screen.SHARECALENDAR);
 			}
@@ -434,20 +441,20 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getAddCalendar().getBtnSubmit()) {
 				
-				
-				String calendarID = screen.getAddCalendar().getTxtCalendarID().getText();
+				String email = getCurrentUser();
 				String name = screen.getAddCalendar().getTextName().getText();
-				String active = screen.getAddCalendar().getTextActive().getText();
-				String createdBy = screen.getAddCalendar().getTextCreatedBy().getText();
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
-				String email = createdBy;
+				int privatepublic = Integer.valueOf(privatePublic);
+				String shareWith = screen.getAddCalendar().getTxtShare().getText();
 				
-				String fields[] = {"calenderID","name","active","createdBy","privatePublic","email"};
-				String values[] = {calendarID,name,active,createdBy,privatePublic, email};
+				ArrayList<String>sharedUsers = new ArrayList<String>();
+				sharedUsers.add(shareWith);
+				
+				
 				
 				try{
-				qb.insertInto("calender", fields).values(values).Execute();
 				
+				sw.addNewCalender(name, privatepublic, email, sharedUsers);
 				
 				
 				
@@ -551,6 +558,14 @@ public class GUILogic {
 				  }
 			  }
 		}
+
+	public String getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(String currentUser) {
+		this.currentUser = currentUser;
+	}
 		
 }
 	

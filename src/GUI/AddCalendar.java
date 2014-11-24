@@ -4,14 +4,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
+
+import model.QueryBuild.QueryBuilder;
 
 
 
@@ -22,23 +32,56 @@ public class AddCalendar extends JPanel {
 	private JButton btnBack;
 	private JButton btnLogout;
 	private JButton btnSubmit;
-	private JLabel lblCalendarID;
 	private JLabel lblName;
-	private JLabel lblActive;
-	private JLabel lblCreatedBy;
 	private JLabel lblPrivateOrPublic;
-	private JTextField txtCalendarID;
 	private JTextField textName;
-	private JTextField textActive;
-	private JTextField textCreatedBy;
 	private JTextField textPrivateOrPublic;
+	private JTextField txtShare;
 	
-	
+	private JTable table;
+	private DefaultTableModel model;
+	private JScrollPane scrollPane;
+	private Object[] objects;
+	QueryBuilder qb = new QueryBuilder();
+	ResultSet rs;
 	
 	
 	public AddCalendar() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
+		
+		String[] columnNames = { "Email" };
+		table = new JTable();
+		model = (DefaultTableModel) table.getModel();
+		model.setColumnIdentifiers(columnNames);
+		table.setSurrendersFocusOnKeystroke(true);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
+		table.setFillsViewportHeight(true);
+		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
+				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+						255), new Color(0, 0, 205), new Color(255, 255, 255)),
+				new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
+		scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(
+				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+						255), new Color(0, 0, 205), new Color(255, 255, 255)),
+				null));
+		scrollPane.setBounds(547, 184, 260, 182);
+
+		// Add the scroll pane to this panel.
+		add(scrollPane);
+		JLabel lblShareWith = new JLabel("Share with:");
+		lblShareWith.setForeground(Color.WHITE);
+		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
+		lblShareWith.setBounds(476, 454, 147, 39);
+		add(lblShareWith);
+		
+		txtShare = new JTextField();
+		txtShare.setColumns(10);
+		txtShare.setBounds(727, 466, 134, 28);
+		add(txtShare);
 		
 		lblHeader = new JLabel("Add Calendar");
 		lblHeader.setForeground(Color.WHITE);
@@ -75,31 +118,11 @@ public class AddCalendar extends JPanel {
 		label.setBounds(10, 698, 250, 59);
 		add(label);
 		
-		lblCalendarID = new JLabel("Calendar ID:");
-		lblCalendarID.setForeground(Color.WHITE);
-		lblCalendarID.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCalendarID.setBounds(476, 220, 162, 39);
-		add(lblCalendarID);
-		
 		lblName = new JLabel("Name:");
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Arial", Font.BOLD, 26));
-		lblName.setBounds(476, 270, 147, 39);
+		lblName.setBounds(476, 379, 147, 39);
 		add(lblName);
-		
-		lblActive = new JLabel("Active:");
-		lblActive.setForeground(Color.WHITE);
-		lblActive.setFont(new Font("Arial", Font.BOLD, 26));
-		lblActive.setBounds(476, 320, 147, 39);
-		add(lblActive);
-		
-		lblCreatedBy = new JLabel("Created by:");
-		lblCreatedBy.setSize(147, 39);
-		lblCreatedBy.setLocation(473, 440);
-		lblCreatedBy.setForeground(Color.WHITE);
-		lblCreatedBy.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCreatedBy.setBounds(476, 370, 147, 39);
-		add(lblCreatedBy);
 		
 		lblPrivateOrPublic = new JLabel("Private or public:");
 		lblPrivateOrPublic.setForeground(Color.WHITE);
@@ -107,25 +130,10 @@ public class AddCalendar extends JPanel {
 		lblPrivateOrPublic.setBounds(476, 420, 223, 39);
 		add(lblPrivateOrPublic);
 		
-		txtCalendarID = new JTextField();
-		txtCalendarID.setBounds(727, 229, 134, 28);
-		add(txtCalendarID);
-		txtCalendarID.setColumns(10);
-		
 		textName = new JTextField();
-		textName.setBounds(727, 279, 134, 28);
+		textName.setBounds(727, 388, 134, 28);
 		add(textName);
 		textName.setColumns(10);
-		
-		textActive = new JTextField();
-		textActive.setBounds(727, 329, 134, 28);
-		add(textActive);
-		textActive.setColumns(10);
-		
-		textCreatedBy = new JTextField();
-		textCreatedBy.setBounds(727, 379, 134, 28);
-		add(textCreatedBy);
-		textCreatedBy.setColumns(10);
 		
 		textPrivateOrPublic = new JTextField();
 		textPrivateOrPublic.setBounds(727, 429, 134, 28);
@@ -144,6 +152,31 @@ public class AddCalendar extends JPanel {
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
+	public void updateTable() {
+		try {
+			model.getDataVector().removeAllElements();
+
+			QueryBuilder qb = new QueryBuilder();
+			String[] values = {"email"};
+			rs = qb.selectFrom(values, "users").all().ExecuteQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int colNo = rsmd.getColumnCount();
+
+			while (rs.next()) {
+
+				objects = new Object[colNo];
+
+				for (int i = 0; i < colNo; i++) {
+					objects[i] = rs.getObject(i + 1);
+				}
+				model.addRow(objects);
+			}
+			table.setModel(model);
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 	
 	public JButton getBtnBack() {
 		return btnBack;
@@ -155,24 +188,16 @@ public class AddCalendar extends JPanel {
 		return btnSubmit;
 	}
 
-	public JTextField getTxtCalendarID() {
-		return txtCalendarID;
+	public JTextField getTxtShare() {
+		return txtShare;
 	}
 
 	public JTextField getTextName() {
 		return textName;
 	}
 
-	public JTextField getTextActive() {
-		return textActive;
-	}
-
-	public JTextField getTextCreatedBy() {
-		return textCreatedBy;
-	}
 
 	public JTextField getTextPrivateOrPublic() {
 		return textPrivateOrPublic;
 	}
-	
 }

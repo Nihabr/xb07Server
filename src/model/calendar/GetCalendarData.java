@@ -21,6 +21,7 @@ public class GetCalendarData {
 	
 	EncryptUserID e = new EncryptUserID();
 	QueryBuilder qb = new QueryBuilder();
+	ResultSet rs;
 
 	//henter data fra URL og l??er ind til en string
     private static String readUrl(String urlString) throws Exception {
@@ -58,8 +59,9 @@ public class GetCalendarData {
 	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
 	    System.out.println(json);
 	    
-	    ResultSet rs = qb.selectFrom("calender").where("email", "=", email).ExecuteQuery();
+	    rs = qb.selectFrom("calender").where("email", "=", email).ExecuteQuery();
 	    int calID = 0;
+	    
 	    
 	    while (rs.next())
 	    	calID = rs.getInt("calenderID");

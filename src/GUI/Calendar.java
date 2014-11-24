@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
@@ -41,6 +42,10 @@ public class Calendar extends JPanel {
 	private JButton btnLogout;
 	private JButton btnShare;
 	
+	int row;
+	int selectedRow;
+	
+	
 	
 
 	public Calendar() {
@@ -48,7 +53,7 @@ public class Calendar extends JPanel {
 		setLayout(null);
 
 		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy",
-				"PrivatePublic" };
+				"PrivatePublic","Email" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -56,21 +61,24 @@ public class Calendar extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				int row = table.getSelectedRow();
-				row+=1;
-
-				lblChosenCalendar.setText(table.getValueAt(row, 2).toString());
+				if(row != -1){
+				row = table.getSelectedRow();
 				
 
+				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());
+				
+				}
 			}
 		});
 		
 		lblChosenCalendar = new JLabel("");
 		lblChosenCalendar.setBounds(1030, 412, 56, 16);
+		lblChosenCalendar.setVisible(false);
 		add(lblChosenCalendar);
 
 		// Create the scroll pane and add the table to it.
@@ -182,6 +190,22 @@ public class Calendar extends JPanel {
 	}
 
 	
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
+	public void setModel(DefaultTableModel model) {
+		this.model = model;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
 	public JLabel getLblChosenCalendar() {
 		return lblChosenCalendar;
 	}

@@ -30,6 +30,7 @@ public class SwitchMethods extends Model
 	ShareCalendars share = new ShareCalendars();
 	
 	String stringToBeReturned = "";
+	String currentUser = "";
 
 	
 	/**
@@ -145,18 +146,20 @@ public class SwitchMethods extends Model
 
 	public String 	share(ArrayList <String> sharedUsers, String calendarID, String email) throws SQLException{
 		
+		
 		String [] values = {"calenderID","createdby"};
-		resultSet = qb.selectFrom(values, "calender").where("email", "=", null).ExecuteQuery();
+		resultSet = qb.selectFrom(values, "calender").where("email", "IS", null ).ExecuteQuery();
 		while(resultSet.next()){
 
 			//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender
 			
-			if(resultSet.getString("createdby").equals(email)){
+			if(resultSet.getInt("calenderID") == (Integer.valueOf(calendarID))){
 				for (String su : sharedUsers){
-				String [] fields = {"email","calendarID"};
-				String [] value = {su, String.valueOf(calendarID)};
-				qb.insertInto("calender_users", fields).values(value).Execute();
-				}
+					System.out.println("for loop køres");
+					String [] fields = {"email","calendarID"};
+					String [] value = {su, String.valueOf(calendarID)};
+					qb.insertInto("calender_users", fields).values(value).Execute();
+					}
 				stringToBeReturned = "Calendar has been shared";
 				}
 			else{
