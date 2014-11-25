@@ -458,12 +458,21 @@ public class GUILogic {
 				String email = getCurrentUser();
 				String name = screen.getAddCalendar().getTextName().getText();
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
-				int privatepublic = Integer.valueOf(privatePublic);
+				
 				String shareWith = screen.getAddCalendar().getTxtShare().getText();
 				ArrayList<String>sharedUsers = new ArrayList<String>();
 				try{
 					
-				boolean privatepub;
+				int visibilitystatus = 0;
+				
+				if(privatePublic.equals("private")){
+					
+					visibilitystatus = 0;
+				}else if(privatePublic.equals("public")){
+					visibilitystatus = 1;
+				}
+					
+					
 					
 				if(screen.getAddCalendar().getChckbxIfYesCheck().isSelected())
 				{
@@ -477,7 +486,7 @@ public class GUILogic {
 				
 				
 				
-				sw.addNewCalendar(name, privatepublic, email, sharedUsers);
+				sw.addNewCalendar(name, visibilitystatus, email, sharedUsers);
 				
 				
 				
