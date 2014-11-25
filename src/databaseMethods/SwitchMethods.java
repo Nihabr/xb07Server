@@ -77,7 +77,7 @@ public class SwitchMethods extends Model
 			sharedUsers.add(email);
 
 				if ( !sharedUsers.isEmpty()){
-					resultSet = qb.selectFrom("calender").where("name", "=", newCalenderName).ExecuteQuery();
+					resultSet = qb.selectFrom("calendar").where("name", "=", newCalenderName).ExecuteQuery();
 					int newCalendarID = 0;
 					while(resultSet.next()){
 						if(resultSet.getString("createdby").equals(email))
