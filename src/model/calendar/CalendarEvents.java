@@ -17,7 +17,7 @@ public class CalendarEvents {
 	
 	public CalendarEvents (String email) throws SQLException{
 
-		ResultSet rs = qb.selectFrom("Calender_users").where("email", "=", email).ExecuteQuery();
+		ResultSet rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
 		while (rs.next()){
 			int CalID = rs.getInt("CalendarID");
 			calendars.add(getUserCalendars(String.valueOf(CalID)));
@@ -27,17 +27,16 @@ public class CalendarEvents {
 	public ArrayList<UserEvent> getUserCalendars (String cid) throws SQLException{
 		
 		ArrayList <UserEvent> subscribedCalendarEvents = new ArrayList<UserEvent>();
-		UserEvent ue = new UserEvent("", "", "", "", "", "", "", "", "", "");
+		UserEvent ue = new UserEvent( 0, "", "", "", "", "", "", "", 0);
 		
 			ResultSet rsCalE = qb.selectFrom("events").where("CalendarID", "=", String.valueOf(cid)).ExecuteQuery();
 			
 				while (rsCalE.next()){
 					if(rsCalE.getInt("active")!=0){
-						ue.setEventid(rsCalE.getString("eventid"));
-						ue.setCalendarID(rsCalE.getString("calendarID"));
+						ue.setEventid(rsCalE.getInt("eventid"));
+						ue.setCalendarID(rsCalE.getInt("calendarID"));
 						ue.setCreatedby(rsCalE.getString("createdby"));
 						ue.setType(rsCalE.getString("type"));
-						ue.setCustomevent(rsCalE.getString("customevent"));
 						ue.setEnd(rsCalE.getString("end"));
 						ue.setStart(rsCalE.getString("start"));
 						ue.setText(rsCalE.getString("text"));

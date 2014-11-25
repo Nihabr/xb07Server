@@ -42,7 +42,7 @@ public class SwitchMethods extends Model
 	 * @throws SQLException
 	 */
 
-	public String 	addNewCalendar (String newCalendarName, int publicOrPrivate, String email, ArrayList <String> sharedUsers) throws SQLException	{
+	public String 	addNewCalendar (String newCalendarName, int publicOrPrivate, String email, ArrayList <String> sharedUsers, int isCBS) throws SQLException	{
 		
 		String result = "";
 		
@@ -100,31 +100,31 @@ public class SwitchMethods extends Model
 
 	public String 	share(ArrayList <String> sharedUsers, String calendarID, String email) throws SQLException{
 		
-		
-		String [] values = {"calendarID","createdby"};
-		resultSet = qb.selectFrom(values, "calendar").where("email", "IS", null ).ExecuteQuery();
-		while(resultSet.next()){
-
-			//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender
-			
-			if(resultSet.getInt("calendarID") == (Integer.valueOf(calendarID))){
-				for (String su : sharedUsers){
-					System.out.println("for loop køres");
-					String [] fields = {"email","calendarID"};
-					String [] value = {su, String.valueOf(calendarID)};
-					qb.insertInto("calendar_users", fields).values(value).Execute();
-					}
-				stringToBeReturned = "Calendar has been shared";
-				}
-			else{
-				stringToBeReturned = "calendarID does not exist or the calendar cannot be shared because of restrictions";
-			}
-			
-		}
+		if(sharedUsers != null)	{
+			String [] values = {"calendarID","createdby"};
+			resultSet = qb.selectFrom(values, "calendar").where("email", "IS", null ).ExecuteQuery();
+			while(resultSet.next()){
 	
-		System.out.println("LOG");
-		return stringToBeReturned;
+				//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender
+				
+				if(resultSet.getInt("calendarID") == (Integer.valueOf(calendarID))){
+					for (String su : sharedUsers){
+						System.out.println("for loop køres");
+						String [] fields = {"email","calendarID"};
+						String [] value = {su, String.valueOf(calendarID)};
+						qb.insertInto("calendar_users", fields).values(value).Execute();
+						}
+					stringToBeReturned = "Calendar has been shared";
+					}
+				else{
+					stringToBeReturned = "calendarID does not exist or the calendar cannot be shared because of restrictions";
+				}
+				
+			}
 		
+			System.out.println("LOG");
+			return stringToBeReturned;
+		} else return "";
 		}
 	public String 	deleteCalendar (String userName, String calendarName) throws SQLException
 	{
@@ -265,7 +265,7 @@ public class SwitchMethods extends Model
 	public String 	clientLogin (String email, String password) throws SQLException{
 		
 		String gsonString = "";	
-		String [] values = {"email", "password", "userID", "isAdmin"};
+		String [] values = {"email", "password", "userID"};
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email).ExecuteQuery();
 		GetCalendarData g = new GetCalendarData();
 		if(resultSet.next()){
@@ -276,9 +276,8 @@ public class SwitchMethods extends Model
 			String calendarName = "CBScalendar " + email;
 			
 			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
-			String [] fields = {"name", "createdby", "privatepublic", "isCBS"};
-			String [] v = {calendarName, "CBS", "0", "1"};
-			qb.insertInto("calendar", fields).values(v).Execute();
+			ArrayList<String> s = null;
+			addNewCalendar(calendarName, 0, "CBS", s, 1);
 			
 			//Opdaterer databasens CBS events
 			try {
@@ -290,8 +289,11 @@ public class SwitchMethods extends Model
 			
 			
 			clientLogin.setCalendars(ce.getCalendars());
-			clientLogin.setIsAdmin(resultSet.getInt("isAdmin"));
 			clientLogin.setUserID(resultSet.getInt("userID"));
+			resultSet = qb.selectFrom("roles").where("email", "=", email).ExecuteQuery();
+			resultSet.next();
+			clientLogin.setRole(resultSet.getString("type"));
+			
 			gsonString = gson.toJson(clientLogin);
 			try {
 				
@@ -307,7 +309,7 @@ public class SwitchMethods extends Model
 		return gsonString;
 	}
 	
-	public String clientLogout (String email) throws SQLException{
+	public String 	clientLogout (String email) throws SQLException{
 		String gsonString = "";	
 		String [] fields = {"active"};
 		String [] values = {"0"};

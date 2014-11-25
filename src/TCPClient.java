@@ -4,27 +4,41 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import JsonClasses.CreateCalendar;
+import JsonClasses.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+@SuppressWarnings("unused")
 public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		
-//		ClientLogin c = new ClientLogin();
+		ClientLogin c = new ClientLogin();
+//		CreateCalendar c = new CreateCalendar();
 		
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalendar c = new CreateCalendar();
-		ArrayList<String> users = new ArrayList<String>();
+
+
+		//CLIENT LOGIN
+		c.setEmail("nihabr");
+		c.setPassWord("1");
 		
-		c.setEmail("nibr13ae");
-		c.setCalendarName("DENNE SKAL");
-		c.setPublicOrPrivate(1);
-		users.add("jolj13ab");
-		users.add("dude");
-		c.setSharedUsers(users);
+		
+		//CLIENTLOGOUT
+		
+//		ClientLogout lo = new ClientLogout();
+//		lo.setEmail("nihabr");
+		
+		//CREATE CALENDAR
+
+//		ArrayList<String> users = new ArrayList<String>();
+//		c.setEmail("nibr13ae");
+//		c.setCalendarName("DENNE SKAL");
+//		c.setPublicOrPrivate(1);
+//		users.add("jolj13ab");
+//		users.add("dude");
+//		c.setSharedUsers(users);
 		
 
 	
