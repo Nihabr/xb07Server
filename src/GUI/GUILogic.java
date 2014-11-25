@@ -116,7 +116,21 @@ public class GUILogic {
 	private class MainMenuActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getMainMenu().getBtnLogOut()) {
+				
+				String[] fields = {"active"};
+				String[] values = {"0"};
+				
+				try{
+				qb.update("users", fields, values).where("email", "=", getCurrentUser()).Execute();
 				screen.show(Screen.LOGIN);
+				}
+				catch(Exception e5){
+					
+				
+					e5.printStackTrace();
+				
+				}
+				
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnUserlist()) {
 				screen.getUserList().updateTable();
