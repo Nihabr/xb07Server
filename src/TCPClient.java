@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import JsonClasses.CreateCalender;
+import JsonClasses.CreateCalendar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +16,7 @@ public class TCPClient {
 		
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalender c = new CreateCalender();
+		CreateCalendar c = new CreateCalendar();
 		ArrayList<String> users = new ArrayList<String>();
 		
 		c.setEmail("nibr13ae");

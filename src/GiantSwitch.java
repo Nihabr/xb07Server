@@ -1,9 +1,5 @@
 import java.sql.SQLException;
 
-import model.QOTD.QOTDModel;
-import model.calendar.UserEvent;
-import model.note.Note;
-import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
