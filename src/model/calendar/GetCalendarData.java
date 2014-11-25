@@ -58,17 +58,17 @@ public class GetCalendarData {
 	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
 	    System.out.println(json);
 	    
-	    rs = qb.selectFrom("calender").where("email", "=", email).ExecuteQuery();
+	    rs = qb.selectFrom("calendar").where("name", "=", "CBScalendar " + email).ExecuteQuery();
 	    int calID = 0;
 	    
 	    
 	    while (rs.next())
-	    	calID = rs.getInt("calenderID");
+	    	calID = rs.getInt("calendarID");
 	    
         Gson gson = new Gson();
         GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
         
-        rs = qb.selectFrom("calender_users").where("email", "=", email).ExecuteQuery();
+        rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
         boolean exists = false;
         while (rs.next()){
         	if (rs.getInt("calendarID") == calID){
@@ -78,7 +78,7 @@ public class GetCalendarData {
         if (!exists){
     		String[] calUfields = {"calendarID", "email"};
     		String[] calUvalues = {String.valueOf(calID), email};
-    		qb.insertInto("calender_users", calUfields).values(calUvalues).Execute();
+    		qb.insertInto("calendar_users", calUfields).values(calUvalues).Execute();
         }
         
         rs = qb.selectFrom("events").where("createdby", "=", "cbs").ExecuteQuery();

@@ -8,11 +8,7 @@ class TCPServer{
 	
 	public static void main(String argv[]) throws Exception       {
 		Configurations cf = new Configurations();
-		
-		
-		cf.getWeather_lat();
-		cf.getWeather_lon();
-		
+
 		AdminWorker admin = new AdminWorker();
 		admin.run();
 		//Creates a socket to send and receive messages in port 8888

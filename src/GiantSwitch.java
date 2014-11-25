@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 
 import JsonClasses.ClientLogin;
+import JsonClasses.ClientLogout;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
@@ -38,6 +39,8 @@ public class GiantSwitch {
 			break;
 
 		case "logOut":
+			ClientLogout clo = (ClientLogout)gson.fromJson(jsonString, ClientLogout.class);
+			answer = SW.clientLogout(clo.getEmail());
 			System.out.println("Recieved logOut");
 			break;
 
