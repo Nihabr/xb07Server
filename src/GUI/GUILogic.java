@@ -471,7 +471,7 @@ public class GUILogic {
 				
 				try{
 				
-				sw.addNewCalender(name, privatepublic, email, sharedUsers);
+				sw.addNewCalendar(name, privatepublic, email, sharedUsers);
 				
 				
 				
