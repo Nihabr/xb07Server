@@ -1,14 +1,12 @@
 package model.calendar;
 
-import java.util.ArrayList;
-
 /**
  * Created by jesperbruun on 10/10/14. Til hver specifik event bliver de
  * defineret saaledes.
  */
 public class UserEvent {
 	// private String activityid;
-	private String eventid;
+	private int eventid;
 	private String type;
 	private String title;
 	private String text;
@@ -16,13 +14,12 @@ public class UserEvent {
 	private String createdby;
 	private String start;
 	private String end;
-	private String customevent;
-	private String calendarID;
+	private int calendarID;
 //	String activityid
-	public UserEvent( String eventid, String type,
+	public UserEvent( int eventid, String type,
 			String location, String createdby, String start,
 			String end, String title, String text,
-			String customevent, String calendarID) {
+			int calendarID) {
 		super();
 		// this.activityid = activityid;
 		this.eventid = eventid;
@@ -33,32 +30,23 @@ public class UserEvent {
 		this.createdby = createdby;
 		this.start = start;
 		this.end = end;
-		this.customevent = customevent;
 		this.calendarID = calendarID;
 	}
 
 
-	public void setEventid(String eventid) {
+	public void setEventid(int eventid) {
 		this.eventid = eventid;
 	}
 
-	public String getCustomevent() {
-		return customevent;
-	}
-
-	public void setCustomevent(String customevent) {
-		this.customevent = customevent;
-	}
-
-	public String getCalendarID() {
+	public int getCalendarID() {
 		return calendarID;
 	}
 
-	public void setCalendarID(String calendarID) {
+	public void setCalendarID(int calendarID) {
 		this.calendarID = calendarID;
 	}
 
-	public String getEventid() {
+	public int getEventid() {
 		return eventid;
 	}
 

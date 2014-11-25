@@ -1,14 +1,11 @@
 import java.sql.SQLException;
 
-import model.QOTD.QOTDModel;
-import model.calendar.UserEvent;
-import model.note.Note;
-import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
-import JsonClasses.CreateCalender;
+import JsonClasses.ClientLogout;
+import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
-import JsonClasses.DeleteCalender;
+import JsonClasses.DeleteCalendar;
 import JsonClasses.DeleteEvent;
 import JsonClasses.DeleteNote;
 import JsonClasses.ShareCalendars;
@@ -42,24 +39,26 @@ public class GiantSwitch {
 			break;
 
 		case "logOut":
+			ClientLogout clo = (ClientLogout)gson.fromJson(jsonString, ClientLogout.class);
+			answer = SW.clientLogout(clo.getEmail());
 			System.out.println("Recieved logOut");
 			break;
 
 		/*************
 		 ** CALENDAR **
 		 *************/
-		case "createCalender":
-			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
-			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.addNewCalender(CC.getCalenderName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers());
+		case "createCalendar":
+			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
+			System.out.println(CC.getCalendarName()+ "Den har lagt det nye ind i klassen");
+			answer = SW.addNewCalendar(CC.getCalendarName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers(), 0);
 
 			
 			break;
 		
-		case "deleteCalender":
-			DeleteCalender DC = (DeleteCalender)gson.fromJson(jsonString, DeleteCalender.class);
-			System.out.println(DC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.deleteCalender(DC.getUserName(), DC.getCalenderName());
+		case "deleteCalendar":
+			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
+			System.out.println(DC.getCalendarName()+ "Den har lagt det nye ind i klassen");
+			answer = SW.deleteCalendar(DC.getUserName(), DC.getCalendarName());
 			break;
 		
 		case"shareCalendar":
@@ -142,12 +141,12 @@ public class GiantSwitch {
 			return "getNote";
 		} else if (ID.contains("deleteNote")){
 			return "deleteNote";
-		}else if  (ID.contains("deleteCalender")){
-			return "deleteCalender";
+		}else if  (ID.contains("deleteCalendar")){
+			return "deleteCalendar";
 		} else if (ID.contains("getClientForecast")) {
 			return "getClientForecast";
-		} else if (ID.contains("saveImportedCalender")) {
-			return "saveImportedCalender";
+		} else if (ID.contains("saveImportedCalendar")) {
+			return "saveImportedCalendar";
 		}else if (ID.contains("importCourse")) {
 			return "importCourse";
 		} else if (ID.contains("exportCourse")) {
@@ -158,14 +157,14 @@ public class GiantSwitch {
 			return "logIn";
 		} else if (ID.contains("logOut")) {
 			return "logOut";
-		} else if (ID.contains("getCalender")) {
-			return "getCalender";
+		} else if (ID.contains("getCalendar")) {
+			return "getCalendar";
 		} else if (ID.contains("createEvent")) {
 			return "createEvent";
 		} else if (ID.contains("deleteEvent")) {
 			return "deleteEvent"; 
-		} else if (ID.contains("createCalender")) {
-			return "createCalender";
+		} else if (ID.contains("createCalendar")) {
+			return "createCalendar";
 		} else if (ID.contains("createNote")){
 			return "createNote";
 		}else if (ID.contains("shareCalendar")){

@@ -11,7 +11,7 @@ public class ClientLogin {
 	String email;
 	String passWord;
 	int userID;
-	int isAdmin;
+	String role;
 	ArrayList <ArrayList<UserEvent>> calendars = new ArrayList <ArrayList<UserEvent>>();
 	
 	
@@ -35,12 +35,12 @@ public class ClientLogin {
 		this.userID = userID;
 	}
 
-	public int getIsAdmin() {
-		return isAdmin;
+	public String getRole() {
+		return role;
 	}
 
-	public void setIsAdmin(int isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getOverallID() {

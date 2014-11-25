@@ -4,6 +4,7 @@ public class WeatherInfo {
 	private String weatherLocation;
 	private String weather;
 	private String temperature;
+	@SuppressWarnings("unused")
 	private String overallID = "weather";
 	
 	public String getWeatherLocation() {

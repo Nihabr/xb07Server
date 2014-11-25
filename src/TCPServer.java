@@ -8,14 +8,10 @@ class TCPServer{
 	
 	public static void main(String argv[]) throws Exception       {
 		Configurations cf = new Configurations();
-		
-		
-		cf.getWeather_lat();
-		cf.getWeather_lon();
-		
+
 		AdminWorker admin = new AdminWorker();
 		admin.run();
-		//Creates a socket to send and receive messages in port 8888
+		//Creates a socket to send and receive messages in port 6666
 		ServerSocket welcomeSocket = new ServerSocket(6666);
 		
 		//While something is true

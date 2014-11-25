@@ -2,10 +2,10 @@ package JsonClasses;
 
 import java.util.ArrayList;
 
-public class CreateCalender implements java.io.Serializable
+public class CreateCalendar implements java.io.Serializable
 {
-	private  final long serialVersionUID = 1L;
-	private String overallID = "createCalender";
+	private static final long serialVersionUID = 1L;
+	private String overallID = "createCalendar";
 	private String calenderName;
 	private String email;
 	private int publicOrPrivate;
@@ -24,10 +24,10 @@ public class CreateCalender implements java.io.Serializable
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getCalenderName() {
+	public String getCalendarName() {
 		return calenderName;
 	}
-	public void setCalenderName(String calenderName) {
+	public void setCalendarName(String calenderName) {
 		this.calenderName = calenderName;
 	}
 	public String getEmail() {
