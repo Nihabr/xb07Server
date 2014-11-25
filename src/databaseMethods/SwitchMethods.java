@@ -277,7 +277,7 @@ public class SwitchMethods extends Model
 			String calendarName = "CBScalendar " + email;
 			
 			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
-			ArrayList<String> s = null;
+			ArrayList<String> s = new ArrayList<String>();
 			addNewCalendar(calendarName, 0, "CBS", s, 1);
 			
 			//Opdaterer databasens CBS events
