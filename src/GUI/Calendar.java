@@ -29,7 +29,8 @@ public class Calendar extends JPanel {
 	private JLabel lblBackground;
 	private JLabel label;
 	private JLabel lblHeader;
-	private JLabel lblChosenCalendar;
+	private JLabel lblCalendarName;
+	private JLabel lblGetId;
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -43,6 +44,7 @@ public class Calendar extends JPanel {
 	private JButton btnShare;
 	
 	int row;
+	private JLabel lblCalendarInfo;
 
 	
 	
@@ -53,7 +55,7 @@ public class Calendar extends JPanel {
 		setLayout(null);
 
 		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy",
-				"PrivatePublic","Email" };
+				"PrivatePublic","IsCBS" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -70,17 +72,28 @@ public class Calendar extends JPanel {
 				if(row != -1){
 				
 				
-
-				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());
+				lblGetId.setText(table.getValueAt(row, 0).toString());
+				lblCalendarName.setText(table.getValueAt(row, 1).toString());
 				
 				}
 			}
 		});
 		
-		lblChosenCalendar = new JLabel("");
-		lblChosenCalendar.setBounds(1030, 412, 56, 16);
-		lblChosenCalendar.setVisible(false);
-		add(lblChosenCalendar);
+		lblCalendarName = new JLabel("");
+		lblCalendarName.setBounds(1030, 412, 56, 16);
+		lblCalendarName.setVisible(false);
+		
+		lblGetId = new JLabel("");
+		lblGetId.setBounds(1030, 363, 56, 16);
+		lblGetId.setVisible(false);
+		
+		lblCalendarInfo = new JLabel("");
+		lblCalendarInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCalendarInfo.setBounds(490, 198, 413, 29);
+		
+		add(lblCalendarInfo);
+		add(lblGetId);
+		add(lblCalendarName);
 
 		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
@@ -207,8 +220,16 @@ public class Calendar extends JPanel {
 		this.table = table;
 	}
 
-	public JLabel getLblChosenCalendar() {
-		return lblChosenCalendar;
+	public JLabel getlblCalendarName() {
+		return lblCalendarName;
+	}
+
+	public JLabel getLblGetId() {
+		return lblGetId;
+	}
+
+	public void setLblGetId(JLabel lblGetId) {
+		this.lblGetId = lblGetId;
 	}
 
 	public void updateTable() {
@@ -262,5 +283,13 @@ public class Calendar extends JPanel {
 	}
 	public JButton getBtnShare() {
 		return btnShare;
+	}
+
+	public JLabel getLblCalendarInfo() {
+		return lblCalendarInfo;
+	}
+
+	public void setLblCalendarInfo(JLabel lblCalendarInfo) {
+		this.lblCalendarInfo = lblCalendarInfo;
 	}
 }

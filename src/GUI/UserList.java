@@ -65,7 +65,8 @@ public class UserList extends JPanel {
                                 "Email",
                                 "Active",
                                 "Created datetime",
-                                "Password"};
+                                "Password",
+                                "Exist"};
     	
         table = new JTable();
 		model = (DefaultTableModel) table.getModel();

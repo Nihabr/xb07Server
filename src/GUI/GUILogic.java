@@ -1,33 +1,29 @@
 package GUI;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import model.user.*;
-import GUI.UserInformation;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import model.QueryBuild.QueryBuilder;
+import model.note.Note;
+import model.note.NoteModel;
+import model.user.AuthenticateUser;
 import databaseMethods.SwitchMethods;
-import model.note.*;
-import model.QueryBuild.*;
-import GUI.Screen;
-import JsonClasses.CreateEvent;
 
 public class GUILogic {
 	private Screen screen;
 	private int loggedIn;
 	private String action;
 	private String currentUser = "";
+	private String currentCalendar = "";
 	
 	private boolean full = false;
 	QueryBuilder qb = new QueryBuilder();
@@ -96,7 +92,7 @@ public class GUILogic {
 						
 						setCurrentUser(userName);
 						screen.getCalendar().updateTable();
-						screen.show(Screen.MAINMENU);
+						screen.show(Screen.SHOWCALENDAR);
 						screen.getLogin().Refresh();
 					}
 
@@ -140,11 +136,11 @@ public class GUILogic {
 				screen.show(Screen.NOTELIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnEventlist()) {
-				screen.getEventlist().updateTable();
+				screen.getEventlist().updateTable(getCurrentCalendar());
 				screen.show(Screen.EVENTLIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnCalendars()) {
-				screen.show(Screen.CALENDAR);
+				screen.show(Screen.SHOWCALENDAR);
 			}
 			
 
@@ -171,7 +167,7 @@ public class GUILogic {
 				String name = screen.getAddEventGUI().getTextField_Name().getText();
 				String text = screen.getAddEventGUI().getTextField_Text().getText();
 				String customEvent = "1";
-				String calendarID = "1";
+				
 				
 				
 				
@@ -186,8 +182,8 @@ public class GUILogic {
 				else
 				{
 					try{
-					sw.createEvent(type, location, createdby, start, end, name, text, customEvent, calendarID);
-					screen.getEventlist().updateTable();
+					sw.createEvent(type, location, createdby, start, end, name, text, customEvent, getCurrentCalendar());
+					screen.getEventlist().updateTable(getCurrentCalendar());
 					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -212,7 +208,7 @@ public class GUILogic {
 				
 			}
 			if (e.getSource() == screen.getShareCalendar().getBtnBack()) {
-				screen.show(Screen.CALENDAR);
+				screen.show(Screen.SHOWCALENDAR);
 			}
 		}
 		
@@ -222,9 +218,7 @@ public class GUILogic {
 
 	private class AddUserActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == screen.getAddUser().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
-			}
+
 			if (e.getSource() == screen.getAddUser().getBtnMainMenu()) {
 				screen.show(Screen.MAINMENU);
 			}
@@ -238,8 +232,7 @@ public class GUILogic {
 				
 				
 
-				// her kan vi ogs� bruke goodpass metoden fra den tidligere
-				// oppgave
+				
 				if (Email.equals("") || type.equals("") || Password.equals("")) {
 					JOptionPane.showMessageDialog(null,
 							"\nPlease fill out all the fields",
@@ -411,15 +404,7 @@ public class GUILogic {
 				screen.show(Screen.ADDEVENTGUI);
 			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
-				int eventID = (int) screen.getEventlist().getModel().getValueAt(row, 1);
-//				try {
-//					sw.removeEvent("1", eventID);
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
 				
-				//mangler
 			}
 		}
 	}
@@ -430,25 +415,25 @@ public class GUILogic {
 			if (e.getSource() == screen.getCalendar().getBtnMainMenu()) {
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getCalendar().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
-			}
 			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
 				screen.getAddCalendar().updateTable();
 				screen.show(Screen.ADDCALENDAR);
 			}
 			if (e.getSource() == screen.getCalendar().getChooseCalendar()) {
 				
+				setCurrentcalendar(screen.getCalendar().getLblGetId().getText());
+				screen.getCalendar().getLblCalendarInfo().setText("the current calendar is now set to: " + screen.getCalendar().getlblCalendarName().getText());
+				
 			}
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
 				
-				String name = screen.getCalendar().getLblChosenCalendar().getText();
+				String name = screen.getCalendar().getlblCalendarName().getText();
 				
 				String fields[] = {"active"};
 				String values[] = {"0"};
 				try{
 					
-					qb.update("calender", fields, values).where("name", "=", name).Execute();
+					qb.update("calendar", fields, values).where("name", "=", name).Execute();
 					screen.getCalendar().updateTable();
 				}catch (Exception e4){
 					e4.printStackTrace();
@@ -465,11 +450,9 @@ public class GUILogic {
 		public void actionPerformed(ActionEvent e) {
 			
 			if (e.getSource() == screen.getAddCalendar().getBtnBack()) {
-				screen.show(Screen.CALENDAR);
+				screen.show(Screen.SHOWCALENDAR);
 			}
-			if (e.getSource() == screen.getAddCalendar().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
-			}
+
 			if (e.getSource() == screen.getAddCalendar().getBtnSubmit()) {
 				
 				String email = getCurrentUser();
@@ -477,13 +460,22 @@ public class GUILogic {
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
 				int privatepublic = Integer.valueOf(privatePublic);
 				String shareWith = screen.getAddCalendar().getTxtShare().getText();
-				
 				ArrayList<String>sharedUsers = new ArrayList<String>();
+				try{
+					
+				boolean privatepub;
+					
+				if(screen.getAddCalendar().getChckbxIfYesCheck().isSelected())
+				{
+				screen.getAddCalendar().showShareFields();
+				
 				sharedUsers.add(shareWith);
 				
+				}else{
+					sharedUsers.isEmpty();
+				}	
 				
 				
-				try{
 				
 				sw.addNewCalendar(name, privatepublic, email, sharedUsers);
 				
@@ -492,10 +484,12 @@ public class GUILogic {
 				JOptionPane.showMessageDialog(null,
 						"\nCalendar has been added!", "", JOptionPane.PLAIN_MESSAGE);
 				screen.getCalendar().updateTable();
-				screen.show(Screen.CALENDAR);
+				screen.show(Screen.SHOWCALENDAR);
+				
 			} catch (Exception e2){
 				e2.printStackTrace();
 			}
+				
 		}
 	}
 //	private class AddCourseActionListener implements ActionListener {
@@ -596,6 +590,14 @@ public class GUILogic {
 
 	public void setCurrentUser(String currentUser) {
 		this.currentUser = currentUser;
+	}
+
+	public String getCurrentCalendar() {
+		return currentCalendar;
+	}
+
+	public void setCurrentcalendar(String currentCalendar) {
+		this.currentCalendar = currentCalendar;
 	}
 		
 }

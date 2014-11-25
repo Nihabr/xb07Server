@@ -19,7 +19,7 @@ public class Screen extends JFrame {
 	public static final String ADDEVENTGUI = "name_6308445225625";
 	public static final String ADDUSER = "name_10334207821613";
 	public static final String ADDNOTE = "addnote";
-	public static final String CALENDAR = "calendar";
+	public static final String SHOWCALENDAR = "showcalendar";
 	public static final String ADDCALENDAR = "addcalendar";
 	public static final String SHARECALENDAR = "shareCalendar";
 	
@@ -92,7 +92,7 @@ public class Screen extends JFrame {
 		
 		contentPane.add(addNote, "addnote");
 		
-		contentPane.add(calendar, "calendar");
+		contentPane.add(calendar, "showcalendar");
 		
 		contentPane.add(addCalendar, "addcalendar");
 		

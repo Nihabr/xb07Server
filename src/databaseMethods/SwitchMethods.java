@@ -102,7 +102,7 @@ public class SwitchMethods extends Model
 		
 		
 		String [] values = {"calendarID","createdby"};
-		resultSet = qb.selectFrom(values, "calendar").where("email", "IS", null ).ExecuteQuery();
+		resultSet = qb.selectFrom(values, "calendar").where("isCBS", "=", "0" ).ExecuteQuery();
 		while(resultSet.next()){
 
 			//Tjekker at kalenderen findes, og at det ikke er brugerens CBS kalender

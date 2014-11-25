@@ -49,7 +49,7 @@ public class EventList extends JPanel {
 
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
-				"Start", "End", "Name", "Text","Active", "CustomEvent", "CalendarID" };
+				"Start", "End", "Name", "Text","Active", "CalendarID","CBSeventID" };
 
 
 		table = new JTable();
@@ -179,14 +179,14 @@ public class EventList extends JPanel {
 	public JButton getBtnMainMenu() {
 		return btnMainMenu;
 	}
-	public void updateTable(){
+	public void updateTable(String value){
 		try {
 			model.getDataVector().removeAllElements();
  			QueryBuilder qb = new QueryBuilder();
  			String key [] = {"active"};
- 			String value = "1";
  			
- 			rs = qb.selectFrom("events").where("active", "=", value).ExecuteQuery();
+ 			
+ 			rs = qb.selectFrom("events").where("calendarID", "=", value).ExecuteQuery();
  			ResultSetMetaData rsmd = rs.getMetaData();
  			int colNo = rsmd.getColumnCount();
  			

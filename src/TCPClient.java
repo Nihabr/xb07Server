@@ -20,7 +20,6 @@ public class TCPClient {
 		ArrayList<String> users = new ArrayList<String>();
 		
 		c.setEmail("nibr13ae");
-		c.setCalenderName("DENNE SKAL");
 		c.setPublicOrPrivate(1);
 		users.add("jolj13ab");
 		users.add("dude");
