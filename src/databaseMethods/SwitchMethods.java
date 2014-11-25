@@ -306,4 +306,12 @@ public class SwitchMethods extends Model
 
 		return gsonString;
 	}
+	
+	public String clientLogout (String email) throws SQLException{
+		String gsonString = "";	
+		String [] fields = {"active"};
+		String [] values = {"0"};
+		qb.update("users", fields, values).where("email", "=", email).Execute();
+		return gsonString;
+	}
 }
