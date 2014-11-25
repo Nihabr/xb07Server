@@ -29,7 +29,8 @@ public class Calendar extends JPanel {
 	private JLabel lblBackground;
 	private JLabel label;
 	private JLabel lblHeader;
-	private JLabel lblChosenCalendar;
+	private JLabel lblCalendarName;
+	private JLabel lblGetId;
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -43,14 +44,18 @@ public class Calendar extends JPanel {
 	private JButton btnShare;
 	
 	int row;
+	private JLabel lblCalendarInfo;
+
 	
-	// panel oprettes hvori der kan oprettes, slettes, deles og vælges kalender.
+	
+	
+
 	public Calendar() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
 		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy",
-				"PrivatePublic","Email" };
+				"PrivatePublic","IsCBS" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -59,7 +64,6 @@ public class Calendar extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		// mouselistener for JTable oprettes.
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -68,18 +72,30 @@ public class Calendar extends JPanel {
 				if(row != -1){
 				
 				
-
-				lblChosenCalendar.setText(table.getValueAt(row, 1).toString());
+				lblGetId.setText(table.getValueAt(row, 0).toString());
+				lblCalendarName.setText(table.getValueAt(row, 1).toString());
 				
 				}
 			}
 		});
 		
-		lblChosenCalendar = new JLabel("");
-		lblChosenCalendar.setBounds(1030, 412, 56, 16);
-		lblChosenCalendar.setVisible(false);
-		add(lblChosenCalendar);
+		lblCalendarName = new JLabel("");
+		lblCalendarName.setBounds(1030, 412, 56, 16);
+		lblCalendarName.setVisible(false);
+		
+		lblGetId = new JLabel("");
+		lblGetId.setBounds(1030, 363, 56, 16);
+		lblGetId.setVisible(false);
+		
+		lblCalendarInfo = new JLabel("");
+		lblCalendarInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCalendarInfo.setBounds(490, 198, 413, 29);
+		
+		add(lblCalendarInfo);
+		add(lblGetId);
+		add(lblCalendarName);
 
+		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -91,6 +107,7 @@ public class Calendar extends JPanel {
 				null));
 		scrollPane.setBounds(425, 240, 553, 315);
 
+		// Add the scroll pane to this panel.
 		add(scrollPane);
 
 		lblHeader = new JLabel("Calendars");
@@ -176,7 +193,7 @@ public class Calendar extends JPanel {
 		add(lblBackground);
 
 	}
-	// Actionlisteners oprettes
+
 	public void addActionListener(ActionListener l) {
 		btnChooseCalendar.addActionListener(l);
 		btnAdd.addActionListener(l);
@@ -203,21 +220,27 @@ public class Calendar extends JPanel {
 		this.table = table;
 	}
 
-	public JLabel getLblChosenCalendar() {
-		return lblChosenCalendar;
+	public JLabel getlblCalendarName() {
+		return lblCalendarName;
 	}
-	// Der oprettes en metode der kan opdatere tabellen. 
+
+	public JLabel getLblGetId() {
+		return lblGetId;
+	}
+
+	public void setLblGetId(JLabel lblGetId) {
+		this.lblGetId = lblGetId;
+	}
+
 	public void updateTable() {
 		try {
-			// her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
-			// Henter values 'email' fra table 'users' i databasen.
+
 			QueryBuilder qb = new QueryBuilder();
 			rs = qb.selectFrom("calendar").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			// Henter values 'email' fra table 'users' i databasen.
 			int colNo = rsmd.getColumnCount();
-			// tilføjer emails til JTable.
+
 			while (rs.next()) {
 
 				objects = new Object[colNo];
@@ -260,5 +283,13 @@ public class Calendar extends JPanel {
 	}
 	public JButton getBtnShare() {
 		return btnShare;
+	}
+
+	public JLabel getLblCalendarInfo() {
+		return lblCalendarInfo;
+	}
+
+	public void setLblCalendarInfo(JLabel lblCalendarInfo) {
+		this.lblCalendarInfo = lblCalendarInfo;
 	}
 }

@@ -42,7 +42,7 @@ public class GiantSwitch {
 			ClientLogout clo = (ClientLogout)gson.fromJson(jsonString, ClientLogout.class);
 			answer = SW.clientLogout(clo.getEmail());
 			System.out.println("Recieved logOut");
-			break;
+			break; 
 
 		/*************
 		 ** CALENDAR **
@@ -50,7 +50,7 @@ public class GiantSwitch {
 		case "createCalendar":
 			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
 			System.out.println(CC.getCalendarName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.addNewCalendar(CC.getCalendarName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers(), 0);
+			answer = SW.addNewCalendar(CC.getCalendarName(), CC.getPublicOrPrivate(),CC.getEmail(), CC.getSharedUsers(), CC.getIsCBS());
 
 			
 			break;

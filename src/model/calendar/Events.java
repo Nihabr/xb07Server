@@ -56,7 +56,7 @@ public class Events {
 				System.out.println(stringStartDate);
 				
 				
-				events.add(new UserEvent( stringEventID, stringType, stringLocation,stringCreatedby, stringStartDate, stringEndDate , nameEvent, text,customEvent,calId ));
+//				events.add(new UserEvent( stringEventID, stringType, stringLocation,stringCreatedby, stringStartDate, stringEndDate , nameEvent, text,customEvent,calId ));
 //				events.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
 				//er det noen grunn til at det tillegges to ganger p� fler av variablene?
 			}

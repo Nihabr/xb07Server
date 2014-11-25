@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 
 import model.QueryBuild.QueryBuilder;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 
 
@@ -33,19 +35,21 @@ public class AddCalendar extends JPanel {
 	private JButton btnLogout;
 	private JButton btnSubmit;
 	private JLabel lblName;
+	private JLabel lblShareWith;
 	private JLabel lblPrivateOrPublic;
 	private JTextField textName;
 	private JTextField textPrivateOrPublic;
 	private JTextField txtShare;
-	private JLabel lblShareWith;
+	private JCheckBox chckbxIfYesCheck;
+	
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private Object[] objects;
 	QueryBuilder qb = new QueryBuilder();
 	ResultSet rs;
+	private JLabel lblShareCalendar;
 	
-	//Herunder tilføjes et JTable med dertilhørende scrollpane, samt alle JLabels, JButtons og JTextfields i tilføj kalender interfacet. 
 	
 	public AddCalendar() {
 		setSize(new Dimension(1366, 768));
@@ -55,6 +59,16 @@ public class AddCalendar extends JPanel {
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
+		
+		chckbxIfYesCheck = new JCheckBox("If yes, check this box");
+		chckbxIfYesCheck.setBounds(737, 436, 149, 25);
+		add(chckbxIfYesCheck);
+		
+		lblShareCalendar = new JLabel("Share this calendar?");
+		lblShareCalendar.setForeground(Color.WHITE);
+		lblShareCalendar.setFont(new Font("Arial", Font.BOLD, 26));
+		lblShareCalendar.setBounds(476, 425, 260, 39);
+		add(lblShareCalendar);
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
@@ -69,18 +83,21 @@ public class AddCalendar extends JPanel {
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
-		scrollPane.setBounds(547, 184, 260, 182);
-		add(scrollPane);
+		scrollPane.setBounds(547, 184, 260, 148);
 
+		// Add the scroll pane to this panel.
+		add(scrollPane);
 		lblShareWith = new JLabel("Share with:");
 		lblShareWith.setForeground(Color.WHITE);
 		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
-		lblShareWith.setBounds(476, 454, 147, 39);
+		lblShareWith.setBounds(476, 468, 147, 39);
+		lblShareWith.setVisible(false);
 		add(lblShareWith);
 		
 		txtShare = new JTextField();
 		txtShare.setColumns(10);
-		txtShare.setBounds(727, 466, 134, 28);
+		txtShare.setBounds(737, 477, 149, 28);
+		txtShare.setVisible(false);
 		add(txtShare);
 		
 		lblHeader = new JLabel("Add Calendar");
@@ -121,22 +138,22 @@ public class AddCalendar extends JPanel {
 		lblName = new JLabel("Name:");
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Arial", Font.BOLD, 26));
-		lblName.setBounds(476, 379, 147, 39);
+		lblName.setBounds(476, 345, 147, 39);
 		add(lblName);
 		
 		lblPrivateOrPublic = new JLabel("Private or public:");
 		lblPrivateOrPublic.setForeground(Color.WHITE);
 		lblPrivateOrPublic.setFont(new Font("Arial", Font.BOLD, 26));
-		lblPrivateOrPublic.setBounds(476, 420, 223, 39);
+		lblPrivateOrPublic.setBounds(476, 385, 223, 39);
 		add(lblPrivateOrPublic);
 		
 		textName = new JTextField();
-		textName.setBounds(727, 388, 134, 28);
+		textName.setBounds(737, 354, 149, 28);
 		add(textName);
 		textName.setColumns(10);
 		
 		textPrivateOrPublic = new JTextField();
-		textPrivateOrPublic.setBounds(727, 429, 134, 28);
+		textPrivateOrPublic.setBounds(737, 394, 149, 28);
 		add(textPrivateOrPublic);
 		textPrivateOrPublic.setColumns(10);
 		
@@ -146,25 +163,22 @@ public class AddCalendar extends JPanel {
 		add(lblBackground);
 		
 		}
-	// Her tilføjes Actionlisteners
+	
 	public void addActionListener(ActionListener l) {
 		btnLogout.addActionListener(l);
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
-	// Der oprettes en metode der kan opdatere tabellen. 
 	public void updateTable() {
 		try {
-			// her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
-			// Henter values 'email' fra table 'users' i databasen. 
+
 			QueryBuilder qb = new QueryBuilder();
 			String[] values = {"email"};
 			rs = qb.selectFrom(values, "users").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			// Henter values 'email' fra table 'users' i databasen.
 			int colNo = rsmd.getColumnCount();
-			// tilføjer emails til JTable.
+
 			while (rs.next()) {
 
 				objects = new Object[colNo];
@@ -181,6 +195,31 @@ public class AddCalendar extends JPanel {
 		}
 	}
 	
+	public JCheckBox getChckbxIfYesCheck() {
+		return chckbxIfYesCheck;
+	}
+
+	public void setChckbxIfYesCheck(JCheckBox chckbxIfYesCheck) {
+		this.chckbxIfYesCheck = chckbxIfYesCheck;
+	}
+
+	public JLabel getLblShareWith() {
+		return lblShareWith;
+	}
+
+	public void setLblShareWith(JLabel lblShareWith) {
+		this.lblShareWith = lblShareWith;
+	}
+	public void showShareFields(){
+		lblShareWith.setVisible(true);
+		txtShare.setVisible(true);
+	}
+
+
+	public void setTxtShare(JTextField txtShare) {
+		this.txtShare = txtShare;
+	}
+
 	public JButton getBtnBack() {
 		return btnBack;
 	}

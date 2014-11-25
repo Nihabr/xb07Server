@@ -9,6 +9,7 @@ public class CreateCalendar implements java.io.Serializable
 	private String calenderName;
 	private String email;
 	private int publicOrPrivate;
+	private int isCBS;
 	private ArrayList <String> sharedUsers;
 	
 	public ArrayList<String> getSharedUsers() {
@@ -41,6 +42,12 @@ public class CreateCalendar implements java.io.Serializable
 	}
 	public void setPublicOrPrivate(int publicPrivate) {
 		this.publicOrPrivate = publicPrivate;
+	}
+	public int getIsCBS() {
+		return isCBS;
+	}
+	public void setIsCBS(int isCBS) {
+		this.isCBS = isCBS;
 	}
 
 }

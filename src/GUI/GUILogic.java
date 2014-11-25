@@ -172,8 +172,6 @@ public class GUILogic {
 				
 				
 				
-				//Her m� det ogs� tilf�yes nye felter til add event panelet.
-				
 				if (type.equals("")|| location.equals("")|| createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
@@ -458,12 +456,21 @@ public class GUILogic {
 				String email = getCurrentUser();
 				String name = screen.getAddCalendar().getTextName().getText();
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
-				int privatepublic = Integer.valueOf(privatePublic);
+				int isCbs = 0;
 				String shareWith = screen.getAddCalendar().getTxtShare().getText();
 				ArrayList<String>sharedUsers = new ArrayList<String>();
 				try{
 					
-				boolean privatepub;
+				int visibilitystatus = 0;
+				
+				if(privatePublic.equals("private")){
+					
+					visibilitystatus = 0;
+				}else if(privatePublic.equals("public")){
+					visibilitystatus = 1;
+				}
+					
+					
 					
 				if(screen.getAddCalendar().getChckbxIfYesCheck().isSelected())
 				{
@@ -477,7 +484,7 @@ public class GUILogic {
 				
 				
 				
-				sw.addNewCalendar(name, privatepublic, email, sharedUsers);
+				sw.addNewCalendar(name, visibilitystatus, email, sharedUsers, isCbs);
 				
 				
 				
