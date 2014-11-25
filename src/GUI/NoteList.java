@@ -1,27 +1,22 @@
 package GUI;
 
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.CompoundBorder;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import model.QueryBuild.QueryBuilder;
@@ -35,6 +30,7 @@ public class NoteList extends JPanel {
 	private JButton btnMainMenu;
 	private JButton btnLogout;
 	private JLabel label;
+	private Object[] objects;
 	private JScrollPane scrollPane;
 	private DefaultTableModel model;
 	private ResultSet rs;
@@ -47,32 +43,13 @@ public class NoteList extends JPanel {
 		setLayout(null);
 		
 		//Laver tabellen inde i Eventlisten.
-		String[] columnNames = { "noteId", "eventId", "createdBy", "text", "dateTime", "active"};
+		String[] columnNames = { "noteId", "eventId", "createdBy", "text", "Created", "active"};
 
 		table = new JTable();
     	model = (DefaultTableModel)table.getModel();
     	model.setColumnIdentifiers(columnNames);
     	// Her hentes alle data ift. noter i databasen i tabellen 'notes', og tilføjes JTable.
-    	 try {
- 			QueryBuilder qb = new QueryBuilder();
- 			rs = qb.selectFrom("notes").all().ExecuteQuery();
- 			ResultSetMetaData rsmd = rs.getMetaData();
- 			int colNo = rsmd.getColumnCount();
- 			
- 	        while (rs.next()) {
- 	        	
- 	        	Object[] objects = new Object[colNo];
- 	        	
- 	        	for(int i=0;i<colNo;i++){
- 	        		  objects[i]=rs.getObject(i+1);
- 	        		  }
- 	        		 model.addRow(objects);
- 	        		}
- 	        		table.setModel(model);
-    		} catch (SQLException e1) {
-     			e1.printStackTrace();
-     		}
-		
+    
 		table.setSurrendersFocusOnKeystroke(true);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
@@ -143,6 +120,33 @@ public class NoteList extends JPanel {
 		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 	}
+	public void updateTable(String value){
+		try {
+			model.getDataVector().removeAllElements();
+ 			QueryBuilder qb = new QueryBuilder();
+ 			
+ 			
+ 			
+ 			rs = qb.selectFrom("notes").where("eventID", "=", value).ExecuteQuery();
+ 			ResultSetMetaData rsmd = rs.getMetaData();
+ 			int colNo = rsmd.getColumnCount();
+ 			
+ 	        while (rs.next()) {
+ 	        	
+ 	        	objects = new Object[colNo];
+ 	        	
+ 	        	for(int i=0;i<colNo;i++){
+ 	        		  objects[i]=rs.getObject(i+1);
+ 	        		  }
+ 	        		 model.addRow(objects);
+ 	        		}
+ 	        		table.setModel(model);
+ 	        		
+    		} catch (SQLException e1) {
+     			e1.printStackTrace();
+     		}
+	}
+	
 
 	public JButton getBtnDelete() {
 		return btnDelete;

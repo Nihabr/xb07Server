@@ -7,15 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-import model.Forecast.Forecast;
 import model.QueryBuild.QueryBuilder;
 
 import org.json.simple.JSONObject;
@@ -23,9 +16,7 @@ import org.json.simple.parser.JSONParser;
 
 public class QOTDModel implements Runnable {
 
-	private ArrayList<QOTD> qotdlist = new ArrayList<>();
-
-	QOTD qotdlist2 = new QOTD(null, null, null);
+	
 	QueryBuilder qb = new QueryBuilder();
 
 	private ResultSet resultSet;
@@ -79,8 +70,6 @@ public class QOTDModel implements Runnable {
 
 			String[] keys = { "qotd" };
 			String[] keys2 = { fQuote };
-			String apostrophe = "'";
-			String[] a = { "''" };
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String datetime = sdf.format(date) + " 11:00:00";
@@ -102,17 +91,16 @@ public class QOTDModel implements Runnable {
 	 * will make it into a json object so it can be printed out to the client.
 	 */
 	public String getQuote() {
-		String q = "";
-		String[] key = { "qotd" };
+		String quote = "";
 		try {
 			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			while (resultSet.next()) {
-				q = resultSet.getString("qotd");
+				quote = resultSet.getString("qotd");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return q;
+		return quote;
 	}
 }

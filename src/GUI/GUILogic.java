@@ -24,6 +24,7 @@ public class GUILogic {
 	private String action;
 	private String currentUser = "";
 	private String currentCalendar = "";
+	private String eventID = "";
 	
 	private boolean full = false;
 	QueryBuilder qb = new QueryBuilder();
@@ -77,7 +78,7 @@ public class GUILogic {
 				// Giv auth noget data som passer til metoden
 				// Dern��st skal auth returnere 0 hvis dataen er god, og ellers
 				// give en fejl
-				// brug if / else statement til at printe om det er godkendt
+				// brug if / else statement til at  om det er godkendt
 				// eller ej, og hvis ikke
 				// skal det printe hvilken fejl der er (bare print den int
 				// v��rdi i modtager)
@@ -118,6 +119,9 @@ public class GUILogic {
 				
 				try{
 				qb.update("users", fields, values).where("email", "=", getCurrentUser()).Execute();
+				setCurrentcalendar(null);
+				setCurrentUser(null);
+				setEventID(null);
 				screen.show(Screen.LOGIN);
 				}
 				catch(Exception e5){
@@ -133,6 +137,7 @@ public class GUILogic {
 				screen.show(Screen.USERLIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnNotelist()) {
+				screen.getNoteList().updateTable(getEventID());
 				screen.show(Screen.NOTELIST);
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnEventlist()) {
@@ -159,14 +164,14 @@ public class GUILogic {
 			if (e.getSource() == screen.getAddEventGUI().getBtnSubmit()){
 				String type = screen.getAddEventGUI().getTextField_Type().getText();
 				String location = screen.getAddEventGUI().getTextField_Location().getText();
-				String createdby = screen.getAddEventGUI().getTextField_Createdby().getText();
+				String createdby = getCurrentUser();
 				String start = "";
 				start = screen.getAddEventGUI().startDateTimeToString();
 				String end = "";
 				end = screen.getAddEventGUI().endDateTimeToString();
 				String name = screen.getAddEventGUI().getTextField_Name().getText();
 				String text = screen.getAddEventGUI().getTextField_Text().getText();
-				String customEvent = "1";
+			
 				
 				
 				
@@ -180,7 +185,7 @@ public class GUILogic {
 				else
 				{
 					try{
-					sw.createEvent(type, location, createdby, start, end, name, text, customEvent, getCurrentCalendar());
+					sw.createEvent(type, location, createdby, start, end, name, text, getCurrentCalendar());
 					screen.getEventlist().updateTable(getCurrentCalendar());
 					
 				} catch (SQLException e1) {
@@ -401,7 +406,26 @@ public class GUILogic {
 			if (e.getSource() == screen.getEventlist().getBtnAdd()){
 				screen.show(Screen.ADDEVENTGUI);
 			}
+			if (e.getSource() == screen.getEventlist().getBtnSelectEvent()){
+				
+				setEventID(screen.getEventlist().getEventID());
+				screen.getEventlist().getLblChosenEvent().setText("Go back to Main menu and then enter Notes to see specific notes for this event: " + screen.getEventlist().getName());
+				
+				
+			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
+				
+				String[] fields = {"active"};
+				String [] values ={"0"};
+				String name = screen.getEventlist().getName();
+				try{
+					qb.update("events", fields, values).where("name", "=", name).Execute();
+					
+					screen.getEventlist().updateTable(getCurrentCalendar());
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				
 			}
 		}
@@ -419,13 +443,13 @@ public class GUILogic {
 			}
 			if (e.getSource() == screen.getCalendar().getChooseCalendar()) {
 				
-				setCurrentcalendar(screen.getCalendar().getLblGetId().getText());
-				screen.getCalendar().getLblCalendarInfo().setText("the current calendar is now set to: " + screen.getCalendar().getlblCalendarName().getText());
+				setCurrentcalendar(screen.getCalendar().getId());
+				screen.getCalendar().getLblCalendarInfo().setText("the current calendar is now set to: " + screen.getCalendar().getName());
 				
 			}
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
 				
-				String name = screen.getCalendar().getlblCalendarName().getText();
+				String name = screen.getCalendar().getName();
 				
 				String fields[] = {"active"};
 				String values[] = {"0"};
@@ -441,6 +465,7 @@ public class GUILogic {
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				screen.show(Screen.SHARECALENDAR);
 			}
+			
 		}
 	}
 	
@@ -589,6 +614,14 @@ public class GUILogic {
 
 	public void setCurrentcalendar(String currentCalendar) {
 		this.currentCalendar = currentCalendar;
+	}
+
+	public String getEventID() {
+		return eventID;
+	}
+
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
 	}
 		
 }

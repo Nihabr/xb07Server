@@ -29,8 +29,7 @@ public class Calendar extends JPanel {
 	private JLabel lblBackground;
 	private JLabel label;
 	private JLabel lblHeader;
-	private JLabel lblCalendarName;
-	private JLabel lblGetId;
+
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -42,6 +41,8 @@ public class Calendar extends JPanel {
 	private JButton btnMainMenu;
 	private JButton btnLogout;
 	private JButton btnShare;
+	private String id;
+	private String name;
 	
 	int row;
 	private JLabel lblCalendarInfo;
@@ -71,29 +72,24 @@ public class Calendar extends JPanel {
 				row = table.getSelectedRow();
 				if(row != -1){
 				
-				
-				lblGetId.setText(table.getValueAt(row, 0).toString());
-				lblCalendarName.setText(table.getValueAt(row, 1).toString());
+				id = table.getValueAt(row, 0).toString();
+				setId(id);
+				name = table.getValueAt(row, 1).toString();
+				setName(name);
+
 				
 				}
 			}
 		});
 		
-		lblCalendarName = new JLabel("");
-		lblCalendarName.setBounds(1030, 412, 56, 16);
-		lblCalendarName.setVisible(false);
-		
-		lblGetId = new JLabel("");
-		lblGetId.setBounds(1030, 363, 56, 16);
-		lblGetId.setVisible(false);
+
 		
 		lblCalendarInfo = new JLabel("");
 		lblCalendarInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCalendarInfo.setBounds(490, 198, 413, 29);
 		
 		add(lblCalendarInfo);
-		add(lblGetId);
-		add(lblCalendarName);
+		
 
 		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
@@ -220,17 +216,6 @@ public class Calendar extends JPanel {
 		this.table = table;
 	}
 
-	public JLabel getlblCalendarName() {
-		return lblCalendarName;
-	}
-
-	public JLabel getLblGetId() {
-		return lblGetId;
-	}
-
-	public void setLblGetId(JLabel lblGetId) {
-		this.lblGetId = lblGetId;
-	}
 
 	public void updateTable() {
 		try {
@@ -292,4 +277,21 @@ public class Calendar extends JPanel {
 	public void setLblCalendarInfo(JLabel lblCalendarInfo) {
 		this.lblCalendarInfo = lblCalendarInfo;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

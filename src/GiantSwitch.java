@@ -82,7 +82,7 @@ public class GiantSwitch {
 			
 			System.out.println("Recieved new event" + ce.getEventid());
 			answer = SW.createEvent(ce.getType(), ce.getLocation(),
-					ce.getCreatedby(),ce.getStart(), ce.getEnd(), ce.getTitle(), ce.getText(), ce.getCustomevent(), ce.getCalendarID());
+					ce.getCreatedby(),ce.getStart(), ce.getEnd(), ce.getTitle(), ce.getText(), ce.getCalendarID());
 			break;
 
 		case "getEventInfo":

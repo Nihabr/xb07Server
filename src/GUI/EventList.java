@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -15,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
@@ -32,7 +35,9 @@ public class EventList extends JPanel {
 	private JButton btnDelete;
 	private JButton btnLogout;
 	private JButton btnMainMenu;
+	private JButton btnSelectEvent;
 	private JLabel label;
+	private JLabel lblChosenEvent;
 	private JLabel lblEvents;
 	private JLabel lblUpcomingEvent;
 	private DefaultTableModel model;
@@ -41,7 +46,9 @@ public class EventList extends JPanel {
 	private JLabel lblHeader;
 	private int row;
 	private ResultSet rs;
-	Object[] objects;
+	private Object[] objects;
+	private String name;
+	private String eventID;
 	
 	public EventList() {
 		setSize(new Dimension(1366, 768));
@@ -49,7 +56,7 @@ public class EventList extends JPanel {
 
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
-				"Start", "End", "Name", "Text","Active", "CalendarID","CBSeventID" };
+				"Start", "End", "Name", "Text","CalendarID", "Active"};
 
 
 		table = new JTable();
@@ -59,11 +66,41 @@ public class EventList extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				row = table.getSelectedRow();
+				if(row != -1){
+				name = table.getValueAt(row, 6).toString();
+				setName(name);
+				eventID = table.getValueAt(row, 0).toString();
+				setEventID(eventID);
+				
+				
+//				lblCalendarName.setText(table.getValueAt(row, 1).toString());
+				
+				}
+			}
+		});
+		
+		lblChosenEvent = new JLabel("");
+		lblChosenEvent.setBounds(233, 144, 611, 21);
+		add(lblChosenEvent);
+		
+		btnSelectEvent = new JButton("Select event");
+		btnSelectEvent.setOpaque(true);
+		btnSelectEvent.setForeground(new Color(0, 0, 205));
+		btnSelectEvent.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
+						255)));
+		btnSelectEvent.setBounds(1138, 434, 118, 29);
+		add(btnSelectEvent);
 
 		lblHeader = new JLabel("Events");
 		lblHeader.setForeground(Color.WHITE);
 		lblHeader.setFont(new Font("Arial", Font.BOLD, 78));
-		lblHeader.setBounds(510, 90, 392, 90);
+		lblHeader.setBounds(512, 41, 392, 90);
 		add(lblHeader);
 		
 		// Create the scroll pane and add the table to it.
@@ -76,7 +113,7 @@ public class EventList extends JPanel {
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
-		scrollPane.setBounds(94, 186, 884, 369);
+		scrollPane.setBounds(218, 184, 884, 369);
 
 		// Add the scroll pane to this panel.
 		add(scrollPane);
@@ -91,7 +128,7 @@ public class EventList extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(602, 590, 194, 50);
+		btnMainMenu.setBounds(559, 587, 194, 50);
 		add(btnMainMenu);
 
 		btnLogout = new JButton("Log out");
@@ -104,7 +141,7 @@ public class EventList extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnLogout.setBounds(602, 656, 194, 50);
+		btnLogout.setBounds(559, 650, 194, 50);
 		add(btnLogout);
 
 		btnDelete = new JButton("Delete");
@@ -112,7 +149,7 @@ public class EventList extends JPanel {
 		btnDelete.setForeground(new Color(0, 0, 205));
 		btnDelete.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
-		btnDelete.setBounds(990, 486, 118, 29);
+		btnDelete.setBounds(1138, 482, 118, 29);
 		add(btnDelete);
 
 		btnAdd = new JButton("Add");
@@ -120,7 +157,7 @@ public class EventList extends JPanel {
 		btnAdd.setForeground(new Color(0, 0, 205));
 		btnAdd.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
 				255)));
-		btnAdd.setBounds(990, 526, 118, 29);
+		btnAdd.setBounds(1138, 524, 118, 29);
 		add(btnAdd);
 
 		label = new JLabel("");
@@ -157,9 +194,25 @@ public class EventList extends JPanel {
 		btnDelete.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
-		
+		btnSelectEvent.addActionListener(l);
 	}
+	
 
+	public JLabel getLblChosenEvent() {
+		return lblChosenEvent;
+	}
+	public void setLblChosenEvent(JLabel lblChosenEvent) {
+		this.lblChosenEvent = lblChosenEvent;
+	}
+	public JButton getBtnSelectEvent() {
+		return btnSelectEvent;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public JButton getBtnAdd() {
 		return btnAdd;
 	}
@@ -179,11 +232,18 @@ public class EventList extends JPanel {
 	public JButton getBtnMainMenu() {
 		return btnMainMenu;
 	}
+	
+	public String getEventID() {
+		return eventID;
+	}
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
+	}
 	public void updateTable(String value){
 		try {
 			model.getDataVector().removeAllElements();
  			QueryBuilder qb = new QueryBuilder();
- 			String key [] = {"active"};
+ 			
  			
  			
  			rs = qb.selectFrom("events").where("calendarID", "=", value).ExecuteQuery();
@@ -205,5 +265,4 @@ public class EventList extends JPanel {
      			e1.printStackTrace();
      		}
 	}
-
 }

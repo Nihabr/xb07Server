@@ -1,14 +1,5 @@
 package model.Forecast;
 
-import model.QueryBuild.QueryBuilder;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import config.Configurations;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,9 +11,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
+import model.QueryBuild.QueryBuilder;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import config.Configurations;
 
 public class ForecastModel implements Runnable {
 
@@ -124,8 +121,7 @@ public class ForecastModel implements Runnable {
 		// Query database and fetch existing weather data from db
 		ResultSet forecast = null;
 		try {
-			forecast = qb.selectFrom("dailyupdate")
-					.where("msg_type", "=", "fc").ExecuteQuery();
+			forecast = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			// Method to add these ResultSet values to ArrayList needs to be
 			// created
 
@@ -167,10 +163,8 @@ public class ForecastModel implements Runnable {
 			String dateTime = (fc.getDate());
 			String temperature = fc.getCelsius().toString();
 			String summary = fc.getDesc();
-			String msg_type = "fc";
-			String[] fields = { "date", "apparenttemperature", "summary",
-					"msg_type" };
-			String[] values = { dateTime, temperature, summary, msg_type };
+			String[] fields = { "date", "apparenttemperature", "summary" };
+			String[] values = { dateTime, temperature, summary };
 			try {
 				qb.insertInto("dailyupdate", fields).values(values).Execute();
 			} catch (SQLException e) {
