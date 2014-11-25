@@ -21,8 +21,8 @@ public class TCPClient {
 
 
 		//CLIENT LOGIN
-		c.setEmail("nihabr");
-		c.setPassWord("1");
+		c.setEmail("hejsa123");
+		c.setPassWord("hejsa123");
 		
 		
 		//CLIENTLOGOUT
@@ -47,7 +47,7 @@ public class TCPClient {
 		
 		
 
-		Socket clientSocket = new Socket("130.226.41.17", 6666);
+		Socket clientSocket = new Socket("172.17.177.232", 6666);
 		DataOutputStream outToServer = new DataOutputStream(
 				clientSocket.getOutputStream());
 		byte[] input = gsonString.getBytes();
