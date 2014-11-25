@@ -484,23 +484,7 @@ public class GUILogic {
 			}
 		}
 	}
-//	private class AddCourseActionListener implements ActionListener {
-//		public void actionPerformed(ActionEvent e) {
-//			
-//			if (e.getSource() == screen.getAddCourse().getBtnMainMenu()){
-//				screen.show(Screen.MAINMENU);
-//			}
-//			if (e.getSource() == screen.getAddCourse().getBtnLogout()){
-//				screen.show(Screen.LOGIN);
-//			}
-//			if (e.getSource() == screen.getAddCourse().getBtnAdd()) {
-//				// mangler
-//			}
-//			if (e.getSource() == screen.getAddCourse().getBtnDelete()) {
-//				// mangler
-//			}
-//		}
-//	}	
+
 	}
 	private class EventListMouseListener implements MouseListener {
 

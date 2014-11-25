@@ -40,9 +40,8 @@ public class NoteList extends JPanel {
 	private ResultSet rs;
 	
 
-	/**
-	 * Create the panel.
-	 */
+	//Panel med noteliste oprettes.
+	
 	public NoteList() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
@@ -53,7 +52,7 @@ public class NoteList extends JPanel {
 		table = new JTable();
     	model = (DefaultTableModel)table.getModel();
     	model.setColumnIdentifiers(columnNames);
-    	
+    	// Her hentes alle data ift. noter i databasen i tabellen 'notes', og tilføjes JTable.
     	 try {
  			QueryBuilder qb = new QueryBuilder();
  			rs = qb.selectFrom("notes").all().ExecuteQuery();
@@ -79,7 +78,6 @@ public class NoteList extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 
-		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -91,7 +89,6 @@ public class NoteList extends JPanel {
 				null));
 		scrollPane.setBounds(149, 171, 1062, 376);
 
-		// Add the scroll pane to this panel.
 		add(scrollPane);
 		
 		lblHeader = new JLabel("Notes");
@@ -139,7 +136,7 @@ public class NoteList extends JPanel {
 		
 		add(lblBackground);
 	}
-	
+	// Actionlisteners tilføjes
 	public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);

@@ -30,10 +30,14 @@ public class UserInfo extends JPanel {
 	private JLabel lblOnlineDot;
 	private JLabel lblCBSlogo;
 	private JLabel lblUserInfo;
+	private JLabel lblUserID;
+	private JLabel lblEmail;
+	private JLabel lblPassword;
+	private JLabel lblCreateddate;
+	private JLabel lblOnline;
+	private JLabel lblBackground;
 
-	/**
-	 * Create the panel.
-	 */
+	// Panel hvor man kan ændre bruger informationer.
 	public UserInfo() {
 		setPreferredSize(new Dimension(1366, 768));
 		setSize(new Dimension(1366, 768));
@@ -61,7 +65,7 @@ public class UserInfo extends JPanel {
 		add(txtField_UserID);
 		txtField_UserID.setColumns(10);
 
-		JLabel lblUserID = new JLabel("UserID");
+		lblUserID = new JLabel("UserID");
 		lblUserID.setForeground(new Color(255, 255, 255));
 		lblUserID.setFont(new Font("Arial", Font.BOLD, 26));
 		lblUserID.setBounds(483, 210, 84, 30);
@@ -74,7 +78,7 @@ public class UserInfo extends JPanel {
 		txtField_Email.setBounds(755, 255, 120, 34);
 		add(txtField_Email);
 
-		JLabel lblEmail = new JLabel("Email");
+		lblEmail = new JLabel("Email");
 		lblEmail.setForeground(new Color(255, 255, 255));
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 26));
 		lblEmail.setBounds(483, 253, 71, 30);
@@ -87,7 +91,7 @@ public class UserInfo extends JPanel {
 		txtField_Password.setBounds(755, 301, 120, 34);
 		add(txtField_Password);
 
-		JLabel lblPassword = new JLabel("Password");
+		lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Arial", Font.BOLD, 26));
 		lblPassword.setForeground(new Color(255, 255, 255));
 		lblPassword.setBounds(483, 296, 129, 30);
@@ -99,14 +103,14 @@ public class UserInfo extends JPanel {
 		txtField_CreatedDate.setColumns(10);
 		txtField_CreatedDate.setBounds(755, 347, 120, 34);
 		add(txtField_CreatedDate);
-
-		JLabel lblCreateddate = new JLabel("Created Date");
+		
+		lblCreateddate = new JLabel("Created Date");
 		lblCreateddate.setForeground(new Color(255, 255, 255));
 		lblCreateddate.setFont(new Font("Arial", Font.BOLD, 26));
 		lblCreateddate.setBounds(483, 339, 159, 31);
 		add(lblCreateddate);
 
-		JLabel lblOnline = new JLabel("Online");
+		lblOnline = new JLabel("Online");
 		lblOnline.setForeground(new Color(255, 255, 255));
 		lblOnline.setFont(new Font("Arial", Font.BOLD, 26));
 		lblOnline.setBounds(483, 420, 82, 30);
@@ -118,58 +122,47 @@ public class UserInfo extends JPanel {
 		btnSubmit.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnSubmit.setForeground(new Color(255, 255, 255));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			//Submit changes to databases
-			//hvad sker der n���r ���ndringer ved en bruger submittes
-			}
-		}
-		);
 		btnSubmit.setBounds(563, 500, 239, 50);
 		add(btnSubmit);
 
 		lblOnlineDot = new JLabel("");
 		lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Red.png")));
-//<<<<<<< HEAD
 		lblOnlineDot.setBounds(755, 433, 20, 20);
 		add(lblOnlineDot);
 		lblOnlineDot.setBackground(Color.RED);
 		lblOnlineDot.repaint();
 		lblOnlineDot.setText("Offline");
 				
-				lblUserInfo = new JLabel("User Info");
-				lblUserInfo.setForeground(Color.WHITE);
-				lblUserInfo.setFont(new Font("Arial", Font.BOLD, 78));
-				lblUserInfo.setBounds(514, 90, 338, 90);
-				add(lblUserInfo);
-				//=======
-				
-				//>>>>>>> FETCH_HEAD
+		lblUserInfo = new JLabel("User Info");
+		lblUserInfo.setForeground(Color.WHITE);
+		lblUserInfo.setFont(new Font("Arial", Font.BOLD, 78));
+		lblUserInfo.setBounds(514, 90, 338, 90);
+		add(lblUserInfo);
 						
-						JLabel lblBackground = new JLabel("");
-						lblBackground.setSize(new Dimension(1366, 768));
-						lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
-						lblBackground.setBounds(0, 0, 1366, 768);
-						add(lblBackground);
+		lblBackground = new JLabel("");
+		lblBackground.setSize(new Dimension(1366, 768));
+		lblBackground.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/MetalBackground.jpg")));
+		lblBackground.setBounds(0, 0, 1366, 768);
+		add(lblBackground);
 						
 	}
+	// metode der clearer textfields
 	public void Refresh(){
 	txtField_UserID.setText("");
 	txtField_Password.setText("");
 	txtField_Email.setText("");
 	txtField_CreatedDate.setText("");
 	}
-//<<<<<<< HEAD
-//=======
+	// documentlistener tilføjes
 	public void addDocumentListener(DocumentListener e){
 		txtField_UserID.getDocument().addDocumentListener(e);
 	}
-	
-	//>>>>>>> FETCH_HEAD
+	// actionlistener tilføjes
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
+	// metode der tjekker om brugeren er online. er active = 1 (online), sættes 'dot' til grøn, er active derimod andet (0), sættes 'dot' til rød for offline.
 	public void setOnlineDot(int active){
 		if (active == 1) {
 			lblOnlineDot.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/Green.png")));

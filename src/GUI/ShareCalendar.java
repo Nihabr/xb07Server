@@ -36,8 +36,6 @@ public class ShareCalendar extends JPanel{
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private Object[] objects;
-	
-
 	private JButton btnBack;
 	private JButton btnShare;
 	private JTextField textFieldShareWith;
@@ -45,9 +43,10 @@ public class ShareCalendar extends JPanel{
 
 	QueryBuilder qb = new QueryBuilder();
 	ResultSet rs;
+	
+	// Panel hvor man kan dele kalndere. Herunder oprettes JTable med kalender info, samt alle JButtons, JLabels og JTextfields.
+	
 	public ShareCalendar() {
-		
-		
 	
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
@@ -62,13 +61,16 @@ public class ShareCalendar extends JPanel{
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 
-		
-		lblShareWith = new JLabel("Share with");
-		lblShareWith.setBounds(506, 574, 98, 16);
+		lblShareWith = new JLabel("Share with"); 
+		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
+		lblShareWith.setForeground(new Color(255, 255, 255));
+		lblShareWith.setBounds(313, 571, 159, 31);
 		add(lblShareWith);
 		
 		lblChooseCalendarBy = new JLabel("Choose calendar by ID");
-		lblChooseCalendarBy.setBounds(458, 535, 134, 19);
+		lblChooseCalendarBy.setFont(new Font("Arial", Font.BOLD, 26));
+		lblChooseCalendarBy.setForeground(new Color(255, 255, 255));
+		lblChooseCalendarBy.setBounds(313, 533, 278, 31);
 		add(lblChooseCalendarBy);
 		
 		textFieldShareWith = new JTextField();
@@ -85,11 +87,11 @@ public class ShareCalendar extends JPanel{
 		btnShare.setForeground(Color.WHITE);
 		btnShare.setFont(new Font("Arial", Font.BOLD, 30));
 		btnShare.setContentAreaFilled(false);
-		btnShare.setBorder(new CompoundBorder(new BevelBorder(
-						BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
-								0), new Color(255, 255, 255), new Color(0, 0, 0)),
-						new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
-								new Color(0, 0, 0), new Color(255, 255, 255),
+		btnShare.setBorder(new CompoundBorder(new BevelBorder(
+						BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
+								0), new Color(255, 255, 255), new Color(0, 0, 0)),
+						new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
+								new Color(0, 0, 0), new Color(255, 255, 255),
 								new Color(0, 0, 0))));
 		btnShare.setBounds(604, 617, 194, 50);
 		add(btnShare);
@@ -98,7 +100,6 @@ public class ShareCalendar extends JPanel{
 		lblChosenCalendar.setBounds(1030, 412, 56, 16);
 		add(lblChosenCalendar);
 
-		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -110,7 +111,6 @@ public class ShareCalendar extends JPanel{
 				null));
 		scrollPane.setBounds(421, 180, 553, 315);
 
-		// Add the scroll pane to this panel.
 		add(scrollPane);
 
 		lblHeader = new JLabel("Calendars");
@@ -144,14 +144,15 @@ public class ShareCalendar extends JPanel{
 				.getResource("/Images/MetalBackground.jpg")));
 		lblBackground.setBounds(0, 0, 1366, 768);
 		add(lblBackground);
-
 	}
+	// metode der opdaterer JTable
 	public void updateTable() {
 		try {
+			// Her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
 
-			
-			rs = qb.selectFrom("calender").all().ExecuteQuery();
+			// Her hentes alle info i tabellen 'calendar' i databasen, hvorefter de tilføjer i JTable.
+			rs = qb.selectFrom("calendar").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();
 
@@ -170,7 +171,7 @@ public class ShareCalendar extends JPanel{
 			e1.printStackTrace();
 		}
 	}
-	
+	// Actionlisteners tilføjes.
 	public void addActionListener(ActionListener l) {
 		btnShare.addActionListener(l);
 		btnBack.addActionListener(l);

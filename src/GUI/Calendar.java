@@ -43,11 +43,8 @@ public class Calendar extends JPanel {
 	private JButton btnShare;
 	
 	int row;
-
 	
-	
-	
-
+	// panel oprettes hvori der kan oprettes, slettes, deles og vælges kalender.
 	public Calendar() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
@@ -62,6 +59,7 @@ public class Calendar extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		// mouselistener for JTable oprettes.
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -82,7 +80,6 @@ public class Calendar extends JPanel {
 		lblChosenCalendar.setVisible(false);
 		add(lblChosenCalendar);
 
-		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -94,7 +91,6 @@ public class Calendar extends JPanel {
 				null));
 		scrollPane.setBounds(425, 240, 553, 315);
 
-		// Add the scroll pane to this panel.
 		add(scrollPane);
 
 		lblHeader = new JLabel("Calendars");
@@ -180,7 +176,7 @@ public class Calendar extends JPanel {
 		add(lblBackground);
 
 	}
-
+	// Actionlisteners oprettes
 	public void addActionListener(ActionListener l) {
 		btnChooseCalendar.addActionListener(l);
 		btnAdd.addActionListener(l);
@@ -210,16 +206,18 @@ public class Calendar extends JPanel {
 	public JLabel getLblChosenCalendar() {
 		return lblChosenCalendar;
 	}
-
+	// Der oprettes en metode der kan opdatere tabellen. 
 	public void updateTable() {
 		try {
+			// her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
-
+			// Henter values 'email' fra table 'users' i databasen.
 			QueryBuilder qb = new QueryBuilder();
 			rs = qb.selectFrom("calendar").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			// Henter values 'email' fra table 'users' i databasen.
 			int colNo = rsmd.getColumnCount();
-
+			// tilføjer emails til JTable.
 			while (rs.next()) {
 
 				objects = new Object[colNo];

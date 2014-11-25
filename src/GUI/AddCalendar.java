@@ -37,7 +37,7 @@ public class AddCalendar extends JPanel {
 	private JTextField textName;
 	private JTextField textPrivateOrPublic;
 	private JTextField txtShare;
-	
+	private JLabel lblShareWith;
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -45,6 +45,7 @@ public class AddCalendar extends JPanel {
 	QueryBuilder qb = new QueryBuilder();
 	ResultSet rs;
 	
+	//Herunder tilføjes et JTable med dertilhørende scrollpane, samt alle JLabels, JButtons og JTextfields i tilføj kalender interfacet. 
 	
 	public AddCalendar() {
 		setSize(new Dimension(1366, 768));
@@ -69,10 +70,9 @@ public class AddCalendar extends JPanel {
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
 		scrollPane.setBounds(547, 184, 260, 182);
-
-		// Add the scroll pane to this panel.
 		add(scrollPane);
-		JLabel lblShareWith = new JLabel("Share with:");
+
+		lblShareWith = new JLabel("Share with:");
 		lblShareWith.setForeground(Color.WHITE);
 		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
 		lblShareWith.setBounds(476, 454, 147, 39);
@@ -146,22 +146,25 @@ public class AddCalendar extends JPanel {
 		add(lblBackground);
 		
 		}
-	
+	// Her tilføjes Actionlisteners
 	public void addActionListener(ActionListener l) {
 		btnLogout.addActionListener(l);
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
+	// Der oprettes en metode der kan opdatere tabellen. 
 	public void updateTable() {
 		try {
+			// her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
-
+			// Henter values 'email' fra table 'users' i databasen. 
 			QueryBuilder qb = new QueryBuilder();
 			String[] values = {"email"};
 			rs = qb.selectFrom(values, "users").all().ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			// Henter values 'email' fra table 'users' i databasen.
 			int colNo = rsmd.getColumnCount();
-
+			// tilføjer emails til JTable.
 			while (rs.next()) {
 
 				objects = new Object[colNo];

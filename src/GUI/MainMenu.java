@@ -24,7 +24,6 @@ import model.QueryBuild.QueryBuilder;
 
 
 public class MainMenu extends JPanel {
-	private JLabel label;
 	private JLabel lblMainMenu;
 	private JButton btnLogOut;
 	private JButton btnUserlist;
@@ -34,14 +33,12 @@ public class MainMenu extends JPanel {
 	private JLabel lblBackground;
 	private JButton btnCalendars;
 
-
+	// Panel med hovedmenu oprettes.
 	
 	public MainMenu() {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 		
-
-	
 		lblMainMenu = new JLabel("Main Menu");
 		lblMainMenu.setForeground(Color.WHITE);
 		lblMainMenu.setFont(new Font("Arial", Font.BOLD, 78));
@@ -106,21 +103,16 @@ public class MainMenu extends JPanel {
 		add(lblBackground);
 		
 		
-				
-		
-		
-		
-
 	}
+	// Actionlisteners tilføjes
 	public void addActionListener(ActionListener l) {
 		btnLogOut.addActionListener(l);
 		btnEventlist.addActionListener(l);
 		btnNotelist.addActionListener(l);
 		btnUserlist.addActionListener(l);
 		btnCalendars.addActionListener(l);
-		
-		
 	}
+	
 	public JButton getBtnUserlist() {
 		return btnUserlist;
 	}

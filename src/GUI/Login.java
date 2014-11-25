@@ -33,7 +33,6 @@ public class Login extends JPanel {
 	private final JLabel lblUsername = new JLabel("Username");
 	private final JLabel lblPassword = new JLabel("Password");
 	private final JButton btnLogIn = new JButton("Log In");
-	private final JButton btnForgotLogIn = new JButton("Forgot username or password?");
 	private final JTextField textFieldUsername = new JTextField();
 	private final JLabel lblCBSlogo = new JLabel("");
 	private final JLabel lblBackground = new JLabel("");
@@ -41,9 +40,7 @@ public class Login extends JPanel {
 	
 
 
-	/**
-	 * Create the panel.
-	 */
+	// Laver panel til at logge ind.
 	public Login() {
 		setSize(new Dimension(1366, 768));
 		setForeground(new Color(255, 255, 255));
@@ -69,12 +66,7 @@ public class Login extends JPanel {
 		btnLogIn.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogIn.setForeground(new Color(255, 255, 255));
 		btnLogIn.setBackground(Color.WHITE);
-		btnLogIn.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-//		btnLogIn.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//			}
-//		}
-	;
+		btnLogIn.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));;
 		textFieldUsername.setOpaque(false);
 		textFieldUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUsername.setForeground(Color.BLACK);
@@ -87,17 +79,7 @@ public class Login extends JPanel {
 		btnLogIn.setBounds(589, 450, 194, 50);
 		
 		add(btnLogIn);
-		btnForgotLogIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			JOptionPane.showInputDialog("Bad Luck!");
-			}
-		});
-		btnForgotLogIn.setContentAreaFilled(false);
-		btnForgotLogIn.setForeground(new Color(255, 255, 255));
-		btnForgotLogIn.setBorderPainted(false);
-		btnForgotLogIn.setBounds(485, 502, 403, 41);
-		
-		add(btnForgotLogIn);
+	
 		lblCBSlogo.setIcon(new ImageIcon(Login.class.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		
@@ -118,7 +100,7 @@ public class Login extends JPanel {
 		add(lblBackground);
 
 	}
-	
+	// metode der fjerner tekst i texfield username og password.
 	public void Refresh(){
 	textFieldUsername.setText("");
 	textFieldPassword.setText("");
@@ -132,14 +114,10 @@ public class Login extends JPanel {
 	public JButton getBtnLogIn() {
 		return btnLogIn;
 	}
-
-	public JButton getBtnForgotLogIn() {
-		return btnForgotLogIn;
-	}
+	
 	public void addActionListener(ActionListener l) {
 		btnLogIn.addActionListener(l);
 		btnLogIn.setActionCommand("btnLogIn");
-		btnForgotLogIn.addActionListener(l);
 }
 
 	public JTextField getTextFieldUsername() {

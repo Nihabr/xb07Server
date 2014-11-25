@@ -24,9 +24,7 @@ import model.QueryBuild.QueryBuilder;
 
 public class EventList extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
+	//Panel med events oprettes.
 
 	private JButton btnAdd;
 	private JButton btnDelete;
@@ -39,6 +37,7 @@ public class EventList extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JLabel lblHeader;
+	private JLabel lblCBSlogo;
 	private int row;
 	private ResultSet rs;
 	Object[] objects;
@@ -50,8 +49,7 @@ public class EventList extends JPanel {
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
 				"Start", "End", "Name", "Text","Active", "CustomEvent", "CalendarID" };
-
-
+		
 		table = new JTable();
     	model = (DefaultTableModel)table.getModel();
     	model.setColumnIdentifiers(columnNames);
@@ -66,7 +64,6 @@ public class EventList extends JPanel {
 		lblHeader.setBounds(510, 90, 392, 90);
 		add(lblHeader);
 		
-		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -78,7 +75,6 @@ public class EventList extends JPanel {
 				null));
 		scrollPane.setBounds(94, 186, 884, 369);
 
-		// Add the scroll pane to this panel.
 		add(scrollPane);
 
 		btnMainMenu = new JButton("Main Menu");
@@ -122,11 +118,15 @@ public class EventList extends JPanel {
 				255)));
 		btnAdd.setBounds(990, 526, 118, 29);
 		add(btnAdd);
-
+		
+		lblCBSlogo = new JLabel("");
+		lblCBSlogo.setIcon(new ImageIcon(MainMenu.class.getResource("/Images/CBSLogo3.png")));
+		lblCBSlogo.setBounds(10, 698, 250, 59);
+		add(lblCBSlogo);
+		
 		label = new JLabel("");
-		label.setIcon(new ImageIcon(EventList.class
-				.getResource("/Images/MetalBackground.jpg")));
-		label.setBounds(-26, -28, 1366, 768);
+		label.setIcon(new ImageIcon(EventList.class.getResource("/Images/MetalBackground.jpg")));
+		label.setBounds(0, 0, 1366, 768);
 		add(label);
 
 		lblEvents = new JLabel("Eventlist");
@@ -179,13 +179,15 @@ public class EventList extends JPanel {
 	public JButton getBtnMainMenu() {
 		return btnMainMenu;
 	}
+	// Der oprettes en metode der kan opdatere tabellen. 
 	public void updateTable(){
 		try {
+			// her fjernes alle elementer i JTable
 			model.getDataVector().removeAllElements();
+			// Henter alle events der er sat til at være 'active' og tilføjer dem til JTable.
  			QueryBuilder qb = new QueryBuilder();
  			String key [] = {"active"};
  			String value = "1";
- 			
  			rs = qb.selectFrom("events").where("active", "=", value).ExecuteQuery();
  			ResultSetMetaData rsmd = rs.getMetaData();
  			int colNo = rsmd.getColumnCount();

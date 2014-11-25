@@ -51,9 +51,7 @@ public class AddEventGUI extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JLabel lblSecond;
 
-	/**
-	 * Create the panel.
-	 */
+	//Tilføjer et panel der kan tilføje events. Heri oprettes alle JLabels, JButtons og JTextfields.
 	public AddEventGUI() {
 		setPreferredSize(new Dimension(1366, 768));
 		setSize(new Dimension(1366, 768));
@@ -195,12 +193,6 @@ public class AddEventGUI extends JPanel {
 						new Color(0, 0, 0))));
 		btnSubmit.setForeground(new Color(255, 255, 255));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Submit changes to databases
-				// hvad sker der n���r ���ndringer ved en bruger submittes
-			}
-		});
 		btnSubmit.setBounds(552, 580, 194, 50);
 		add(btnSubmit);
 
@@ -275,9 +267,6 @@ public class AddEventGUI extends JPanel {
 		lblSecond = new JLabel("Second");
 		lblSecond.setBounds(1080, 275, 61, 16);
 		add(lblSecond);
-		// =======
-
-		// >>>>>>> FETCH_HEAD
 
 		lblBackground = new JLabel("");
 		lblBackground.setSize(new Dimension(1366, 768));
@@ -287,12 +276,12 @@ public class AddEventGUI extends JPanel {
 		add(lblBackground);
 
 	}
-
+	// Actionlisteners tilføjes
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
-	
+	// Her samles alt input fra textfields angående startdate til en lang string.
 	public String startDateTimeToString(){
 		
 		String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
@@ -301,7 +290,7 @@ public class AddEventGUI extends JPanel {
 		
 		return start;
 	}
-	
+	// Her samles alt input fra textfields angående enddate til en lang string.
 	public String endDateTimeToString(){
 		
 		String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
@@ -367,12 +356,6 @@ public class AddEventGUI extends JPanel {
 	public JTextField getTextField_Createdby() {
 		return textField_Createdby;
 	}
-
-//	public JTextField getTextField_Start() {
-//		return textFieldStartYear;
-//	}
-
-
 
 	public JTextField getTextField_Name() {
 		return textField_Name;

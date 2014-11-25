@@ -33,9 +33,7 @@ import javax.swing.ImageIcon;
 import model.QueryBuild.QueryBuilder;
  
 public class UserList extends JPanel {
-    /**
-	 * 
-	 */
+   
 	private static final long serialVersionUID = 1L;
 //	private static final ActionListener ActionListener = null;
 
@@ -55,18 +53,17 @@ public class UserList extends JPanel {
 	private ResultSet rs;
 	int row;
 	
+	
+	// Panel hvori man kan se brugere. heruner oprettes JButtons, JLabels og et JTable hvori brugerne kan ses.
     public UserList() {
     	setSize(new Dimension(1366, 768));
     	   setLayout(null);
     	
-    	
-
         String[] columnNames = {"UserID",
                                 "Email",
                                 "Active",
                                 "Created datetime",
                                 "Password"};
-    	
         table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -87,7 +84,7 @@ public class UserList extends JPanel {
 				}
 			}
 		});
-		// Create the scroll pane and add the table to it.
+
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
@@ -99,7 +96,6 @@ public class UserList extends JPanel {
 				null));
 		scrollPane.setBounds(425, 240, 553, 315);
 
-		// Add the scroll pane to this panel.
 		add(scrollPane);
 
         
@@ -169,9 +165,7 @@ public class UserList extends JPanel {
         lblChosenUser.setVisible(false);
         add(lblChosenUser);
     }
- 
-
- 
+    // 
     public void updateTable(){
     	try {
 			model.getDataVector().removeAllElements();
@@ -197,7 +191,7 @@ public class UserList extends JPanel {
 		}
     }
     
-    
+    // Actionlisteners tilføjes.
     public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
@@ -207,19 +201,13 @@ public class UserList extends JPanel {
 		
 	}
 
-    
-
 	public JLabel getLblChosenUser() {
 		return lblChosenUser;
 	}
 
-
-
 	public void setLblChosenUser(JLabel lblChosenUser) {
 		this.lblChosenUser = lblChosenUser;
 	}
-
-
 
 	public JButton getBtnAdd() {
 		return btnAdd;

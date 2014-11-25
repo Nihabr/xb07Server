@@ -32,35 +32,15 @@ public class Screen extends JFrame {
 	private final UserList userlist = new UserList();
 	private final EventList eventList = new EventList();
 	private final AddNote addNote = new AddNote();
-	private AddEventGUI addEventGUI;
+	private final AddEventGUI addEventGUI = new AddEventGUI();
 	private final AddUser addUser = new AddUser();
-	private final AddCourse addCourse = new AddCourse();
 	private final Calendar calendar = new Calendar();
 	private final AddCalendar addCalendar = new AddCalendar();
 	private final ShareCalendar shareCalendar = new ShareCalendar();
 	CardLayout c;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Screen frame = new Screen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	// Heri oprettes et JPanel kaldet contentPane, hvori alle panaler tilføjes.
 	public Screen() {
-		addCourse.getBtnMainMenu().setLocation(605, 620);
-		addCourse.getBtnLogout().setLocation(605, 690);
-		addCourse.getBtnLogout().setSize(194, 50);
-		addCourse.getBtnMainMenu().setSize(194, 50);
 		setTitle("Doek4life");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,10 +53,7 @@ public class Screen extends JFrame {
 		
 		contentPane.add(addUser, "name_10334207821613");
 		
-		addEventGUI = new AddEventGUI();
 		contentPane.add(addEventGUI, "name_6308445225625");
-		login.getBtnLogIn().setContentAreaFilled(false);
-		login.getBtnForgotLogIn().setContentAreaFilled(false);
 		
 		contentPane.add(login, "name_276091497157488");
 		
@@ -100,11 +77,13 @@ public class Screen extends JFrame {
 		
 		c = (CardLayout) getContentPane().getLayout();
 	}
-	
+	// Her laves en metode der kan skifte mellem de forskellige 'kort', altså dem der er tilføjet i contentPane.
+	public void show(String card) {
+		c.show(getContentPane(),  card);
+	}
 	public Login getLogin() {
 		return login;
 	}
-	
 	public MainMenu getMainMenu() {
 		return mainMenu;
 	}
@@ -114,15 +93,11 @@ public class Screen extends JFrame {
 	public UserInfo getUserInfo() {
 		return userInfo;
 	}
-	
 	public NoteList getNoteList() {
 		return noteList;
 	}
 	public UserList getUserList() {
 		return userlist;
-	}
-	public void show(String card) {
-		c.show(getContentPane(),  card);
 	}
 	public EventList getEventlist() {
 		return eventList;
@@ -133,18 +108,13 @@ public class Screen extends JFrame {
 	public AddUser getAddUser() {
 		return addUser;
 	}
-	public AddCourse getAddCourse() {
-		return addCourse;
-	}
 	public Calendar getCalendar() {
 		return calendar;
 	}
 	public AddCalendar getAddCalendar() {
 		return addCalendar;
 	}
-
 	public ShareCalendar getShareCalendar() {
 		return shareCalendar;
 	}
-
 }
