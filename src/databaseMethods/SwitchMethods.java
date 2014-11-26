@@ -81,13 +81,12 @@ public class SwitchMethods extends Model
 	}
 	public String 	createEvent(String type,
 			String location, String createdby, String start,
-			String end, String name, String text,
-			String customevent, String calendarID)throws SQLException{
+			String end, String name, String text, String calendarID)throws SQLException{
 		testConnection();
 		String [] fields = {"type", "location", "createdby", "start",
-				"end", "name","text","customevent", "calendarID"};
+				"end", "name","text", "calendarID"};
 		String[] values = {type ,  location ,  createdby ,  start ,
-				 end ,  name , text , customevent ,  calendarID };
+				 end ,  name , text ,  calendarID };
 		
 		qb.insertInto("events", fields).values(values).Execute();
 		stringToBeReturned = "Event has been created";
