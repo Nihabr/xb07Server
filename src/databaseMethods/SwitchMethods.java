@@ -21,7 +21,7 @@ public class SwitchMethods extends Model
 	QueryBuilder qb = new QueryBuilder();
 	Gson gson = new GsonBuilder().create();
 	QOTDModel qm = new QOTDModel();
-	NoteModel nm = new NoteModel (0, "", "", "", 0, 0);
+	NoteModel nm = new NoteModel ("", "", "");
 	Note note = new Note();
 	GetDailyUpdate gdu = new GetDailyUpdate();
 	ClientLogin clientLogin = new ClientLogin();
@@ -179,11 +179,11 @@ public class SwitchMethods extends Model
 	}
 
 	public String 	CreateNote(CreateNote cn){
-		nm.setActive(cn.getIsActive());
+		
 		nm.setCreatedBy(cn.getCreatedBy());
-		nm.setDateTime(cn.getDateTime());
+		
 		nm.setEventID(cn.getEventID());
-		nm.setNoteID(cn.getNoteID());
+		
 		nm.setText(cn.getText());
 		
 		note.CreateNote(nm);

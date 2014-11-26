@@ -29,8 +29,6 @@ public class AddNote extends JPanel {
 	private JLabel lblBackground, lblCBSlogo;
 	private JButton btnAddNote;
 	private JTextField textFieldText;
-	private JTextField textFieldCreatedBy;
-	private JLabel lblCreatedBy;
 	private JLabel lblNote;
 	private JLabel lblAddUser;
 	private JButton btnBack;
@@ -76,25 +74,14 @@ public class AddNote extends JPanel {
 	lblAddUser.setBounds(509, 107, 464, 90);
 	add(lblAddUser);
 	
-	lblCreatedBy = new JLabel("Created by:");
-	lblCreatedBy.setForeground(Color.WHITE);
-	lblCreatedBy.setFont(new Font("Arial", Font.BOLD, 26));
-	lblCreatedBy.setBounds(473, 261, 147, 39);
-	add(lblCreatedBy);
-	
-	lblNote = new JLabel("Note:");
+	lblNote = new JLabel("Note for this event:");
 	lblNote.setForeground(Color.WHITE);
 	lblNote.setFont(new Font("Arial", Font.BOLD, 26));
-	lblNote.setBounds(473, 312, 105, 31);
+	lblNote.setBounds(620, 250, 250, 31);
 	add(lblNote);
 	
-	textFieldCreatedBy = new JTextField();
-	textFieldCreatedBy.setBounds(651, 267, 231, 22);
-	add(textFieldCreatedBy);
-	textFieldCreatedBy.setColumns(10);
-	
 	textFieldText = new JTextField();
-	textFieldText.setBounds(651, 302, 231, 119);
+	textFieldText.setBounds(570, 294, 351, 141);
 	add(textFieldText);
 	textFieldText.setColumns(10);
 	
@@ -132,7 +119,7 @@ public class AddNote extends JPanel {
 	add(lblBackground);
 	}
 	public void addActionListener(ActionListener l) {
-		textFieldCreatedBy.addActionListener(l);
+		
 		textFieldText.addActionListener(l);
 		btnAddNote.addActionListener(l);
 		btnBack.addActionListener(l);
@@ -143,9 +130,6 @@ public class AddNote extends JPanel {
 	}
 	public JTextField getTextFieldText() {
 		return textFieldText;
-	}
-	public JTextField getTextFieldCreatedBy() {
-		return textFieldCreatedBy;
 	}
 	public JButton getBtnBack() {
 		return btnBack;

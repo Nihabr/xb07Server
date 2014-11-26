@@ -289,19 +289,16 @@ public class GUILogic {
 
 			if (e.getSource() == screen.getAddNote().getBtnAddNote()) {
 				
-				int nID = 0;
-				int eID = 0;
-				String createdBy = screen.getAddNote().getTextFieldCreatedBy()
-						.getText();
-				String date = "1000-01-01 00:00:00";
+				
+				String eID = getEventID();
+				String createdBy = getCurrentUser();
 				String text = screen.getAddNote().getTextFieldText().getText();
-				int isActive = 1;
-				NoteModel noteModel = new NoteModel(nID, text, date, createdBy, isActive, eID);
+				NoteModel noteModel = new NoteModel( text, createdBy, eID);
 				Note note = new Note();
 				note.CreateNote(noteModel);
 
 				screen.show(Screen.NOTELIST);
-
+				screen.getNoteList().updateTable(getEventID());
 			}
 			
 			if (e.getSource() == screen.getAddNote().getBtnBack()) {
@@ -355,7 +352,17 @@ public class GUILogic {
 				screen.getLogin().Refresh();
 			}
 			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
-				//mangler
+				
+				String noteId = screen.getNoteList().getNoteID();
+				String [] fields = {"active"};
+				String [] values = {"0"};
+				try{
+					
+					qb.update("notes", fields, values).where("noteID", "=", noteId).Execute();
+					screen.getNoteList().updateTable(getEventID());
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
 			}
 		}
 	}

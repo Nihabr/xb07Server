@@ -77,10 +77,7 @@ public class EventList extends JPanel {
 				setName(name);
 				eventID = table.getValueAt(row, 0).toString();
 				setEventID(eventID);
-				
-				
-//				lblCalendarName.setText(table.getValueAt(row, 1).toString());
-				
+
 				}
 			}
 		});
