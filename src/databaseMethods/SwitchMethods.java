@@ -271,7 +271,6 @@ public class SwitchMethods extends Model
 		if(resultSet.next()){
 			System.out.println("res = true");
 			e.setEmail(email);
-			CalendarEvents ce = new CalendarEvents(email);
 			
 			String calendarName = "CBScalendar " + email;
 			
@@ -286,8 +285,8 @@ public class SwitchMethods extends Model
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			
-			
+			clientLogin.setLoggedIn(true);
+			CalendarEvents ce = new CalendarEvents(email);
 			clientLogin.setCalendars(ce.getCalendars());
 			resultSet = qb.selectFrom("roles").where("email", "=", email).ExecuteQuery();
 			resultSet.next();
