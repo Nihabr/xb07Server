@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.QueryBuild.QueryBuilder;
+import JsonClasses.CalendarInfo;
 public class CalendarEvents {
 
-	ArrayList <ArrayList<UserEvent>> calendars = new ArrayList <ArrayList<UserEvent>>();
+	ArrayList <CalendarInfo> calendars = new ArrayList <CalendarInfo>();
+	CalendarInfo ci = new CalendarInfo();
 	
-	public ArrayList<ArrayList<UserEvent>> getCalendars() {
-		return calendars;
-	}
+
 
 	QueryBuilder qb = new QueryBuilder();
 	
@@ -25,9 +25,13 @@ public class CalendarEvents {
 		}
 	}
 
-	public ArrayList<UserEvent> getUserCalendars (String cid) throws SQLException{
+	public ArrayList<CalendarInfo> getCalendars() {
+		return calendars;
+	}
+	
+	public CalendarInfo getUserCalendars (String cid) throws SQLException{
 		
-		ArrayList <UserEvent> subscribedCalendarEvents = new ArrayList<UserEvent>();
+		CalendarInfo subscribedCalendarEvents = new CalendarInfo();
 		UserEvent ue = new UserEvent( 0, "", "", "", "", "", "", "", 0);
 		
 			ResultSet rsCalE = qb.selectFrom("events").where("CalendarID", "=", String.valueOf(cid)).ExecuteQuery();
@@ -43,12 +47,15 @@ public class CalendarEvents {
 						ue.setText(rsCalE.getString("text"));
 						ue.setTitle(rsCalE.getString("name"));
 						ue.setLocation(rsCalE.getString("location"));
-						subscribedCalendarEvents.add(ue);
+						subscribedCalendarEvents.getCalendars().add(ue);
 					}
 					System.out.println(ue.getEventid());
 					
 				}
-					
+		rsCalE = qb.selectFrom("calendar").where("calendarid", "=", cid).ExecuteQuery();
+		rsCalE.next();
+		subscribedCalendarEvents.setCalenderName(rsCalE.getString("name"));
+		subscribedCalendarEvents.setPublicOrPrivate(rsCalE.getInt("privatepublic"));
 		
 		return subscribedCalendarEvents;
 	}

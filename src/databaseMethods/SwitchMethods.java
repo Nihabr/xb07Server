@@ -28,6 +28,7 @@ public class SwitchMethods extends Model
 	EncryptUserID e = new EncryptUserID();
 	GetCalendarData gcd = new GetCalendarData();
 	ShareCalendars share = new ShareCalendars();
+	CalendarInfo cInfo = new CalendarInfo();
 	
 	String stringToBeReturned = "";
 	String currentUser = "";
