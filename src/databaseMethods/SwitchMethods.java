@@ -73,6 +73,7 @@ public class SwitchMethods extends Model
 					}
 					share(sharedUsers, String.valueOf(newCalendarID), email); 
 					result += " Calendar has been shared with specified users.";
+					
 //				}
 			}
 		} else
@@ -271,7 +272,6 @@ public class SwitchMethods extends Model
 		if(resultSet.next()){
 			System.out.println("res = true");
 			e.setEmail(email);
-			CalendarEvents ce = new CalendarEvents(email);
 			
 			String calendarName = "CBScalendar " + email;
 			
@@ -286,21 +286,15 @@ public class SwitchMethods extends Model
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			
-			
+			clientLogin.setLoggedIn(true);
+			CalendarEvents ce = new CalendarEvents(email);
 			clientLogin.setCalendars(ce.getCalendars());
 			resultSet = qb.selectFrom("roles").where("email", "=", email).ExecuteQuery();
 			resultSet.next();
 			clientLogin.setRole(resultSet.getString("type"));
 			
 			gsonString = gson.toJson(clientLogin);
-			try {
-				
-				g.getDataFromCalendar();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
 
 		}
 		else gsonString = "Login failed";

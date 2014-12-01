@@ -81,21 +81,23 @@ public class GetCalendarData {
     		qb.insertInto("calendar_users", calUfields).values(calUvalues).Execute();
         }
         
-        rs = qb.selectFrom("events").where("createdby", "=", "cbs").ExecuteQuery();
-        ArrayList <CreateEvent> dbArray = null;
+        rs = qb.selectFrom("events").where("createdby", "=", "CBS").ExecuteQuery();
+        ArrayList <CreateEvent> dbArray = new ArrayList<CreateEvent>();
         CreateEvent cbsEv = new CreateEvent();
         while(rs.next()){
+        	
         	cbsEv.setType(rs.getString("Type"));
         	cbsEv.setLocation(rs.getString("Location"));
         	cbsEv.setCreatedby(rs.getString("CreatedBy"));
         	cbsEv.setTitle(rs.getString("Name"));
         	cbsEv.setText(rs.getString("text"));
         	cbsEv.setCalendarID(String.valueOf(rs.getInt("CalendarID")));
-        	cbsEv.setStart(rs.getDate("start").toString());
-        	cbsEv.setEnd(rs.getDate("End").toString());
+        	cbsEv.setStart(rs.getString("start"));
+        	cbsEv.setEnd(rs.getString("End"));
         	cbsEv.setCBSeventID(rs.getString("CBSeventID"));
-        	dbArray.add(cbsEv);
-        	
+        	System.out.println("rs cbseventid: " + rs.getString("CBSeventID"));
+        	dbArray.add(cbsEv);	
+        	cbsEv = new CreateEvent();
         }
         
         for (CBSevents cbs : cbsEvents.getEvents()){
@@ -120,6 +122,8 @@ public class GetCalendarData {
         	
             cbsEv = getArray(cbs.getEventid(), dbArray);
             
+            System.out.println("start1 " + cbsEv.getStart());
+            System.out.println("start2 " + start);
             if	(
             		!cbsEv.getStart().equals(start)		 			||
             		!cbsEv.getEnd().equals(end)						||
@@ -132,7 +136,7 @@ public class GetCalendarData {
             {
 		        String[] fields = {"activityID", "createdby", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
 		        String[] values = {	cbs.getActivityid(),
-		        					"2",
+		        					"CBS",
 		        					cbs.getEventid(),
 		        					cbs.getType(),
 		        					cbs.getTitle(),
@@ -148,6 +152,7 @@ public class GetCalendarData {
 		        	e.printStackTrace();
 		        }
             }
+            else System.out.println("if = false");
         }
     }
     public CreateEvent getArray(String CBSeventID, ArrayList<CreateEvent> al){
@@ -155,7 +160,8 @@ public class GetCalendarData {
     		if(temp.getCBSeventID().equals(CBSeventID))
     			return temp;
     	}
-    	return null;
+    	CreateEvent empty = new CreateEvent();
+    	return empty;
     	
     }
 }

@@ -4,17 +4,17 @@ public class CreateEvent {
 
 
 		// private String activityid;
-		private String eventid;
-		private String type;
-		private String title;
-		private String text;
-		private String location;
-		private String createdby;
-		private String start;
-		private String end;
-		private String customevent;
-		private String calendarID;
-		private String CBSeventID;
+		private String eventid = "";
+		private String type = "";
+		private String title = "";
+		private String text = "";
+		private String location = "";
+		private String createdby = "";
+		private String start = "";
+		private String end = "";
+		private String customevent = "";
+		private String calendarID = "";
+		private String CBSeventID = "";
 		
 		private  final long serialVersionUID = 1L;
 		private String overallID = "createEvent";
