@@ -19,8 +19,9 @@ public class CalendarEvents {
 
 		ResultSet rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
 		while (rs.next()){
-			int CalID = rs.getInt("CalendarID");
-			calendars.add(getUserCalendars(String.valueOf(CalID)));
+			int calID = rs.getInt("CalendarID");
+			calendars.add(getUserCalendars(String.valueOf(calID)));
+			System.out.println("calendar " + calID + " has been added");
 		}
 	}
 
@@ -42,8 +43,10 @@ public class CalendarEvents {
 						ue.setText(rsCalE.getString("text"));
 						ue.setTitle(rsCalE.getString("name"));
 						ue.setLocation(rsCalE.getString("location"));
+						subscribedCalendarEvents.add(ue);
 					}
-					subscribedCalendarEvents.add(ue);
+					System.out.println(ue.getEventid());
+					
 				}
 					
 		

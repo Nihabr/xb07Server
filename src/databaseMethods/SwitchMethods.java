@@ -73,6 +73,7 @@ public class SwitchMethods extends Model
 					}
 					share(sharedUsers, String.valueOf(newCalendarID), email); 
 					result += " Calendar has been shared with specified users.";
+					
 //				}
 			}
 		} else
@@ -293,13 +294,7 @@ public class SwitchMethods extends Model
 			clientLogin.setRole(resultSet.getString("type"));
 			
 			gsonString = gson.toJson(clientLogin);
-			try {
-				
-				g.getDataFromCalendar();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
 
 		}
 		else gsonString = "Login failed";
