@@ -4,8 +4,11 @@ package model.calendar;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import model.QueryBuild.QueryBuilder;
 import JsonClasses.CreateEvent;
 
@@ -57,7 +60,7 @@ public class GetCalendarData {
     	String email = e.getEmail();
 	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
 	    System.out.println(json);
-	    
+
 	    rs = qb.selectFrom("calendar").where("name", "=", "CBScalendar " + email).ExecuteQuery();
 	    int calID = 0;
 	    
@@ -85,7 +88,6 @@ public class GetCalendarData {
         ArrayList <CreateEvent> dbArray = new ArrayList<CreateEvent>();
         CreateEvent cbsEv = new CreateEvent();
         while(rs.next()){
-        	
         	cbsEv.setType(rs.getString("Type"));
         	cbsEv.setLocation(rs.getString("Location"));
         	cbsEv.setCreatedby(rs.getString("CreatedBy"));
@@ -93,29 +95,30 @@ public class GetCalendarData {
         	cbsEv.setText(rs.getString("text"));
         	cbsEv.setCalendarID(String.valueOf(rs.getInt("CalendarID")));
         	cbsEv.setStart(rs.getString("start"));
-        	cbsEv.setEnd(rs.getString("End"));
+        	cbsEv.setEnd(rs.getString("end"));
         	cbsEv.setCBSeventID(rs.getString("CBSeventID"));
-        	System.out.println("rs cbseventid: " + rs.getString("CBSeventID"));
-        	dbArray.add(cbsEv);	
+           	dbArray.add(cbsEv);	
         	cbsEv = new CreateEvent();
         }
-        
+        int m = 0;
         for (CBSevents cbs : cbsEvents.getEvents()){
 
         	 //	["2014",8,"5","8","00"]
         	String start ="";
-        	start = String.format("%s-%s-%s %s:%s:00", 
+        	m = (Integer.parseInt(cbs.getStart().get(1))) + 1;
+        	start = String.format("%s-%d-%s %s:%s:00", 
         			cbs.getStart().get(0), 
-					cbs.getStart().get(1),
+					m,
 					cbs.getStart().get(2),
 					cbs.getStart().get(3),
 					cbs.getStart().get(4));
         	System.out.println("stringStart: " + start);
         	
         	String end ="";
-        	end = String.format("%s-%s-%s %s:%s:00", 
+        	m = (Integer.parseInt(cbs.getEnd().get(1))) + 1;
+        	end = String.format("%s-%d-%s %s:%s:00", 
         			cbs.getEnd().get(0), 
-					cbs.getEnd().get(1),
+        			m,
 					cbs.getEnd().get(2),
 					cbs.getEnd().get(3),
 					cbs.getEnd().get(4));
