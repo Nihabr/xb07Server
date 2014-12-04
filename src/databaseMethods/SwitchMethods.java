@@ -126,8 +126,8 @@ public class SwitchMethods extends Model {
 
 		if (sharedUsers != null) {
 			String[] values = { "calendarID", "createdby" };
-			resultSet = qb.selectFrom(values, "calendar")
-					.where("isCBS", "=", "0").ExecuteQuery();
+			resultSet = qb.selectFrom(values, "calendar").all().ExecuteQuery();
+					
 			while (resultSet.next()) {
 
 				// Tjekker at kalenderen findes, og at det ikke er brugerens CBS
