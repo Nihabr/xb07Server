@@ -55,12 +55,13 @@ public class CalendarEvents {
 	public CalendarInfo getUserCalendars (String cid) throws SQLException{
 		
 		CalendarInfo subscribedCalendarEvents = new CalendarInfo();
-		UserEvent ue = new UserEvent( 0, "", "", "", "", "", "", "", 0);
+
 		
 			ResultSet rs = qb.selectFrom("events").where("CalendarID", "=", String.valueOf(cid)).ExecuteQuery();
 			
 				while (rs.next()){
 					if(rs.getInt("active")!=0){
+						UserEvent ue = new UserEvent( 0, "", "", "", "", "", "", "", 0);
 						ue.setEventid(rs.getInt("eventid"));
 						ue.setCalendarID(rs.getInt("calendarID"));
 						ue.setCreatedby(rs.getString("createdby"));
@@ -72,7 +73,6 @@ public class CalendarEvents {
 						ue.setLocation(rs.getString("location"));
 						subscribedCalendarEvents.getCalendars().add(ue);
 					}
-					System.out.println(ue.getEventid());
 					
 				}
 		rs = qb.selectFrom("calendar").where("calendarid", "=", cid).ExecuteQuery();
