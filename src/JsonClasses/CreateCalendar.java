@@ -7,11 +7,18 @@ public class CreateCalendar implements java.io.Serializable
 	private static final long serialVersionUID = 1L;
 	private String overallID = "createCalendar";
 	private String calenderName;
-	private String email;
+	private String createdBy;
 	private int publicOrPrivate;
 	private int isCBS;
 	private ArrayList <String> sharedUsers;
 	
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 	public ArrayList<String> getSharedUsers() {
 		return sharedUsers;
 	}
@@ -30,12 +37,6 @@ public class CreateCalendar implements java.io.Serializable
 	}
 	public void setCalendarName(String calenderName) {
 		this.calenderName = calenderName;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public int getPublicOrPrivate() {
 		return publicOrPrivate;

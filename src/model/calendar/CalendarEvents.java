@@ -34,29 +34,29 @@ public class CalendarEvents {
 		CalendarInfo subscribedCalendarEvents = new CalendarInfo();
 		UserEvent ue = new UserEvent( 0, "", "", "", "", "", "", "", 0);
 		
-			ResultSet rsCalE = qb.selectFrom("events").where("CalendarID", "=", String.valueOf(cid)).ExecuteQuery();
+			ResultSet rs = qb.selectFrom("events").where("CalendarID", "=", String.valueOf(cid)).ExecuteQuery();
 			
-				while (rsCalE.next()){
-					if(rsCalE.getInt("active")!=0){
-						ue.setEventid(rsCalE.getInt("eventid"));
-						ue.setCalendarID(rsCalE.getInt("calendarID"));
-						ue.setCreatedby(rsCalE.getString("createdby"));
-						ue.setType(rsCalE.getString("type"));
-						ue.setEnd(rsCalE.getString("end"));
-						ue.setStart(rsCalE.getString("start"));
-						ue.setText(rsCalE.getString("text"));
-						ue.setTitle(rsCalE.getString("name"));
-						ue.setLocation(rsCalE.getString("location"));
+				while (rs.next()){
+					if(rs.getInt("active")!=0){
+						ue.setEventid(rs.getInt("eventid"));
+						ue.setCalendarID(rs.getInt("calendarID"));
+						ue.setCreatedby(rs.getString("createdby"));
+						ue.setType(rs.getString("type"));
+						ue.setEnd(rs.getString("end"));
+						ue.setStart(rs.getString("start"));
+						ue.setText(rs.getString("text"));
+						ue.setTitle(rs.getString("name"));
+						ue.setLocation(rs.getString("location"));
 						subscribedCalendarEvents.getCalendars().add(ue);
 					}
 					System.out.println(ue.getEventid());
 					
 				}
-		rsCalE = qb.selectFrom("calendar").where("calendarid", "=", cid).ExecuteQuery();
-		rsCalE.next();
-		subscribedCalendarEvents.setCalenderName(rsCalE.getString("name"));
-		subscribedCalendarEvents.setPublicOrPrivate(rsCalE.getInt("privatepublic"));
-		
+		rs = qb.selectFrom("calendar").where("calendarid", "=", cid).ExecuteQuery();
+		rs.next();
+		subscribedCalendarEvents.setCalenderName(rs.getString("name"));
+		subscribedCalendarEvents.setPublicOrPrivate(rs.getInt("privatepublic"));
+		subscribedCalendarEvents.setCalendarId(rs.getInt("calendarId"));
 		return subscribedCalendarEvents;
 	}
 }
