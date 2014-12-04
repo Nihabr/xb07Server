@@ -58,6 +58,52 @@ public class GetCalendarData {
 	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
 	    System.out.println(json);
 
+        Gson gson = new Gson();
+        GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
+        
+	    //Check whether course exists in database
+        String[] values = {"idCourses"};
+        String[] calendarFields = {"name", "CreatedBy", "privatepublic", "isCBS"};
+        
+        rs = qb.selectFrom(values, "courses").all().ExecuteQuery();
+        ResultSet rs2;
+        ArrayList<String> courseTitles = new ArrayList<String>();
+        for (CBSevents cbse : cbsEvents.getEvents()){
+        	boolean courseExists = false;
+        	
+        	while(rs.next()){
+        		if(rs.getString("idCourses").equals(cbse.getTitle())){
+        			courseExists = true;
+        		}
+        	}
+        	// If course does not exist, add calendar to course and subscribe the user to the course
+        	if (!courseExists){
+        		String[] calendarValues = {cbse.getTitle(), "CBS", "0", "1"};
+        		qb.insertInto("calendar", calendarFields).values(calendarValues).Execute();
+        		rs2 = qb.selectFrom("calendar").where("name", "=", cbse.getTitle()).ExecuteQuery();
+        		String [] fields = {"idcourses", "calendarID"};
+        		String [] courseValues = {cbse.getTitle(), String.valueOf(rs2.getInt("calendarid"))};
+        		qb.insertInto("courses", fields).values(courseValues).Execute();
+        		String [] cuFields = {"idcourses", "calendarID"};
+        		String[] cuValues = {cbse.getTitle(), String.valueOf(rs2.getInt("calendarid"))};
+        		qb.insertInto("calendar_users", cuFields).values(cuValues).Execute();
+        	}
+        	if(!courseTitles.contains(cbse.getTitle()))
+        		courseTitles.add(cbse.getTitle());
+        }
+        	
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    rs = qb.selectFrom("calendar").where("name", "=", "CBScalendar " + email).ExecuteQuery();
 	    int calID = 0;
 	    
@@ -65,8 +111,7 @@ public class GetCalendarData {
 	    while (rs.next())
 	    	calID = rs.getInt("calendarID");
 	    
-        Gson gson = new Gson();
-        GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
+
         
         rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
         boolean exists = false;
@@ -135,7 +180,7 @@ public class GetCalendarData {
         		)
             {
 		        String[] fields = {"activityID", "createdby", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
-		        String[] values = {	cbs.getActivityid(),
+		        String[] values1 = {	cbs.getActivityid(),
 		        					"CBS",
 		        					cbs.getEventid(),
 		        					cbs.getType(),
@@ -147,7 +192,7 @@ public class GetCalendarData {
 		        					String.valueOf(calID)};
 		
 		        try{
-		        qb.insertInto("events", fields).values(values).Execute();
+		        qb.insertInto("events", fields).values(values1).Execute();
 		        } catch (Exception e) {
 		        	e.printStackTrace();
 		        }
