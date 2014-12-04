@@ -15,6 +15,13 @@ public class CalendarEvents {
 
 	QueryBuilder qb = new QueryBuilder();
 	
+	/**Will set 'ArrayList <CalendarInfo> calendars' based on the
+	 * subscriptions of the given email. calendars can be fetched
+	 * using the 'getCalendars(String calendarID)' method.
+	 * @author Niklas Broge
+	 * @param email
+	 * @throws SQLException
+	 */
 	public CalendarEvents (String email) throws SQLException{
 
 		ResultSet rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
@@ -24,11 +31,27 @@ public class CalendarEvents {
 			System.out.println("calendar " + calID + " has been added");
 		}
 	}
-
+	
+	/**Returns object CalendarInfo with the calendars the email
+	 * is subscribed to. CalendarInfo also contains the events
+	 * bound to the different calendars.
+	 * @author Niklas Broge
+	 * @param cid
+	 * @return calendars
+	 * @throws SQLException
+	 */
 	public ArrayList<CalendarInfo> getCalendars() {
 		return calendars;
 	}
-	
+
+	/**Fetches events bound to given calendarID and stores them in an object
+	 * of CalendarInfo, along with the name and private public status of the
+	 * calendar.
+	 * @author Niklas Broge
+	 * @param cid
+	 * @return CalendarInfo
+	 * @throws SQLException
+	 */
 	public CalendarInfo getUserCalendars (String cid) throws SQLException{
 		
 		CalendarInfo subscribedCalendarEvents = new CalendarInfo();

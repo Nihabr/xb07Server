@@ -4,9 +4,7 @@ package model.calendar;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import model.QueryBuild.QueryBuilder;
@@ -50,8 +48,7 @@ public class GetCalendarData {
      * Allows client to retrieve CBS's calendar and then access it.
      * @throws Exception
      */
-    @SuppressWarnings("null")
-	public void getDataFromCalendar() throws Exception {
+    public void getDataFromCalendar() throws Exception {
 
         /**
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
