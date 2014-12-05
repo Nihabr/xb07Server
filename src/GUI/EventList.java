@@ -77,7 +77,10 @@ public class EventList extends JPanel {
 				setName(name);
 				eventID = table.getValueAt(row, 0).toString();
 				setEventID(eventID);
-
+				
+				
+//				lblCalendarName.setText(table.getValueAt(row, 1).toString());
+				
 				}
 			}
 		});
@@ -236,7 +239,6 @@ public class EventList extends JPanel {
 	public void setEventID(String eventID) {
 		this.eventID = eventID;
 	}
-	//inspirasjon til Tablemodel hentet fra: http://www.rgagnon.com/javadetails/java-0309.html
 	public void updateTable(String value){
 		try {
 			model.getDataVector().removeAllElements();

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -36,8 +34,6 @@ public class NoteList extends JPanel {
 	private JScrollPane scrollPane;
 	private DefaultTableModel model;
 	private ResultSet rs;
-	private int row;
-	private String noteID;
 	
 
 	//Panel med noteliste oprettes.
@@ -58,23 +54,6 @@ public class NoteList extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				row = table.getSelectedRow();
-				if(row != -1){
-				
-				noteID = table.getValueAt(row, 0).toString();
-				setNoteID(noteID);
-				
-				
-//				lblCalendarName.setText(table.getValueAt(row, 1).toString());
-				
-				}
-			}
-		});
-		
 
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
@@ -169,12 +148,6 @@ public class NoteList extends JPanel {
 	}
 	
 
-	public String getNoteID() {
-		return noteID;
-	}
-	public void setNoteID(String noteID) {
-		this.noteID = noteID;
-	}
 	public JButton getBtnDelete() {
 		return btnDelete;
 	}
