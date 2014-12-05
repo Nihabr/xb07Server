@@ -43,8 +43,7 @@ public class SwitchMethods extends Model
 	 */
 
 	public String 	addNewCalendar (String newCalendarName, int publicOrPrivate, String email, ArrayList <String> sharedUsers, int isCBS) throws SQLException	{
-		
-		String result = "";
+	
 		
 		//Queries DB to see if calendar name is in use
 		resultSet = qb.selectFrom("calendar").where("name", "=", newCalendarName).ExecuteQuery();
@@ -61,7 +60,7 @@ public class SwitchMethods extends Model
 			String [] fields = {"Name","active","CreatedBy","PrivatePublic"};
 			String [] values = {newCalendarName,"1",email, Integer.toString(publicOrPrivate)};
 			qb.insertInto("calendar", fields).values(values).Execute();
-			result = "Calendar has been created.";
+			stringToBeReturned = "Calendar has been created.";
 			sharedUsers.add(email);
 
 				if ( !sharedUsers.isEmpty()){
@@ -72,12 +71,12 @@ public class SwitchMethods extends Model
 							newCalendarID = resultSet.getInt("calendarID");
 					}
 					share(sharedUsers, String.valueOf(newCalendarID), email); 
-					result += " Calendar has been shared with specified users.";
+					stringToBeReturned += " Calendar has been shared with specified users.";
 //				}
 			}
 		} else
-			result = "User already has calendar with that name. Please chose a new name for the calendar!";
-		return result;
+			stringToBeReturned = "User already has calendar with that name. Please chose a new name for the calendar!";
+		return stringToBeReturned;
 	}
 	public String 	createEvent(String type,
 			String location, String createdby, String start,
@@ -110,7 +109,7 @@ public class SwitchMethods extends Model
 				
 				if(resultSet.getInt("calendarID") == (Integer.valueOf(calendarID))){
 					for (String su : sharedUsers){
-						System.out.println("for loop køres");
+						System.out.println("for loop kï¿½res");
 						String [] fields = {"email","calendarID"};
 						String [] value = {su, String.valueOf(calendarID)};
 						qb.insertInto("calendar_users", fields).values(value).Execute();
@@ -193,7 +192,6 @@ public class SwitchMethods extends Model
 	
 	public String 	deleteEvent(String userID, String eventID)throws SQLException{
 		
-		String stringToBeReturned = "";
 		testConnection();
 		stringToBeReturned = removeEvent(userID, eventID);
 
@@ -203,7 +201,7 @@ public class SwitchMethods extends Model
 	public String 	removeEvent(String userID, String eventID) throws SQLException{
 		
 		
-		String stringToBeReturend = "";
+		
 		String createdBy ="";
 		resultSet = qb.selectFrom("events").where("eventID", "=", String.valueOf(eventID)).ExecuteQuery();
 		
@@ -215,18 +213,18 @@ public class SwitchMethods extends Model
 			}
 			if(!createdBy.equals(userID) || userID.equals("admin"))
 			{
-				stringToBeReturend = "Only the creator of the event is able to delete it.";
+				stringToBeReturned = "Only the creator of the event is able to delete it.";
 			}
 			else
 			{
 				String [] keys = {"active"};
 				String [] values = {"0"};
 				qb.update("events", keys, values).where("eventID", "=", String.valueOf(eventID)).Execute();
-				stringToBeReturend = "event has been set inactive";
+				stringToBeReturned = "event has been set inactive";
 			}
 			
 		
-		return stringToBeReturend;
+		return stringToBeReturned;
 		
 	}
 	public String 	getDailyUpdate () throws SQLException{
@@ -276,7 +274,7 @@ public class SwitchMethods extends Model
 			
 			String calendarName = "CBScalendar " + email;
 			
-			//Sørger for at der eksisterer en CBS kalender i databasen til brugeren
+			//Sï¿½rger for at der eksisterer en CBS kalender i databasen til brugeren
 			ArrayList<String> s = new ArrayList<String>();
 			addNewCalendar(calendarName, 0, "CBS", s, 1);
 			
