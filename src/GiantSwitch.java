@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 
+import JsonClasses.GetNotes;
 import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ClientLogin;
 import JsonClasses.ClientLogout;
@@ -118,12 +119,15 @@ public class GiantSwitch {
 			break;
 			
 		case "createNote":
-			//Niklas
 			CreateNote cn = (CreateNote)gson.fromJson(jsonString, CreateNote.class);
 			SW.CreateNote(cn);
 			System.out.println("Recieved saveNote");
 			break;
 			
+		case "getNotes":	
+			GetNotes gn = (GetNotes)gson.fromJson(jsonString, GetNotes.class);
+			answer = SW.getNotes(gn.getEvents());
+			break;
 		case "deleteNote":
 			System.out.println("Recieved deleteNote");
 			DeleteNote dn = (DeleteNote)gson.fromJson(jsonString, DeleteNote.class);
@@ -192,7 +196,10 @@ public class GiantSwitch {
 			return "shareCalendar";
 		}else if (ID.contains("getUsers")){
 			return "getUsers";
+		}else if (ID.contains("getNotes")){
+			return "getNotes";
 		}
+		
 		
 
 		else

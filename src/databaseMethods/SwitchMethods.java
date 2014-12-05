@@ -15,6 +15,7 @@ import model.QueryBuild.QueryBuilder;
 import model.calendar.CalendarEvents;
 import model.calendar.EncryptUserID;
 import model.calendar.GetCalendarData;
+import model.calendar.UserEvent;
 import model.note.*;
 import JsonClasses.*;
 
@@ -33,6 +34,7 @@ public class SwitchMethods extends Model {
 	CalendarInfo cInfo = new CalendarInfo();
 	GetEvents ge = new GetEvents();
 	GetUsers gu = new GetUsers();
+	
 	RetrieveUserCalendar gc = new RetrieveUserCalendar();
 	
 	String stringToBeReturned = "";
@@ -349,6 +351,26 @@ public class SwitchMethods extends Model {
 		stringToBeReturned = gson.toJson(gu);
 		return stringToBeReturned;
 		
+	}
+	
+	public String getNotes(ArrayList<UserEvent> events) throws SQLException{
+		
+		GetNotes gn = new GetNotes();
+		
+		for(UserEvent eventID : events){
+			CreateNote note = new CreateNote();
+			ResultSet rs = qb.selectFrom("notes").where("eventID", "=", String.valueOf(eventID.getEventid())).ExecuteQuery();
+				while(rs.next()){
+					if(rs.getInt("Active") == 1){						
+						note.setText(rs.getString("text"));
+						note.setCreatedBy(rs.getString("CreatedBy"));
+					}
+				}
+			gn.getNotes().add(note);
+		}
+		stringToBeReturned = gson.toJson(gn);
+		
+		return stringToBeReturned;
 	}
 	
 	public String clientLogin(String email, String password)

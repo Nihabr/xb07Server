@@ -17,41 +17,11 @@ public class ClientWorker implements  Runnable{
 	private GiantSwitch GS = new GiantSwitch();
 	private ByteCoder byteCryp = new ByteCoder();
 	private String incomingJson;
-//	private encryptionAES cryp =  new encryptionAES();
+	private encryptionAES cryp =  new encryptionAES();
 	
 	ClientWorker(Socket connectionSocket){
 		this.connectionSocketConected = connectionSocket;
 	}
-	
-//	public void run(){
-//		try{
-//			System.out.println("forbindelse Oprettet!");
-//			//BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-//			byte[] b = new byte[500000];
-//			int count = connectionSocketConected.getInputStream().read(b);
-//			ByteArrayInputStream bais = new ByteArrayInputStream(b);
-//			DataInputStream inFromClient = new DataInputStream(connectionSocketConected.getInputStream());		
-//			//Creates an object of the data which is to be send back to the client, via the connectionSocket
-//			DataOutputStream outToClient = new DataOutputStream(connectionSocketConected.getOutputStream());
-//			System.out.println("Outtoclient oprettet!");
-//			//Sets client sentence equals input from client
-//			//incomingJson = inFromClient.readLine();			
-//			System.out.println("b :" + b);
-//			String ny = byteCryp.decrypt(b);
-//						
-//			//cryp.StringEncryption(inFromClient.readLine());
-//			System.out.println("Besked modtaget!");
-//			//Sysout recieved message
-//			System.out.println("Received: " + ny);
-//			String returnSvar = GS.GiantSwitchMethod(cryp.decrypt(ny));		
-//			//Sends the capitalized message back to client!!
-//			outToClient.writeBytes(cryp.encrypt(returnSvar) + "\n");
-//			System.out.println("svar sendt");
-//			//BufferedWriter writer = new BufferedWriter(arg0)
-//		}catch(Exception exception){
-//			System.err.print(exception);
-//		}
-//	}
 	
 	public void run(){
 		try{
@@ -67,8 +37,8 @@ public class ClientWorker implements  Runnable{
 			//Sets client sentence equals input from client
 			//incomingJson = inFromClient.readLine();			
 			
-			String ny = byteCryp.decrypt(b);
-			
+			String encryptedString = byteCryp.decrypt(b);
+			String ny = cryp.decrypt(encryptedString);
 			//cryp.StringEncryption(inFromClient.readLine());
 			System.out.println("Besked modtaget!");
 			//Sysout recieved message
