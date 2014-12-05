@@ -6,21 +6,23 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import model.QueryBuild.QueryBuilder;
 import JsonClasses.CreateEvent;
 
 import com.google.gson.Gson;
 
 
-/**
- * Created by jesperbruun on 13/10/14.
- */
+
 public class GetCalendarData {
 	
 	EncryptUserID e = new EncryptUserID();
 	QueryBuilder qb = new QueryBuilder();
 	ResultSet rs;
-
+	
+	/**
+	 * Created by jesperbruun on 13/10/14.
+	 */
 	//henter data fra URL og l??er ind til en string
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
@@ -47,8 +49,7 @@ public class GetCalendarData {
      * Allows client to retrieve CBS's calendar and then access it.
      * @throws Exception
      */
-    @SuppressWarnings("null")
-	public void getDataFromCalendar() throws Exception {
+    public void getDataFromCalendar() throws Exception {
 
         /**
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
@@ -57,70 +58,124 @@ public class GetCalendarData {
     	String email = e.getEmail();
 	    String json = readUrl("http://calendar.cbs.dk/events.php/"+ email + "/" + e.getKey() + ".json");
 	    System.out.println(json);
-	    
-	    rs = qb.selectFrom("calendar").where("name", "=", "CBScalendar " + email).ExecuteQuery();
-	    int calID = 0;
-	    
-	    
-	    while (rs.next())
-	    	calID = rs.getInt("calendarID");
-	    
+
         Gson gson = new Gson();
         GetCBSevents cbsEvents = gson.fromJson(json, GetCBSevents.class);
         
-        rs = qb.selectFrom("calendar_users").where("email", "=", email).ExecuteQuery();
-        boolean exists = false;
-        while (rs.next()){
-        	if (rs.getInt("calendarID") == calID){
-        		exists = true;
+	    //Check whether course exists in database
+        String[] values = {"courseid"};
+        String[] calendarFields = {"name", "CreatedBy", "privatepublic", "isCBS"};
+        
+        rs = qb.selectFrom(values, "courses").all().ExecuteQuery();
+        ResultSet rs2;
+        ArrayList<String> courseTitles = new ArrayList<String>();
+        for (CBSevents cbse : cbsEvents.getEvents()){
+        	
+        	if(!courseTitles.contains(cbse.getTitle())){
+        		System.out.println("coursetitles did not contain title.");
+        		courseTitles.add(cbse.getTitle());
+        	
         	}
         }
-        if (!exists){
-    		String[] calUfields = {"calendarID", "email"};
-    		String[] calUvalues = {String.valueOf(calID), email};
-    		qb.insertInto("calendar_users", calUfields).values(calUvalues).Execute();
-        }
-        
-        rs = qb.selectFrom("events").where("createdby", "=", "cbs").ExecuteQuery();
-        ArrayList <CreateEvent> dbArray = null;
-        CreateEvent cbsEv = new CreateEvent();
-        while(rs.next()){
-        	cbsEv.setType(rs.getString("Type"));
-        	cbsEv.setLocation(rs.getString("Location"));
-        	cbsEv.setCreatedby(rs.getString("CreatedBy"));
-        	cbsEv.setTitle(rs.getString("Name"));
-        	cbsEv.setText(rs.getString("text"));
-        	cbsEv.setCalendarID(String.valueOf(rs.getInt("CalendarID")));
-        	cbsEv.setStart(rs.getDate("start").toString());
-        	cbsEv.setEnd(rs.getDate("End").toString());
-        	cbsEv.setCBSeventID(rs.getString("CBSeventID"));
-        	dbArray.add(cbsEv);
+        for (String cbse : courseTitles){
         	
+        	boolean courseExists = false;
+        	rs.beforeFirst();
+        	while(rs.next()){
+        		
+        		if(rs.getString("courseid").equals(cbse)){
+        			System.out.println("Line 87: courseID = " + rs.getString("courseid") + " equals.cbse: " + cbse );
+        			courseExists = true;
+        		}
+        	}
+        	// If course does not exist, add calendar to course and subscribe the user to the course
+        	System.out.println("Line 92: courseExists = " + courseExists);
+        	if (!courseExists){
+        		String[] calendarValues = {cbse, "CBS", "0", "1"};
+        		qb.insertInto("calendar", calendarFields).values(calendarValues).Execute();
+        		rs2 = qb.selectFrom("calendar").where("name", "=", cbse).ExecuteQuery();
+        		rs2.next();
+        		String [] fields = {"courseid", "calendarID"};
+        		String [] courseValues = {cbse, String.valueOf(rs2.getInt("calendarid"))};
+        		qb.insertInto("courses", fields).values(courseValues).Execute();
+//        		String [] cuFields = {"email", "calendarID"};
+//        		String[] cuValues = {email, String.valueOf(rs2.getInt("calendarid"))};
+//        		qb.insertInto("calendar_users", cuFields).values(cuValues).Execute();
+        	}
         }
-        
+        	
+        ArrayList<String> calendarID = new ArrayList<String>();
+	    for(String ct : courseTitles){	    
+		    rs = qb.selectFrom("courses").where("courseid", "=", ct).ExecuteQuery();
+		    
+		    while(rs.next())
+		    {
+		    	calendarID.add(rs.getString("calendarID"));
+		    }
+	    }
+	    CreateEvent cbsEv = new CreateEvent();
+	    ArrayList <CreateEvent> dbArray = new ArrayList<CreateEvent>();
+	    
+        for(String cid : calendarID){
+        	
+	        rs = qb.selectFrom("events").where("calendarID", "=", cid).ExecuteQuery();
+	       
+	        
+	        while(rs.next()){
+	        	cbsEv.setType(rs.getString("Type"));
+	        	cbsEv.setLocation(rs.getString("Location"));
+	        	cbsEv.setCreatedby(rs.getString("CreatedBy"));
+	        	cbsEv.setTitle(rs.getString("Name"));
+	        	cbsEv.setText(rs.getString("text"));
+	        	cbsEv.setCalendarID(String.valueOf(rs.getInt("CalendarID")));
+	        	cbsEv.setStart(rs.getString("start"));
+	        	cbsEv.setEnd(rs.getString("end"));
+	        	cbsEv.setCBSeventID(rs.getString("CBSeventID"));
+	           	dbArray.add(cbsEv);	
+	        	cbsEv = new CreateEvent();
+	        }
+        }
+        int m = 0;
         for (CBSevents cbs : cbsEvents.getEvents()){
 
         	 //	["2014",8,"5","8","00"]
         	String start ="";
-        	start = String.format("%s-%s-%s %s:%s:00", 
+        	m = (Integer.parseInt(cbs.getStart().get(1))) + 1;
+        	start = String.format("%s-%d-%s %s:%s:00", 
         			cbs.getStart().get(0), 
-					cbs.getStart().get(1),
+					m,
 					cbs.getStart().get(2),
 					cbs.getStart().get(3),
 					cbs.getStart().get(4));
         	System.out.println("stringStart: " + start);
         	
         	String end ="";
-        	end = String.format("%s-%s-%s %s:%s:00", 
+        	m = (Integer.parseInt(cbs.getEnd().get(1))) + 1;
+        	end = String.format("%s-%d-%s %s:%s:00", 
         			cbs.getEnd().get(0), 
-					cbs.getEnd().get(1),
+        			m,
 					cbs.getEnd().get(2),
 					cbs.getEnd().get(3),
 					cbs.getEnd().get(4));
         	
-            cbsEv = getArray(cbs.getEventid(), dbArray);
+            cbsEv = getArray(cbs.getEventid(), dbArray);            	
+
+            System.out.println("start1 " + cbsEv.getStart());
+            System.out.println("start2 " + start);
             
-            if	(
+            String cid = "";
+            if	(cbsEv.getStart()==null){
+            	rs = qb.selectFrom("calendar").where("name", "=", cbs.getTitle()).ExecuteQuery();
+            	rs.next();
+            	cid = rs.getString("calendarid");
+            }
+            else
+            	cid = cbsEv.getCalendarID();
+            
+            
+            
+            
+            if	(	 cbsEv.getStart()==null							||
             		!cbsEv.getStart().equals(start)		 			||
             		!cbsEv.getEnd().equals(end)						||
             		!cbsEv.getType().equals(cbs.getType())			||
@@ -131,23 +186,24 @@ public class GetCalendarData {
         		)
             {
 		        String[] fields = {"activityID", "createdby", "CBSeventid", "type", "name", "text", "location", "start", "end", "calendarid"};
-		        String[] values = {	cbs.getActivityid(),
-		        					"2",
-		        					cbs.getEventid(),
-		        					cbs.getType(),
-		        					cbs.getTitle(),
-		        					cbs.getDescription(),
-		        					cbs.getLocation(),
-		        					start,
-		        					end,
-		        					String.valueOf(calID)};
+		        String[] values1 = {	cbs.getActivityid(),
+			        					"CBS",
+			        					cbs.getEventid(),
+			        					cbs.getType(),
+			        					cbs.getTitle(),
+			        					cbs.getDescription(),
+			        					cbs.getLocation(),
+			        					start,
+			        					end,
+			        					cid};
 		
 		        try{
-		        qb.insertInto("events", fields).values(values).Execute();
+		        qb.insertInto("events", fields).values(values1).Execute();
 		        } catch (Exception e) {
 		        	e.printStackTrace();
 		        }
-            }
+            }   else System.out.println("if = false");
+            
         }
     }
     public CreateEvent getArray(String CBSeventID, ArrayList<CreateEvent> al){
@@ -155,7 +211,8 @@ public class GetCalendarData {
     		if(temp.getCBSeventID().equals(CBSeventID))
     			return temp;
     	}
-    	return null;
+    	CreateEvent empty = new CreateEvent();
+    	return empty;
     	
     }
 }

@@ -83,7 +83,7 @@ public class ForecastModel implements Runnable {
 
 				Date date = new Date((long) innerObj.get("dt") * 1000L);
 				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
+						"yyyy-MM-dd");
 				String date_string = sdf.format(date);
 
 				JSONObject temp = (JSONObject) innerObj.get("temp");
@@ -137,7 +137,7 @@ public class ForecastModel implements Runnable {
 
 				date = forecast.getDate("date");
 				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
+						"yyyy-MM-dd");
 				String date_string = sdf.format(date);
 				String temperatur = String.valueOf(forecast
 						.getDouble("apparentTemperature"));

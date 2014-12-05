@@ -13,7 +13,7 @@ public class ClientLogin {
 	int userID;
 	String role;
 	ArrayList <ArrayList<UserEvent>> calendars = new ArrayList <ArrayList<UserEvent>>();
-	
+	boolean loggedIn = false;
 	
 	public ClientLogin (){
 		
@@ -63,6 +63,13 @@ public class ClientLogin {
 	}
 	public long getSerialVersionUID() {
 		return serialVersionUID;
+	}
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 	
 }

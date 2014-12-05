@@ -22,7 +22,7 @@ public class SwitchMethods extends Model {
 	QueryBuilder qb = new QueryBuilder();
 	Gson gson = new GsonBuilder().create();
 	QOTDModel qm = new QOTDModel();
-	NoteModel nm = new NoteModel("", "", "");
+	NoteModel nm = new NoteModel(0, "", "", "", 0, 0);
 	Note note = new Note();
 	GetDailyUpdate gdu = new GetDailyUpdate();
 	CreateEvent createEvent = new CreateEvent();
