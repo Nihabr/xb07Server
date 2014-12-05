@@ -1,5 +1,6 @@
 package databaseMethods;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class SwitchMethods extends Model {
 	ShareCalendars share = new ShareCalendars();
 	CalendarInfo cInfo = new CalendarInfo();
 	GetEvents ge = new GetEvents();
-	
+	GetUsers gu = new GetUsers();
+	RetrieveUserCalendar gc = new RetrieveUserCalendar();
 	
 	String stringToBeReturned = "";
 	
@@ -127,6 +129,7 @@ public class SwitchMethods extends Model {
 		if (sharedUsers != null) {
 			String[] values = { "calendarID", "createdby" };
 			resultSet = qb.selectFrom(values, "calendar").all().ExecuteQuery();
+			ResultSet rs = qb.selectFrom("users").all().ExecuteQuery();
 					
 			while (resultSet.next()) {
 
@@ -139,12 +142,24 @@ public class SwitchMethods extends Model {
 						System.out.println("for loop køres");
 						String[] fields = { "email", "calendarID" };
 						String[] value = { su, String.valueOf(calendarID) };
-						qb.insertInto("calendar_users", fields).values(value)
-								.Execute();
-					}
-					stringToBeReturned = "Calendar has been shared";
+						
+							while (rs.next()){
+								
+								
+								if(su.equals(rs.getString("email"))){
+									
+									qb.insertInto("calendar_users", fields).values(value)
+									.Execute();
+								}else{
+									stringToBeReturned += "User " + su + " does not exist in database. ";
+								}
+							}
+							
+						}
+					
+					stringToBeReturned = "Calendar has been shared.";
 				} else {
-					stringToBeReturned = "calendarID does not exist or the calendar cannot be shared because of restrictions";
+					stringToBeReturned = "calendarID does not exist or the calendar cannot be shared because of restrictions.";
 				}
 
 			}
@@ -186,7 +201,7 @@ public class SwitchMethods extends Model {
 				stringToBeReturned = "Only the creator of the calendar is able to delete it.";
 			} else {
 				String[] keys = { "Active" };
-				String[] values = { "2" };
+				String[] values = { "0" };
 				qb.update("calendar", keys, values)
 						.where("Name", "=", calendarName).Execute();
 				stringToBeReturned = "Calendar has been set inactive";
@@ -199,6 +214,22 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
+	public String retrieveUserCalendar(String email)throws SQLException{
+		
+		String [] fields = {"calendarID", "name"};
+		
+		resultSet = qb.selectFrom(fields, "calendar").where("createdBy", "=", email).ExecuteQuery();
+		while(resultSet.next()){
+			
+			cInfo.setCalendarId(resultSet.getInt("calendarId"));
+			cInfo.setCalenderName(resultSet.getString("name"));
+			
+			gc.getUserCalendars().add(cInfo);
+		}
+		stringToBeReturned = gson.toJson(gc);
+		return stringToBeReturned;
+	}
+	
 	public String CreateNote(CreateNote cn) {
 
 		nm.setCreatedBy(cn.getCreatedBy());
@@ -303,6 +334,23 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
+	public String getUsers() throws SQLException{
+		
+		String [] fields = {"email", "active"};
+		
+		resultSet = qb.selectFrom(fields,"users").all().ExecuteQuery();
+		while(resultSet.next()){
+			UserInfo ui  = new UserInfo();
+			ui.setActive(String.valueOf(resultSet.getInt("active")));
+			ui.setEmail(resultSet.getString("email"));
+			
+			gu.getUserArray().add(ui);
+		}
+		stringToBeReturned = gson.toJson(gu);
+		return stringToBeReturned;
+		
+	}
+	
 	public String clientLogin(String email, String password)
 			throws SQLException {
 

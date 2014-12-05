@@ -36,7 +36,7 @@ public class Screen extends JFrame {
 	private final AddUser addUser = new AddUser();
 	private final Calendar calendar = new Calendar();
 	private final AddCalendar addCalendar = new AddCalendar();
-	private final ShareCalendar shareCalendar = new ShareCalendar();
+	private final ShareCalendarGUI shareCalendar = new ShareCalendarGUI();
 	CardLayout c;
 
 	// Heri oprettes et JPanel kaldet contentPane, hvori alle panaler tilføjes.
@@ -114,7 +114,7 @@ public class Screen extends JFrame {
 	public AddCalendar getAddCalendar() {
 		return addCalendar;
 	}
-	public ShareCalendar getShareCalendar() {
+	public ShareCalendarGUI getShareCalendar() {
 		return shareCalendar;
 	}
 }

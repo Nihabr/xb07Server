@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 
+import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ClientLogin;
 import JsonClasses.ClientLogout;
 import JsonClasses.CreateCalendar;
@@ -9,6 +10,8 @@ import JsonClasses.DeleteCalendar;
 import JsonClasses.DeleteEvent;
 import JsonClasses.DeleteNote;
 import JsonClasses.GetEvents;
+import JsonClasses.GetUsers;
+import JsonClasses.UserInfo;
 import JsonClasses.ShareCalendars;
 
 import com.google.gson.*;
@@ -44,6 +47,11 @@ public class GiantSwitch {
 			answer = SW.clientLogout(clo.getEmail());
 			System.out.println("Recieved logOut");
 			break; 
+			
+		case "getUsers":			
+			answer = SW.getUsers();
+			System.out.println("Users retrieved");
+			break;
 
 		/*************
 		 ** CALENDAR **
@@ -68,7 +76,14 @@ public class GiantSwitch {
 			answer = SW.share(sc.getShareEmail(), sc.getCalendarID(), sc.getEmail());
 			
 			break;
+		
+		case"getCalendar":
 			
+			RetrieveUserCalendar ru = (RetrieveUserCalendar)gson.fromJson(jsonString, RetrieveUserCalendar.class);
+			answer = SW.retrieveUserCalendar(ru.getEmail());
+			System.out.println("dude, it works");
+			
+			break;
 			
 		case "getEvents":
 			
@@ -128,6 +143,9 @@ public class GiantSwitch {
 		}
 		return answer;
 		
+		
+		
+		
 	}
 
 	//Creates a loooong else if statement, which checks the JSon string which keyword it contains, and returns the following 
@@ -172,6 +190,8 @@ public class GiantSwitch {
 			return "createNote";
 		}else if (ID.contains("shareCalendar")){
 			return "shareCalendar";
+		}else if (ID.contains("getUsers")){
+			return "getUsers";
 		}
 		
 

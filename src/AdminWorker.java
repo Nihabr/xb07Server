@@ -4,13 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 import model.Forecast.ForecastModel;
 import model.QOTD.QOTDModel;
-import GUI.GUILogic;
+import controller.Controller;
 
 public class AdminWorker implements Runnable{
 	public void run(){
-		GUILogic logic = new GUILogic();
+		Controller controller = new Controller();
 		addThreads();
-		logic.run();
+		controller.run();
 	
     
     }

@@ -217,12 +217,12 @@ public class Calendar extends JPanel {
 	}
 
 
-	public void updateTable() {
+	public void updateTable(String value) {
 		try {
 			model.getDataVector().removeAllElements();
 
 			QueryBuilder qb = new QueryBuilder();
-			rs = qb.selectFrom("calendar").all().ExecuteQuery();
+			rs = qb.selectFrom("calendar").where("active", "=", value).ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();
 

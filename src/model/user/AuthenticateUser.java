@@ -20,7 +20,7 @@ public class AuthenticateUser {
 	 * @throws Exception
 	 */
 //	public int authenticate(String email, String password, boolean isAdmin) throws Exception {
-		public int authenticate(String email, String password, boolean isAdmin) throws Exception {
+		public int authenticate(String email, String password) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 		String[] fields = {"active"};
