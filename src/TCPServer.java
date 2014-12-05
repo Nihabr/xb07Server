@@ -6,8 +6,7 @@ import config.Configurations;
 
 class TCPServer{    
 	
-	public static void main(String argv[]) throws Exception       {
-		Configurations cf = new Configurations();
+	public void StartTCP() throws Exception       {
 
 		AdminWorker admin = new AdminWorker();
 		admin.run();
@@ -18,6 +17,7 @@ class TCPServer{
 		while(true){
 			//Creates a socket and a buffered reader which receives some sort of input from somewhere around the internet!
 			Socket connectionSocket = welcomeSocket.accept();
+			System.out.println("Connection welcome");
 			ClientWorker client= new ClientWorker(connectionSocket);
 			Thread thread = new Thread(client, "client");
 			thread.start();
