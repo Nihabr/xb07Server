@@ -9,7 +9,7 @@ public class CreateNote {
 	private String dateTime;
 	private String createdBy;
 	private int isActive;
-	private int eventID;
+	private String eventID;
 	
 	public CreateNote(){
 		
@@ -51,10 +51,10 @@ public class CreateNote {
 	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
-	public int getEventID() {
+	public String getEventID() {
 		return eventID;
 	}
-	public void setEventID(int eventID) {
+	public void setEventID(String eventID) {
 		this.eventID = eventID;
 	}
 	public long getSerialVersionUID() {
