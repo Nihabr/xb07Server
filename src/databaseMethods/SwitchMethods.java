@@ -244,37 +244,37 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
-	public String deleteEvent(String userID, String eventID)
+	public String deleteEvent(String email, String eventID)
 			throws SQLException {
 
 		String stringToBeReturned = "";
 		testConnection();
-		stringToBeReturned = removeEvent(userID, eventID);
+		stringToBeReturned = removeEvent(email, eventID);
 
 		return stringToBeReturned;
 
 	}
 
-	public String removeEvent(String userID, String eventID)
+	public String removeEvent(String email, String eventID)
 			throws SQLException {
 
 		String stringToBeReturend = "";
 		String createdBy = "";
 		resultSet = qb.selectFrom("events")
-				.where("eventID", "=", String.valueOf(eventID)).ExecuteQuery();
+				.where("eventID", "=", eventID).ExecuteQuery();
 
 		while (resultSet.next()) {
 			System.out.println("createdby ledes efter: ");
 			createdBy = resultSet.getString("createdby");
 			System.out.println(createdBy);
 		}
-		if (!createdBy.equals(userID) || userID.equals("admin")) {
+		if (!createdBy.equals(email) || email.equals("admin")) {
 			stringToBeReturend = "Only the creator of the event is able to delete it.";
 		} else {
 			String[] keys = { "active" };
 			String[] values = { "0" };
 			qb.update("events", keys, values)
-					.where("eventID", "=", String.valueOf(eventID)).Execute();
+					.where("eventID", "=", eventID).Execute();
 			stringToBeReturend = "event has been set inactive";
 		}
 

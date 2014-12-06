@@ -113,7 +113,7 @@ public class GiantSwitch {
 			
 			DeleteEvent de = (DeleteEvent)gson.fromJson(jsonString, DeleteEvent.class);
 			
-			answer = SW.deleteEvent(de.getUserID(), de.getEventId());
+			answer = SW.deleteEvent(de.getEmail(), de.getEventId());
 			System.out.println("Event" + de.getEventId() +"is deleted");
 			
 			System.out.println("Recieved deleteEvent");

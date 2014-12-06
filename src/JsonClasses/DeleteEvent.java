@@ -5,10 +5,15 @@ public class DeleteEvent {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "deleteEvent";
 	private String eventId;
-	private String userID;
+	private String email;
 	
-	public DeleteEvent(){
-		
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getOverallID() {
@@ -27,13 +32,6 @@ public class DeleteEvent {
 		this.eventId = eventId;
 	}
 
-	public String getUserID() {
-		return userID;
-	}
-
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
 
 	public long getSerialVersionUID() {
 		return serialVersionUID;
