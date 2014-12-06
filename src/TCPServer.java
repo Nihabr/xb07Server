@@ -12,7 +12,6 @@ class TCPServer{
 		admin.run();
 		//Creates a socket to send and receive messages in port 6666
 		ServerSocket welcomeSocket = new ServerSocket(8888);
-		
 		//While something is true
 		while(true){
 			//Creates a socket and a buffered reader which receives some sort of input from somewhere around the internet!

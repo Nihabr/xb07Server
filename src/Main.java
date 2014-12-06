@@ -7,9 +7,6 @@ public class Main {
 		Configurations cf = new Configurations();
 		cf.ReadFile();
 		
-		cf.getWeather_lat();
-		cf.getWeather_lon();
-		
 		TCPServer tcp = new TCPServer();
 		tcp.StartTCP();
 		

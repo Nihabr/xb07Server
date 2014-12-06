@@ -43,7 +43,7 @@ public class Calendar extends JPanel {
 	private JButton btnShare;
 	private String id;
 	private String name;
-	
+	private String isCBS;
 	int row;
 	private JLabel lblCalendarInfo;
 
@@ -76,6 +76,8 @@ public class Calendar extends JPanel {
 				setId(id);
 				name = table.getValueAt(row, 1).toString();
 				setName(name);
+				isCBS = table.getValueAt(row, 5).toString();
+				setIsCBS(isCBS);
 
 				
 				}
@@ -292,6 +294,14 @@ public class Calendar extends JPanel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getIsCBS() {
+		return isCBS;
+	}
+
+	public void setIsCBS(String isCBS) {
+		this.isCBS = isCBS;
 	}
 	
 }

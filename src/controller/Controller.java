@@ -483,8 +483,10 @@ public class Controller {
 				
 				String name = screen.getCalendar().getName();
 				
+				if(!screen.getCalendar().getIsCBS().equals("1")){
 				String fields[] = {"active"};
 				String values[] = {"0"};
+				
 				try{
 					
 					qb.update("calendar", fields, values).where("name", "=", name).Execute();
@@ -492,7 +494,16 @@ public class Controller {
 				}catch (Exception e4){
 					e4.printStackTrace();
 				}
+				}else{
+					JOptionPane.showMessageDialog(null,
+							"\nThis calendar can not be deleted!", "", JOptionPane.PLAIN_MESSAGE);
+					
+					
+					
 				}
+				
+				}
+			
 			
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				screen.getShareCalendar().updateTable("1");

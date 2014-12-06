@@ -11,7 +11,6 @@ public class AdminWorker implements Runnable{
 		Controller controller = new Controller();
 		addThreads();
 		controller.run();
-	
     
     }
       public void addThreads(){
