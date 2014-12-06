@@ -376,10 +376,12 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	
-	public String clientLogin(String email, String password)
+	public String clientLogin(String email, String password, boolean authenticated)
 			throws SQLException {
-
+		
 		String gsonString = "";
+		if(authenticated == true){
+
 		String[] values = { "email", "password", "userID" };
 		resultSet = qb.selectFrom(values, "users").where("email", "=", email)
 				.ExecuteQuery();
@@ -410,6 +412,9 @@ public class SwitchMethods extends Model {
 			resultSet.next();
 			clientLogin.setRole(resultSet.getString("type"));
 			clientLogin.setEmail(email);
+		}else
+			clientLogin.setLoggedIn(false);
+			
 			gsonString = gson.toJson(clientLogin);
 
 		} else

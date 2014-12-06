@@ -43,10 +43,13 @@ public class GiantSwitch {
 		case "logIn":
 			ClientLogin cl = (ClientLogin)gson.fromJson(jsonString, ClientLogin.class);
 			int authRes = auth.authenticate(cl.getEmail(), cl.getPassWord());
-			if(authRes == 0){
-				answer = SW.clientLogin(cl.getEmail(), cl.getPassWord());
-			} else
-				answer = "Login failed.";
+			boolean authenticated;
+			if (authRes == 0){
+				authenticated = true;
+			}else
+				authenticated = false;
+			answer = SW.clientLogin(cl.getEmail(), cl.getPassWord(), authenticated);
+
 			break;
 
 		case "logOut":
