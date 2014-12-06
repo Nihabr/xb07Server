@@ -301,13 +301,13 @@ public class SwitchMethods extends Model {
 		return gsonString;
 	}
 
-	public String deleteNote(String uID, String nID) throws SQLException {
+	public String deleteNote(String email, String nID) throws SQLException {
 
 		resultSet = qb.selectFrom("notes").where("noteID", "=", nID)
 				.ExecuteQuery();
-		System.out.println("Checkpoint 1");
+		
 		while (resultSet.next()) {
-			if (uID.equals(resultSet.getString("createdBy"))) {
+			if (email.equals(resultSet.getString("createdBy"))) {
 				String[] fields = { "active" };
 				String[] values = { "0" };
 				qb.update("notes", fields, values).where("noteID", "=", nID)

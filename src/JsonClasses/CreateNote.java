@@ -4,7 +4,7 @@ public class CreateNote {
 
 	private  final long serialVersionUID = 1L;
 	private String overallID = "createNote";
-	private int noteID;
+	private String noteID;
 	private String text;
 	private String dateTime;
 	private String createdBy;
@@ -21,12 +21,15 @@ public class CreateNote {
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public int getNoteID() {
+
+	public String getNoteID() {
 		return noteID;
 	}
-	public void setNoteID(int noteID) {
+
+	public void setNoteID(String noteID) {
 		this.noteID = noteID;
 	}
+
 	public String getText() {
 		return text;
 	}

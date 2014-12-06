@@ -4,8 +4,17 @@ public class DeleteNote {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "deleteNote";
 	String noteID;
-	String userID;
+	String email;
 	
+	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getOverallID() {
 		return overallID;
 	}
@@ -18,12 +27,7 @@ public class DeleteNote {
 	public void setNoteID(String noteID) {
 		this.noteID = noteID;
 	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+
 	public long getSerialVersionUID() {
 		return serialVersionUID;
 	}

@@ -137,10 +137,11 @@ public class GiantSwitch {
 			GetNotes gn = (GetNotes)gson.fromJson(jsonString, GetNotes.class);
 			answer = SW.getNotes(gn.getEvents());
 			break;
+			
 		case "deleteNote":
 			System.out.println("Recieved deleteNote");
 			DeleteNote dn = (DeleteNote)gson.fromJson(jsonString, DeleteNote.class);
-			answer = SW.deleteNote(dn.getUserID(), dn.getNoteID());
+			answer = SW.deleteNote(dn.getEmail(), dn.getNoteID());
 			break;
 
 		/*****************
