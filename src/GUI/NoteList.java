@@ -30,7 +30,6 @@ public class NoteList extends JPanel {
 	private JButton btnDelete;
 	private JButton btnAdd;
 	private JButton btnMainMenu;
-	private JButton btnLogout;
 	private JLabel label;
 	private Object[] objects;
 	private JScrollPane scrollPane;
@@ -117,14 +116,6 @@ public class NoteList extends JPanel {
 		btnMainMenu.setBounds(601, 589, 194, 50);
 		add(btnMainMenu);
 		
-		btnLogout = new JButton("Log out");
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setBounds(601, 659, 194, 50);
-		add(btnLogout);
-		
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(NoteList.class.getResource("/Images/CBSLogo3.png")));
 		label.setBounds(10, 698, 250, 59);
@@ -144,7 +135,6 @@ public class NoteList extends JPanel {
 	public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 	}
 	public void updateTable(String value){
@@ -186,9 +176,4 @@ public class NoteList extends JPanel {
 	public JButton getBtnMainMenu() {
 		return btnMainMenu;
 	}
-
-	public JButton getBtnLogout() {
-		return btnLogout;
-	}
-	
 }

@@ -33,7 +33,6 @@ public class EventList extends JPanel {
 
 	private JButton btnAdd;
 	private JButton btnDelete;
-	private JButton btnLogout;
 	private JButton btnMainMenu;
 	private JButton btnSelectEvent;
 	private JLabel label;
@@ -49,6 +48,7 @@ public class EventList extends JPanel {
 	private Object[] objects;
 	private String name;
 	private String eventID;
+	private String createdBy;
 	
 	public EventList() {
 		setSize(new Dimension(1366, 768));
@@ -56,7 +56,7 @@ public class EventList extends JPanel {
 
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
-				"Start", "End", "Name", "Text","CalendarID", "Active"};
+				"Start", "End", "Text","CalendarID", "Active"};
 
 
 		table = new JTable();
@@ -77,6 +77,8 @@ public class EventList extends JPanel {
 				setName(name);
 				eventID = table.getValueAt(row, 0).toString();
 				setEventID(eventID);
+				createdBy = table.getValueAt(row, 3).toString();
+				setCreatedBy(createdBy);
 				
 				
 //				lblCalendarName.setText(table.getValueAt(row, 1).toString());
@@ -131,19 +133,6 @@ public class EventList extends JPanel {
 		btnMainMenu.setBounds(559, 587, 194, 50);
 		add(btnMainMenu);
 
-		btnLogout = new JButton("Log out");
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
-						0), new Color(255, 255, 255), new Color(0, 0, 0)),
-				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
-						new Color(0, 0, 0), new Color(255, 255, 255),
-						new Color(0, 0, 0))));
-		btnLogout.setBounds(559, 650, 194, 50);
-		add(btnLogout);
-
 		btnDelete = new JButton("Delete");
 		btnDelete.setOpaque(true);
 		btnDelete.setForeground(new Color(0, 0, 205));
@@ -179,6 +168,15 @@ public class EventList extends JPanel {
 		add(lblUpcomingEvent);
 	
 	}
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public DefaultTableModel getModel() {
 		return model;
 	}
@@ -192,7 +190,6 @@ public class EventList extends JPanel {
 	public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 		btnSelectEvent.addActionListener(l);
 	}
@@ -223,10 +220,6 @@ public class EventList extends JPanel {
 	}
 	public JButton getBtnDelete() {
 		return btnDelete;
-	}
-
-	public JButton getBtnLogout() {
-		return btnLogout;
 	}
 
 	public JButton getBtnMainMenu() {

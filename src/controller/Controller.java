@@ -372,10 +372,6 @@ public class Controller {
 			if (e.getSource() == screen.getNoteList().getBtnMainMenu()) {
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getNoteList().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
-				screen.getLogin().Refresh();
-			}
 			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
 				
 				String noteId = screen.getNoteList().getNoteID();
@@ -398,9 +394,7 @@ public class Controller {
 			if (e.getSource() == screen.getUserList().getBtnMainMenu()) {
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getUserList().getBtnLogout()) {
-				screen.show(Screen.LOGIN);
-			}
+			
 			if (e.getSource() == screen.getUserList().getBtnAdd()) {
 				screen.show(Screen.ADDUSER);
 			}
@@ -432,9 +426,7 @@ public class Controller {
 			if (e.getSource() == screen.getEventlist().getBtnMainMenu()){
 				screen.show(Screen.MAINMENU);
 			}
-			if (e.getSource() == screen.getEventlist().getBtnLogout()){
-				screen.show(Screen.LOGIN);
-			}
+
 			if (e.getSource() == screen.getEventlist().getBtnAdd()){
 				screen.show(Screen.ADDEVENTGUI);
 			}
@@ -447,6 +439,8 @@ public class Controller {
 			}
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
 				
+				if(!screen.getEventlist().getCreatedBy().equals("CBS")){
+					
 				String[] fields = {"active"};
 				String [] values ={"0"};
 				String name = screen.getEventlist().getName();
@@ -457,6 +451,13 @@ public class Controller {
 					
 				}catch(Exception ex){
 					ex.printStackTrace();
+				}
+				}
+				else{
+					JOptionPane.showMessageDialog(null,
+							"\nThis event cannot be deleted because of restrictions!", "", JOptionPane.PLAIN_MESSAGE);
+					
+					
 				}
 				
 			}

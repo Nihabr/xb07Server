@@ -32,7 +32,7 @@ public class SwitchMethods extends Model {
 	GetCalendarData gcd = new GetCalendarData();
 	ShareCalendars share = new ShareCalendars();
 	CalendarInfo cInfo = new CalendarInfo();
-	GetEvents ge = new GetEvents();
+	EventInfo ge = new EventInfo();
 	GetUsers gu = new GetUsers();
 	
 	RetrieveUserCalendar gc = new RetrieveUserCalendar();

@@ -39,7 +39,6 @@ public class Calendar extends JPanel {
 	private JButton btnAdd;
 	private JButton btnDelete;
 	private JButton btnMainMenu;
-	private JButton btnLogout;
 	private JButton btnShare;
 	private String id;
 	private String name;
@@ -165,19 +164,6 @@ public class Calendar extends JPanel {
 		btnMainMenu.setBounds(601, 589, 194, 50);
 		add(btnMainMenu);
 
-		btnLogout = new JButton("Log out");
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
-						0), new Color(255, 255, 255), new Color(0, 0, 0)),
-				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
-						new Color(0, 0, 0), new Color(255, 255, 255),
-						new Color(0, 0, 0))));
-		btnLogout.setBounds(601, 659, 194, 50);
-		add(btnLogout);
-
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(NoteList.class
 				.getResource("/Images/CBSLogo3.png")));
@@ -197,7 +183,6 @@ public class Calendar extends JPanel {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
 		btnMainMenu.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnShare.addActionListener(l);
 	}
 
@@ -265,9 +250,6 @@ public class Calendar extends JPanel {
 		return btnMainMenu;
 	}
 
-	public JButton getBtnLogout() {
-		return btnLogout;
-	}
 	public JButton getBtnShare() {
 		return btnShare;
 	}

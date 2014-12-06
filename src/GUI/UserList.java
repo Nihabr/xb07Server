@@ -39,7 +39,6 @@ public class UserList extends JPanel {
 
 	private JButton btnAdd;
 	private JButton btnDelete;
-	private JButton btnLogout;
 	private JButton btnMainMenu;
 	private JScrollPane scrollPane;
 	private JLabel lblUserlist;
@@ -105,14 +104,6 @@ public class UserList extends JPanel {
         btnAdd.setForeground(new Color(0, 0, 205));
         btnAdd.setOpaque(true);
         add(btnAdd);
-        
-        btnLogout = new JButton("Log out");
-        btnLogout.setBounds(616, 666, 194, 50);
-        btnLogout.setForeground(Color.WHITE);
-        btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-        btnLogout.setContentAreaFilled(false);
-        btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-        add(btnLogout);
         
         btnMainMenu = new JButton("Main Menu");
         btnMainMenu.setBounds(616, 596, 194, 50);
@@ -195,7 +186,6 @@ public class UserList extends JPanel {
     public void addActionListener(ActionListener l) {
 		btnAdd.addActionListener(l);
 		btnDelete.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 		btnEditUser.addActionListener(l);
 		
@@ -221,9 +211,7 @@ public class UserList extends JPanel {
 		return btnMainMenu;
 	}
 
-	public JButton getBtnLogout() {
-		return btnLogout;
-	}
+
 	public JButton getBtnEditUser() {
 		return btnEditUser;
 	}

@@ -10,7 +10,7 @@ import JsonClasses.CreateNote;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.DeleteEvent;
 import JsonClasses.DeleteNote;
-import JsonClasses.GetEvents;
+import JsonClasses.EventInfo;
 import JsonClasses.GetUsers;
 import JsonClasses.UserInfo;
 import JsonClasses.ShareCalendars;
@@ -89,7 +89,7 @@ public class GiantSwitch {
 			
 		case "getEvents":
 			
-			GetEvents ge = (GetEvents)gson.fromJson(jsonString, GetEvents.class);
+			EventInfo ge = (EventInfo)gson.fromJson(jsonString, EventInfo.class);
 			
 			answer = SW.getEvents(ge.getCalendarId());
 			

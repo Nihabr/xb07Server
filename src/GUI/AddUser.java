@@ -22,7 +22,6 @@ public class AddUser extends JPanel {
 	private JTextField textField_Type;
 	private JTextField textField_Password;
 	private JButton btnSubmit;
-	private JButton btnLogout;
 	private JLabel lblCBSlogo;
 	private JButton btnMainMenu;
 	private JLabel lblUserInfo;
@@ -43,15 +42,6 @@ public class AddUser extends JPanel {
 		lblCBSlogo.setIcon(new ImageIcon(UserInfo.class.getResource("/Images/CBSLogo3.png")));
 		lblCBSlogo.setBounds(10, 698, 250, 59);
 		add(lblCBSlogo);
-		
-
-		btnLogout = new JButton("Log out");
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setForeground(new Color(255, 255, 255));
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(560, 540, 194, 50);
-		add(btnLogout);
 
 		textField_Email = new JTextField();
 		textField_Email.setForeground(new Color(105, 105, 105));
@@ -131,7 +121,6 @@ public class AddUser extends JPanel {
 	// Actionlisteners tilfæjes
 	public void addActionListener(ActionListener l) {
 		btnSubmit.addActionListener(l);
-		btnLogout.addActionListener(l);
 		btnMainMenu.addActionListener(l);
 	}
 
@@ -157,7 +146,5 @@ public class AddUser extends JPanel {
 		return btnMainMenu;
 	}
 	
-	public JButton getBtnLogout() {
-		return btnLogout;
-	}
+
 }

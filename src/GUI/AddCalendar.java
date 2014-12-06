@@ -32,7 +32,6 @@ public class AddCalendar extends JPanel {
 	private JLabel label;
 	private JLabel lblHeader;
 	private JButton btnBack;
-	private JButton btnLogout;
 	private JButton btnSubmit;
 	private JLabel lblName;
 	private JLabel lblShareWith;
@@ -114,14 +113,6 @@ public class AddCalendar extends JPanel {
 		btnBack.setBounds(601, 590, 194, 50);
 		add(btnBack);
 		
-		btnLogout = new JButton("Log out");
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setBounds(601, 660, 194, 50);
-		add(btnLogout);
-		
 		btnSubmit = new JButton("Submit");
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
@@ -165,7 +156,7 @@ public class AddCalendar extends JPanel {
 		}
 	
 	public void addActionListener(ActionListener l) {
-		btnLogout.addActionListener(l);
+		
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
@@ -222,9 +213,6 @@ public class AddCalendar extends JPanel {
 
 	public JButton getBtnBack() {
 		return btnBack;
-	}
-	public JButton getBtnLogout() {
-		return btnLogout;
 	}
 	public JButton getBtnSubmit() {
 		return btnSubmit;
