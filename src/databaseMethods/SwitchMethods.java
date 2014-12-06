@@ -358,16 +358,18 @@ public class SwitchMethods extends Model {
 		GetNotes gn = new GetNotes();
 		
 		for(UserEvent eventID : events){
-			CreateNote note = new CreateNote();
+			
 			ResultSet rs = qb.selectFrom("notes").where("eventID", "=", String.valueOf(eventID.getEventid())).ExecuteQuery();
 				while(rs.next()){
-					if(rs.getInt("Active") == 1){						
+					if(rs.getInt("Active") == 1){		
+						CreateNote note = new CreateNote();
 						note.setText(rs.getString("text"));
 						note.setCreatedBy(rs.getString("CreatedBy"));
 						note.setEventID(String.valueOf(eventID.getEventid()));
+						gn.getNotes().add(note);
 					}
 				}
-			gn.getNotes().add(note);
+			
 		}
 		stringToBeReturned = gson.toJson(gn);
 		
