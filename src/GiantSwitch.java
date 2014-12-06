@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 
+import model.user.AuthenticateUser;
 import JsonClasses.GetNotes;
 import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ClientLogin;
@@ -23,12 +24,12 @@ public class GiantSwitch {
 	
 	
 	
-	public String GiantSwitchMethod(String jsonString) throws SQLException {
+	public String GiantSwitchMethod(String jsonString) throws Exception {
 
 		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
 
 		SwitchMethods SW = new SwitchMethods();
-		
+		AuthenticateUser auth = new AuthenticateUser();
 		Gson gson = new GsonBuilder().create();
 		String answer = "";	
 		//Creates a switch which determines which method should be used. Methods will be applied later on
@@ -41,7 +42,11 @@ public class GiantSwitch {
 		 **********/
 		case "logIn":
 			ClientLogin cl = (ClientLogin)gson.fromJson(jsonString, ClientLogin.class);
-			answer = SW.clientLogin(cl.getEmail(), cl.getPassWord());
+			int authRes = auth.authenticate(cl.getEmail(), cl.getPassWord());
+			if(authRes == 0){
+				answer = SW.clientLogin(cl.getEmail(), cl.getPassWord());
+			} else
+				answer = "Login failed.";
 			break;
 
 		case "logOut":
