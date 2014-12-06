@@ -32,9 +32,10 @@ public class GiantSwitch {
 		Gson gson = new GsonBuilder().create();
 		String answer = "";	
 		//Creates a switch which determines which method should be used. Methods will be applied later on
+		System.out.println(Determine(jsonString));
 		switch (Determine(jsonString)) {
 		//If the Json String contains one of the keywords below, run the relevant method.
-
+		
 		/**********
 		 ** LOGIN **
 		 **********/
@@ -147,9 +148,6 @@ public class GiantSwitch {
 		}
 		return answer;
 		
-		
-		
-		
 	}
 
 	//Creates a loooong else if statement, which checks the JSon string which keyword it contains, and returns the following 
@@ -162,8 +160,6 @@ public class GiantSwitch {
 			return "getEventInfo";
 		} else if (ID.contains("saveNote")) {
 			return "saveNote";
-		} else if (ID.contains("getNote")) {
-			return "getNote";
 		} else if (ID.contains("deleteNote")){
 			return "deleteNote";
 		}else if  (ID.contains("deleteCalendar")){

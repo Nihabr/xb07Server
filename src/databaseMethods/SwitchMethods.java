@@ -364,6 +364,7 @@ public class SwitchMethods extends Model {
 					if(rs.getInt("Active") == 1){						
 						note.setText(rs.getString("text"));
 						note.setCreatedBy(rs.getString("CreatedBy"));
+						note.setEventID(String.valueOf(eventID.getEventid()));
 					}
 				}
 			gn.getNotes().add(note);
