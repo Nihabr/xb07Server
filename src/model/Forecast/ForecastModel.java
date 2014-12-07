@@ -23,7 +23,7 @@ import config.Configurations;
 
 public class ForecastModel implements Runnable {
 
-	// Json parser to retrieve and map data from openweathermap.org
+	
 	private ArrayList<Forecast> forecastList = new ArrayList<Forecast>();
 	private String weatherDescription = "";
 	QueryBuilder qb = new QueryBuilder();
@@ -122,16 +122,14 @@ public class ForecastModel implements Runnable {
 		ResultSet forecast = null;
 		try {
 			forecast = qb.selectFrom("dailyupdate").all().ExecuteQuery();
-			// Method to add these ResultSet values to ArrayList needs to be
-			// created
+			
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
-		// Do something nice with ResultSet in order to make it into an
-		// ArrayList
+		// Info om forecast hentes og gemmes i et ArrayList
 		try {
 			while (forecast.next()) {
 
@@ -149,12 +147,12 @@ public class ForecastModel implements Runnable {
 			return forecastList;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return null;
 	}
-
+	// Info om forecast ligges fra ArrayListen ned i databasen
 	private void updateFc() {
 
 		forecastList = requestForecast();

@@ -11,7 +11,6 @@ import java.util.Date;
 import model.QueryBuild.QueryBuilder;
 
 /**
- * Created by jesperbruun on 10/10/14.
  * Den laver selve arrayet af alle generede Event
  */
 public class Events {
@@ -28,7 +27,7 @@ public class Events {
 				rs = qb.selectFrom("events").all().ExecuteQuery();
 			while (rs.next())
 			{
-				//String values from SQL database (must be created)
+				//String values from SQL database 
 				int eventID = rs.getInt("eventid");
 				int type = rs.getInt("type");
 				int location = rs.getInt("location");
@@ -78,12 +77,5 @@ public class Events {
     public String toString() {
         return Arrays.toString(events.toArray());
     }
-    
-//    public static void main(String []args){
-//    	Events Hej = new Events();
-//    	
-//    	Hej.getEvents();
-//    	System.out.println(Hej.toString());
-//
-//    }
+   
 }

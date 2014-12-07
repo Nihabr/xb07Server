@@ -5,7 +5,12 @@ public class QOTD {
 	private String quote;
 	private String author;
 	private String topic;
-	
+	/**
+	 * Bruges til at definere QOTD
+	 * @param quote
+	 * @param author
+	 * @param topic
+	 */
 	public QOTD(String quote, String author, String topic) {
 		super();
 		this.quote = quote;

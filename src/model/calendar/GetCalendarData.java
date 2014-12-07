@@ -20,9 +20,7 @@ public class GetCalendarData {
 	QueryBuilder qb = new QueryBuilder();
 	ResultSet rs;
 	
-	/**
-	 * Created by jesperbruun on 13/10/14.
-	 */
+	
 	//henter data fra URL og l??er ind til en string
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;

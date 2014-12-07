@@ -18,16 +18,6 @@ public abstract class Model {
     private static String sqlPasswd = cf.getPassword();
     private static String dbName = cf.getDbname();
     
-//    private static String sqlUrl = "jdbc:mysql://54.172.101.85:3306";
-//    private static String sqlUser = "root";
-//    private static String sqlPasswd = "doekdoek";
-//    private static String dbName = "cbscalendar";
-    
-//    private static String sqlUrl = "jdbc:mysql://localhost:3306";
-//    private static String sqlUser = "root";
-//    private static String sqlPasswd = "1234";
-//   private static String dbName = "cbscalendar";
-    
     private Statement stmt;
     protected Connection conn = null;
     protected PreparedStatement sqlStatement;

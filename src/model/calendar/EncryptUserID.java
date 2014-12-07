@@ -2,16 +2,8 @@ package model.calendar;
 
 import java.security.MessageDigest;
 
-/**
- * Created by jesperbruun on 23/09/14.
- */
-
 public class EncryptUserID {
 
-    /**
-     * Constant cipher seed - DO NOT CHANGE.
-     * http://www.miraclesalad.com/webtools/md5.php - Du kan her saette userid foerst og derefter hashkey for at teste
-     */
     private static final String HASHKEY = "v.eRyzeKretW0r_t";
     private static String email = "";
     private static String key;
@@ -47,7 +39,7 @@ public class EncryptUserID {
         return hexString.toString();
     }
 
-    //Quick example of how to get the hash.
+    //
     public static void main(String[] args) {
 
         System.out.print("Secret key: " + crypt(email + HASHKEY));

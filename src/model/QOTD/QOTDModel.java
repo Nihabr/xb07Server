@@ -22,14 +22,14 @@ public class QOTDModel implements Runnable {
 	private ResultSet resultSet;
 
 	/**
-     *
-     */
+	 * 
+	 */
 
 	public void run() {
 
 		saveQuote();
 	}
-
+	// Metode til at læse URL-adressen, hvor QOTD JSON String er
 	private static String readUrl(String urlString) throws Exception {
 		BufferedReader reader = null;
 		try {

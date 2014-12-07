@@ -10,6 +10,7 @@ public class Note extends Model{
 	NoteModel notes = new NoteModel( "", "", "");
 	QueryBuilder qb = new QueryBuilder(); 
 	
+		// Metoden til at lave en ny note
 		public void CreateNote(NoteModel note)	{
 			
 			
@@ -25,25 +26,16 @@ public class Note extends Model{
 				qb.insertInto("notes", fields).values(values).Execute();
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-//		public void DeleteNote (int noteID) throws SQLException {
-//			
-//					notes = GetNote(noteID);
-//					notes.setActive(0);
-//					SaveNote(notes);
-//					
-//				}
-
+		
+		//Metode til at hente noter fra databasen
 		public NoteModel GetNote (int noteID) throws SQLException{
 			
 			try {
 				resultSet = qb.selectFrom("notes").where("noteID", "= ", String.valueOf(noteID)).ExecuteQuery();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				while(resultSet.next()){
@@ -62,6 +54,7 @@ public class Note extends Model{
 		
 		}
 		
+		// Metode til at gemme noter i databasen
 		public void SaveNote (NoteModel note){
 			
 			String text = note.getText();
@@ -76,7 +69,6 @@ public class Note extends Model{
 			try {
 				qb.update("notes", fields, values).where("noteID", "=",eventID).Execute();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				

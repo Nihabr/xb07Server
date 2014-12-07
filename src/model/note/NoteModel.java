@@ -1,21 +1,17 @@
 package model.note;
 
-/*
- * 		Mangler:
- * 			- Identifikation på brugeren der har lavet noten
- * 			- Hvem der skal kunne redigere noten
- * 			- Mulighed for at slette / redigere noter
- * 			- Active Status
- * 
- * 			ETA: 2 timer
- */
-
 public class NoteModel {
 
 	private String text;
 	private String createdBy;
 	private String eventID;
 
+	/**
+	 * Bruges til at definere notes
+	 * @param text
+	 * @param createdBy
+	 * @param eventID
+	 */
 	public NoteModel(String text, String createdBy, String eventID) {
 		super();
 		this.text = text;
