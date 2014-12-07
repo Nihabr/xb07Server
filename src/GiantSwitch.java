@@ -1,8 +1,4 @@
-import java.sql.SQLException;
-
 import model.user.AuthenticateUser;
-import JsonClasses.GetNotes;
-import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ClientLogin;
 import JsonClasses.ClientLogout;
 import JsonClasses.CreateCalendar;
@@ -12,11 +8,12 @@ import JsonClasses.DeleteCalendar;
 import JsonClasses.DeleteEvent;
 import JsonClasses.DeleteNote;
 import JsonClasses.EventInfo;
-import JsonClasses.GetUsers;
-import JsonClasses.UserInfo;
+import JsonClasses.GetNotes;
+import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ShareCalendars;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import databaseMethods.SwitchMethods;
 
@@ -26,7 +23,6 @@ public class GiantSwitch {
 	
 	public String GiantSwitchMethod(String jsonString) throws Exception {
 
-		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
 
 		SwitchMethods SW = new SwitchMethods();
 		AuthenticateUser auth = new AuthenticateUser();
@@ -58,6 +54,11 @@ public class GiantSwitch {
 			System.out.println("Recieved logOut");
 			break; 
 			
+			
+		/*************
+		 ** USERS **
+		 *************/
+			
 		case "getUsers":			
 			answer = SW.getUsers();
 			System.out.println("Users retrieved");
@@ -76,7 +77,7 @@ public class GiantSwitch {
 		case "deleteCalendar":
 			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
 			System.out.println(DC.getCalendarName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.deleteCalendar(DC.getUserName(), DC.getCalendarName());
+			answer = SW.removeCalendar(DC.getUserName(), DC.getCalendarName());
 			break;
 		
 		case"shareCalendar":
@@ -90,7 +91,7 @@ public class GiantSwitch {
 		case"getCalendar":
 			
 			RetrieveUserCalendar ru = (RetrieveUserCalendar)gson.fromJson(jsonString, RetrieveUserCalendar.class);
-			answer = SW.retrieveUserCalendar(ru.getEmail());
+			answer = SW.getUserCalendar(ru.getEmail());
 			System.out.println("dude, it works");
 			
 			break;
@@ -121,7 +122,7 @@ public class GiantSwitch {
 			
 			DeleteEvent de = (DeleteEvent)gson.fromJson(jsonString, DeleteEvent.class);
 			
-			answer = SW.deleteEvent(de.getEmail(), de.getEventId());
+			answer = SW.removeEvent(de.getEmail(), de.getEventId());
 			System.out.println("Event" + de.getEventId() +"is deleted");
 			
 			System.out.println("Recieved deleteEvent");
@@ -129,7 +130,7 @@ public class GiantSwitch {
 			
 		case "createNote":
 			CreateNote cn = (CreateNote)gson.fromJson(jsonString, CreateNote.class);
-			SW.CreateNote(cn);
+			SW.createNote(cn);
 			System.out.println("Recieved saveNote");
 			break;
 			
@@ -159,8 +160,13 @@ public class GiantSwitch {
 		
 	}
 
-	//Creates a loooong else if statement, which checks the JSon string which keyword it contains, and returns the following 
-	//keyword if
+	
+	/**
+	 * Creates a long else if statement, which checks the JSon string which keyword it contains, and returns the following 
+		keyword if
+	 * @param ID
+	 * @return case
+	 */
 	public String Determine(String ID) {
 
 		if (ID.contains("getEvents")) {

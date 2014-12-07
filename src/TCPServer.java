@@ -6,6 +6,10 @@ import config.Configurations;
 
 class TCPServer{    
 	
+	/**
+	 * Starts Tcp
+	 * @throws Exception
+	 */
 	public void StartTCP() throws Exception       {
 
 		AdminWorker admin = new AdminWorker();

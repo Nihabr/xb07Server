@@ -171,23 +171,35 @@ public class SwitchMethods extends Model {
 		} else
 			return "";
 	}
-
-	public String deleteCalendar(String userName, String calendarName)
+	/**
+	 * bruke removeCalendarModel til 
+	 * @param userName
+	 * @param calendarName
+	 * @return
+	 * @throws SQLException
+	 */
+	public String removeCalendar(String userName, String calendarName)
 			throws SQLException {
 		testConnection();
-		stringToBeReturned = removeCalendar(userName, calendarName);
+		stringToBeReturned = removeCalendarModel(userName, calendarName);
 
 		return stringToBeReturned;
 	}
-
-	public String removeCalendar(String userName, String calendarName)
+	/**
+	 * Model til å slette kalender hvis den eksisterer samt at det 
+	 * gjøres av den samme bruker som har laget den.
+	 * @param userName
+	 * @param calendarName
+	 * @return String
+	 * @throws SQLException
+	 */
+	public String removeCalendarModel(String userName, String calendarName)
 			throws SQLException {
 		String usernameOfCreator = "";
 		String calendarExists = "";
 		resultSet = qb.selectFrom("calendar").where("Name", "=", calendarName)
 				.ExecuteQuery();
 
-		// ("select * from calendar where Name = '"+calendarName+"';");
 		while (resultSet.next()) {
 			calendarExists = resultSet.toString();
 		}
@@ -197,7 +209,6 @@ public class SwitchMethods extends Model {
 					.where("Name", "=", calendarName).ExecuteQuery();
 			while (resultSet.next()) {
 				usernameOfCreator = resultSet.toString();
-				System.out.println(usernameOfCreator);
 			}
 			if (!usernameOfCreator.equals(userName)) {
 				stringToBeReturned = "Only the creator of the calendar is able to delete it.";
@@ -215,8 +226,13 @@ public class SwitchMethods extends Model {
 
 		return stringToBeReturned;
 	}
-
-	public String retrieveUserCalendar(String email)throws SQLException{
+	/**
+	 * Henter alle kalendere som tilhører den valgte bruker
+	 * @param email
+	 * @return String
+	 * @throws SQLException
+	 */
+	public String getUserCalendar(String email)throws SQLException{
 		
 		String [] fields = {"calendarID", "name"};
 		
@@ -231,8 +247,13 @@ public class SwitchMethods extends Model {
 		stringToBeReturned = gson.toJson(gc);
 		return stringToBeReturned;
 	}
-	
-	public String CreateNote(CreateNote cn) {
+	/**
+	 * Bruker metode CreateNote fra klasse Note til å opprette en note
+	 * på bakgrunn av Jsonclass CreateNote
+	 * @param cn
+	 * @return
+	 */
+	public String createNote(CreateNote cn) {
 
 		nm.setCreatedBy(cn.getCreatedBy());
 
@@ -244,44 +265,62 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
-	public String deleteEvent(String email, String eventID)
+	/**
+	 * Sletter det valgte event
+	 * @param email
+	 * @param eventID
+	 * @return String
+	 * @throws SQLException
+	 */
+	public String removeEvent(String email, String eventID)
 			throws SQLException {
-
-		String stringToBeReturned = "";
 		testConnection();
-		stringToBeReturned = removeEvent(email, eventID);
+		stringToBeReturned = removeEventModel(email, eventID);
 
 		return stringToBeReturned;
 
 	}
 
-	public String removeEvent(String email, String eventID)
+	/**
+	 * Model til å slette event fra database hvis det enten gjøres av 
+	 * brukeren som har laget den, eller brukeren er admin
+	 * 
+	 * @param email
+	 * @param eventID
+	 * @return String
+	 * @throws SQLException
+	 */
+	public String removeEventModel(String email, String eventID)
 			throws SQLException {
 
-		String stringToBeReturend = "";
+		
 		String createdBy = "";
 		resultSet = qb.selectFrom("events")
 				.where("eventID", "=", eventID).ExecuteQuery();
 
 		while (resultSet.next()) {
-			System.out.println("createdby ledes efter: ");
+			
 			createdBy = resultSet.getString("createdby");
-			System.out.println(createdBy);
+			
 		}
 		if (!createdBy.equals(email) || email.equals("admin")) {
-			stringToBeReturend = "Only the creator of the event is able to delete it.";
+			stringToBeReturned = "Only the creator of the event is able to delete it.";
 		} else {
 			String[] keys = { "active" };
 			String[] values = { "0" };
 			qb.update("events", keys, values)
 					.where("eventID", "=", eventID).Execute();
-			stringToBeReturend = "event has been set inactive";
+			stringToBeReturned = "event has been set inactive";
 		}
 
-		return stringToBeReturend;
+		return stringToBeReturned;
 
 	}
-
+	/**
+	 * Henter dailyupdate fra databasen
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String getDailyUpdate() throws SQLException {
 
 		Date date = new Date();
@@ -301,6 +340,14 @@ public class SwitchMethods extends Model {
 		return gsonString;
 	}
 
+	/**
+	 * Metode til å slette en note. Det blir kun slettet hvis det
+	 * er den samme bruker som har opprettet noten.
+	 * @param email
+	 * @param nID
+	 * @return
+	 * @throws SQLException
+	 */
 	public String deleteNote(String email, String nID) throws SQLException {
 
 		resultSet = qb.selectFrom("notes").where("noteID", "=", nID)
@@ -319,7 +366,12 @@ public class SwitchMethods extends Model {
 
 		return stringToBeReturned;
 	}
-	
+	/**
+	 * Henter events fra systemet på bakgrunn av calendarId
+	 * @param calendarID
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String getEvents(String calendarID) throws SQLException{
 		
 		
@@ -336,6 +388,11 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
+	/**
+	 * Henter alle aktive brukere fra databasen
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String getUsers() throws SQLException{
 		
 		String [] fields = {"email", "active"};
@@ -353,6 +410,12 @@ public class SwitchMethods extends Model {
 		
 	}
 	
+	/**
+	 * Henter noter fra databasen basert på eventID
+	 * @param events
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String getNotes(ArrayList<UserEvent> events) throws SQLException{
 		
 		GetNotes gn = new GetNotes();
@@ -376,7 +439,15 @@ public class SwitchMethods extends Model {
 		
 		return stringToBeReturned;
 	}
-	
+	/**
+	 * Metode til å logge bruker inn i systemet, 
+	 * samtidig som det hentes kalender for den spesifikke bruker
+	 * @param email
+	 * @param password
+	 * @param authenticated
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String clientLogin(String email, String password, boolean authenticated)
 			throws SQLException {
 		
@@ -423,7 +494,12 @@ public class SwitchMethods extends Model {
 
 		return gsonString;
 	}
-
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
 	public String clientLogout(String email) throws SQLException {
 		String gsonString = "";
 		String[] fields = { "active" };
