@@ -226,7 +226,7 @@ public class Controller {
 				
 				
 				try {
-					sw.share(sharedUsers, calendarID, getCurrentUser());
+					sw.shareCalendar(sharedUsers, calendarID, getCurrentUser());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

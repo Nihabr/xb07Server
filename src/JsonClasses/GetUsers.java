@@ -5,14 +5,20 @@ import java.util.ArrayList;
 public class GetUsers implements java.io.Serializable
 {
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
 	private String overallID = "getUsers";
-	ArrayList<UserInfo>  getUsers;
-
-	public GetUsers(){
-		getUsers = new ArrayList<UserInfo>();
-	}
 	
+	
+	ArrayList<UserInfo>  getUsers =	new ArrayList<UserInfo>();
+	
+	
+	public String getOverallID() {
+		return overallID;
+	}
+
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
+
 	public ArrayList<UserInfo> getUserArray() {
 		return getUsers;
 	}

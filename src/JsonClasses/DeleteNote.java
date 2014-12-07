@@ -1,7 +1,9 @@
 package JsonClasses;
 
-public class DeleteNote {
-	private  final long serialVersionUID = 1L;
+public class DeleteNote implements java.io.Serializable{
+	
+	
+	private static final long serialVersionUID = 1L;
 	private String overallID = "deleteNote";
 	String noteID;
 	String email;

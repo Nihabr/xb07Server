@@ -2,7 +2,7 @@ package JsonClasses;
 
 import java.util.ArrayList;
 
-public class GetEvents {
+public class GetEvents implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String overallID = "getEvents";

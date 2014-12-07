@@ -4,6 +4,8 @@ public class EventInfo implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String overallID = "eventInfo";
+	
+	
 	private int eventId;
 	private String type;
 	private String location;
@@ -14,6 +16,20 @@ public class EventInfo implements java.io.Serializable {
 	private String text;
 	private String calendarId;
 	private int active;
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getOverallID() {
+		return overallID;
+	}
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
 	public int getEventId() {
 		return eventId;
 	}

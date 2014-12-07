@@ -2,9 +2,9 @@ package JsonClasses;
 
 import java.util.ArrayList;
 
-public class ClientLogin {
+public class ClientLogin implements java.io.Serializable{
 
-	private  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private String overallID = "logIn";
 	String email;
 	String passWord;
@@ -12,11 +12,13 @@ public class ClientLogin {
 	String role;
 	ArrayList <CalendarInfo> calendars = new ArrayList <CalendarInfo>();
 	boolean loggedIn = false;
+
 	
-	public ClientLogin (){
-		
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-	
 
 
 	public ArrayList<CalendarInfo> getCalendars() {

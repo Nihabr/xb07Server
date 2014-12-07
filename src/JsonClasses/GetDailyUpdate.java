@@ -1,13 +1,16 @@
 package JsonClasses;
 
-public class GetDailyUpdate {
+public class GetDailyUpdate implements java.io.Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
+	private String overallID = "getDailyUpdate";
 	private String quote;
     private String date;
     private String celsius;
 	private String desc;
-	private  final long serialVersionUID = 1L;
-	private String overallID = "getDailyUpdate";
+	
+	
 	
 	public GetDailyUpdate(){
 		

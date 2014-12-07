@@ -3,17 +3,14 @@ package JsonClasses;
 import java.util.ArrayList;
 
 
-public class ShareCalendars {
+public class ShareCalendars implements java.io.Serializable{
 
-	private  final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
 	private String overallID = "shareCalendar";
 	String email;
 	ArrayList <String> shareEmail;
 	String calendarID;
-	
-	public ShareCalendars(){
-		
-	}
 
 	public String getOverallID() {
 		return overallID;

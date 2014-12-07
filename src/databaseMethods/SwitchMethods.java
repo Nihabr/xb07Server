@@ -41,7 +41,8 @@ public class SwitchMethods extends Model {
 	
 
 	/**
-	 * Allows the client to create a new calendar
+	 * Allows the client to create a new calendar if it is not a duplicate.
+	 * When creating a calendar it is also possible to share it at the same time.
 	 * 
 	 * @param userName
 	 * @param calendarName
@@ -54,7 +55,7 @@ public class SwitchMethods extends Model {
 			String email, ArrayList<String> sharedUsers, int isCBS)
 			throws SQLException {
 
-		String result = "";
+		
 
 		// Queries DB to see if calendar name is in use
 		resultSet = qb.selectFrom("calendar")
@@ -74,7 +75,7 @@ public class SwitchMethods extends Model {
 			String[] values = { newCalendarName, email,
 					Integer.toString(publicOrPrivate), Integer.toString(isCBS) };
 			qb.insertInto("calendar", fields).values(values).Execute();
-			result = "Calendar has been created.";
+			stringToBeReturned = "Calendar has been created.";
 			sharedUsers.add(email);
 
 			if (!sharedUsers.isEmpty()) {
@@ -85,16 +86,29 @@ public class SwitchMethods extends Model {
 					if (resultSet.getString("createdby").equals(email))
 						newCalendarID = resultSet.getInt("calendarID");
 				}
-				share(sharedUsers, String.valueOf(newCalendarID), email);
-				result += " Calendar has been shared with specified users.";
+				shareCalendar(sharedUsers, String.valueOf(newCalendarID), email);
+				stringToBeReturned += " Calendar has been shared with specified users.";
 
 				// }
 			}
 		} else
-			result = "User already has calendar with that name. Please chose a new name for the calendar!";
-		return result;
+			stringToBeReturned = "User already has calendar with that name. Please chose a new name for the calendar!";
+		return stringToBeReturned;
 	}
 
+	/**
+	 * Creates event for user calendars
+	 * @param type
+	 * @param location
+	 * @param createdby
+	 * @param start
+	 * @param end
+	 * @param name
+	 * @param text
+	 * @param calendarID
+	 * @return String
+	 * @throws SQLException
+	 */
 	public String createEvent(String type, String location, String createdby,
 			String start, String end, String name, String text,
 			String calendarID) throws SQLException {
@@ -118,14 +132,16 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 
-	/**
-	 * Allows the client to delete a calendar
-	 * 
-	 * @param
-	 * @return String message
-	 */
 
-	public String share(ArrayList<String> sharedUsers, String calendarID,
+	/**
+	 * Share calendar with specified users
+	 * @param sharedUsers
+	 * @param calendarID
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
+	public String shareCalendar(ArrayList<String> sharedUsers, String calendarID,
 			String email) throws SQLException {
 
 		if (sharedUsers != null) {

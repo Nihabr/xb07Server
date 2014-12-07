@@ -1,9 +1,9 @@
 package JsonClasses;
 
-public class CreateEvent {
-
-
-		// private String activityid;
+public class CreateEvent implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	private String overallID = "createEvent";
+	
 		private String eventid;
 		private String type;
 		private String title;
@@ -16,11 +16,9 @@ public class CreateEvent {
 		private String calendarID;
 		private String CBSeventID;
 		
-		private  final long serialVersionUID = 1L;
-		private String overallID = "createEvent";
-//		String activityid
-		public CreateEvent(){ 
-		}
+		
+		
+
 		
 		public String getOverallID() {
 			return overallID;

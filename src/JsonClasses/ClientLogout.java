@@ -1,22 +1,27 @@
 package JsonClasses;
 
-public class ClientLogout {
+public class ClientLogout implements java.io.Serializable{
 	
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
 	private String overallID = "logOut";
 	String email;
 	
-	public ClientLogout (){
-		
-	}
-	
+
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getOverallID() {
+		return overallID;
+	}
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 }

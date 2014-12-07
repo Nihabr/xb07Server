@@ -84,7 +84,7 @@ public class GiantSwitch {
 			
 			ShareCalendars sc = (ShareCalendars)gson.fromJson(jsonString, ShareCalendars.class);
 			System.out.println(sc.getShareEmail() + "har nå tilgang til kalender " + sc.getCalendarID());
-			answer = SW.share(sc.getShareEmail(), sc.getCalendarID(), sc.getEmail());
+			answer = SW.shareCalendar(sc.getShareEmail(), sc.getCalendarID(), sc.getEmail());
 			
 			break;
 		

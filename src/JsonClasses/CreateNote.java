@@ -1,19 +1,18 @@
 package JsonClasses;
 
-public class CreateNote {
-
-	private  final long serialVersionUID = 1L;
+public class CreateNote implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 	private String overallID = "createNote";
+	
+	
+	
 	private String noteID;
 	private String text;
 	private String dateTime;
 	private String createdBy;
 	private int isActive;
 	private String eventID;
-	
-	public CreateNote(){
-		
-	}
+
 	
 	public String getOverallID() {
 		return overallID;

@@ -4,19 +4,14 @@ import java.util.ArrayList;
 
 import model.calendar.UserEvent;
 
-public class GetNotes {
-	
-	@SuppressWarnings("unused")
+public class GetNotes implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
+	
 	private String overallID = "getNotes";
 	ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
 	ArrayList<UserEvent> Events = new ArrayList<UserEvent>();
 	String email;
-	
-	public GetNotes(){
-		
-	}
+
 
 	public ArrayList<CreateNote> getNotes() {
 		return notes;
@@ -40,6 +35,18 @@ public class GetNotes {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getOverallID() {
+		return overallID;
+	}
+
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }
