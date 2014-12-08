@@ -24,7 +24,7 @@ Strings:
 				String role
 				ArrayList <CalendarInfo> calendars
 						
-						CalendarInfo:
+					CalendarInfo:
 						private static final long serialVersionUID = 1L
 						private String overallID = "calendarInfo"
 						private int calendarId
@@ -33,7 +33,7 @@ Strings:
 						private int publicOrPrivate
 						ArrayList<UserEvent> calendars
 						
-								UserEvent:
+							UserEvent:
 								private int eventid
 								private String type
 								private String title
@@ -43,31 +43,13 @@ Strings:
 								private String start
 								private String end
 								private int calendarID
-						
-				boolean loggedIn
+								
+	"logOut":
+	Funktion:	Logger brugeren ud.
 	
-	requestQuote
+	Forventer:	String email
 	
-	saveQuote
+	Returnerer: String answer = "";
 	
-	getQuote
-	
-	requestForecast
-	
-	getForecast
-	
-	saveForecast
-	
-	createCalendar
-	
-	importCalendar
-	
-	exportCalendar
-	
-	saveNote
-	
-	getNote
-	
-	getEvents
-	
-	getEventInfo
+	"
+
