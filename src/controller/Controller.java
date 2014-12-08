@@ -28,7 +28,7 @@ public class Controller {
 	private String currentCalendar = "";
 	private String eventID = "";
 	
-	
+	// instanser af QueryBuilder, AuthenticateUser og SwitchMethods oprettes
 	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
 	int row;
@@ -38,6 +38,7 @@ public class Controller {
 
 	public Controller() {
 
+		// Hvert JPanel tilføjes actionlisteners
 		screen = new Screen();
 		screen.getLogin().addActionListener(new LoginActionListener());
 		screen.getMainMenu().addActionListener(new MainMenuActionListener());
@@ -53,45 +54,39 @@ public class Controller {
 		screen.getAddCalendar().addActionListener(new AddCalendarActionListener());
 		screen.getShareCalendar().addActionListener(new ShareCalendarActionListener());
 		
-		
 	}
-
+	// Run metoden angiver hvilken Screen programmet starter ved
 	public void run() {
 
 		screen.show(Screen.LOGIN);
 		screen.setVisible(true);
 	}
-
+	// tillægger login knappen en funktion
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				
+				// indsamler data fra textfields
 				action = e.getActionCommand();
 				String userName = screen.getLogin().getTextFieldUsername()
 						.getText().trim();
 				char[] pass = screen.getLogin().getTextFieldPassword()
 						.getPassword();
 				String password = String.valueOf(pass);
-				
-				
-				
+
 				
 				// Giv auth noget data som passer til metoden
 				// Dern��st skal auth returnere 0 hvis dataen er god, og ellers
 				// give en fejl
 				// brug if / else statement til at  om det er godkendt
 				// eller ej, og hvis ikke
-				// skal det printe hvilken fejl der er (bare print den int
-				// v��rdi i modtager)
+				// skal det printe hvilken fejl der er
 				if ((action.equals("btnLogIn"))) {
 					
 					loggedIn = auth.authenticate(userName, password);
 			
 
 					if (loggedIn == 0)
-
-					{
-						
+					{	
 						setCurrentUser(userName);
 						screen.getCalendar().updateTable("1");
 						screen.show(Screen.SHOWCALENDAR);
@@ -110,9 +105,10 @@ public class Controller {
 			}
 		}
 	}
-
+	// tillægger de forskellige knapper i mainmenu funktioner
 	private class MainMenuActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			// ved logout ændres active til 0, så man bliver logget ud.
 			if (e.getSource() == screen.getMainMenu().getBtnLogOut()) {
 				
 				String[] fields = {"active"};
@@ -133,6 +129,7 @@ public class Controller {
 				}
 				
 			}
+			// fører brugeren videre til de rigtige screens.
 			if (e.getSource() == screen.getMainMenu().getBtnUserlist()) {
 				screen.getUserList().updateTable();
 				screen.show(Screen.USERLIST);
@@ -153,16 +150,13 @@ public class Controller {
 
 		}
 	}
-
+	
 	private class AddEventGUIActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-//			if (e.getSource() == screen.getAddEventGUI().getBtnLogout()){
-//				screen.show(Screen.LOGIN);
-//			}
-			
 			if (e.getSource() == screen.getAddEventGUI().getBtnBack()){
 				screen.show(Screen.EVENTLIST);
 			}
+			// Indsamler data fra textfields
 			if (e.getSource() == screen.getAddEventGUI().getBtnSubmit()){
 				String type = screen.getAddEventGUI().getTextField_Type().getText();
 				String location = screen.getAddEventGUI().getTextField_Location().getText();
@@ -178,7 +172,7 @@ public class Controller {
 				
 				
 				
-				
+				// tjekker om alle textfields er udfyldte
 				if (type.equals("")|| location.equals("")|| createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
@@ -186,6 +180,7 @@ public class Controller {
 				}
 				else
 				{
+					// henter metode fra SwitchMethods til at oprette et event, og opdaterer eventlist table bagefter.
 					try{
 					sw.createEvent(type, location, createdby, start, end, name, text, getCurrentCalendar());
 					screen.getEventlist().updateTable(getCurrentCalendar());
@@ -209,19 +204,18 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			
 			if (e.getSource() == screen.getShareCalendar().getBtnShare()) {
-				
+				// henter data fra textfields
 				String calendarID = screen.getShareCalendar().getTextFieldChooseCal().getText();
 				
-				
-				
 				String shareEmail = screen.getShareCalendar().getTextFieldShareWith().getText();
-				ArrayList<String>sharedUsers = new ArrayList<String>();
 				
+				ArrayList<String>sharedUsers = new ArrayList<String>();
+				// tjekker at begge felter er udfyldte
 				if(calendarID != "" || shareEmail != ""){
 					
 					sharedUsers.add(shareEmail);
 				}else{
-					//feilmelding
+				
 				}
 				
 				
@@ -243,7 +237,7 @@ public class Controller {
 		
 		
 	}
-
+	
 	private class AddUserActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
@@ -251,7 +245,7 @@ public class Controller {
 				screen.show(Screen.MAINMENU);
 			}
 			if (e.getSource() == screen.getAddUser().getBtnSubmit()) {
-
+				// indsamler data fra textfields
 				String Email = screen.getAddUser().getTextField_Email()
 						.getText();
 				String type = screen.getAddUser().getTextField_Type().getText();
@@ -260,7 +254,7 @@ public class Controller {
 				
 				
 
-				
+				// tjekker at alle textfields er udfyldte
 				if (Email.equals("") || type.equals("") || Password.equals("")) {
 					JOptionPane.showMessageDialog(null,
 							"\nPlease fill out all the fields",
@@ -269,18 +263,12 @@ public class Controller {
 					
 					
 				} else {
-
+					
 					String[] kolonner = {"email", "password" };
 					String[] Values = { Email, Password };
 					
 					try {
-//						String[] email = {"email"};
-//						res = qb.selectFrom(email, "users").all().ExecuteQuery();
-//						while(res.next())
-//						if(res.getString("email").equals(Email)){
-//							JOptionPane.showMessageDialog(null,
-//									"\nUser already exists", "", JOptionPane.PLAIN_MESSAGE);
-//						}else{
+						// indsætter data i databasen via QueryBuilder
 						qb.insertInto("users", kolonner).values(Values).Execute();
 						
 						String[] value = {"email"};
@@ -308,13 +296,13 @@ public class Controller {
 			}
 		}
 	}
-
+	
 	private class AddNoteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == screen.getAddNote().getBtnAddNote()) {
 				
-				
+				// indsamler nødvendige data for at oprette en note, og opretter endelig en note.
 				String eID = getEventID();
 				String createdBy = getCurrentUser();
 				String text = screen.getAddNote().getTextFieldText().getText();
@@ -342,6 +330,7 @@ public class Controller {
 			if (e.getSource() == screen.getUserInfo().getBtnBack()) {
 				screen.show(Screen.USERLIST);
 			}
+			// indsamler data op lægger det ind i et String array. 
 			if (e.getSource() == screen.getUserInfo().getBtnSubmit()) {
 			String userID = screen.getUserInfo().getTxtField_UserID().getText();
 			String email = screen.getUserInfo().getTxtField_Email().getText();
@@ -349,6 +338,7 @@ public class Controller {
 			String[] fields = {"email", "Password"};
 			String[] values = {email, password};
 			try {
+				// String array'er bliver indsat i databasen
 				qb.update("users", fields, values).where("userID", "=", userID).Execute();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -373,12 +363,12 @@ public class Controller {
 				screen.show(Screen.MAINMENU);
 			}
 			if (e.getSource() == screen.getNoteList().getBtnDelete()) {
-				
+				// slettes en note, sættes active til 0. softdelete.
 				String noteId = screen.getNoteList().getNoteID();
 				String [] fields = {"active"};
 				String [] values = {"0"};
 				try{
-					
+					// opdaterer table
 					qb.update("notes", fields, values).where("noteID", "=", noteId).Execute();
 					screen.getNoteList().updateTable(getEventID());
 				}catch(Exception ee){
@@ -403,13 +393,13 @@ public class Controller {
 				screen.getUserInfo().Refresh();
 			}
 			if (e.getSource() == screen.getUserList().getBtnDelete()) {
-				
+				// Soft delete. Ændrer igen value til 0.
 				String email = screen.getUserList().getLblChosenUser().getText();
 				
 				String fields[] = {"exist"};
 				String values[] = {"0"};
 				try{
-					
+					// opdaterer tabel og table
 					qb.update("users", fields, values).where("email", "=", email).Execute();
 					screen.getUserList().updateTable();
 				}catch (Exception e4){
@@ -419,7 +409,7 @@ public class Controller {
 
 		}
 	}
-
+	// dirrigerer videre til den rigtige klasse, alt afhængigt af hvilken knap man har trykket på.
 	private class EventListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
@@ -437,12 +427,13 @@ public class Controller {
 				
 				
 			}
+			// sletter event
 			if (e.getSource() == screen.getEventlist().getBtnDelete()){
 				
 				if(!screen.getEventlist().getCreatedBy().equals("CBS")){
 					
 				String[] fields = {"active"};
-				String [] values ={"0"};
+				String[] values ={"0"};
 				String name = screen.getEventlist().getName();
 				try{
 					qb.update("events", fields, values).where("name", "=", name).Execute();
@@ -480,6 +471,7 @@ public class Controller {
 				screen.getCalendar().getLblCalendarInfo().setText("the current calendar is now set to: " + screen.getCalendar().getName());
 				
 			}
+			// sletter event
 			if (e.getSource() == screen.getCalendar().getBtnDelete()) {
 				
 				String name = screen.getCalendar().getName();
@@ -505,7 +497,7 @@ public class Controller {
 				
 				}
 			
-			
+			// opdaterer kalendere
 			if (e.getSource() == screen.getCalendar().getBtnShare()) {
 				screen.getShareCalendar().updateTable("1");
 				screen.show(Screen.SHARECALENDAR);
@@ -522,7 +514,7 @@ public class Controller {
 			}
 
 			if (e.getSource() == screen.getAddCalendar().getBtnSubmit()) {
-				
+				// indsamler nødvendige data for at oprette en kalender
 				String email = getCurrentUser();
 				String name = screen.getAddCalendar().getTextName().getText();
 				String privatePublic = screen.getAddCalendar().getTextPrivateOrPublic().getText();
@@ -552,7 +544,7 @@ public class Controller {
 				}	
 				
 				
-				
+				// Tilføjer kalenderen gennem switchMethods
 				sw.addNewCalendar(name, visibilitystatus, email, sharedUsers, isCbs);
 				
 				
