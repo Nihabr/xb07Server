@@ -1,31 +1,70 @@
-døk4ever_server API
+CBS CALENDAR SERVER API:
 
-Serveren modtager en String (kan være json) og returnere data efter hvilken String der er givet.
+Serveren modtager et object i json format, som indeholder en af nedenunder n�vnte strings. Serveren
+returnerer et tilsvarende object med informationer, som defineret nedenfor:
 
 Strings:
 
-requestQuote
-
-saveQuote
-
-getQuote
-
-requestForecast
-
-getForecast
-
-saveForecast
-
-createCalendar
-
-importCalendar
-
-exportCalendar
-
-saveNote
-
-getNote
-
-getEvents
-
-getEventInfo
+	"logIn":
+	Forventer: 		
+				String email
+				String password
+				private static final long serialVersionUID = 1L
+				private String overallID = "logIn"
+				
+	Returnerer:	
+				private static final long serialVersionUID = 1L
+				private String overallID = "logIn"
+				String email
+				String passWord
+				int userID
+				String role
+				ArrayList <CalendarInfo> calendars
+						
+						CalendarInfo:
+						private static final long serialVersionUID = 1L
+						private String overallID = "calendarInfo"
+						private int calendarId
+						private String calenderName
+						private String userName
+						private int publicOrPrivate
+						ArrayList<UserEvent> calendars
+						
+								UserEvent:
+								private int eventid
+								private String type
+								private String title
+								private String text
+								private String location
+								private String createdby
+								private String start
+								private String end
+								private int calendarID
+						
+				boolean loggedIn
+	
+	requestQuote
+	
+	saveQuote
+	
+	getQuote
+	
+	requestForecast
+	
+	getForecast
+	
+	saveForecast
+	
+	createCalendar
+	
+	importCalendar
+	
+	exportCalendar
+	
+	saveNote
+	
+	getNote
+	
+	getEvents
+	
+	getEventInfo
