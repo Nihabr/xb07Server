@@ -72,7 +72,7 @@ public class QOTDModel implements Runnable {
 			String[] keys2 = { fQuote };
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String datetime = sdf.format(date) + " 12:00:00";
+			String datetime = sdf.format(date);
 
 		
 

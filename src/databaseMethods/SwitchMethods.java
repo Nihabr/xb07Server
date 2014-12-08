@@ -341,7 +341,7 @@ public class SwitchMethods extends Model {
 
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String datetime = sdf.format(date) + " 12:00:00";
+		String datetime = sdf.format(date) + " 00:00:00";
 		resultSet = qb.selectFrom("dailyupdate").where("date", "=", datetime)
 				.ExecuteQuery();
 		while (resultSet.next()) {
