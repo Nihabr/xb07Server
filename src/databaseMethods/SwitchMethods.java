@@ -260,6 +260,7 @@ public class SwitchMethods extends Model {
 			cInfo.setCalenderName(resultSet.getString("name"));
 			
 			gc.getUserCalendars().add(cInfo);
+			cInfo = new CalendarInfo();
 		}
 		stringToBeReturned = gson.toJson(gc);
 		return stringToBeReturned;
@@ -414,7 +415,7 @@ public class SwitchMethods extends Model {
 		
 		String [] fields = {"email", "active"};
 		
-		resultSet = qb.selectFrom(fields,"users").all().ExecuteQuery();
+		resultSet = qb.selectFrom(fields,"users").where("active", "=", "1").ExecuteQuery();
 		while(resultSet.next()){
 			UserInfo ui  = new UserInfo();
 			ui.setActive(String.valueOf(resultSet.getInt("active")));
