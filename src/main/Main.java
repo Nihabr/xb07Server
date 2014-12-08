@@ -1,3 +1,4 @@
+package main;
 import config.Configurations;
 
 public class Main {

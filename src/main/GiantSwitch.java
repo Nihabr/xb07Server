@@ -1,3 +1,4 @@
+package main;
 import model.user.AuthenticateUser;
 import JsonClasses.ClientLogin;
 import JsonClasses.ClientLogout;
