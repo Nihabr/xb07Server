@@ -66,18 +66,25 @@ public class GetCalendarData {
         
         rs = qb.selectFrom(values, "courses").all().ExecuteQuery();
         ResultSet rs2;
+        
+        //ArrayList will contain one String representation of the different
+        //course titles of the JSON string from CBS Calendar
         ArrayList<String> courseTitles = new ArrayList<String>();
         for (CBSevents cbse : cbsEvents.getEvents()){
         	
+        	//Adds course titles to arraylist courseTitles if they do not already
+        	//exist in the arrayList
         	if(!courseTitles.contains(cbse.getTitle())){
-        		System.out.println("coursetitles did not contain title.");
         		courseTitles.add(cbse.getTitle());
         	
         	}
         }
+        //Iterates over coursetitles to check if any coursetitles do not exist in
+        //the database, and adds them if they don't.
         for (String cbse : courseTitles){
         	
         	boolean courseExists = false;
+        	//'resets' the resultset rs so the while-loop can iterate from the beginning
         	rs.beforeFirst();
         	while(rs.next()){
         		
@@ -96,13 +103,12 @@ public class GetCalendarData {
         		String [] fields = {"courseid", "calendarID"};
         		String [] courseValues = {cbse, String.valueOf(rs2.getInt("calendarid"))};
         		qb.insertInto("courses", fields).values(courseValues).Execute();
-//        		String [] cuFields = {"email", "calendarID"};
-//        		String[] cuValues = {email, String.valueOf(rs2.getInt("calendarid"))};
-//        		qb.insertInto("calendar_users", cuFields).values(cuValues).Execute();
         	}
         }
         	
         ArrayList<String> calendarID = new ArrayList<String>();
+        
+        //Retrieves calendar ID's from the calendars related to the courseTitles
 	    for(String ct : courseTitles){	    
 		    rs = qb.selectFrom("courses").where("courseid", "=", ct).ExecuteQuery();
 		    
@@ -113,7 +119,8 @@ public class GetCalendarData {
 	    }
 	    CreateEvent cbsEv = new CreateEvent();
 	    ArrayList <CreateEvent> dbArray = new ArrayList<CreateEvent>();
-	    
+	    //Iterates over the calendarID's to retrieve the related events. Adds the events
+	    //to an ArrayList.
         for(String cid : calendarID){
         	
 	        rs = qb.selectFrom("events").where("calendarID", "=", cid).ExecuteQuery();
@@ -125,7 +132,7 @@ public class GetCalendarData {
 	        	cbsEv.setCreatedby(rs.getString("CreatedBy"));
 	        	cbsEv.setTitle(rs.getString("Name"));
 	        	cbsEv.setText(rs.getString("text"));
-	        	cbsEv.setCalendarID(String.valueOf(rs.getInt("CalendarID")));
+	        	cbsEv.setCalendarID(cid);
 	        	cbsEv.setStart(rs.getString("start"));
 	        	cbsEv.setEnd(rs.getString("end"));
 	        	cbsEv.setCBSeventID(rs.getString("CBSeventID"));
@@ -134,9 +141,11 @@ public class GetCalendarData {
 	        }
         }
         int m = 0;
+        //Iterates over all the events, and finds the corresponding event from the database
+        //to check if any information has been changed, and updates the database if it has.
         for (CBSevents cbs : cbsEvents.getEvents()){
 
-        	 //	["2014",8,"5","8","00"]
+        	 //	formats the CBS dates to match the database dates
         	String start ="";
         	m = (Integer.parseInt(cbs.getStart().get(1))) + 1;
         	start = String.format("%s-%d-%s %s:%s:00", 
@@ -156,11 +165,9 @@ public class GetCalendarData {
 					cbs.getEnd().get(3),
 					cbs.getEnd().get(4));
         	
+        	//Retrieves the event with given eventID from ArrayList dbArray
             cbsEv = getArray(cbs.getEventid(), dbArray);            	
-
-            System.out.println("start1 " + cbsEv.getStart());
-            System.out.println("start2 " + start);
-            
+          
             String cid = "";
             if	(cbsEv.getStart()==null){
             	rs = qb.selectFrom("calendar").where("name", "=", cbs.getTitle()).ExecuteQuery();
@@ -169,9 +176,7 @@ public class GetCalendarData {
             }
             else
             	cid = cbsEv.getCalendarID();
-            
-            
-            
+        
             
             if	(	 cbsEv.getStart()==null							||
             		!cbsEv.getStart().equals(start)		 			||
