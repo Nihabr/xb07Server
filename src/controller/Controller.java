@@ -28,7 +28,7 @@ public class Controller {
 	private String currentCalendar = "";
 	private String eventID = "";
 	
-	private boolean full = false;
+	
 	QueryBuilder qb = new QueryBuilder();
 	AuthenticateUser auth = new AuthenticateUser();
 	int row;
@@ -406,12 +406,12 @@ public class Controller {
 				
 				String email = screen.getUserList().getLblChosenUser().getText();
 				
-				String fields[] = {"active"};
+				String fields[] = {"exist"};
 				String values[] = {"0"};
 				try{
 					
 					qb.update("users", fields, values).where("email", "=", email).Execute();
-					screen.getCalendar().updateTable("1");
+					screen.getUserList().updateTable();
 				}catch (Exception e4){
 					e4.printStackTrace();
 				}

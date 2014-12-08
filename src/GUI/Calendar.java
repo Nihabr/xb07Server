@@ -54,8 +54,7 @@ public class Calendar extends JPanel {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
-		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy",
-				"PrivatePublic","IsCBS" };
+		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy","IsCBS" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -208,7 +207,6 @@ public class Calendar extends JPanel {
 		try {
 			model.getDataVector().removeAllElements();
 
-			QueryBuilder qb = new QueryBuilder();
 			rs = qb.selectFrom("calendar").where("active", "=", value).ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();

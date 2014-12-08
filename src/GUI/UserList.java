@@ -162,7 +162,7 @@ public class UserList extends JPanel {
 			model.getDataVector().removeAllElements();
 
 			QueryBuilder qb = new QueryBuilder();
-			rs = qb.selectFrom("users").all().ExecuteQuery();
+			rs = qb.selectFrom("users").where("exist", "=", "1").ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();
 
