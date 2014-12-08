@@ -166,12 +166,13 @@ public class SwitchMethods extends Model {
 								
 								if(su.equals(rs.getString("email"))){
 									
-									qb.insertInto("calendar_users", fields).values(value)
-									.Execute();
+									qb.insertInto("calendar_users", fields).values(value).Execute();
 								}else{
 									stringToBeReturned += "User " + su + " does not exist in database. ";
 								}
+								
 							}
+							rs.beforeFirst();
 							
 						}
 					
