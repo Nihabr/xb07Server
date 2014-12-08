@@ -14,7 +14,7 @@ class TCPServer{
 
 		AdminWorker admin = new AdminWorker();
 		admin.run();
-		//Creates a socket to send and receive messages in port 6666
+		//Creates a socket to send and receive messages in port 8888
 		ServerSocket welcomeSocket = new ServerSocket(8888);
 		//While something is true
 		while(true){
