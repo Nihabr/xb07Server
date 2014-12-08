@@ -96,7 +96,7 @@ public class AddCalendar extends JPanel {
 		txtShare = new JTextField();
 		txtShare.setColumns(10);
 		txtShare.setBounds(737, 477, 149, 28);
-		txtShare.setVisible(false);
+		txtShare.setVisible(true);
 		add(txtShare);
 		
 		lblHeader = new JLabel("Add Calendar");
@@ -160,13 +160,13 @@ public class AddCalendar extends JPanel {
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
-	public void updateTable() {
+	public void updateTable(String value) {
 		try {
 			model.getDataVector().removeAllElements();
 
 			QueryBuilder qb = new QueryBuilder();
 			String[] values = {"email"};
-			rs = qb.selectFrom(values, "users").all().ExecuteQuery();
+			rs = qb.selectFrom(values, "users").where("active", "=", "1").ExecuteQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int colNo = rsmd.getColumnCount();
 
@@ -201,10 +201,7 @@ public class AddCalendar extends JPanel {
 	public void setLblShareWith(JLabel lblShareWith) {
 		this.lblShareWith = lblShareWith;
 	}
-	public void showShareFields(){
-		lblShareWith.setVisible(true);
-		txtShare.setVisible(true);
-	}
+
 
 
 	public void setTxtShare(JTextField txtShare) {

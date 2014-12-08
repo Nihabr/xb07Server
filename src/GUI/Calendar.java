@@ -54,7 +54,7 @@ public class Calendar extends JPanel {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
-		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy","IsCBS" };
+		String[] columnNames = { "CalendarID", "Name", "Active", "CreatedBy","privatepublic","IsCBS" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -101,7 +101,7 @@ public class Calendar extends JPanel {
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
-		scrollPane.setBounds(425, 240, 553, 315);
+		scrollPane.setBounds(283, 240, 695, 315);
 
 		// Add the scroll pane to this panel.
 		add(scrollPane);
@@ -160,7 +160,7 @@ public class Calendar extends JPanel {
 				new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 						new Color(0, 0, 0), new Color(255, 255, 255),
 						new Color(0, 0, 0))));
-		btnMainMenu.setBounds(601, 589, 194, 50);
+		btnMainMenu.setBounds(537, 590, 194, 50);
 		add(btnMainMenu);
 
 		label = new JLabel("");

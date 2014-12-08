@@ -471,7 +471,7 @@ public class Controller {
 				screen.show(Screen.MAINMENU);
 			}
 			if (e.getSource() == screen.getCalendar().getBtnAdd()) {
-				screen.getAddCalendar().updateTable();
+				screen.getAddCalendar().updateTable("1");
 				screen.show(Screen.ADDCALENDAR);
 			}
 			if (e.getSource() == screen.getCalendar().getChooseCalendar()) {
@@ -544,8 +544,7 @@ public class Controller {
 					
 				if(screen.getAddCalendar().getChckbxIfYesCheck().isSelected())
 				{
-				screen.getAddCalendar().showShareFields();
-				
+				sharedUsers.add(email);
 				sharedUsers.add(shareWith);
 				
 				}else{
