@@ -120,15 +120,7 @@ public class SwitchMethods extends Model {
 
 		qb.insertInto("events", fields).values(values).Execute();
 		
-		createEvent.setCalendarID(calendarID);
-		createEvent.setCreatedby(createdby);
-		createEvent.setStart(start);
-		createEvent.setEnd(end);
-		createEvent.setTitle(name);
-		createEvent.setText(text);
-		createEvent.setType(type);
-		
-		stringToBeReturned = gson.toJson(createEvent);
+		stringToBeReturned = "";
 		return stringToBeReturned;
 	}
 
@@ -157,7 +149,7 @@ public class SwitchMethods extends Model {
 				if (resultSet.getInt("calendarID") == (Integer
 						.valueOf(calendarID))) {
 					for (String su : sharedUsers) {
-						System.out.println("for loop køres");
+						System.out.println("for loop kï¿½res");
 						String[] fields = { "email", "calendarID" };
 						String[] value = { su, String.valueOf(calendarID) };
 						
@@ -203,8 +195,8 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	/**
-	 * Model til å slette kalender hvis den eksisterer samt at det 
-	 * gjøres av den samme bruker som har laget den.
+	 * Model til ï¿½ slette kalender hvis den eksisterer samt at det 
+	 * gjï¿½res av den samme bruker som har laget den.
 	 * @param userName
 	 * @param calendarName
 	 * @return String
@@ -244,7 +236,7 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	/**
-	 * Henter alle kalendere som tilhører den valgte bruker
+	 * Henter alle kalendere som tilhï¿½rer den valgte bruker
 	 * @param email
 	 * @return String
 	 * @throws SQLException
@@ -266,8 +258,8 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	/**
-	 * Bruker metode CreateNote fra klasse Note til å opprette en note
-	 * på bakgrunn av Jsonclass CreateNote
+	 * Bruker metode CreateNote fra klasse Note til ï¿½ opprette en note
+	 * pï¿½ bakgrunn av Jsonclass CreateNote
 	 * @param cn
 	 * @return
 	 */
@@ -300,7 +292,7 @@ public class SwitchMethods extends Model {
 	}
 
 	/**
-	 * Model til å slette event fra database hvis det enten gjøres av 
+	 * Model til ï¿½ slette event fra database hvis det enten gjï¿½res av 
 	 * brukeren som har laget den, eller brukeren er admin
 	 * 
 	 * @param email
@@ -359,7 +351,7 @@ public class SwitchMethods extends Model {
 	}
 
 	/**
-	 * Metode til å slette en note. Det blir kun slettet hvis det
+	 * Metode til ï¿½ slette en note. Det blir kun slettet hvis det
 	 * er den samme bruker som har opprettet noten.
 	 * @param email
 	 * @param nID
@@ -385,7 +377,7 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	/**
-	 * Henter events fra systemet på bakgrunn av calendarId
+	 * Henter events fra systemet pï¿½ bakgrunn av calendarId
 	 * @param calendarID
 	 * @return String
 	 * @throws SQLException
@@ -429,7 +421,7 @@ public class SwitchMethods extends Model {
 	}
 	
 	/**
-	 * Henter noter fra databasen basert på eventID
+	 * Henter noter fra databasen basert pï¿½ eventID
 	 * @param events
 	 * @return String
 	 * @throws SQLException
@@ -458,7 +450,7 @@ public class SwitchMethods extends Model {
 		return stringToBeReturned;
 	}
 	/**
-	 * Metode til å logge bruker inn i systemet, 
+	 * Metode til ï¿½ logge bruker inn i systemet, 
 	 * samtidig som det hentes kalender for den spesifikke bruker
 	 * @param email
 	 * @param password
@@ -482,7 +474,7 @@ public class SwitchMethods extends Model {
 
 			String calendarName = "CBScalendar " + email;
 
-			// Sørger for at der eksisterer en CBS kalender i databasen til
+			// Sï¿½rger for at der eksisterer en CBS kalender i databasen til
 			// brugeren
 			ArrayList<String> s = new ArrayList<String>();
 			addNewCalendar(calendarName, 0, "CBS", s, 1);

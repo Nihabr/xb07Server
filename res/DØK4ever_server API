@@ -1,23 +1,23 @@
 CBS CALENDAR SERVER API:
 
-Serveren modtager et object i json format, som indeholder en af nedenunder nævnte strings. Serveren
+Serveren modtager et object i json format, som indeholder en af nedenunder nï¿½vnte strings. Serveren
 returnerer et tilsvarende object med informationer, som defineret nedenfor:
 
 Strings:
 
-	"logIn":
+"logIn":
 	Funktion: 	Tjekker brugernavn og password mod databasen. Hvis brugeren godkendes, returneres
 				loggedIn som true, sammen med alle kalenderinformationerne. Hvis ikke, returneres
 				loggedIn som false.
 	Forventer: 		
 				String email
 				String password
-				private static final long serialVersionUID = 1L
-				private String overallID = "logIn"
+				 static final long serialVersionUID = 1L
+				 String overallID = "logIn"
 				
 	Returnerer:	
-				private static final long serialVersionUID = 1L
-				private String overallID = "logIn"
+				 static final long serialVersionUID = 1L
+				 String overallID = "logIn"
 				String email
 				String passWord
 				int userID
@@ -25,31 +25,206 @@ Strings:
 				ArrayList <CalendarInfo> calendars
 						
 					CalendarInfo:
-						private static final long serialVersionUID = 1L
-						private String overallID = "calendarInfo"
-						private int calendarId
-						private String calenderName
-						private String userName
-						private int publicOrPrivate
+						 static final long serialVersionUID = 1L
+						 String overallID = "calendarInfo"
+						 int calendarId
+						 String calenderName
+						 String userName
+						 int publicOr
 						ArrayList<UserEvent> calendars
 						
 							UserEvent:
-								private int eventid
-								private String type
-								private String title
-								private String text
-								private String location
-								private String createdby
-								private String start
-								private String end
-								private int calendarID
+								 int eventid
+								 String type
+								 String title
+								 String text
+								 String location
+								 String createdby
+								 String start
+								 String end
+								 int calendarID
+			
 								
-	"logOut":
+"logOut":
 	Funktion:	Logger brugeren ud.
 	
 	Forventer:	String email
 	
 	Returnerer: String answer = "";
 	
-	"
+	
+"getUsers"
+	Funktion:	Henter users i databasen gennem SwitchMethods
+	
+	Forventer:	-
+	
+	Returnerer:	ArrayList<UserInfo>  
+	
+					UserInfo:
+						 String email;
+						 String active;
 
+"createCalendar":
+	Funktion:	Opretter en ny kalender.
+	
+	Forventer:	 String calenderName;
+				 String email;
+				 int publicOr;
+				 int isCBS;
+				 ArrayList <String> sharedUsers;
+					
+	Returnerer:	String med indhold
+	
+"deleteCalendar":
+	Funktion:	Sletter en kalender.
+	
+	Forventer:	 String calendarName
+				 String userName
+				
+	Returnerer:	String med indhold.
+
+"shareCalendar":
+	Funktion:	Deler en kalender.
+	
+	Forventer:	ArrayList<String> sharedUsers
+				String calendarID,
+				String email		
+					
+	Returnerer:	String med indhold.				
+					
+"getCalendar":
+	Funktion:	Henter en kalender fra databasen.
+	
+	Forventer:	 String Email
+	
+	Returnerer:	 String email;
+				ArrayList<CalendarInfo> userCalendars
+					
+						CalendarInfo:
+							 static final long serialVersionUID = 1L;
+							 String overallID = "calendarInfo";
+							 int calendarId;
+							 String calenderName;
+							 String userName;
+							 int publicOr;
+							ArrayList<UserEvent> calendars
+	
+								UserEvent:
+									 int eventId;
+									 String type;
+									 String location;
+									 String createdBy;
+									 String start;
+									 String end;
+									 String name;
+									 String text;
+									 String calendarId;
+									 int active;				
+
+					
+"getEvents":
+	Funktion:	Henter events fra databasen.
+	
+	Forventer:	String calendarID
+	
+	Returnerer:		 int eventId;
+					 String type;
+					 String location;
+					 String createdBy;
+					 String start;
+					 String end;
+					 String name;
+					 String text;
+					 String calendarId;
+					 int active;				
+					
+"createEvent":	
+	Funktion:	Opretter et event til en kalender.
+	
+	Forventer:	 String type
+				 String location
+				 String createdBy
+				 String start
+				 String end
+				 String name
+				 String text
+				 String calendarID					
+	
+	Returnerer:	String answer = "";
+
+"deleteEvent":
+	Funktion:	Sletter et event via softdelete.
+	
+	Forventer:	String email
+				String eventID
+					
+	Returnerer:	String med indhold.
+	
+"createNote":
+	Funktion:	Opretter en note.				
+					
+	Forventer:	private String noteID;
+				private String text;
+				private String dateTime;
+				private String createdBy;
+				private int isActive;
+				private String eventID;				
+
+	Returnerer:	String answer = "";
+	
+"getNotes":
+	Funktion:	Henter noter fra databasen.
+
+	Forventer:	ArrayList<UserEvent> events
+		
+					UserEvent:
+					int eventid;
+					String type;
+					String title;
+					String text;
+					String location;
+					String createdby;
+					String start;
+					String end;
+					int calendarID;	
+
+	Returnerer:	ArrayList<CreateNote> notes
+				ArrayList<UserEvent> Events
+				String email;
+
+					CreateNote:
+						String noteID;
+						String text;
+						String dateTime;
+						String createdBy;
+						int isActive;
+						String eventID;
+
+					UserEvent:
+						int eventid;
+						String type;
+						String title;
+						String text;
+						String location;
+						String createdby;
+						String start;
+						String end;
+						int calendarID;
+
+"deleteNote":
+	Funktion:	Sletter en note.
+	
+	Forventer:	String email
+				String nID
+					
+	Returnerer:	String med indhold
+	
+"getDailyUpdate":
+	Funktion:	Henter QOTD og weatherforecast.
+	
+	Forvnter:	-
+	
+	Returnerer:	String quote;
+    			String date;
+    			String celsius;
+				String desc;

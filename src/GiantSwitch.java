@@ -83,7 +83,7 @@ public class GiantSwitch {
 		case"shareCalendar":
 			
 			ShareCalendars sc = (ShareCalendars)gson.fromJson(jsonString, ShareCalendars.class);
-			System.out.println(sc.getShareEmail() + "har nå tilgang til kalender " + sc.getCalendarID());
+			System.out.println(sc.getShareEmail() + "har nï¿½ tilgang til kalender " + sc.getCalendarID());
 			answer = SW.shareCalendar(sc.getShareEmail(), sc.getCalendarID(), sc.getEmail());
 			
 			break;
@@ -113,10 +113,6 @@ public class GiantSwitch {
 			answer = SW.createEvent(ce.getType(), ce.getLocation(),
 					ce.getCreatedby(),ce.getStart(), ce.getEnd(), ce.getTitle(), ce.getText(), ce.getCalendarID());
 			break;
-
-		case "getEventInfo":
-			System.out.println("Recieved getEventInfo");
-			break;
 			
 		case "deleteEvent":
 			
@@ -130,7 +126,7 @@ public class GiantSwitch {
 			
 		case "createNote":
 			CreateNote cn = (CreateNote)gson.fromJson(jsonString, CreateNote.class);
-			SW.createNote(cn);
+			answer = SW.createNote(cn);
 			System.out.println("Recieved saveNote");
 			break;
 			
@@ -171,8 +167,6 @@ public class GiantSwitch {
 
 		if (ID.contains("getEvents")) {
 			return "getEvents";
-		} else if (ID.contains("getEventInfo")) {
-			return "getEventInfo";
 		} else if (ID.contains("saveNote")) {
 			return "saveNote";
 		} else if (ID.contains("deleteNote")){
