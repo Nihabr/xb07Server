@@ -6,6 +6,9 @@ returnerer et tilsvarende object med informationer, som defineret nedenfor:
 Strings:
 
 	"logIn":
+	Funktion: 	Tjekker brugernavn og password mod databasen. Hvis brugeren godkendes, returneres
+				loggedIn som true, sammen med alle kalenderinformationerne. Hvis ikke, returneres
+				loggedIn som false.
 	Forventer: 		
 				String email
 				String password
