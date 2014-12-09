@@ -71,20 +71,6 @@ public abstract class Model {
      * @param sql
      * @return PreparedStatement
      */
-    public PreparedStatement doQuery(String sql) {
-        try {
-            getConnection(false);
-            getConn();
-            sqlStatement = getConn().prepareStatement(sql);
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            
-        }
-
-        return sqlStatement;
-    }
 
     public boolean testConnection() {
         try {
@@ -99,52 +85,6 @@ public abstract class Model {
         }
 
         return false;
-    }
-
-    public int doUpdate(String update) throws SQLException {
-        getConnection(false);
-        int temp = 0;
-
-        try {
-            setStmt(getConn().createStatement());
-            temp = getStmt().executeUpdate(update);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        //luk forbindelser
-        finally {
-            if (getStmt() != null) {
-                try {
-                    getStmt().close();
-                } catch (SQLException sqlEx) {  //ignore
-                    setStmt(null);
-                }
-            }
-        }
-
-        return temp;
-    }
-
-
-    public String readFromFile(String path) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            br.close();
-        }
-        return "";
     }
 
     /**

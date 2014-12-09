@@ -112,7 +112,6 @@ public class SwitchMethods extends Model {
 	public String createEvent(String type, String location, String createdby,
 			String start, String end, String name, String text,
 			String calendarID) throws SQLException {
-		testConnection();
 		String[] fields = { "type", "location", "createdby", "start", "end",
 				"name", "text", "calendarID" };
 		String[] values = { type, location, createdby, start, end, name, text,
@@ -189,7 +188,6 @@ public class SwitchMethods extends Model {
 	 */
 	public String removeCalendar(String userName, String calendarName)
 			throws SQLException {
-		testConnection();
 		stringToBeReturned = removeCalendarModel(userName, calendarName);
 
 		return stringToBeReturned;
@@ -284,8 +282,7 @@ public class SwitchMethods extends Model {
 	 */
 	public String removeEvent(String email, String eventID)
 			throws SQLException {
-		testConnection();
-		stringToBeReturned = removeEventModel(email, eventID);
+			stringToBeReturned = removeEventModel(email, eventID);
 
 		return stringToBeReturned;
 
