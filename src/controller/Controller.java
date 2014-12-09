@@ -264,8 +264,8 @@ public class Controller {
 					
 				} else {
 					
-					String[] kolonner = {"email", "password" };
-					String[] Values = { Email, Password };
+					String[] kolonner = {"email", "password", "active"};
+					String[] Values = { Email, Password, "1" };
 					
 					try {
 						// indsætter data i databasen via QueryBuilder

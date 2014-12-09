@@ -56,7 +56,7 @@ public class EventList extends JPanel {
 
 		// Laver tabellen inde i Eventlisten.
 		String[] columnNames = { "EventID", "Type", "Location", "CreatedBy",
-				"Start", "End", "Text","CalendarID", "Active"};
+				"Start", "End", "Name", "Text", "CalendarID", "Active"};
 
 
 		table = new JTable();
